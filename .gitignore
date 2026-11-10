@@ -44,6 +44,9 @@ tools/*
 !tools/atoms_ext.py
 !tools/comfy_proxy.py
 
+# ---------- 开发流水（含逐条排查细节与内容词条，仅留本地） ----------
+docs/历史与回退-v3.md
+
 # ---------- webui/data：只保留前端/后端实际读取的 9 个文件 ----------
 webui/assistant.lock
 webui/favorites.json
