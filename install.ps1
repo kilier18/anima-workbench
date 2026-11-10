@@ -18,6 +18,38 @@ try { $Host.UI.RawUI.WindowTitle = "Anima Workbench 安装向导" } catch { }
 $script:Fail = 0
 $script:Skip = 0
 
+function Invoke-Py {
+    param([string]$Python, [string[]]$PyArgs)
+    $old = $ErrorActionPreference
+    $oldEnc = $env:PYTHONIOENCODING
+    $ErrorActionPreference = "Continue"
+    $env:PYTHONIOENCODING = "utf-8"   # 否则 python 的中文输出在 CP936 控制台是乱码
+    try {
+        $out = (& $Python @PyArgs 2>&1 | Out-String)
+        $code = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $old
+        $env:PYTHONIOENCODING = $oldEnc
+    }
+    return [pscustomobject]@{ Code = $code; Out = $out.Trim() }
+}
+
+function Invoke-Git {
+    # PowerShell 5.1 会把 native 命令的 stderr 当成 ErrorRecord，配合
+    # $ErrorActionPreference="Stop" 会直接中断脚本。统一在这里吞掉噪音、
+    # 只回传退出码与合并输出。
+    param([string[]]$GitArgs)
+    $old = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        $out = (& git @GitArgs 2>&1 | Out-String)
+        $code = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $old
+    }
+    return [pscustomobject]@{ Code = $code; Out = $out.Trim() }
+}
+
 function Say([string]$m, [string]$c = "Gray") {
     Write-Host $m -ForegroundColor $c
 }
@@ -84,7 +116,8 @@ function Step1 {
     else { Warn ("读不到 " + $driveLetter + " 盘的剩余空间") }
 
     if (Have "git") {
-        $v = (& git --version) -replace "git version ", ""
+        $gv = Invoke-Git @("--version")
+        $v = ($gv.Out -replace "git version ", "").Trim()
         Ok ("git " + $v)
     } else {
         Bad "没有 git。请先安装：winget install --id Git.Git -e"
@@ -227,12 +260,12 @@ function Step4 {
 
     $m = Join-Path $Dir "models"
     $items = @(
-        @{ n = "qwen_3_06b_base.safetensors"; p = "text_encoders"; s = 1200;
-           u = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_3_06b_base.safetensors" },
-        @{ n = "qwen_image_vae.safetensors"; p = "vae"; s = 250;
-           u = "https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/vae/qwen_image_vae.safetensors" },
-        @{ n = "anima-base-v1.0.safetensors"; p = "diffusion_models\Anima"; s = 4200;
-           u = "https://huggingface.co/circlestone-labs/Anima/resolve/main/anima-base-v1.0.safetensors" }
+        @{ n = "qwen_3_06b_base.safetensors"; p = "text_encoders"; s = 1137;
+           u = "https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/text_encoders/qwen_3_06b_base.safetensors" },
+        @{ n = "qwen_image_vae.safetensors"; p = "vae"; s = 242;
+           u = "https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors" },
+        @{ n = "anima-base-v1.0.safetensors"; p = "diffusion_models\Anima"; s = 3989;
+           u = "https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/diffusion_models/anima-base-v1.0.safetensors" }
     )
 
     foreach ($it in $items) {
@@ -286,7 +319,7 @@ function Step5 {
         $tag = if ($n.need) { "必需" } else { "可选" }
         Say ("  " + $n.d + "  [" + $tag + "]")
         if (Ask "  拉取？" "y") {
-            & git clone --depth 1 $n.u $t 2>&1 | Out-Null
+            $r = Invoke-Git @("clone", "--depth", "1", $n.u, $t)
             if (Test-Path $t) { Ok ($n.d + " 完成") }
             elseif ($n.need) { Bad ($n.d + " 拉取失败：" + $n.u) }
             else { Warn ($n.d + " 拉取失败（可选，可忽略）") }
@@ -306,14 +339,14 @@ function Step6 {
 
     if ($hasPy) {
         Ok "工作台已存在"
-        $cur = (& git -C $Dir rev-parse --short HEAD 2>$null)
+        $cur = (Invoke-Git @("-C", $Dir, "rev-parse", "--short", "HEAD")).Out
         if ($cur) { Info ("当前提交 " + $cur) }
         if (Ask "从远程更新到最新版？" "y") {
-            $br = (& git -C $Dir rev-parse --abbrev-ref HEAD 2>$null)
-            & git -C $Dir fetch origin --quiet 2>&1 | Out-Null
-            & git -C $Dir branch --set-upstream-to=origin/$br $br 2>&1 | Out-Null
-            $out = (& git -C $Dir pull --ff-only 2>&1 | Out-String)
-            if ($LASTEXITCODE -eq 0) { Ok "已更新到最新版" } else { Warn ("更新失败：" + $out.Trim()) }
+            $br = (Invoke-Git @("-C", $Dir, "rev-parse", "--abbrev-ref", "HEAD")).Out
+            Invoke-Git @("-C", $Dir, "fetch", "origin", "--quiet") | Out-Null
+            Invoke-Git @("-C", $Dir, "branch", "--set-upstream-to=origin/$br", $br) | Out-Null
+            $r = Invoke-Git @("-C", $Dir, "pull", "--ff-only")
+            if ($r.Code -eq 0) { Ok "已更新到最新版" } else { Warn ("更新失败：" + $r.Out) }
         }
     } else {
         New-Item -ItemType Directory -Force -Path $Dir | Out-Null
@@ -322,7 +355,7 @@ function Step6 {
         } else {
             $tmp = Join-Path $env:TEMP ("aw_" + [guid]::NewGuid().ToString("N").Substring(0, 8))
             Info ("克隆 " + $Repo)
-            & git clone --depth 1 $Repo $tmp 2>&1 | Out-Null
+            $r = Invoke-Git @("clone", "--depth", "1", $Repo, $tmp)
             if (Test-Path (Join-Path $tmp "webui\assistant.py")) {
                 # 只复制仓库里的东西，不动 ComfyUI 等已有内容
                 Copy-Item -Path (Join-Path $tmp "*") -Destination $Dir -Recurse -Force
@@ -366,26 +399,34 @@ function Step6 {
 function Step7 {
     Head 7 "冒烟验证"
 
+    # 优先用 ComfyUI 自带的 python；没有就退回系统 python（数据体检不依赖 ComfyUI）
     $py = Join-Path $Dir "ComfyUI_windows_portable\python_embeded\python.exe"
-    if (-not (Test-Path $py)) { Warn "找不到 ComfyUI 的 python，跳过"; return }
+    if (-not (Test-Path $py)) {
+        $cmd = Get-Command python -ErrorAction SilentlyContinue
+        if ($cmd) { $py = $cmd.Source; Info "用系统 python 验证数据（ComfyUI 还没装）" }
+    }
+    if (-not $py) { Warn "既没有 ComfyUI 的 python，也没有系统 python，跳过"; return }
 
     foreach ($f in @("webui\assistant.py", "webui\planner.py", "tools\build_atoms.py", "tools\gen_workbench.py", "tools\verify_repo.py")) {
         $p = Join-Path $Dir $f
         if (-not (Test-Path $p)) { Bad ("缺文件 " + $f); continue }
-        & $py -m py_compile $p 2>&1 | Out-Null
-        if ($LASTEXITCODE -eq 0) { Ok ($f + " 编译通过") } else { Bad ($f + " 编译失败") }
+        $r = Invoke-Py $py @("-m", "py_compile", $p)
+        if ($r.Code -eq 0) { Ok ($f + " 编译通过") } else { Bad ($f + " 编译失败：" + $r.Out) }
     }
 
     $hc = Join-Path $Dir "tools\health_check.py"
     if (Test-Path $hc) {
         Say "  数据体检："
-        & $py $hc 2>&1 | Select-Object -Last 3 | ForEach-Object { Info $_ }
+        $r = Invoke-Py $py @($hc)
+        ($r.Out -split "`n" | Select-Object -Last 4) | ForEach-Object { Info $_ }
     }
 
     $vr = Join-Path $Dir "tools\verify_repo.py"
     if (Test-Path $vr) {
         Say "  仓库一致性："
-        & $py $vr --quiet 2>&1 | ForEach-Object { Info $_ }
+        $r = Invoke-Py $py @($vr, "--quiet")
+        ($r.Out -split "`n" | Where-Object { $_.Trim() } | Select-Object -Last 6) | ForEach-Object { Info $_ }
+        Info "（第 6 步把脚本里的路径改写成了本机目录，所以这几行报差异属正常）"
     }
 
     Say ""
