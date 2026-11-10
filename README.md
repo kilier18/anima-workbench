@@ -82,6 +82,17 @@ ComfyUI/
 
 **从零部署请直接看 [DEPLOY.md](DEPLOY.md)**，那里写了 ComfyUI、模型、节点的完整安装顺序和校验命令。
 
+最快的方式是双击仓库根目录的 `install.cmd`（7 步向导，可 `install.cmd 3` 单独重跑某一步），
+它会自检环境、装好 ComfyUI、建模型目录、下模型、装节点、装工作台并做冒烟验证。
+
+装完后随时可以校验本地文件和仓库是否一致：
+
+```bat
+python toolserify_repo.py            :: 逐文件 sha256 比对
+python toolserify_repo.py --remote   :: 再比一次 HEAD vs origin/main
+python toolserify_repo.py --quiet    :: 只打结论
+```
+
 已经装好 ComfyUI + Anima 的话，最短路径是：
 
 ```bat
