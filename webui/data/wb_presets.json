@@ -1,0 +1,1749 @@
+{
+ "forge": [
+  {
+   "name": "全身立绘",
+   "desc": "纯背景 + 正面全身，适合做角色卡",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "solo",
+     "zh": "单人"
+    },
+    {
+     "en": "full body",
+     "zh": "全身"
+    },
+    {
+     "en": "from front",
+     "zh": "正面视角"
+    },
+    {
+     "en": "standing",
+     "zh": "站立"
+    },
+    {
+     "en": "simple background",
+     "zh": "简单背景"
+    },
+    {
+     "en": "white background",
+     "zh": "白色背景"
+    },
+    {
+     "en": "looking at viewer",
+     "zh": "看向观者"
+    },
+    {
+     "en": "official art",
+     "zh": "官方画风"
+    },
+    {
+     "en": "best quality",
+     "zh": "最佳质量"
+    }
+   ]
+  },
+  {
+   "name": "半身特写",
+   "desc": "胸部以上，突出表情与眼神",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "portrait",
+     "zh": "肖像"
+    },
+    {
+     "en": "upper body",
+     "zh": "上半身"
+    },
+    {
+     "en": "close-up",
+     "zh": "特写"
+    },
+    {
+     "en": "looking at viewer",
+     "zh": "看向观者"
+    },
+    {
+     "en": "depth of field",
+     "zh": "景深"
+    },
+    {
+     "en": "detailed face",
+     "zh": "精细面部"
+    },
+    {
+     "en": "soft lighting",
+     "zh": "柔光"
+    }
+   ]
+  },
+  {
+   "name": "夏日瘫软",
+   "desc": "电扇前的暑气溃败",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "solo",
+     "zh": "单人"
+    },
+    {
+     "en": "sitting on floor",
+     "zh": "坐在地上"
+    },
+    {
+     "en": "slumped",
+     "zh": "瘫坐"
+    },
+    {
+     "en": "leaning back",
+     "zh": "后仰"
+    },
+    {
+     "en": "legs spread",
+     "zh": "双腿摊开"
+    },
+    {
+     "en": "arms limp",
+     "zh": "手臂无力垂下"
+    },
+    {
+     "en": "closed eyes",
+     "zh": "闭眼"
+    },
+    {
+     "en": "open mouth",
+     "zh": "张嘴"
+    },
+    {
+     "en": "blush",
+     "zh": "脸红"
+    },
+    {
+     "en": "sweat",
+     "zh": "流汗"
+    },
+    {
+     "en": "exhausted",
+     "zh": "精疲力竭"
+    },
+    {
+     "en": "electric fan",
+     "zh": "电风扇"
+    },
+    {
+     "en": "summer",
+     "zh": "夏天"
+    },
+    {
+     "en": "hair blown by fan",
+     "zh": "头发被风扇吹起"
+    },
+    {
+     "en": "sitting in front of electric fan",
+     "zh": "坐在电扇前"
+    }
+   ]
+  },
+  {
+   "name": "雨中天台",
+   "desc": "湿发与积水反光",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "rain",
+     "zh": "下雨"
+    },
+    {
+     "en": "rainy day",
+     "zh": "雨天"
+    },
+    {
+     "en": "rooftop",
+     "zh": "天台"
+    },
+    {
+     "en": "wet hair",
+     "zh": "湿发"
+    },
+    {
+     "en": "wet clothes",
+     "zh": "湿衣服"
+    },
+    {
+     "en": "looking up",
+     "zh": "抬头"
+    },
+    {
+     "en": "overcast",
+     "zh": "阴天"
+    },
+    {
+     "en": "cinematic lighting",
+     "zh": "电影光"
+    },
+    {
+     "en": "reflection",
+     "zh": "倒影"
+    },
+    {
+     "en": "city",
+     "zh": "城市"
+    },
+    {
+     "en": "depth of field",
+     "zh": "景深"
+    }
+   ]
+  },
+  {
+   "name": "樱花树下",
+   "desc": "春日花瓣与柔光",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "cherry blossoms",
+     "zh": "樱花"
+    },
+    {
+     "en": "spring",
+     "zh": "春天"
+    },
+    {
+     "en": "tree",
+     "zh": "树"
+    },
+    {
+     "en": "petals",
+     "zh": "花瓣"
+    },
+    {
+     "en": "wind",
+     "zh": "风"
+    },
+    {
+     "en": "hair blown by wind",
+     "zh": "头发被风吹起"
+    },
+    {
+     "en": "sunlight",
+     "zh": "阳光"
+    },
+    {
+     "en": "soft lighting",
+     "zh": "柔光"
+    },
+    {
+     "en": "kimono",
+     "zh": "和服"
+    },
+    {
+     "en": "smile",
+     "zh": "微笑"
+    }
+   ]
+  },
+  {
+   "name": "赛博夜街",
+   "desc": "霓虹雨夜的都市感",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "night",
+     "zh": "夜晚"
+    },
+    {
+     "en": "city",
+     "zh": "城市"
+    },
+    {
+     "en": "neon lights",
+     "zh": "霓虹灯"
+    },
+    {
+     "en": "rain",
+     "zh": "下雨"
+    },
+    {
+     "en": "wet street",
+     "zh": "湿滑街道"
+    },
+    {
+     "en": "cyberpunk",
+     "zh": "赛博朋克"
+    },
+    {
+     "en": "glowing",
+     "zh": "发光"
+    },
+    {
+     "en": "backlighting",
+     "zh": "背光"
+    },
+    {
+     "en": "reflection",
+     "zh": "倒影"
+    },
+    {
+     "en": "techwear",
+     "zh": "机能风"
+    },
+    {
+     "en": "hoodie",
+     "zh": "连帽衫"
+    }
+   ]
+  },
+  {
+   "name": "教室午后",
+   "desc": "斜阳与课桌",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "classroom",
+     "zh": "教室"
+    },
+    {
+     "en": "afternoon",
+     "zh": "下午"
+    },
+    {
+     "en": "sunlight",
+     "zh": "阳光"
+    },
+    {
+     "en": "window",
+     "zh": "窗户"
+    },
+    {
+     "en": "desk",
+     "zh": "课桌"
+    },
+    {
+     "en": "school uniform",
+     "zh": "校服"
+    },
+    {
+     "en": "sitting",
+     "zh": "坐着"
+    },
+    {
+     "en": "reading",
+     "zh": "阅读"
+    },
+    {
+     "en": "lens flare",
+     "zh": "镜头光晕"
+    },
+    {
+     "en": "warm lighting",
+     "zh": "暖光"
+    }
+   ]
+  },
+  {
+   "name": "神社参拜",
+   "desc": "石阶、鸟居与巫女",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "shrine",
+     "zh": "神社"
+    },
+    {
+     "en": "torii",
+     "zh": "鸟居"
+    },
+    {
+     "en": "stone stairs",
+     "zh": "石阶"
+    },
+    {
+     "en": "miko",
+     "zh": "巫女"
+    },
+    {
+     "en": "japanese clothes",
+     "zh": "和服"
+    },
+    {
+     "en": "autumn",
+     "zh": "秋天"
+    },
+    {
+     "en": "maple leaves",
+     "zh": "枫叶"
+    },
+    {
+     "en": "lantern",
+     "zh": "灯笼"
+    },
+    {
+     "en": "traditional",
+     "zh": "传统"
+    },
+    {
+     "en": "dappled sunlight",
+     "zh": "斑驳阳光"
+    }
+   ]
+  },
+  {
+   "name": "冬日围巾",
+   "desc": "雪地呼出的白气",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "winter",
+     "zh": "冬天"
+    },
+    {
+     "en": "snow",
+     "zh": "雪"
+    },
+    {
+     "en": "snowing",
+     "zh": "下雪"
+    },
+    {
+     "en": "scarf",
+     "zh": "围巾"
+    },
+    {
+     "en": "coat",
+     "zh": "大衣"
+    },
+    {
+     "en": "gloves",
+     "zh": "手套"
+    },
+    {
+     "en": "breath",
+     "zh": "呼出白气"
+    },
+    {
+     "en": "blush",
+     "zh": "脸红"
+    },
+    {
+     "en": "cold",
+     "zh": "寒冷"
+    },
+    {
+     "en": "white breath",
+     "zh": "白气"
+    },
+    {
+     "en": "pale skin",
+     "zh": "白皙肌肤"
+    }
+   ]
+  },
+  {
+   "name": "海边黄昏",
+   "desc": "逆光剪影与浪花",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "beach",
+     "zh": "海滩"
+    },
+    {
+     "en": "ocean",
+     "zh": "海洋"
+    },
+    {
+     "en": "sunset",
+     "zh": "日落"
+    },
+    {
+     "en": "golden hour",
+     "zh": "黄金时刻"
+    },
+    {
+     "en": "backlighting",
+     "zh": "背光"
+    },
+    {
+     "en": "wind",
+     "zh": "风"
+    },
+    {
+     "en": "dress",
+     "zh": "连衣裙"
+    },
+    {
+     "en": "barefoot",
+     "zh": "赤脚"
+    },
+    {
+     "en": "waves",
+     "zh": "海浪"
+    },
+    {
+     "en": "cinematic",
+     "zh": "电影感"
+    }
+   ]
+  },
+  {
+   "name": "魔法少女",
+   "desc": "变身特效与魔法阵",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "magical girl",
+     "zh": "魔法少女"
+    },
+    {
+     "en": "magic circle",
+     "zh": "魔法阵"
+    },
+    {
+     "en": "glowing",
+     "zh": "发光"
+    },
+    {
+     "en": "sparkle",
+     "zh": "闪光"
+    },
+    {
+     "en": "frilled dress",
+     "zh": "荷叶边裙"
+    },
+    {
+     "en": "ribbon",
+     "zh": "缎带"
+    },
+    {
+     "en": "wand",
+     "zh": "魔杖"
+    },
+    {
+     "en": "floating",
+     "zh": "漂浮"
+    },
+    {
+     "en": "starry sky",
+     "zh": "星空"
+    },
+    {
+     "en": "dynamic pose",
+     "zh": "动态姿势"
+    },
+    {
+     "en": "energy",
+     "zh": "能量"
+    }
+   ]
+  },
+  {
+   "name": "战斗姿态",
+   "desc": "刀光与速度线",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "fighting stance",
+     "zh": "战斗姿态"
+    },
+    {
+     "en": "sword",
+     "zh": "刀"
+    },
+    {
+     "en": "holding sword",
+     "zh": "持刀"
+    },
+    {
+     "en": "dynamic pose",
+     "zh": "动态姿势"
+    },
+    {
+     "en": "motion blur",
+     "zh": "动态模糊"
+    },
+    {
+     "en": "speed lines",
+     "zh": "速度线"
+    },
+    {
+     "en": "action",
+     "zh": "动作"
+    },
+    {
+     "en": "serious",
+     "zh": "严肃"
+    },
+    {
+     "en": "armor",
+     "zh": "铠甲"
+    },
+    {
+     "en": "sparks",
+     "zh": "火花"
+    }
+   ]
+  },
+  {
+   "name": "图书馆阅读",
+   "desc": "暖灯与成堆的书",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "library",
+     "zh": "图书馆"
+    },
+    {
+     "en": "bookshelf",
+     "zh": "书架"
+    },
+    {
+     "en": "book",
+     "zh": "书"
+    },
+    {
+     "en": "reading",
+     "zh": "阅读"
+    },
+    {
+     "en": "glasses",
+     "zh": "眼镜"
+    },
+    {
+     "en": "sitting",
+     "zh": "坐着"
+    },
+    {
+     "en": "warm lighting",
+     "zh": "暖光"
+    },
+    {
+     "en": "indoors",
+     "zh": "室内"
+    },
+    {
+     "en": "quiet",
+     "zh": "安静"
+    },
+    {
+     "en": "depth of field",
+     "zh": "景深"
+    }
+   ]
+  },
+  {
+   "name": "咖啡店打工",
+   "desc": "围裙与服务生",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "cafe",
+     "zh": "咖啡店"
+    },
+    {
+     "en": "apron",
+     "zh": "围裙"
+    },
+    {
+     "en": "waiter",
+     "zh": "服务生"
+    },
+    {
+     "en": "holding tray",
+     "zh": "端着托盘"
+    },
+    {
+     "en": "smile",
+     "zh": "微笑"
+    },
+    {
+     "en": "indoors",
+     "zh": "室内"
+    },
+    {
+     "en": "warm lighting",
+     "zh": "暖光"
+    },
+    {
+     "en": "counter",
+     "zh": "吧台"
+    },
+    {
+     "en": "coffee",
+     "zh": "咖啡"
+    }
+   ]
+  },
+  {
+   "name": "黑白线稿",
+   "desc": "单色线画，适合上色底稿",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "monochrome",
+     "zh": "单色"
+    },
+    {
+     "en": "lineart",
+     "zh": "线稿"
+    },
+    {
+     "en": "greyscale",
+     "zh": "灰度"
+    },
+    {
+     "en": "sketch",
+     "zh": "速写"
+    },
+    {
+     "en": "white background",
+     "zh": "白色背景"
+    },
+    {
+     "en": "simple background",
+     "zh": "简单背景"
+    },
+    {
+     "en": "clean lines",
+     "zh": "干净线条"
+    }
+   ]
+  },
+  {
+   "name": "复古胶片",
+   "desc": "颗粒、漏光、褪色",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "film grain",
+     "zh": "胶片颗粒"
+    },
+    {
+     "en": "vintage",
+     "zh": "复古"
+    },
+    {
+     "en": "light leak",
+     "zh": "漏光"
+    },
+    {
+     "en": "faded colors",
+     "zh": "褪色"
+    },
+    {
+     "en": "analog",
+     "zh": "胶片感"
+    },
+    {
+     "en": "35mm film",
+     "zh": "35mm 胶片"
+    },
+    {
+     "en": "soft focus",
+     "zh": "柔焦"
+    },
+    {
+     "en": "nostalgic",
+     "zh": "怀旧"
+    }
+   ]
+  },
+  {
+   "name": "星空露营",
+   "desc": "银河与篝火",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "night",
+     "zh": "夜晚"
+    },
+    {
+     "en": "starry sky",
+     "zh": "星空"
+    },
+    {
+     "en": "milky way",
+     "zh": "银河"
+    },
+    {
+     "en": "campfire",
+     "zh": "篝火"
+    },
+    {
+     "en": "tent",
+     "zh": "帐篷"
+    },
+    {
+     "en": "camping",
+     "zh": "露营"
+    },
+    {
+     "en": "bonfire",
+     "zh": "营火"
+    },
+    {
+     "en": "mountains",
+     "zh": "山脉"
+    },
+    {
+     "en": "glowing",
+     "zh": "发光"
+    },
+    {
+     "en": "wide shot",
+     "zh": "远景"
+    }
+   ]
+  },
+  {
+   "name": "废墟探索",
+   "desc": "断壁与藤蔓",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "ruins",
+     "zh": "废墟"
+    },
+    {
+     "en": "broken building",
+     "zh": "残破建筑"
+    },
+    {
+     "en": "vines",
+     "zh": "藤蔓"
+    },
+    {
+     "en": "overgrown",
+     "zh": "杂草丛生"
+    },
+    {
+     "en": "dust",
+     "zh": "尘埃"
+    },
+    {
+     "en": "god rays",
+     "zh": "神光"
+    },
+    {
+     "en": "exploring",
+     "zh": "探索"
+    },
+    {
+     "en": "backpack",
+     "zh": "背包"
+    },
+    {
+     "en": "muted colors",
+     "zh": "低饱和"
+    }
+   ]
+  },
+  {
+   "name": "偶像舞台",
+   "desc": "聚光灯与荧光棒",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "stage",
+     "zh": "舞台"
+    },
+    {
+     "en": "spotlight",
+     "zh": "聚光灯"
+    },
+    {
+     "en": "idol",
+     "zh": "偶像"
+    },
+    {
+     "en": "microphone",
+     "zh": "麦克风"
+    },
+    {
+     "en": "singing",
+     "zh": "唱歌"
+    },
+    {
+     "en": "glowing",
+     "zh": "发光"
+    },
+    {
+     "en": "confetti",
+     "zh": "彩纸"
+    },
+    {
+     "en": "dynamic pose",
+     "zh": "动态姿势"
+    },
+    {
+     "en": "crowd",
+     "zh": "人群"
+    }
+   ]
+  },
+  {
+   "name": "睡衣清晨",
+   "desc": "刚醒来的松弛感",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "bedroom",
+     "zh": "卧室"
+    },
+    {
+     "en": "morning",
+     "zh": "清晨"
+    },
+    {
+     "en": "pajamas",
+     "zh": "睡衣"
+    },
+    {
+     "en": "messy hair",
+     "zh": "乱发"
+    },
+    {
+     "en": "bed",
+     "zh": "床"
+    },
+    {
+     "en": "yawning",
+     "zh": "打哈欠"
+    },
+    {
+     "en": "sleepy",
+     "zh": "困倦"
+    },
+    {
+     "en": "sunlight",
+     "zh": "阳光"
+    },
+    {
+     "en": "soft lighting",
+     "zh": "柔光"
+    },
+    {
+     "en": "sitting on bed",
+     "zh": "坐在床上"
+    }
+   ]
+  },
+  {
+   "name": "雨天窗边",
+   "desc": "玻璃上的水痕",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "rain",
+     "zh": "下雨"
+    },
+    {
+     "en": "window",
+     "zh": "窗户"
+    },
+    {
+     "en": "raindrops on glass",
+     "zh": "玻璃上的雨滴"
+    },
+    {
+     "en": "indoors",
+     "zh": "室内"
+    },
+    {
+     "en": "sitting",
+     "zh": "坐着"
+    },
+    {
+     "en": "chin on hand",
+     "zh": "托腮"
+    },
+    {
+     "en": "looking outside",
+     "zh": "望向窗外"
+    },
+    {
+     "en": "moody",
+     "zh": "忧郁"
+    },
+    {
+     "en": "cool colors",
+     "zh": "冷色调"
+    }
+   ]
+  },
+  {
+   "name": "龙与少女",
+   "desc": "奇幻巨兽与小小身影",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "dragon",
+     "zh": "龙"
+    },
+    {
+     "en": "fantasy",
+     "zh": "奇幻"
+    },
+    {
+     "en": "epic",
+     "zh": "史诗感"
+    },
+    {
+     "en": "scale",
+     "zh": "鳞片"
+    },
+    {
+     "en": "horns",
+     "zh": "角"
+    },
+    {
+     "en": "floating island",
+     "zh": "浮空岛"
+    },
+    {
+     "en": "clouds",
+     "zh": "云"
+    },
+    {
+     "en": "wide shot",
+     "zh": "远景"
+    },
+    {
+     "en": "cinematic lighting",
+     "zh": "电影光"
+    }
+   ]
+  },
+  {
+   "name": "水墨和风",
+   "desc": "留白、墨迹、和纸质感",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "ink wash painting",
+     "zh": "水墨画"
+    },
+    {
+     "en": "sumi-e",
+     "zh": "墨绘"
+    },
+    {
+     "en": "japanese style",
+     "zh": "和风"
+    },
+    {
+     "en": "negative space",
+     "zh": "留白"
+    },
+    {
+     "en": "paper texture",
+     "zh": "纸张质感"
+    },
+    {
+     "en": "monochrome",
+     "zh": "单色"
+    },
+    {
+     "en": "elegant",
+     "zh": "优雅"
+    },
+    {
+     "en": "kimono",
+     "zh": "和服"
+    }
+   ]
+  },
+  {
+   "name": "像素游戏",
+   "desc": "16bit 复古游戏画面",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "pixel art",
+     "zh": "像素画"
+    },
+    {
+     "en": "16-bit",
+     "zh": "16 位"
+    },
+    {
+     "en": "retro game",
+     "zh": "复古游戏"
+    },
+    {
+     "en": "dithering",
+     "zh": "抖动渐变"
+    },
+    {
+     "en": "limited palette",
+     "zh": "有限色板"
+    },
+    {
+     "en": "side view",
+     "zh": "侧视"
+    },
+    {
+     "en": "game ui",
+     "zh": "游戏界面"
+    }
+   ]
+  },
+  {
+   "name": "机甲少女",
+   "desc": "机械外骨骼与冷光",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "mecha",
+     "zh": "机甲"
+    },
+    {
+     "en": "mecha musume",
+     "zh": "机甲少女"
+    },
+    {
+     "en": "robot",
+     "zh": "机器人"
+    },
+    {
+     "en": "armor",
+     "zh": "装甲"
+    },
+    {
+     "en": "glowing",
+     "zh": "发光"
+    },
+    {
+     "en": "hangar",
+     "zh": "机库"
+    },
+    {
+     "en": "science fiction",
+     "zh": "科幻"
+    },
+    {
+     "en": "metal",
+     "zh": "金属"
+    },
+    {
+     "en": "blue lighting",
+     "zh": "蓝光"
+    }
+   ]
+  },
+  {
+   "name": "花海仰望",
+   "desc": "躺着看天，前景虚化",
+   "tags": [
+    {
+     "en": "1girl",
+     "zh": "一个女孩"
+    },
+    {
+     "en": "flower field",
+     "zh": "花海"
+    },
+    {
+     "en": "lying",
+     "zh": "躺下"
+    },
+    {
+     "en": "looking up",
+     "zh": "抬头"
+    },
+    {
+     "en": "blue sky",
+     "zh": "蓝天"
+    },
+    {
+     "en": "clouds",
+     "zh": "云"
+    },
+    {
+     "en": "from above",
+     "zh": "俯视"
+    },
+    {
+     "en": "shallow depth of field",
+     "zh": "浅景深"
+    },
+    {
+     "en": "peaceful",
+     "zh": "宁静"
+    },
+    {
+     "en": "petals",
+     "zh": "花瓣"
+    }
+   ]
+  }
+ ],
+ "anima": [
+  {
+   "id": "s1",
+   "name": "神社晨参",
+   "lv": "sfw",
+   "src": "anima",
+   "note": "安静开场，全身",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "shrine",
+    "torii",
+    "morning light",
+    "standing",
+    "hands together",
+    "miko outfit",
+    "calm expression",
+    "clear sky",
+    "soft focus",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, nude, nipples, sex, censored"
+  },
+  {
+   "id": "s2",
+   "name": "图书馆午后",
+   "lv": "sfw",
+   "src": "anima",
+   "note": "看书，中景",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "library",
+    "afternoon light",
+    "sitting at desk",
+    "open book",
+    "glasses",
+    "school uniform",
+    "quiet expression",
+    "dust in the air",
+    "medium shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, nude, nipples, sex, censored"
+  },
+  {
+   "id": "s3",
+   "name": "雨中回头",
+   "lv": "sfw",
+   "src": "anima",
+   "note": "撑伞背影",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "street",
+    "rain",
+    "holding umbrella",
+    "long coat",
+    "walking away",
+    "looking back",
+    "neon signs",
+    "wet ground reflection",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, nude, nipples, sex, censored"
+  },
+  {
+   "id": "s4",
+   "name": "天台黄昏",
+   "lv": "sfw",
+   "src": "anima",
+   "note": "风吹头发",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "rooftop",
+    "sunset",
+    "wind",
+    "hair blowing",
+    "leaning on railing",
+    "city skyline",
+    "school uniform",
+    "looking at distance",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, nude, nipples, sex, censored"
+  },
+  {
+   "id": "s5",
+   "name": "教室窗边",
+   "lv": "sfw",
+   "src": "anima",
+   "note": "樱花窗外",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "classroom",
+    "window light",
+    "sitting on desk",
+    "looking outside",
+    "cherry blossoms",
+    "school uniform",
+    "peaceful",
+    "medium shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, nude, nipples, sex, censored"
+  },
+  {
+   "id": "s6",
+   "name": "和风廊下",
+   "lv": "sfw",
+   "src": "anima",
+   "note": "浴衣喝茶",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "ryokan",
+    "wooden corridor",
+    "yukata",
+    "sitting",
+    "tea cup",
+    "warm lighting",
+    "garden view",
+    "evening",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, nude, nipples, sex, censored"
+  },
+  {
+   "id": "m1",
+   "name": "更衣室半遮",
+   "lv": "suggestive",
+   "src": "anima",
+   "note": "内衣，手挡",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "changing room",
+    "undressing",
+    "bra",
+    "looking away",
+    "blush",
+    "bare shoulder",
+    "shy expression",
+    "locker",
+    "soft light",
+    "medium shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, sex, penis, censored"
+  },
+  {
+   "id": "m2",
+   "name": "睡衣滑落",
+   "lv": "suggestive",
+   "src": "anima",
+   "note": "侧躺，肩线",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "bed",
+    "lying on side",
+    "pajama slipping",
+    "bare shoulder",
+    "messy hair",
+    "blush",
+    "looking at viewer",
+    "morning",
+    "soft light",
+    "medium shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, sex, penis, censored"
+  },
+  {
+   "id": "m3",
+   "name": "浴室门缝",
+   "lv": "suggestive",
+   "src": "anima",
+   "note": "湿发浴巾",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "bathroom",
+    "wet hair",
+    "towel",
+    "steam",
+    "doorway",
+    "looking at viewer",
+    "blush",
+    "water drops",
+    "warm light",
+    "medium shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, sex, penis, censored"
+  },
+  {
+   "id": "m4",
+   "name": "膝枕仰望",
+   "lv": "suggestive",
+   "src": "anima",
+   "note": "极近特写",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "lap pillow",
+    "lying on lap",
+    "looking up",
+    "hand on head",
+    "soft smile",
+    "blush",
+    "indoors",
+    "warm light",
+    "close-up"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, sex, penis, censored"
+  },
+  {
+   "id": "m5",
+   "name": "池边湿身",
+   "lv": "suggestive",
+   "src": "anima",
+   "note": "泳装坐边",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "solo",
+    "poolside",
+    "wet skin",
+    "bikini",
+    "sitting on edge",
+    "water drops",
+    "sunlight",
+    "blush",
+    "summer",
+    "medium shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, sex, penis, censored"
+  },
+  {
+   "id": "m6",
+   "name": "解领带贴近",
+   "lv": "suggestive",
+   "src": "anima",
+   "note": "脸贴脸",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "loosened tie",
+    "face to face",
+    "hands on collar",
+    "breath",
+    "blush",
+    "office",
+    "warm light",
+    "close-up"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, sex, penis, censored"
+  },
+  {
+   "id": "r1",
+   "name": "夜灯正常位",
+   "lv": "r18",
+   "src": "anima",
+   "note": "烛光，慢节奏",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "bedroom",
+    "night",
+    "candlelight",
+    "sex",
+    "missionary",
+    "nude",
+    "sweat",
+    "blush",
+    "half-closed eyes",
+    "moaning",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r2",
+   "name": "镜前后入",
+   "lv": "r18",
+   "src": "anima",
+   "note": "镜中双视角",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "bathroom",
+    "mirror",
+    "sex from behind",
+    "standing",
+    "sex",
+    "wet skin",
+    "nude",
+    "steam",
+    "blush",
+    "looking at viewer",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r3",
+   "name": "榻榻米骑乘",
+   "lv": "r18",
+   "src": "anima",
+   "note": "低机位",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "tatami",
+    "cowgirl position",
+    "sex",
+    "nude",
+    "bouncing breasts",
+    "sweat",
+    "blush",
+    "moaning",
+    "warm light",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r4",
+   "name": "桌后口交",
+   "lv": "r18",
+   "src": "anima",
+   "note": "上半身仍穿衣",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "office",
+    "under desk",
+    "fellatio",
+    "kneeling",
+    "nude",
+    "saliva",
+    "blush",
+    "warm light",
+    "cowboy shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r5",
+   "name": "沙发侧入",
+   "lv": "r18",
+   "src": "anima",
+   "note": "面对面侧躺",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "living room",
+    "sofa",
+    "sex",
+    "on side",
+    "face to face",
+    "leg lift",
+    "nude",
+    "eye contact",
+    "blush",
+    "evening light",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r6",
+   "name": "浴缸对坐",
+   "lv": "r18",
+   "src": "anima",
+   "note": "水面到腰",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "bathtub",
+    "water",
+    "sex",
+    "sitting on lap",
+    "chest to chest",
+    "wet hair",
+    "steam",
+    "nude",
+    "blush",
+    "cowboy shot"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r7",
+   "name": "阳台夜风",
+   "lv": "r18",
+   "src": "anima",
+   "note": "城市剪影",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "balcony",
+    "night",
+    "sex from behind",
+    "standing",
+    "sex",
+    "bent over railing",
+    "city lights",
+    "wind",
+    "nude",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  },
+  {
+   "id": "r8",
+   "name": "教室夕阳",
+   "lv": "r18",
+   "src": "anima",
+   "note": "桌上，光斜切",
+   "tags": [
+    "masterpiece",
+    "best quality",
+    "1girl",
+    "1boy",
+    "faceless male",
+    "hetero",
+    "classroom",
+    "desk",
+    "sex",
+    "missionary",
+    "on back",
+    "spread legs",
+    "sunset",
+    "dust in the air",
+    "nude",
+    "blush",
+    "full body"
+   ],
+   "neg": "lowres, bad anatomy, bad hands, extra fingers, missing fingers, worst quality, low quality, jpeg artifacts, blurry, watermark, text, signature, censored, mosaic"
+  }
+ ]
+}

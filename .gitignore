@@ -1,0 +1,67 @@
+# ============================================================
+#  Anima Workbench — 仓库白名单式忽略
+#  原则：只提交「工坊本体 + 部署脚本 + 文档」，运行产物一律不入库
+# ============================================================
+
+# ---------- 体积巨大的运行时目录（部署时另行准备） ----------
+ComfyUI_windows_portable/
+models/
+output/
+logs/
+logs-*.log
+archive/
+tmp/
+custom_nodes/
+style-refs/
+
+# ---------- Python 缓存 ----------
+__pycache__/
+*.pyc
+*.pyo
+
+# ---------- 本机配置与日志（含个人绝对路径 / 个人使用记录） ----------
+webui/data/wb_config.json
+webui/*.log
+webui/_debug.log
+webui/_start.log
+*.log
+.hist.json
+
+# ---------- _setup：只保留 4 个部署必需脚本 ----------
+_setup/*
+!_setup/start_engine.cmd
+!_setup/start_assistant.cmd
+!_setup/start_ollama.cmd
+!_setup/get_outdir.py
+
+# ---------- tools：只保留构建与自检脚本 ----------
+tools/*
+!tools/build_atoms.py
+!tools/gen_workbench.py
+!tools/health_check.py
+!tools/atoms_solo.py
+!tools/atoms_duo.py
+!tools/atoms_ext.py
+!tools/comfy_proxy.py
+
+# ---------- webui/data：只保留前端/后端实际读取的 9 个文件 ----------
+webui/assistant.lock
+webui/favorites.json
+prompts/examples-r18.json
+webui/data/lib_*.json
+webui/data/anima_scenes_extra.json
+webui/data/presets_extra.json
+webui/data/wb_tiers.json
+webui/data/lib_stats.json
+webui/data/wb_config.json
+
+# ---------- 角色缩略图（4.2MB 二进制，可选重新生成） ----------
+# 如需一并发布，注释掉下面这行
+webui/presets/thumbs/
+
+# ---------- 编辑器 / 系统 ----------
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store

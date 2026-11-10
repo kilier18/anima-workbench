@@ -1,0 +1,26 @@
+{
+  "styles": [
+    {
+      "id": "kanpa",
+      "name": "カンパ（东方本家风·社区 tag）",
+      "dir": "",
+      "mode": "tag",
+      "weight": 0.0,
+      "artistTag": "kanpa_(campagne_9)",
+      "baseFamily": "illustrious",
+      "note": "只用社区调好的画师 tag，不注入任何参考图。这是 20261105 那批（色彩正常）的配方，保持不动。",
+      "tag_weight": 1.2
+    },
+    {
+      "id": "none",
+      "name": "不指定（通用二次元）",
+      "dir": "",
+      "mode": "tag",
+      "weight": 0.0,
+      "artistTag": "",
+      "baseFamily": "illustrious",
+      "note": "不加任何画风约束，只吃底模本身的默认审美。",
+      "tag_weight": 1.0
+    }
+  ]
+}

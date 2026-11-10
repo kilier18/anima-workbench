@@ -1,0 +1,27 @@
+# ComfyUI 模型路径重定向（由 DSH 部署脚本生成）
+# 让 portable 包自带的 models 目录指向统一的 D:\ComfyUI\models，
+# 底模/LoRA/VAE 全部放这一处，重装 ComfyUI 不丢模型。
+
+comfyui:
+  base_path: D:/ComfyUI/models
+  checkpoints: checkpoints
+  loras: loras
+  vae: vae
+  controlnet: controlnet
+  upscale_models: upscale_models
+  ipadapter: ipadapter
+  clip_vision: clip_vision
+  clip: clip
+  text_encoders: text_encoders
+  unet: unet
+  embeddings: embeddings
+  style_models: style_models
+  gligen: gligen
+  photomaker: photomaker
+  diffusion_models: diffusion_models
+  ultralytics_bbox: ultralytics/bbox
+  ultralytics_segm: ultralytics/segm
+  sams: sams
+  sam2: sam2
+  onnx: onnx
+  impact: impact

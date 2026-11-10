@@ -1,0 +1,103 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anima 使用教程</title><style>
+:root{--bg:#0b0e15;--pan:#131924;--line:#232c3c;--tx:#dbe2ee;--dim:#8994a7;--acc:#7aa2f7;--acc2:#c099ff;--ok:#9ece6a;--warn:#e0af68}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 10% -10%,#1a2331 0,var(--bg) 62%);color:var(--tx);
+ font:14.5px/1.75 "Segoe UI","Microsoft YaHei",system-ui}
+.wrap{max-width:960px;margin:0 auto;padding:28px 22px 90px}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;padding:10px 0 12px;
+ background:linear-gradient(180deg,rgba(11,14,21,.97),rgba(11,14,21,.72));backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-bottom:18px}
+.bar .name{font-weight:700}
+.bar .name i{color:var(--acc);font-style:normal}
+.btn{background:#1b2433;border:1px solid var(--line);color:var(--tx);border-radius:8px;padding:5px 11px;
+ text-decoration:none;font-size:12.5px;cursor:pointer}
+.btn:hover{border-color:#3c4e6d}
+h1{font-size:24px;margin:6px 0 14px;letter-spacing:.3px}
+h2{font-size:18.5px;margin:32px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);color:#e6ecf8}
+h3{font-size:15.5px;margin:22px 0 8px;color:#cfdcf3}
+h4{font-size:14px;margin:16px 0 6px;color:var(--dim)}
+p{margin:9px 0}
+ul,ol{margin:8px 0 8px 22px;padding:0}
+li{margin:4px 0}
+code{background:#0e131c;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.8px;
+ font-family:Consolas,"Cascadia Mono",monospace;color:#c8d8f5}
+pre{background:#0e131c;border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:auto}
+pre code{border:0;background:none;padding:0;color:#b9cbe8}
+blockquote{margin:12px 0;padding:8px 14px;border-left:3px solid var(--acc2);background:#141b27;color:#c7d3e8;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#182030;color:#dbe6fa;font-weight:600}
+tr:nth-child(even) td{background:#101722}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+a{color:var(--acc)}
+strong{color:#eef3fc}
+.tip{margin:14px 0;padding:10px 14px;border:1px solid #3a4b6a;border-radius:10px;background:#141d2c}
+</style></head><body><div class="wrap">
+<div class="bar"><span class="name">Anima <i>使用教程</i></span><span style="flex:1"></span>
+<a class="btn" href="/tool">一键出图</a><a class="btn" href="/wb">Studio</a><a class="btn" href="/">生图助手</a></div>
+<h1>Anima 生图使用教程 v1</h1>
+<blockquote>更新于 2026-11-08。这份教程讲<strong>怎么用</strong>，不讲究原理；原理与实测数据在 <code>Anima生图知识-v1.md</code>。</blockquote>
+<h2>0. 一句话上手</h2>
+<p>桌面双击 <strong>「ComfyUI 一键出图」</strong> → 等右上角显示引擎已连接 → 在正向提示词框里写一句中文（例如 <code>灵梦 后入 吐舌头 全身</code>）→ 点页面上的 <strong>生成</strong> → 12～20 秒出图。</p>
+<p>出图落在 <code>D:\ComfyUI\output\</code>，文件名形如 <code>anima_pg_00001_.png</code>（WAI 档是 <code>wai_gen_</code>）。要重画手，点「修手」；要看每个词的中文，看输入框下面那行「中文：…」。</p>
+<h2>1. 一个页面，四块</h2>
+<p>打开 <code>http://127.0.0.1:8190/</code>（桌面「ComfyUI 一键出图」首页就是它），全部功能都在这一页，不用跳转：</p>
+<table><thead><tr><th>块</th><th>位置</th><th>干什么</th></tr></thead><tbody><tr><td>① 写提示词</td><td>左上</td><td>中文一句话 → 「本地扩写」；点词自动进正文；「规则整理」跑减法；负面已按单人/多人自动补；下面一行是逐词中文对照</td></tr><tr><td>② 资料库</td><td>中间</td><td>五个页签：标签 19 类 1960 · 角色 2390 · 场景（r18 187 + Anima 271）· 预设（Forge 26 + WAI 配方 50）· 画师 106。点任意一个词直接写进正文</td></tr><tr><td>③ Anima Studio</td><td>右侧</td><td>插件的 15 段 57 字段 1134 选项，逐段折叠；每段可单独「本段随机」，也可以「全部随机」</td></tr><tr><td>④ 预览与出图</td><td>底部整行</td><td>预览 chips + 尺寸/步数/CFG/采样/调度/种子 + 生成 / 修手 / 复制 + 成图网格（点图看大图）</td></tr></tbody></table>
+<p>旧的四个独立页还留着（<code>/assistant</code> 生图助手、<code>/wb</code> Studio、<code>/lib</code> 资料库、<code>/anima</code> 单独出图），只在调试或回退时用，界面上不再互链。</p>
+<p>桌面快捷方式 <strong>「ComfyUI 一键出图」</strong> 会自动拉起 Ollama、生图助手、8199 代理、ComfyUI 引擎，首页直接进单页工坊。</p>
+<p>端口速查：<code>8188</code> ComfyUI 引擎 · <code>8190</code> 全部网页 · <code>8199</code> 浏览器跨域代理 · <code>4000</code> LiteLLM · <code>11434</code> Ollama。</p>
+<p>控制台窗口顶部按钮：一键出图（单页工坊）/ 生图助手 / Anima Studio / 资料库 / ComfyUI 原界面。</p>
+<h2>2. 两套底模怎么选</h2>
+<p>「一键出图」页顶栏有 <strong>Anima 10 步 / WAI 26 步</strong> 两个按钮，点一下即切（参数自动跟着变，浏览器会记住）。</p>
+<table><thead><tr><th></th><th>Anima（默认）</th><th>WAI v17</th></tr></thead><tbody><tr><td>观感</td><td>日式插画、平涂、色彩干净</td><td>2.5D 写实、皮肤质感强</td></tr><tr><td>速度</td><td>10 步，1024×1536 约 12～20s</td><td>26 步，约 80～130s</td></tr><tr><td>擅长</td><td>构图、动态、风格化、风景</td><td>人体结构、手脚、复杂接触</td></tr><tr><td>弱项</td><td>手指、细微接触、极多人物</td><td>慢；风格偏"厚"</td></tr><tr><td>用法</td><td>先出构图与氛围，快</td><td>定稿、精修、需要解剖正确时</td></tr></tbody></table>
+<p>经验：<strong>Anima 出草稿挑构图，WAI 定稿</strong>；或者干脆 Anima 出图后点「修手」补手。</p>
+<h2>3. Anima 的正确参数（别乱调）</h2>
+<table><thead><tr><th>参数</th><th>取值</th><th>说明</th></tr></thead><tbody><tr><td>步数</td><td><strong>10</strong></td><td>turbo LoRA 是步数蒸馏出来的，10 步是设计工况</td></tr><tr><td>CFG</td><td><strong>1.0</strong></td><td>关键。CFG 调到 4 会饱和度暴涨、暗部压死，立刻"欧美 CG 塑料感"</td></tr><tr><td>采样器 / 调度器</td><td><code>er_sde</code> / <code>beta</code></td><td>官方 10 步工作流同款</td></tr><tr><td>分辨率</td><td><strong>1024×1536</strong></td><td>竖图最稳；832×1216 更快但细节少</td></tr><tr><td>LoRA 链</td><td>turbo 1.0 → kinokohime 0.6 → konya 0.3</td><td>顺序与权重都别动</td></tr></tbody></table>
+<p>实测结论（同提示词同种子）：CFG 1 时 10/20/30 步<strong>都合格</strong>，只是越跑越厚、越暗；<strong>CFG 4 的几张明显更差</strong>。所以上一轮"效果差"的元凶是 CFG，不是内容。既然三档都合格，就取最省时间的 10 步。</p>
+<p>分辨率别贪大：1536×2304 时微对比掉到 51（1024×1536 是 66.8），耗时从 16s 涨到 36s，长边超过 1792 开始发糊。</p>
+<h2>4. 四种用法</h2>
+<h3>4.1 场景直出（最省事）</h3>
+<p>页面左侧「标签库 → 场景」里有 <strong>187 条</strong>我们自己的场景，按 <code>◆前戏 / ◆插入 / ◆手动 / ◆口交 / ◆多人 / ◆高潮 / ◆事后</code> 分组。点一条，正向框会被填好（含机位、表情、取景），直接点生成。</p>
+<p>场景的写法已经包含过"减法"经验，例如后入不会同时写 <code>sex/doggystyle/arched_back</code>（会画出奇怪姿势），乳交不会混进插入词（会穿模）。</p>
+<h3>4.2 表情档（★T0–T5）</h3>
+<p>预设里另有 6 条 <code>★表情 T0–T5</code>，直接写在正向提示词末尾即可：</p>
+<table><thead><tr><th>档</th><th>语义</th><th>典型组合</th></tr></thead><tbody><tr><td>T0</td><td>原生，不干预</td><td>不写任何表情词，交给底模</td></tr><tr><td>T1</td><td>温柔 / 高冷 / 羞涩</td><td><code>light_smile, blush</code>、<code>expressionless</code></td></tr><tr><td>T2</td><td>坏笑 / 挑衅</td><td><code>smirk, one_eye_closed</code></td></tr><tr><td>T3</td><td>吐舌 / 喘息 / 泪目</td><td><code>tongue_out, half-closed_eyes</code></td></tr><tr><td>T4</td><td>半崩坏</td><td><code>rolling_eyes, drooling</code></td></tr><tr><td>T5</td><td>失神（只适合事后 / 二次）</td><td><code>empty_eyes, parted_lips</code></td></tr></tbody></table>
+<p>口交类不建议用 T0（底模会给一张面无表情的脸，反而怪），用 T2/T3 更自然。</p>
+<h3>4.3 中文一句话 + 本地扩写（推荐）</h3>
+<p>在正向框里直接写中文，点生成时脚本会先调本地 planner 把中文翻成 tag，再做规范化，然后提交。写法大致是：</p>
+<pre><code>角色 + 动作/体位 + 细节 + 景别 + (可选)画风
+灵梦 后入 吐舌头 全身
+蕾米 骑乘 侧面看 七分身
+魔理沙 口交 含着 脸颊鼓鼓的</code></pre>
+<p>实测映射（够用就好，不用背）：</p>
+<table><thead><tr><th>你写的</th><th>转成</th></tr></thead><tbody><tr><td>后入</td><td><code>sex_from_behind, all_fours</code></td></tr><tr><td>骑乘</td><td><code>cowgirl_position, girl_on_top</code></td></tr><tr><td>口交</td><td><code>oral, fellatio</code></td></tr><tr><td>乳交</td><td><code>paizuri, breast_press</code></td></tr><tr><td>腿交</td><td><code>thigh_sex</code></td></tr><tr><td>足交</td><td><code>footjob</code></td></tr><tr><td>素股</td><td><code>pussyjob, dry_humping</code></td></tr><tr><td>内射 / 射了</td><td>追加 <code>cum_in_pussy, cumdrip</code></td></tr><tr><td>全身 / 七分身 / 侧面看</td><td>取景与机位</td></tr></tbody></table>
+<p>三条经验：① 一句话里<strong>最多两个动作</strong>，多了底模会拼错；② 想要脸入画就写「全身」或「七分身」，别写「特写」；③ 精液词只在你真要的时候写，不然满屏都是。</p>
+<h3>4.4 画师 tag</h3>
+<p>页面「画师」区有 10 个风格 tag。常用的是 <code>kanpa (campagne 9)</code>（日式厚涂、皮肤干净）、<code>pako (pako)</code>、<code>lack</code>。画师 tag 放最前面，效果比堆形容词明显。</p>
+<h2>5. 出图之后</h2>
+<ol><li><strong>看中文对照</strong>：正向框下面那行「中文：…」逐词翻译（3276 条对照表），能立刻看出模型理解偏了哪里。</li><li><strong>修手</strong>：点「修手（重画手部）」，只重画手部区域（FaceDetailer，8 步 / denoise 0.45），约 8 秒，其余像素不动。</li><li><strong>不满意怎么改</strong>（按性价比排序）：</li></ol>
+<ul><li>换种子（最省事）；</li><li>改景别（脸被裁 → 改「全身」；人太小 → 改「七分身」）；</li><li><strong>删词</strong>而不是加词（重复的 <code>sex</code>、互相冲突的机位最容易出事）；</li><li>换机位（<code>from_behind / from_side / from_above / from_below</code> 只留一个）。</li></ul>
+<h2>6. 症状 → 改法速查</h2>
+<table><thead><tr><th>症状</th><th>原因</th><th>改法</th></tr></thead><tbody><tr><td>颜色艳到发光、脸部塑料</td><td>CFG 太高</td><td>CFG 回 1.0</td></tr><tr><td>手指数不对 / 手指粘一起</td><td>Anima 弱项</td><td>点「修手」；或换 WAI</td></tr><tr><td>画面里多出一个人</td><td>多人词或 <code>solo</code> 冲突</td><td>单人场景删掉 <code>2girls/threesome</code>，加 <code>solo</code></td></tr><tr><td>两个人粘在一起 / 腿分不清</td><td>动作词堆太多</td><td>一次只写一个体位，删掉重复的 <code>sex</code></td></tr><tr><td>乳房/阴茎穿模</td><td>乳交混了插入词</td><td>乳交只留 <code>paizuri, breast_press</code></td></tr><tr><td>脸部被裁掉一半</td><td>取景太近</td><td>改 <code>full_body</code> 或 <code>cowboy_shot</code></td></tr><tr><td>角色不像（发色/服装跑偏）</td><td>角色 tag 没被识别</td><td>用角色库点选，别手打中文名</td></tr><tr><td>一片模糊 / 结构糊</td><td>长边超过 1792</td><td>回到 1024×1536</td></tr><tr><td>脸上莫名有乳白液体</td><td>精液词残留</td><td>删 <code>cum*</code>（Anima 对体液词很敏感）</td></tr><tr><td>点角色/场景后正文没变</td><td>旧版只有「随机」才写正文</td><td>已修：Studio 点哪个就写哪个，正文即时重算</td></tr><tr><td>想点选标签出图</td><td>资料库页签没加载</td><td>中栏五个页签任选，点词即写入正文；或点左上「🎲 随机一套」</td></tr><tr><td>角色卡片没有预览图</td><td>缩略图还没跑</td><td>已改本地自跑：<code>tools/gen_char_thumbs_local.py --only-tag &lt;tag&gt;</code></td></tr></tbody></table>
+<h2>7. 常见问题</h2>
+<p><strong>页面一直转圈不出图？</strong> 看控制台的「引擎日志」tab，多半是 ComfyUI 引擎没起来。关掉控制台重开，或等 30 秒再试。</p>
+<p><strong>点生成毫无反应（也不报错）？</strong> 历史原因有两个，都已修：① 8199 代理把浏览器 <code>Origin</code> 转给 ComfyUI 会被 403；② 中文正则写错导致不触发扩写。若再遇到，先确认 8199 在跑：<code>curl http://127.0.0.1:8199/system_stats</code>。</p>
+<p><strong>图存哪了？</strong> <code>D:\ComfyUI\output\</code>。一键出图前缀 <code>anima_pg_</code>（WAI 档 <code>wai_gen_</code>），修手是 <code>anima_handfix_</code>，插件节点出图是 <code>anima_v5_</code>。</p>
+<p><strong>能批量吗？</strong> 能。<code>tools/batch_scenes.py</code> 按 id 批量跑 r18 场景库 187 条，跑完自动生成 <code>INDEX.md</code> 与联系表；角色缩略图批量用 <code>tools/gen_char_thumbs_local.py --limit 2400</code>。</p>
+<p><strong>能换别的模型吗？</strong> Anima 这套是固定的（UNET+CLIP+VAE 三者配套）；换底模请用「WAI」按钮那套，或在页面里把 <code>mode</code> 改回 ckpt 模式自己填。</p>
+<h2>8. 关键文件</h2>
+<table><thead><tr><th>文件</th><th>作用</th></tr></thead><tbody><tr><td><code>D:\ComfyUI\webui\anima.html</code></td><td>一键出图页（手写，非生成器）</td></tr><tr><td><code>D:\ComfyUI\webui\lib.html</code></td><td>资料库页（<code>tools/gen_lib.py</code> 生成）</td></tr><tr><td><code>D:\ComfyUI\webui\wb.html</code></td><td>Anima Studio 页（<code>tools/gen_wb_studio.py</code> 生成）</td></tr><tr><td><code>D:\ComfyUI\webui\assistant.py</code></td><td>后端：<code>/</code>（单页工坊）<code>/assistant</code> <code>/anima</code> <code>/lib</code> <code>/wb</code>、<code>/api/gen</code>、<code>/api/expand</code>、<code>/api/wb/*</code>、<code>/api/anima/handfix</code></td></tr><tr><td><code>D:\ComfyUI\webui\tag_zh.json</code></td><td>3276 条中文对照</td></tr><tr><td><code>D:\ComfyUI\webui\scenes_catalog.json</code></td><td>r18 场景库 187 条（WAI 用）</td></tr><tr><td><code>D:\ComfyUI\tools\gen_lib.py</code></td><td>资料库页生成器（改完重跑）</td></tr><tr><td><code>D:\ComfyUI\tools\gen_wb_studio.py</code></td><td>Studio 页生成器（改完重跑）</td></tr><tr><td><code>D:\ComfyUI\tools\gen_char_thumbs_local.py</code></td><td>本地实跑角色缩略图 → 插件 <code>presets/thumbs/</code></td></tr><tr><td><code>D:\ComfyUI\tools\comfy_proxy.py</code></td><td>8199 跨域代理</td></tr><tr><td><code>D:\ComfyUI\ComfyUI控制台.ps1</code></td><td>控制台：拉起全部服务 + 五键导航</td></tr><tr><td><code>D:\ComfyUI\archive\v1.0\forge\</code></td><td>退役的 Forge 原件（回退用）</td></tr><tr><td><code>D:\ComfyUI\docs\Anima生图知识-v1.md</code></td><td>原理与实测数据</td></tr><tr><td><code>D:\ComfyUI\docs\历史与回退-v1.md</code></td><td>每次改动的记录与回退点</td></tr></tbody></table>
+<h2>9. 每次开机做什么</h2>
+<ol><li>双击「ComfyUI 一键出图」，等右上角变绿（引擎连上）。</li><li>需要换底模就点 Anima / WAI。</li><li>写中文或点场景 → 生成。</li><li>不满意先换种子，再删词，最后才加词。</li><li>收工直接关窗口；服务下次启动会自己补。</li></ol>
+<h2>11. 单页工坊的关键文件</h2>
+<table><thead><tr><th>路径</th><th>说明</th></tr></thead><tbody><tr><td><code>D:\ComfyUI\webui\workbench.html</code></td><td>单页界面（35KB，由生成器产出，别手改）</td></tr><tr><td><code>D:\ComfyUI\tools\gen_workbench.py</code></td><td>单页生成器，改完跑一次就生效</td></tr><tr><td><code>D:\ComfyUI\tools\build_workbench_data.py</code></td><td>打包 <code>webui/data/wb_*.json</code>（标签/角色/场景/预设/中文对照）</td></tr><tr><td><code>D:\ComfyUI\webui\data\wb_*.json</code></td><td>页面运行时拉的数据，合计约 930KB</td></tr><tr><td><code>D:\ComfyUI\tools\gen_char_thumbs_local.py</code></td><td>角色缩略图本地实跑（<code>--idle</code> 只在引擎空闲时补图）</td></tr></tbody></table>
+<p>排版坏了或数据不对时，依次重跑：<code>build_workbench_data.py</code> → <code>gen_workbench.py</code> → 浏览器 Ctrl+F5。</p>
+<h2>12. 档位 / 预设分组 / 中文对照（2026-11-08）</h2>
+<table><thead><tr><th>想干什么</th><th>怎么做</th></tr></thead><tbody><tr><td>只要安全图</td><td>档位 <code>SFW</code>：负面自动加 <code>nude, nipples, sex, censored</code>，预设只给非 R18 的 33 条，场景只给 Anima 组</td></tr><tr><td>暧昧但不露</td><td>档位 <code>Suggestive</code>：画面词放开，仍不给 r18 场景</td></tr><tr><td>成人图</td><td>档位 <code>R18</code>：r18 场景 187 条 + r18 预设 43 条同时放开</td></tr><tr><td>找 r18 配方</td><td>预设页签 →「R18 43」段；非成人 →「非 R18 33」段</td></tr><tr><td>看不懂英文词</td><td>正文下方中文对照条（词条全部有中文，点一下即删词）</td></tr></tbody></table>
+<p>体检：<code>tools\health_check.py</code> 一次跑 28 项（主页/教程/302/data/代理/API/py_compile）。</p>
+<p>新增脚本：<code>tools/merge_zh_flat.py</code>（中文表重建）、<code>tools/tag_preset_lv.py</code>（预设打档）、<code>tools/health_check.py</code>（体检）。</p>
+<h2>13. 两套方言：WAI 与 Anima 别混着喂（2026-11-08）</h2>
+<table><thead><tr><th>维度</th><th>WAI（SDXL / danbooru）</th><th>Anima（自然语言）</th></tr></thead><tbody><tr><td>写法</td><td>下划线标签 <code>sex_from_behind</code></td><td>空格短语 <code>sex from behind</code></td></tr><tr><td>权重</td><td>可 <code>(tag:1.2)</code></td><td>不吃，写了也被剥掉</td></tr><tr><td>画师</td><td><code>kanpa_(campagne_9)</code></td><td><code>@kanpa (campagne 9)</code></td></tr><tr><td>质量前缀</td><td><code>masterpiece, best quality, …</code></td><td>不加（10 步 turbo，加了反而糊）</td></tr><tr><td>负面</td><td>10 词结构 + 分镜三词</td><td>14 词短表（手/水印/文字），长堆叠无效</td></tr><tr><td>词量</td><td>16–20 个 tag</td><td>30–45 个短语（超 45 会被截断）</td></tr><tr><td>参数</td><td>18–30 步 / CFG 5.5–7</td><td>10 步 / CFG 1 / er_sde + beta</td></tr></tbody></table>
+<p>页面按底模自动选方言：点「Anima 10 步」扩写就出短语，点「WAI 26 步」扩写就出 danbooru 标签。槽位解析（谁是角色、几人、什么姿势、机位、减法规则）两套共用，只有表现层不同。</p>
+</div></body></html>

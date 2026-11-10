@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>工坊 · 提示词 / 资料库 / Studio / 出图</title>
+<style>
+:root{
+  --bg:#0f1116; --panel:#171a21; --panel2:#1d212a; --line:#2a2f3a;
+  --tx:#e6e8ee; --dim:#8b93a3; --acc:#4c8dff; --acc2:#43c08a; --warn:#e0a34d;
+  --r:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);
+  font:13px/1.5 "Microsoft YaHei","Segoe UI",system-ui,sans-serif}
+body{display:flex;flex-direction:column;overflow:hidden}
+body{min-width:1180px;overflow-x:auto}
+button,select,input,textarea{font:inherit;color:var(--tx);background:var(--panel2);
+  border:1px solid var(--line);border-radius:8px;padding:5px 8px;outline:none}
+button{cursor:pointer}
+button:hover{border-color:#3d465a;background:#222836}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+button.pri:hover{background:#5f9bff}
+button.ok{background:var(--acc2);border-color:var(--acc2);color:#06110c;font-weight:600}
+textarea{resize:none;width:100%;line-height:1.55}
+select{padding:4px 6px}
+.small{font-size:12px;color:var(--dim)}
+
+header{flex:0 0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:8px 14px;border-bottom:1px solid var(--line);background:#12151b}
+header .logo{font-weight:700;letter-spacing:.5px}
+header .sp{flex:1}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:transparent;padding:5px 12px;color:var(--dim)}
+.seg button.on{background:var(--acc);color:#fff}
+.seg.r18 button.on{background:#c04a68}
+.chip-model{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:99px;
+  background:#1d2a3a;border:1px solid #2f4a66;color:#8fb4e8;font-size:12px;letter-spacing:.3px}
+
+main{flex:1 1 auto;min-height:0;display:grid;min-width:1180px;
+  grid-template-columns:330px minmax(320px,1fr) 372px;
+  grid-template-rows:minmax(0,1fr) 292px;
+  gap:10px;padding:10px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+.panel>h2{margin:0;padding:8px 12px;font-size:13px;font-weight:600;color:#cfd6e4;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;background:#141821}
+.panel>h2 .badge{font-size:11px;color:var(--dim);font-weight:400;border:1px solid var(--line);
+  border-radius:20px;padding:1px 8px}
+.panel>h2 #pfLine{margin-left:auto;cursor:help}
+.panel>h2 .badge.ok{color:var(--acc2);border-color:#2b5b46}
+.panel>h2 .badge.warn{color:var(--warn);border-color:#5c4526}
+.panel .body{flex:1 1 auto;min-height:0;overflow:auto;padding:10px 12px;overscroll-behavior:contain}
+#p1{grid-column:1;grid-row:1}
+#p2{grid-column:2;grid-row:1}
+#p3{grid-column:3;grid-row:1}
+#p4{grid-column:1/4;grid-row:2;display:grid;grid-template-columns:minmax(0,1fr) 420px;
+  grid-template-rows:auto minmax(0,1fr)}
+#p4 .bar{grid-column:1/3;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:8px 12px;border-bottom:1px solid var(--line);background:#141821}
+#p4 .left{grid-column:1;grid-row:2;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#p4 .right{grid-column:2;grid-row:2;display:flex;flex-direction:column;min-height:0;overflow:hidden;
+  border-left:1px solid var(--line)}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#232936;border:1px solid #2f3646;
+  border-radius:999px;padding:2px 8px;font-size:12px;cursor:pointer}
+.chip b{font-weight:500;color:#dfe4ee}
+.chip i{color:var(--dim);font-style:normal;font-size:11px}
+.chip .x{color:#7a8296}
+.chip:hover{border-color:#4a5568}
+.chip.on{background:#2b3a55;border-color:#4c8dff}
+.tag{background:#1f2531;border:1px solid #2b3240;border-radius:8px;padding:3px 8px;
+  font-size:12px;cursor:pointer;white-space:nowrap}
+.tag:hover{border-color:#4c8dff;background:#243044}
+.tag .zh{color:var(--dim);margin-left:5px;font-size:11px}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+
+.tabs{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap}
+.tabs button{padding:4px 10px;font-size:12px}
+.tabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+
+#catbar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+#catbar button{font-size:12px;padding:3px 9px}
+#catbar button.on{background:#2b3a55;border-color:#4c8dff}
+
+#charGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.ccard{border:1px solid #262c38;border-radius:8px;overflow:hidden;background:#1a1f28;cursor:pointer}
+.ccard:hover{border-color:#4c8dff}
+.ccard .ph{width:100%;aspect-ratio:96/134;background:#232936 center/cover no-repeat;
+  display:flex;align-items:center;justify-content:center;font-size:20px;color:#4a5366}
+.ccard .ph{color:#4a5366}
+.ccard .nm{padding:3px 5px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ccard .tw{padding:0 5px 4px;font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+
+#secList .sec{margin-bottom:7px;border:1px solid #252b37;border-radius:8px;background:#1a1f27}
+#secList .sec>.hd{display:flex;align-items:center;gap:6px;padding:6px 9px;cursor:pointer;
+  font-size:12px;color:#cfd6e4}
+#secList .sec>.hd .n{color:var(--dim);font-size:11px}
+#secList .sec>.bd{display:none;padding:0 9px 9px}
+#secList .sec.open>.bd{display:block}
+#secList .fld{margin-bottom:6px}
+#secList .fld label{display:block;font-size:11px;color:var(--dim);margin-bottom:2px}
+#secList select{width:100%}
+
+#prev{flex:1 1 auto;min-height:0;overflow:auto;padding:10px 12px}
+#imgs{flex:1 1 auto;min-height:0;overflow:auto;padding:10px;display:flex;flex-wrap:wrap;gap:8px;
+  align-content:flex-start}
+#imgs img{height:150px;border-radius:8px;border:1px solid #2a3140;cursor:pointer;background:#111}
+#imgs .ph{color:var(--dim);font-size:12px;padding:6px}
+#big{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;
+  z-index:50;cursor:zoom-out}
+#big img{max-width:94vw;max-height:94vh;border-radius:6px}
+.pv-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.pv-tags .t{background:#20283a;border:1px solid #2e3a52;border-radius:6px;padding:2px 7px;font-size:11px}
+.pv-tags .t{color:#9fc0ff;border-color:#2e3a52}
+.pv-tags .t .z{color:#7e8798;margin-left:4px}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.fieldline{display:flex;gap:6px;align-items:center}
+.fieldline select{flex:1}
+.hint{font-size:11px;color:#6f7788;margin:4px 0 8px}
+#prog{position:relative;margin:6px 0 0;height:22px;border:1px solid var(--line);
+  border-radius:11px;background:#151a22;overflow:hidden}
+#prog i{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,#3d6fd1,#6ea8ff);
+  transition:width .35s ease}
+#prog.run i{width:100%;animation:pg 1.6s linear infinite;background:linear-gradient(90deg,#2b4d8f,#4c8dff,#2b4d8f);
+  background-size:200% 100%}
+@keyframes pg{0%{background-position:0 0}100%{background-position:-200% 0}}
+#prog span{position:relative;display:block;text-align:center;font-size:11px;line-height:20px;color:#cfd6e4}
+#prog.done i{width:100%;background:linear-gradient(90deg,#2f7d55,#48b47f)}
+#prog.err i{width:100%;background:#8c3b4a}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#2a3346;
+  border:1px solid #3c4860;padding:7px 14px;border-radius:8px;font-size:12px;opacity:0;
+  transition:opacity .2s;pointer-events:none;z-index:60}
+#toast.on{opacity:1}
+button.mini{padding:3px 9px;font-size:12px;border-radius:7px;border:1px solid #3c4860;background:#232c3c;color:#9fb0c8;cursor:pointer}
+button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
+.mask{position:fixed;inset:0;background:#000a;z-index:70;display:none;align-items:center;justify-content:center}
+.mask.on{display:flex}
+.modal{background:#1c2432;border:1px solid #3c4860;border-radius:12px;padding:18px 20px;width:min(560px,92vw);box-shadow:0 18px 60px #000b}
+.modal h3{margin:0 0 4px;font-size:15px;color:#e6ecf5}
+.modal input{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:8px;border:1px solid #3c4860;
+  background:#12181f;color:#e6ecf5;font-size:13px;font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">工坊</span>
+  <span class="chip-model" title="3.1 起统一使用 Anima 底模">Anima</span>
+  <span class="sp"></span>
+  <span class="small" id="stat">加载中…</span>
+  <button id="btnCfg" class="mini" title="设置出图目录">⚙ 目录</button>
+  <div class="seg" id="tierSeg">
+    <button data-v="sfw" class="on">SFW</button>
+    <button data-v="suggestive">Suggestive</button>
+    <button data-v="r18" class="r18">R18</button>
+  </div>
+</header>
+
+<main>
+  <!-- ① 提示词 -->
+  <section class="panel" id="p1">
+    <h2>① 提示词 <span class="badge" id="posCount">0 词</span>
+      <span class="badge" id="pfLine" title="出图前审查：人数 / 性别 / 道具一致性">审查 —</span></h2>
+    <div class="body">
+      <textarea id="pos" rows="7" placeholder="写中文（灵梦 后入 吐舌头 全身）或直接贴 tag，选词会追加到这里"></textarea>
+      <div class="row" style="margin:6px 0 10px">
+        <button id="btnExpand" class="pri">本地扩写</button>
+        <button id="btnNorm">规则整理</button>
+        <button id="btnClear">清空</button>
+        <button id="btnRoll">🎲 随机一套</button>
+      </div>
+      <div class="small" style="margin-bottom:4px">负面（自动补，可改）</div>
+      <textarea id="neg" rows="3"></textarea>
+      <div class="row" style="margin-top:6px">
+        <button id="btnNegReset">恢复默认负面</button>
+      </div>
+      <div class="small" style="margin:10px 0 4px">中文对照</div>
+      <div class="chips" id="zhChips"></div>
+    </div>
+  </section>
+
+  <!-- ② 资料库 -->
+  <section class="panel" id="p2">
+    <h2>② 资料库 <span class="badge" id="libCount"></span></h2>
+    <div class="tabs" id="libTabs">
+      <button data-t="tags" class="on">标签</button>
+      <button data-t="chars">角色</button>
+      <button data-t="scenes">场景</button>
+      <button data-t="presets">预设</button>
+      <button data-t="artists">画师</button>
+      <button data-t="outfits">服饰道具</button>
+      <button id="libRoll" style="margin-left:auto">🎲 本页随机</button>
+    </div>
+    <div class="body" id="libBody"></div>
+  </section>
+
+  <!-- ③ Studio -->
+  <section class="panel" id="p3">
+    <h2>③ Studio 15 段 <span class="badge" id="studioCount"></span>
+      <button id="studioRoll" style="margin-left:auto;font-size:12px;padding:3px 9px">🎲 全部随机</button>
+    </h2>
+    <div class="body" id="secList"></div>
+  </section>
+
+  <!-- ④ 预览与出图 -->
+  <section class="panel" id="p4">
+    <div class="bar">
+      <span class="small">预览</span>
+      <span class="small" id="pvCount">0 词</span>
+      <span class="sp" style="flex:1"></span>
+      <span class="small">尺寸</span>
+      <select id="qSize">
+        <option value="1024x1536">1024×1536</option>
+        <option value="832x1216">832×1216</option>
+        <option value="1152x1728">1152×1728</option>
+        <option value="1216x832">1216×832</option>
+        <option value="1536x1024">1536×1024</option>
+      </select>
+      <span class="small">步数</span><input id="qSteps" type="number" min="1" max="60" value="10" style="width:64px">
+      <span class="small">CFG</span><input id="qCfg" type="number" step="0.1" min="0.5" max="12" value="1" style="width:60px">
+      <span class="small">采样</span>
+      <select id="qSampler">
+        <option>er_sde</option><option>euler_ancestral</option><option>euler</option><option>dpmpp_2m</option>
+      </select>
+      <span class="small">调度</span>
+      <select id="qSched"><option>beta</option><option>normal</option><option>karras</option></select>
+      <span class="small">种子</span><input id="qSeed" type="number" value="-1" style="width:96px">
+      <label class="small" title="动作×地点×光线×强度×构图×机位 随机组合，动作本批不重复"><input type="checkbox" id="qCompose" checked> 组合抽词</label>
+      <label class="small" title="加 speech_bubble：画面出现漫画式对话框"><input id="qBubble" type="checkbox"> 对话框</label>
+      <span class="small" title="需要男性时的处理：无脸男 / 隐形男(只剩压痕与动作) / 只有阴茎">男体</span>
+      <select id="qScene" title="场景类型：自动=按角色数推断；锁定后只从该类三档池抽动作">
+        <option value="auto" selected>自动</option>
+        <option value="solo">单人</option>
+        <option value="yuri">女同</option>
+        <option value="machine">机械</option>
+        <option value="bdsm">调教</option>
+        <option value="tentacle">触手</option>
+        <option value="triple">3P</option>
+        <option value="hypno">催眠</option>
+      </select>
+      <select id="qMale" title="需要男性时的处理：无脸男 / 隐形男(只剩压痕与动作) / 只有阴茎">
+        <option value="invisible" selected>隐形男</option>
+        <option value="faceless">无脸男</option>
+        <option value="penis">只有阴茎</option>
+      </select>
+      <button id="btnGen" class="pri">🎨 生成</button>
+      <span class="small">批量</span><input id="batchN" type="number" value="8" min="1" max="60" style="width:64px">
+      <button id="btnBatch" class="pri" style="background:#2f6f4f">🎬 批量出图</button>
+      <button id="btnPause" disabled>⏸ 暂停</button>
+      <button id="btnHand">🔧 修手</button>
+      <button id="btnCopy">复制提示词</button>
+      <button id="btnLog">📋 日志</button>
+    </div>
+    <div id="prog"><i id="progBar"></i><span id="progTxt">待机</span></div>
+    <div class="left">
+      <div id="prev"></div>
+    </div>
+    <div class="right">
+      <div id="imgs"><div class="ph">生成的图会出现在这里</div></div>
+    </div>
+  </section>
+</main>
+<div id="big"><img alt=""></div>
+<div id="toast"></div>
+<div id="cfgMask" class="mask"><div class="modal">
+  <h3>出图目录</h3>
+  <p class="small" style="margin:2px 0 8px">改完会重启 ComfyUI 才生效（约 20–40 秒）。目录必须已存在或能被创建、且可写。</p>
+  <input id="cfgDir" spellcheck="false" placeholder="例如 F:\\Users\\pinn\\Pictures\\libido">
+  <div class="small" id="cfgNow" style="margin:6px 0 2px"></div>
+  <div class="row" style="justify-content:flex-end;gap:8px;margin-top:14px">
+    <button id="cfgCancel">取消</button>
+    <button id="cfgSave" class="pri">保存并重启</button>
+  </div>
+</div></div>
+
+<script>
+/* ============ 状态 ============ */
+const S = {bubble:false, 
+  tags: [], neg: [], charTag: null, sceneTags: [], sceneName: '', chars: [], scenes: [], sceneGrp: 'all', sceneCat: '全部', sceneQ: '', sceneScroll: 0,
+  tier: 'sfw', model: 'anima', imgs: [], last: null, presetGrp: null,
+  lib: {tags:null, chars:null, scenes:null, presets:null, artists:null, outfits:null},
+  tab: 'tags', cat: null, charLimit: 160, charWork: '', charQ: '',
+  zh: {}, pools: null, sel: {}, sectionOpen: {}, owner: {}, userTags: [],
+};
+const $ = id => document.getElementById(id);
+const K = t => String(t).toLowerCase().replace(/[\s-]+/g,'_');
+// 马赛克/打码抑制块（带权重，Illustrious/Anima 系认括号权重）
+const CENSOR_HARD = "(mosaic censoring:1.45), (bar censor:1.4), (censored:1.35), (pixelated:1.3), " +
+  "mosaic, square mosaic, blur censor, light censor, steam censor, hair censor, heart censor, " +
+  "convenient censoring, transparent censoring, out-of-frame censoring, censored genitals";
+const DEF_NEG = "bad quality, worst quality, worst detail, bad anatomy, bad hands, muscular_male, muscular, abs, bare_pectorals, back_muscles, " + CENSOR_HARD;
+const CUM = ["cum","cum_in_pussy","cum_on_body","cum_on_breasts","cum_overflow","cumdrip","cum_in_mouth","cum_on_tongue","facial","bukkake","cum_in_ass","excessive_cum","cum_on_hair","cum_on_face","cum_on_stomach"];
+const ANGLES = ["from_above","from_below","from_behind","from_side","from_front","pov"];
+const SOLO_BAN = ["1boy","2boys","faceless_male","2girls","yuri","penis","hetero","group_sex","multiple_boys"];
+const POSES = ["missionary","cowgirl_position","reverse_cowgirl_position","all_fours","sex_from_behind",
+  "on_side","standing_sex","mating_press","upright_straddle","amazon_position","piledriver","spooning",
+  "straddling","girl_on_top","sitting_on_lap"];
+const SELF_TOUCH = ["spread_pussy","two_hands_spreading","both_hands_between_her_legs","pussy_spread",
+  "masturbation","fingering","onanism","after_masturbation","hand_between_legs"];
+const GEAR = ["nipple_clamps","chain_between_nipple_clamps","chest_harness","rope_around_breasts",
+  "thigh_strap","collar","leash","shibari","bondage","bound_arms","arms_behind_back","ball_gag","blindfold"];
+const BOND_RE = /(bondage|shibari|rope|clamp|chain|tied|bound|harness|slave|cuff|gag|blindfold|collar|leash|pillory|stocks|suspension|restraint|bdsm|spread_arms|wrists_spread|bound_ankles|frogtie|pet_play|tail_plug|anal_beads|butt_plug)/;
+const ACT_R18 = ["sex,all_fours","sex,missionary","sex,straddling","sex,sex_from_behind","sex,on_side"];
+const ACT_SFW = ["standing","sitting","walking","lying_on_bed","reading_a_book","drinking_tea","arms_crossed","stretching"];
+const GEAR_TRIG = ["shibari","bondage","rope","clamp","harness","collar","leash","绳","缚","夹","项圈","牵引","捆"];
+
+const keyOf = t => t.toLowerCase().replace(/ /g,'_');
+function hypnoFix(list){
+  const low = list.map(keyOf);
+  const isHyp = low.includes("heart-shaped_pupils") || low.includes("symbol-shaped_pupils");
+  if(!isHyp) return list;
+  const DROP = ["empty_eyes","blank_stare","dazed","expressionless","closed_eyes","rolling_eyes","half-closed_eyes"];
+  let out = list.filter(t=>!DROP.includes(keyOf(t)));
+  const lo = out.map(keyOf);
+  if(!lo.includes("torogao")) out.push("torogao");
+  if(!lo.some(t=>["close-up","upper_body","portrait","cowboy_shot","pov"].includes(t))) out.push("upper_body");
+  if(!lo.some(t=>["pov","from_behind"].includes(t))) out.push("looking_at_viewer");
+  return out;
+}
+
+/* 三级分级（由 _setup/tier_sets.py 生成，勿手改） */
+const EXPLICIT_HARD = ["sex", "vaginal", "anal", "sex_from_behind", "missionary", "cowgirl_position", "reverse_cowgirl_position", "all_fours", "doggystyle", "upright_straddle", "amazon_position", "mating_press", "piledriver", "spooning", "suspended_congress", "full_nelson", "prone_bone", "squatting_cowgirl_position", "standing_sex", "paizuri", "fellatio", "oral", "cunnilingus", "deepthroat", "thigh_sex", "handjob", "footjob", "tribadism", "69", "double_penetration", "triple_penetration", "penis", "testicles", "cum", "cum_in_pussy", "cum_on_body", "cum_on_breasts", "cum_in_mouth", "cum_on_tongue", "cum_on_penis", "cum_on_fingers", "cum_in_ass", "cum_in_navel", "cum_swap", "cumdrip", "cum_overflow", "cum_on_hair", "cum_on_stomach", "cum_on_feet", "excessive_cum", "facial", "bukkake", "spilling", "gokkun", "pussy", "anus", "spread_pussy", "pubic_hair", "clitoris", "urethra", "gaping", "ass_eaten", "nipples", "areolae", "erect_nipples", "milking_machine", "masturbation", "fingering", "dildo", "vibrator", "sex_toy", "butt_plug", "anal_beads", "sex_machine", "mechanical_tentacles", "tentacles", "tentacle_sex", "tentaclejob", "tentacle_in_mouth", "tentacle_grab", "tentacles_under_clothes", "stomach_bulge", "slime_(substance)", "egg_laying", "bondage", "shibari", "bound_arms", "bound_legs", "bound_wrists", "bound_ankles", "restrained", "ring_gag", "ball_gag", "cleave_gag", "wax_play", "whip", "riding_crop", "spanking", "welts", "humiliation", "futanari", "futanari_with_female", "futa_with_female", "orgasm", "female_ejaculation", "squirt", "forced_orgasm", "after_sex", "after_vaginal", "after_anal", "afterglow", "used_condom", "condom", "ahegao", "torogao", "rolling_eyes", "drooling", "empty_eyes", "heart-shaped_pupils", "mind_control", "hypnosis", "urination", "enema", "scat", "public_use", "glory_hole"];
+
+const EXPLICIT_SOFT = ["1boy", "2boys", "3boys", "multiple_boys", "faceless_male", "hetero", "male_focus", "male_on_top", "underwear", "panties", "bra", "lingerie", "garter_belt", "garter_straps", "pantyhose", "thighhighs", "kneehighs", "socks", "black_thighhighs", "white_thighhighs", "leggings", "swimsuit", "bikini", "one-piece_swimsuit", "sling_bikini", "leotard", "spats", "bloomers", "cleavage", "underboob", "sideboob", "downblouse", "areola_slip", "wardrobe_malfunction", "bare_shoulders", "bare_back", "midriff", "navel", "see-through", "wet_clothes", "wet_shirt", "wet_skin", "transparent_clothing", "skirt_lift", "shirt_lift", "clothes_lift", "bra_lift", "dress_lift", "crotch", "cameltoe", "panty_pull", "panties_around_one_leg", "kneeling", "spread_legs", "legs_up", "leg_lift", "leg_lock", "arched_back", "bent_over", "against_wall", "sitting_on_lap", "straddling", "girl_on_top", "collar", "leash", "undressing", "clothes_removed", "changing_room", "locker_room", "lactation", "breast_milk", "milking", "breast_expansion", "inflation", "kiss", "french_kiss", "tongue_out", "open_mouth", "parted_lips", "saliva", "saliva_trail", "heavy_breathing", "sweat", "trembling", "massage_given_or_received", "kanojo", "hug_from_behind", "kiss_on_neck", "kiss_on_shoulder", "biting_ear", "nipple_stimulation", "breast_sucking", "nipple_pull", "nipple_clamps", "clothed_sex", "grinding", "dry_humping", "pussy_juice", "wet", "clothing_aside", "breast_slip", "nude", "completely_nude", "bottomless", "topless", "no_bra", "no_panties", "panties_aside", "naked_apron", "naked_towel", ];
+
+function stripBy(arr, set){
+  return arr.filter(t=>!set.includes(String(t).toLowerCase()));
+}
+function tierGate(arr){
+  const t = S.tier || 'sfw';
+  if(t === 'r18') return arr;
+  let out = stripBy(arr, EXPLICIT_HARD);
+  if(t === 'suggestive') out = stripBy(out, ['1boy','2boys','3boys','multiple_boys','faceless_male','hetero']);
+  else out = stripBy(out, EXPLICIT_SOFT);
+  // 剩下的男人词：没有性行为就不留（避免"莫名其妙的路人"）
+  const hasAct = out.some(x=>SEX_ACT.includes(keyOf(x)));
+  if(!hasAct) out = stripBy(out, ['1boy','2boys','3boys','faceless_male','hetero','multiple_boys']);
+  return out;
+}
+
+function censFix(list){
+  const CENS = ["cum_in_pussy","cumdrip","cum_on_pussy","spread_pussy","pussy","cum_in_ass",
+                "after_vaginal","after_anal","female_ejaculation","cum_overflow","excessive_cum",
+                "creampie","sperm","spilling"];
+  const low = list.map(keyOf);
+  const hit = low.includes("penis") || CENS.some(t=>low.includes(t)) ||
+              (low.includes("close-up") && low.some(t=>t.includes("cum")));
+  if(hit && !low.includes("uncensored")) list.push("uncensored");
+  return list;
+}
+function cleanConflicts(list){
+  const txt = (($("pos")&&$("pos").value)||"").toLowerCase();
+  const scn = ((S.sceneName||"") + " " + (S.sceneCat||"") + " " + (S.sceneTags||[]).join(" ")).toLowerCase();
+  const gearOk = GEAR_TRIG.some(k=>txt.includes(k)||scn.includes(k));
+  const low0 = new Set(list.map(keyOf));
+  const hasSex = list.some(t=>keyOf(t)&&SEX_ACT.includes(keyOf(t)));
+  const yuri = list.some(t=>["yuri","tribadism","2girls","multiple_girls","lesbian"].includes(keyOf(t)));
+  const out=[]; const seen=new Set(); let pose=null;
+  for(const t of list){
+    const k=keyOf(t);
+    if(!k||seen.has(k)) continue;
+    if(k==="cum" && (low0.has("cum_in_pussy")||low0.has("cum_in_ass")||low0.has("creampie"))) continue;
+    if(GEAR.includes(k) && !gearOk) continue;
+    if(!gearOk && BOND_RE.test(k)) continue;
+    if(POSES.includes(k)){ if(pose && k!==pose) continue; pose=k; }
+    if(k==="legs_together" && (low0.has("spread_legs")||low0.has("legs_up")||low0.has("leg_lift"))) continue;
+    if(infoLegsGuard(k, low0)) continue;
+    if(SELF_TOUCH.includes(k) && hasSex && !yuri) continue;
+    if(k==="after_masturbation" && hasSex) continue;
+    if(k==="deep_penetration" && !hasSex) continue;
+    if(k==="1girl" && (low0.has("2girls")||low0.has("multiple_girls"))) continue;
+    if(k==="solo" && (low0.has("1boy")||low0.has("2boys")||low0.has("faceless_male"))) continue;
+    seen.add(k); out.push(t);
+  }
+  return out;
+}
+function infoLegsGuard(k, low0){
+  return ["spread_legs","legs_up","leg_lift"].includes(k) && low0.has("legs_together");
+}
+
+function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),1400); }
+
+/* ===== 出图目录设置 ===== */
+async function openCfg(){
+  $("cfgMask").classList.add("on");
+  $("cfgNow").textContent="读取中…";
+  try{
+    const r = await fetch('/api/config'); const j = await r.json();
+    $("cfgDir").value = j.output_dir || "";
+    $("cfgNow").textContent = "当前：" + (j.output_dir||"") + "　（ComfyUI " + (j.running_from==="running"?"运行中":"已停止") + "）";
+  }catch(e){ $("cfgNow").textContent="读取失败："+e; }
+}
+function closeCfg(){ $("cfgMask").classList.remove("on"); }
+async function saveCfg(){
+  const v = ($("cfgDir").value||"").trim();
+  if(!v){ toast("目录不能为空"); return; }
+  const b = $("cfgSave"); b.disabled=true; b.textContent="保存中…";
+  try{
+    const r = await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({output_dir:v})});
+    const j = await r.json();
+    if(!j.ok){ toast(j.error||"保存失败"); b.disabled=false; b.textContent="保存并重启"; return; }
+    b.textContent="重启 ComfyUI…"; $("cfgNow").textContent="正在重启，等它就绪…";
+    const r2 = await fetch('/api/comfy/restart',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const j2 = await r2.json();
+    $("cfgNow").textContent = j2.msg || (j2.ok?"已切换":"重启失败");
+    toast(j2.ok ? "出图目录已切到 "+j.output_dir : "目录已存，但 ComfyUI 没起来");
+    if(j2.ok) setTimeout(closeCfg, 1200);
+  }catch(e){ toast("失败："+e); b.disabled=false; b.textContent="保存并重启"; }
+}
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function zhOf(t){ return S.zh[String(t).toLowerCase()] || S.zh[t] || ""; }
+function uniq(a){ const seen=new Set(), out=[]; for(const x of a){ const k=String(x).trim(); if(!k) continue; const lk=k.toLowerCase(); if(seen.has(lk)) continue; seen.add(lk); out.push(k);} return out; }
+
+
+/* ============ 诊断日志（前端缓冲 + 落盘 logs/workbench.log） ============ */
+function logline(msg, extra){
+  S.log = S.log || [];
+  const line = new Date().toTimeString().slice(0,8) + "  " + msg + (extra? "  "+extra : "");
+  S.log.push(line);
+  if(S.log.length > 300) S.log.shift();
+  try{ fetch('/api/log',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({msg:line})}); }catch(e){}
+}
+function showLog(){
+  const txt = (S.log||[]).slice(-60).join(String.fromCharCode(10)) || "（还没有日志）";
+  const w = window.open("", "_blank", "width=760,height=520");
+  if(!w){ alert(txt); return; }
+  w.document.write('<pre style="font:12px/1.5 Consolas,monospace;white-space:pre-wrap;padding:12px">'+
+    txt.replace(/[<>&]/g, c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))+'</pre>');
+  w.document.title = "工坊日志（最近 60 条）";
+}
+/* ============ 提示词 ============ */
+function parseTags(s){ return uniq(String(s||"").split(/[,\n]/).map(x=>x.trim()).filter(Boolean)); }
+function cleanTags(){
+  const low = t => String(t).toLowerCase();
+  let a = [];
+  const seen = new Set();
+  S.tags.forEach(t=>{ const k=low(t).replace(/_/g," "); if(!seen.has(k)){ seen.add(k); a.push(t); } });
+  const nChar = (S.chars||[]).length;
+  const duo = nChar >= 2;
+  // 双人不要 close-up / 器官特写：必然叠人
+  if(duo) a = a.filter(t=>!["close-up","breasts","cleavage","portrait"].includes(low(t)));
+  // 俯拍与横躺互斥（from_above 会把横躺的人压成奇怪透视）
+  if(a.some(t=>low(t)==="from_above") && a.some(t=>["on_side","on_stomach","face_down"].includes(low(t))))
+    a = a.filter(t=>low(t)!=="from_above");
+  // 镜像本身容易穿帮：只保留明确镜前主题
+  if(!/镜/.test(S.sceneName||"")) a = a.filter(t=>!["mirror","looking_at_mirror","reflection"].includes(low(t)));
+  // 只拍局部的词会把头切掉，直接拦
+  a = a.filter(t=>!["head_out_of_frame","lower_body","no_head","disembodied"].includes(low(t)));
+  // 构图只留一个
+  const SHOT = ["close-up","cowboy_shot","upper_body","full_body"];
+  const shots = a.filter(t=>SHOT.includes(low(t)));
+  if(shots.length>1){
+    const keep = shots[0];
+    a = a.filter(t=>!SHOT.includes(low(t)) || low(t)===low(keep));
+  }
+  // 构图必有一个：双人剔掉 close-up 后没人补，底模会自由裁切出半身/切头
+  if(!a.some(t=>SHOT.includes(low(t)))) a.push(duo ? "full_body" : "upper_body");
+  // 站/走 与 床/地 互斥：同时出现会画出"站着躺在床上"
+  const UP = ["standing","walking","standing_sex","tiptoes","leaning_forward"];
+  const FLAT = ["on_bed","on_floor","on_side","on_stomach"];
+  if(a.some(t=>UP.includes(low(t))) && a.some(t=>FLAT.includes(low(t)))){
+    const keepFlat = a.some(t=>["on_side","on_stomach"].includes(low(t)));
+    if(!keepFlat) a = a.filter(t=>!["on_bed","on_floor"].includes(low(t)));
+    else a = a.filter(t=>!UP.includes(low(t)));
+  }
+  // 躺 与 跪/趴 互斥：动作侧优先，躺姿让位
+  if(a.some(t=>low(t)==="lying") && a.some(t=>["kneeling","all_fours","squatting"].includes(low(t))))
+    a = a.filter(t=>low(t)!=="lying");
+  S.tags = a;
+}
+
+function syncText(){ $("pos").value = S.tags.join(", "); $("posCount").textContent = S.tags.length + " 词"; renderPreview(); renderZh(); }
+function setTags(list){ S.tags = uniq(list); syncText(); }
+function addTag(t){ if(!t) return; const add = parseTags(t);
+  S.tags = uniq(S.tags.concat(add));
+  S.userTags = uniq((S.userTags||[]).concat(add));
+  add.forEach(x=>{ S.owner[K(x)] = 'user'; });
+  syncText(); }
+function delTag(t){ const k=K(t);
+  S.tags = S.tags.filter(x=>K(x)!==k);
+  S.userTags = (S.userTags||[]).filter(x=>K(x)!==k);
+  S.sceneTags = (S.sceneTags||[]).filter(x=>K(x)!==k);
+  syncText(); }
+
+const SEX_ACT = ['sex','vaginal','anal','sex_from_behind','missionary','cowgirl_position',
+  'reverse_cowgirl_position','all_fours','paizuri','fellatio','oral','thigh_sex','handjob',
+  'footjob','double_penetration','cum_in_pussy','cum_in_ass','creampie','pussyjob'];
+const YURI = ['yuri','tribadism','2girls','multiple_girls','female_only'];
+const NO_MALE = ['tentacle','tentacles','tentacle_sex','tentacle_grab','tentaclejob','tentacle_in_mouth',
+  'tentacles_under_clothes','mechanical_tentacles','monster','sex_machine','milking_machine','machine',
+  'dildo','dildo_riding','vibrator','sex_toy','sex_toys','egg_vibrator','butt_plug','anal_beads',
+  'futanari','slime','slime_(substance)','girls_only','tribadism'];
+function needMale(list){
+  const low = list.map(t=>t.toLowerCase().replace(/ /g,'_'));
+  const hasSex = low.some(t=>SEX_ACT.includes(t));
+  const yuri = low.some(t=>YURI.includes(t));
+  const noMale = low.some(t=>NO_MALE.includes(t));
+  const hasBoy = low.some(t=>t==='1boy'||t==='2boys'||t==='faceless_male'||t==='male');
+  const solo = low.includes('solo') || low.includes('1girl')
+    || low.some(t=>['after_vaginal','after_anal','after_sex','afterglow','used_condom','cumdrip'].includes(t));
+  if(!hasSex || yuri || noMale || hasBoy || solo) return list;
+  const add = ['1boy','faceless_male','hetero'].filter(t=>!low.includes(t));
+  const drop = ['solo','masturbation','dildo','sex_toy','sex_toys','vibrator','1other'];
+  return list.filter(t=>!drop.includes(t.toLowerCase())).concat(add);
+}
+function normTags(list){
+  // 统一走一遍冲突梳理
+  
+  let a = uniq(list);
+  const has = t => a.some(x=>x.toLowerCase()===t);
+  const drop = t => { a = a.filter(x=>x.toLowerCase()!==t); };
+  const lower = () => a.map(x=>x.toLowerCase());
+  // 后入减法
+  if (lower().some(t=>["sex_from_behind","doggystyle","all_fours"].includes(t))) {
+    ["sex","doggystyle","arched_back"].forEach(drop);
+  }
+  // 乳交不加插入
+  if (lower().some(t=>["paizuri","breast_press"].includes(t))) {
+    ["vaginal","sex","missionary","cum_in_pussy","deep_penetration"].forEach(drop);
+  }
+  // 口交不加插入
+  if (lower().some(t=>["fellatio","oral","cunnilingus"].includes(t))) {
+    ["vaginal","sex","cum_in_pussy"].forEach(drop);
+  }
+  // 腿交自带夹腿
+  if (lower().some(t=>["thigh_sex","leg_lock"].includes(t))) { ["vaginal","sex"].forEach(drop); }
+  // 女女：去男性与精液
+  const isYuri = lower().some(t=>["yuri","tribadism","2girls","lesbian"].includes(t));
+  if (isYuri) {
+    a = a.filter(x=>!CUM.includes(x.toLowerCase()) && !["1boy","2boys","faceless_male","penis","hetero","multiple_boys"].includes(x.toLowerCase()));
+    ["sweat","pussy_juice"].forEach(t=>{ if(!has(t)) a.push(t); });
+  }
+  // 机位只留一个
+  const ang = a.filter(x=>ANGLES.includes(x.toLowerCase()));
+  if (ang.length > 1) { let first = true; a = a.filter(x=>{ if(!ANGLES.includes(x.toLowerCase())) return true; if(first){ first=false; return true;} return false; }); }
+  // 档位决定抽词来源：R18 补性动作，SFW 把性动作剔掉
+  const lv = (S.tier||'sfw');
+  // 池上下文：触手/机械/事后/日常池自带动作，硬插 sex/missionary 会在无男池里凭空画出男人
+  const __pool = (typeof POOL_RULE !== 'undefined' && S.scenePool && POOL_RULE[S.scenePool]) || {};
+  const poolKind = __pool.k || '';
+  const noActPool = ['tentacle','machine','after','daily'].indexOf(poolKind) >= 0;
+  const yuriCtx = !noActPool && poolKind !== 'group' && (isYuri || (S.chars||[]).length >= 2);
+  if(lv === 'r18'){
+    if(!a.some(t=>SEX_ACT.includes(keyOf(t))) && !noActPool){
+      const dropAct = new Set(ACT_SFW.concat(['all_fours','on_back','straddling','kneeling','spread_legs']));
+      a = a.filter(t=>!dropAct.has(keyOf(t)));
+      if(yuriCtx){ a.push(Math.random()<0.5 ? 'tribadism' : 'cunnilingus'); }
+      else { ACT_R18[Math.floor(Math.random()*ACT_R18.length)].split(',').forEach(t=>a.push(t)); }
+    }
+  } else {
+    a = a.filter(t=>!SEX_ACT.includes(keyOf(t)));
+  }
+  // 女女：去男体与精液，补汗与爱液
+  if(yuriCtx){
+    a = a.filter(t=>!['1boy','2boys','faceless_male','penis','hetero','cum','cum_in_pussy',
+      'cum_overflow','cum_on_body','excessive_cum','cum_in_mouth','cum_on_breasts','1girl'].includes(keyOf(t)));
+    ['sweat','pussy_juice'].forEach(t=>{ if(!a.some(x=>keyOf(x)===t)) a.push(t); });
+  }
+  // 非女同的性行为 → 补无脸男性（否则底模会自己编男体/拼错）
+  if(a.map(t=>K(t)).some(t=>NO_MALE.includes(t))){
+    a = a.filter(t=>!['1boy','2boys','3boys','faceless_male','hetero','male','penis'].includes(K(t)));
+  }
+  a = needMale(a);
+  a = cleanConflicts(a);
+  // 有男性就不该 solo
+  if (lower().some(t=>["1boy","2boys","faceless_male","hetero"].includes(t))) drop("solo");
+  // 单人补 solo
+  if (!lower().some(t=>SOLO_BAN.includes(t)) && !has("solo")) a.push("solo");
+  return censFix(hypnoFix(tierGate(uniq(a))));
+}
+
+function defaultNeg(){
+  let n = DEF_NEG.split(", ");
+  const solo = S.tags.some(t=>t.toLowerCase()==="solo");
+  if (solo) n = n.concat(["2girls","multiple_girls","duplicate","clone","extra girls"]);
+  if (S.tier !== 'r18') n = n.concat(["nude","nipples","pussy","penis","areolae","topless","bottomless","exposed breasts","exposed pussy","spread legs","cameltoe","cum","mosaic censoring","bar censor","censor bar","white bar","pixelated","mosaic"]);
+  return n.join(", ");
+}
+function stripCensorNeg(txt){
+  return txt.split(",").map(x=>x.trim())
+    .filter(x=>x && !/censor|mosaic|pixelat/i.test(x)).join(", ");
+}
+function refreshNeg(force){
+  if(force || !$("neg").value.trim()) $("neg").value = defaultNeg();
+}
+
+async function doExpand(){
+  const txt = $("pos").value.trim();
+  if(!txt){ toast("先写点什么"); return; }
+  $("stat").textContent = "扩写中…";
+  try{
+    const r = await fetch('/api/expand',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:txt, dialect:(S.model==='anima'?'anima':'danbooru'), level:S.tier})});
+    const j = await r.json();
+    if(j.positive){ setTags(normTags(parseTags(j.positive))); if(j.negative) $("neg").value=j.negative; else refreshNeg(true); toast((j.why ? j.why + " · " : "") + "扩写完成（" + (j.dialect==="anima" ? "Anima 短语" : "danbooru 标签") + "）"); }
+    else toast(j.error||"扩写失败");
+  }catch(e){ toast("扩写失败 "+e); }
+  $("stat").textContent = "就绪";
+}
+
+function renderZh(){
+  const box=$("zhChips"); box.innerHTML="";
+  S.tags.slice(0,80).forEach(t=>{
+    const z=zhOf(t); if(!z) return;
+    const d=document.createElement("span"); d.className="chip";
+    d.innerHTML = '<b>'+esc(t)+'</b><i>'+esc(z)+'</i>';
+    d.onclick=()=>delTag(t); box.appendChild(d);
+  });
+}
+
+/* ============ ④ 预览 ============ */
+function renderPreview(){
+  const box=$("prev"); box.innerHTML="";
+  const wrap=document.createElement("div"); wrap.className="pv-tags";
+  S.tags.forEach(t=>{
+    const d=document.createElement("span"); d.className="t";
+    const z=zhOf(t);
+    d.innerHTML = esc(t) + (z? '<span class="z">'+esc(z)+'</span>' : '');
+    wrap.appendChild(d);
+  });
+  box.appendChild(wrap);
+  const pre=document.createElement("div"); pre.className="hint";
+  pre.textContent = "共 " + S.tags.length + " 词 · 负面 " + parseTags($("neg").value).length + " 词";
+  box.appendChild(pre);
+  $("pvCount").textContent = S.tags.length + " 词";
+}
+
+/* ============ ② 资料库 ============ */
+async function loadData(){
+  const files = {tags:'wb_tags.json', chars:'wb_chars.json', scenes:'wb_scenes.json', presets:'wb_presets.json', zh:'wb_zh.json', pools:'wb_pools.json', outfits:'wb_outfits.json', atoms:'wb_atoms.json'};
+  const out = {};
+  await Promise.all(Object.entries(files).map(async ([k,f])=>{
+    const r = await fetch('/data/'+f); out[k] = await r.json();
+  }));
+  S.lib.tags = out.tags; S.lib.chars = out.chars; S.lib.scenes = out.scenes;
+  S.lib.presets = out.presets; S.zh = out.zh; S.pools = out.pools; S.lib.outfits = out.outfits; S.atoms = out.atoms;
+  const nTags = out.tags.cats.reduce((a,c)=>a+c.tags.length,0);
+  // 3.1 起场景只剩 anima 一套；这里必须容错，任何 .length 打空都会让 boot 整段中断（首屏空白）
+  const nSc = Object.keys(out.scenes||{}).reduce((a,k)=>a+((out.scenes[k]||[]).length),0);
+  $("stat").textContent = "标签 "+nTags+" · 角色 "+out.chars.chars.length+" · 场景 "+nSc;
+    // 池化后 actions 是 11 个池的 dict，没有 L1/L2/L3；旧写法 .L1.length 会抛错，
+    // 把整个 boot 打断 → 首屏资料库空白（切一次标签才恢复，因为 click 里直接 renderLib）
+    try{
+      const ac = (out.atoms && out.atoms.actions) || {};
+      const tn = Object.keys(ac).reduce((a,k)=>a+((ac[k]||[]).length),0);
+      window.__atomN = tn + "条/" + (((out.atoms||{}).meta||{}).combinations||0) + "组合";
+    }catch(e){ window.__atomN = "err:" + e.message; }
+  $("libCount").textContent = "标签 "+nTags+" / 角色 "+out.chars.chars.length+" / 服饰 "+((out.outfits&&out.outfits.items||[]).length)+" / 场景 "+nSc;
+}
+
+
+/* ============ 服饰道具（与角色同逻辑：只手动清，不被场景覆盖） ============ */
+function outfitTags(){ return S.outfit || []; }
+function renderOutfits(b){
+  b.innerHTML="";
+  const tip=document.createElement("div"); tip.className="small";
+  tip.style.marginBottom="6px";
+  tip.textContent="点=加入，再点=移出；换场景不会清掉，只有「清空」或再点一次才移除。";
+  b.appendChild(tip);
+  const q=document.createElement("input");
+  q.id="outfitSearch"; q.placeholder="搜索服饰 / 道具（英文 / 中文）";
+  q.style.cssText="width:100%;margin-bottom:8px;padding:7px 10px;border-radius:8px;border:1px solid #333;background:#181b22;color:#e6e9ef";
+  const cs=document.createElement("div"); cs.style.cssText="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap";
+  [["柔和厚涂","@kanpa (campagne 9), @hisahiko, @yukie (kusaka shi)"],
+   ["通透淡彩","@kanpa (campagne 9), @kantoku, @shirabi"],
+   ["质感厚涂","@kanpa (campagne 9), @mignon, @b-ginga"]].forEach(([n,v])=>{
+    const btn=document.createElement("span"); btn.className="tag"; btn.textContent=n; btn.title=v;
+    btn.onclick=()=>{ addTag(v); toast("已加入画师组合："+n); };
+    cs.appendChild(btn);
+  });
+  b.appendChild(cs);
+  b.appendChild(q);
+  const row=document.createElement("div"); row.className="row"; row.style.marginBottom="8px";
+  const cnt=document.createElement("span"); cnt.className="small";
+  const clr=document.createElement("button"); clr.textContent="清空服饰"; clr.style.fontSize="12px";
+  clr.onclick=()=>{ S.outfit=[]; (S.outfit||[]).forEach(t=>delTag(t)); syncText(); renderLib(); toast("已清空服饰道具"); };
+  row.appendChild(cnt); row.appendChild(clr); b.appendChild(row);
+  const grid=document.createElement("div"); grid.className="grid"; b.appendChild(grid);
+  const all=(S.lib.outfits&&S.lib.outfits.items)||[];
+  function draw(){
+    const k=(q.value||"").trim().toLowerCase();
+    grid.innerHTML="";
+    const hit=all.filter(t=>!k||t.en.toLowerCase().includes(k)||(t.zh||"").toLowerCase().includes(k));
+    cnt.textContent = "服饰道具 "+hit.length+" / "+all.length+" · 已选 "+(S.outfit||[]).length;
+    hit.slice(0,600).forEach(t=>{
+      const on=(S.outfit||[]).some(x=>x.toLowerCase()===t.en.toLowerCase());
+      const d=document.createElement("span"); d.className="tag"+(on?" on":"");
+      d.style.cursor="pointer";
+      d.innerHTML=esc(t.en)+(t.zh?'<span class="zh">'+esc(t.zh)+'</span>':'');
+      d.onclick=()=>{ pickOutfit(t); };
+      grid.appendChild(d);
+    });
+  }
+  q.oninput=draw;
+  draw();
+}
+function pickOutfit(t){
+  S.outfit = S.outfit || [];
+  const has = S.tags.some(x=>x.toLowerCase()===t.en.toLowerCase());
+  if(has){
+    S.tags = S.tags.filter(x=>x.toLowerCase()!==t.en.toLowerCase());
+    S.outfit = S.outfit.filter(x=>x.toLowerCase()!==t.en.toLowerCase());
+    toast("移出服饰："+(t.zh||t.en));
+  }else{
+    S.outfit.push(t.en); S.owner[K(t.en)]='outfit';
+    addTag([t.en]);
+    toast("服饰 +1："+(t.zh||t.en));
+  }
+  syncText(); renderLib();
+}
+
+function renderLib(){
+  const b=$("libBody");
+  if(S.tab==='tags') return renderTags(b);
+  if(S.tab==='chars') return renderChars(b);
+  if(S.tab==='scenes') return renderScenes(b);
+  if(S.tab==='presets') return renderPresets(b);
+  if(S.tab==='artists') return renderArtists(b);
+  if(S.tab==='outfits') return renderOutfits(b);
+}
+
+function renderTags(b){
+  b.innerHTML="";
+  const bar=document.createElement("div"); bar.id="catbar";
+  const cats=S.lib.tags.cats;
+  if(!S.cat) S.cat = cats[0].id;
+  cats.forEach(c=>{
+    const btn=document.createElement("button");
+    btn.textContent = c.name + " " + c.tags.length;
+    if(c.id===S.cat) btn.className="on";
+    btn.onclick=()=>{ S.cat=c.id; renderLib(); };
+    bar.appendChild(btn);
+  });
+  b.appendChild(bar);
+  const q=document.createElement("input"); q.placeholder="搜索（英文/中文）"; q.style.width="100%"; q.style.marginBottom="8px";
+  q.oninput=()=>{ drawTags(q.value); };
+  b.appendChild(q);
+  const grid=document.createElement("div"); grid.className="grid"; grid.id="tagGrid"; b.appendChild(grid);
+  function drawTags(kw){
+    grid.innerHTML="";
+    const cat=cats.find(c=>c.id===S.cat);
+    const k=(kw||"").toLowerCase();
+    cat.tags.filter(t=>!k || t.en.toLowerCase().includes(k) || (t.zh||"").toLowerCase().includes(k))
+      .slice(0,600).forEach(t=>{
+        const d=document.createElement("span"); d.className="tag";
+        d.innerHTML = esc(t.en) + (t.zh? '<span class="zh">'+esc(t.zh)+'</span>':'');
+        d.onclick=()=>{ addTag(t.en); toast("已加入：" + (t.zh||t.en)); };
+        grid.appendChild(d);
+      });
+  }
+  drawTags("");
+}
+
+function renderChars(b){
+  b.innerHTML="";
+  const row=document.createElement("div"); row.className="row"; row.style.marginBottom="8px";
+  const q=document.createElement("input"); q.placeholder="搜角色 / 中文 / 作品";
+  q.value=S.charQ; q.style.flex="1";
+  q.oninput=()=>{ S.charQ=q.value; S.charLimit=160; drawChars(); };
+  const sel=document.createElement("select");
+  const works=S.lib.chars.works.slice(0,40);
+  const WZ = (S.lib.chars.works_zh || {});
+  sel.innerHTML = '<option value="">全部作品</option>' + works.map(w=>{
+    const zh = WZ[w[0]] || w[0] || '其他';
+    return '<option value="'+esc(w[0])+'">'+esc(zh)+' ('+w[1]+')</option>';
+  }).join("");
+  sel.value=S.charWork;
+  sel.onchange=()=>{ S.charWork=sel.value; S.charLimit=160; drawChars(); };
+  row.appendChild(q); row.appendChild(sel); b.appendChild(row);
+  const grid=document.createElement("div"); grid.id="charGrid"; b.appendChild(grid);
+  const more=document.createElement("div"); more.className="row"; more.style.marginTop="8px";
+  const btn=document.createElement("button"); btn.textContent="加载更多"; btn.onclick=()=>{ S.charLimit+=200; drawChars(); };
+  more.appendChild(btn); b.appendChild(more);
+
+  function drawChars(){
+    grid.innerHTML="";
+    const k=S.charQ.trim().toLowerCase();
+    const list=S.lib.chars.chars.filter(c=>{
+      if(S.charWork && c.w!==S.charWork) return false;
+      if(!k) return true;
+      return c.t.toLowerCase().includes(k) || (c.zh||"").toLowerCase().includes(k) || c.w.toLowerCase().includes(k);
+    });
+    list.slice(0,S.charLimit).forEach(c=>{
+      const d=document.createElement("div"); d.className="ccard";
+      d.innerHTML = '<div class="ph" data-tag="'+esc(c.t)+'">'+esc((c.zh||c.t).slice(0,1))+'</div>'+
+                    '<div class="nm" title="'+esc(c.t)+'">'+esc(c.zh||c.t)+'</div>'+
+                    '<div class="tw">'+esc(c.w||"")+'</div>';
+      d.onclick=()=>{ pickChar(c); };
+      grid.appendChild(d);
+      if(c.th){ const ph=d.querySelector(".ph"); const im=new Image();
+        const src='/anima-wardrobe-v5/thumb/'+encodeURIComponent(c.t)+'?v=3';
+        im.onload=()=>{ ph.style.backgroundImage='url("'+src+'")'; ph.textContent=""; };
+        im.onerror=()=>{ ph.textContent=String(c.t||'?').slice(0,2).toUpperCase(); };
+        im.src=src; }
+    });
+    btn.textContent = "加载更多（"+Math.min(list.length,S.charLimit)+"/"+list.length+"）";
+  }
+  drawChars();
+}
+
+const COUNT_TAGS = ['1girl','1boy','2girls','2boys','multiple_girls','solo','1other'];
+function recount(){
+  // 人数词一律从"正文里实际存在的角色 tag"重算，避免残留 2girls 又挂 multiple_girls
+  S.chars = (S.chars || []).filter(t => S.tags.some(x => x.toLowerCase() === t.toLowerCase()));
+  const n = S.chars.length;
+  COUNT_TAGS.forEach(t => delTag(t));
+  if(n === 0) return 0;                       // 没有角色就不塞人数词（清空/空稿）
+  if(n === 1) addTag(['1girl','solo']);
+  else if(n === 2) addTag(['2girls']);
+  else addTag(['multiple_girls']);
+  return n;
+}
+function pickChar(c){
+  // 累加：点第二个角色不顶掉第一个；再点同一个角色 = 移出
+  S.chars = S.chars || [];
+  const has = S.tags.some(x=>x.toLowerCase()===c.t.toLowerCase());
+  if(has){
+    S.tags = S.tags.filter(x=>x.toLowerCase()!==c.t.toLowerCase());
+    S.chars = S.chars.filter(x=>x!==c.t);
+    S.charTag = S.chars[S.chars.length-1] || null;
+    const n = recount(); syncText();
+    toast("移出角色：" + (c.zh||c.t) + "（剩 " + n + " 个）");
+    return;
+  }
+  S.chars.push(c.t); S.charTag = c.t; S.owner[K(c.t)] = 'char';
+  logline("pickChar", c.t + " chars=" + S.chars.length);
+  addTag([c.t].concat(c.g||[]));
+  const n = recount();
+  toast("角色 +1（共 " + n + " 个）：" + (c.zh||c.t));
+}
+
+function renderScenes(b){
+  const pane = b.parentElement;
+  const keepScroll = pane ? pane.scrollTop : 0;
+  b.innerHTML="";
+  const row=document.createElement("div"); row.className="row"; row.style.marginBottom="8px";
+  // 场景库只剩 Anima 一套：分组 + 分类 + 搜索，去掉 r18/anima 双源切换
+  const g = 'anima';
+  // 分组按钮 / 分类下拉：原来跟双源切换段写在一起，3.1 删那段时被一起删掉，
+  // renderScenes 直接 ReferenceError → 场景面板全空（2026-11-10 回归）
+  const grpSeg=document.createElement("div"); grpSeg.className="seg";
+  [['all','全部'],['sfw','常规'],['near','暧昧'],['nsfw','R18']].forEach(function(pair){
+    const btn=document.createElement("button"); btn.dataset.grp=pair[0]; btn.textContent=pair[1];
+    if((S.sceneGrp||'all')===pair[0]) btn.classList.add("on");
+    if(pair[0]!=='all' && S.tier!=='r18' && !(pair[0]==='near' && S.tier==='suggestive')){
+      btn.disabled=true; btn.title='对应档位才能用';
+    }
+    grpSeg.appendChild(btn);
+  });
+  const catSeg=document.createElement("select");
+  const cats=['全部'].concat(uniq((S.lib.scenes.anima||[]).map(x=>x.cat||'').filter(Boolean)));
+  cats.forEach(function(c){
+    const o=document.createElement("option"); o.value=c; o.textContent=c;
+    if((S.sceneCat||'全部')===c) o.selected=true;
+    catSeg.appendChild(o);
+  });
+  const q=document.createElement("input"); q.placeholder="搜场景"; q.style.flex="1";
+  q.value = S.sceneQ || "";
+  row.appendChild(q); b.appendChild(row);
+  const grpRow=document.createElement("div"); grpRow.className="row"; grpRow.style.margin="2px 0 6px";
+  grpRow.appendChild(grpSeg); grpRow.appendChild(catSeg); b.appendChild(grpRow);
+  const grid=document.createElement("div"); grid.className="grid"; b.appendChild(grid);
+  grpSeg.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{
+    S.sceneGrp=btn.dataset.grp; grpSeg.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===btn)); draw(); });
+  catSeg.onchange=()=>{ S.sceneCat=catSeg.value; draw(); };
+  q.oninput=()=>{ S.sceneQ=q.value; draw(); };
+  function draw(){
+    const sc = (pane && pane.scrollTop) || S.sceneScroll || 0;
+    grid.innerHTML="";
+    let list = (S.lib.scenes.anima||[]);
+    const gp = S.sceneGrp || 'all';
+    if(gp !== 'all') list = list.filter(x=>(x.group||'sfw')===gp);
+    if(S.tier!=='r18') list = list.filter(x=>(x.group||'sfw')!=='nsfw');
+    if((S.sceneCat||'全部') !== '全部') list = list.filter(x=>(x.cat||'')===S.sceneCat);
+    const k=(q.value||"").trim().toLowerCase();
+    list.filter(s=>!k || (s.zh||s.name_zh||"").toLowerCase().includes(k) || (s.tags||[]).join(" ").toLowerCase().includes(k))
+      .slice(0,600).forEach(s=>{
+        const d=document.createElement("span"); d.className="tag";
+        d.innerHTML = '<b>'+esc(s.id)+'</b> '+esc(s.zh||s.name_zh||'(无名)') + (s.cat? '<span class="zh">'+esc(s.cat)+'</span>':'');
+        d.onclick=()=>{ applyScene(s, g); };
+        grid.appendChild(d);
+      });
+    if(pane){ requestAnimationFrame(()=>{ pane.scrollTop = S.sceneScroll = sc; }); }
+  }
+  if(pane && !pane.__scrollBound){
+    pane.__scrollBound = true;
+    pane.addEventListener('scroll', ()=>{ if(S.tab==='scenes') S.sceneScroll = pane.scrollTop; }, {passive:true});
+  }
+  draw();
+  if(pane){ requestAnimationFrame(()=>{ pane.scrollTop = S.sceneScroll || keepScroll; }); }
+}
+
+const KEEP_ACT = /^(sex|vaginal|anal|oral|fellatio|cunnilingus|paizuri|handjob|footjob|thigh_sex|pussyjob|tribadism|masturbation|fingering|69|missionary|all_fours|doggystyle|sex_from_behind|cowgirl_position|reverse_cowgirl_position|girl_on_top|on_side|standing_sex|mating_press|upright_straddle|amazon_position|piledriver|spooning|straddling|sitting_on_lap|suspended_congress|prone_bone|leg_lift|legs_up|spread_legs|bent_over|against_wall|penis|1boy|2boys|faceless_male|hetero|nude|completely_nude|cum_in_pussy|cumdrip|cum_overflow|excessive_cum|cum_on_body|creampie|uncensored)$/;
+
+function applyScene(s, src){
+  // 纯场景（s.pure，无动作）：只补地点/光线/天气，不覆盖已有动作与体位
+  if(s.pure){
+    const PLACE = (s.tags||[]).filter(t=>!KEEP_ACT.test(String(t)));
+    const keep = (S.sceneTags||[]).filter(t=>KEEP_ACT.test(String(t)));
+    S.sceneTags = uniq(keep.concat(PLACE));
+    S.sceneName = (s.zh || s.name_zh || "");
+    const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]));
+    setTags(normTags(base.concat(S.sceneTags)));
+    refreshNeg(true);
+    toast("已补场景：" + (s.zh||s.id) + " · 动作保留");
+    return;
+  }
+  // 一键覆盖：正文 = 手写词 + 角色词 + 这一套场景词（旧场景整段丢弃）
+  const add = (s.tags||[]).filter(Boolean);
+  S.sceneTags = add.slice();
+  S.sceneName = (s.zh || s.name_zh || "");
+  S.scenes = [s.id];
+  const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]));
+  setTags(normTags(base.concat(add)));
+  refreshNeg(true);
+  toast("已换场景：" + (s.zh||s.id) + " · " + add.length + " 词");
+}
+
+function presetLv(p){
+  if(p.lv) return p.lv;
+  const blob = " " + (p.tags||[]).map(t=>typeof t==='string'? t : (t.en||"")).join(" ").toLowerCase() + " ";
+  const K = ["nude","naked","sex","cum","penis","pussy","anal","oral","fellatio","paizuri",
+             "nipple","bondage","shibari","ahegao","vaginal","creampie","orgasm","squirt",
+             "masturbat","dildo","hetero","1boy","doggystyle","cowgirl","missionary"];
+  return K.some(k=>blob.includes(k)) ? 'r18' : 'sfw';
+}
+
+function renderPresets(b){
+  b.innerHTML="";
+  const all = (S.lib.presets.forge||[]).map(p=>({p:p,src:'forge'})).concat(
+              (S.lib.presets.anima||[]).map(p=>({p:p,src:'anima'})));
+  const cnt = {sfw:0, suggestive:0, r18:0};
+  all.forEach(x=>{ const lv=presetLv(x.p); cnt[lv]=(cnt[lv]||0)+1; });
+
+  if(!S.presetGrp) S.presetGrp = (S.tier==='r18') ? 'r18' : (S.tier==='suggestive' ? 'suggestive' : 'sfw');
+  const seg=document.createElement("div"); seg.className="seg"; seg.style.marginBottom="10px";
+  [['sfw','常规 '+cnt.sfw],['suggestive','暧昧 '+cnt.suggestive],['r18','R18 '+cnt.r18],['all','全部 '+all.length]].forEach(([v,label])=>{
+    const btn=document.createElement("button"); btn.dataset.g=v; btn.textContent=label;
+    if(S.presetGrp===v) btn.className="on";
+    if(v!=='sfw' && v!=='all' && S.tier!=='r18' && !(v==='suggestive' && S.tier==='suggestive')){ btn.disabled=true; btn.title="对应档位才能用"; }
+    btn.onclick=()=>{ S.presetGrp=v; renderPresets(b); };
+    seg.appendChild(btn);
+  });
+  b.appendChild(seg);
+
+  const list = all.filter(x=>{
+    const lv = presetLv(x.p);
+    if(S.presetGrp==='all') return true;
+    return lv === S.presetGrp;
+  });
+  const hint=document.createElement("div"); hint.className="hint";
+  hint.textContent = "共 "+list.length+" 条 · 当前档位 "+(S.tier==='r18'?'R18':'非 R18')+"（档位在顶栏切换）";
+  b.appendChild(hint);
+
+  const grid=document.createElement("div"); grid.className="grid";
+  list.forEach(({p,src})=>{
+    const tags=(p.tags||[]).map(t=>typeof t==='string'? t : (t.en||"")).filter(Boolean);
+    const d=document.createElement("span"); d.className="tag";
+    const nm = (p.name||'预设');
+    d.innerHTML='<b>'+esc(nm)+'</b>'+(p.note||p.desc?'<span class="zh">'+esc((p.note||p.desc||'').slice(0,12))+'</span>':'');
+    d.title=tags.join(", ");
+    d.onclick=()=>applyPreset(tags, nm, p.neg, p.lv);
+    grid.appendChild(d);
+  });
+  b.appendChild(grid);
+
+  function applyPreset(tags,name,neg,lv){
+    // 追加：保留已选角色与已写内容，预设只往后面接
+    const keep = S.tags.slice();
+    setTags(normTags(keep.concat(tags)));
+    S.chars = (S.chars||[]).filter(t => S.tags.some(x => x.toLowerCase() === t.toLowerCase()));
+    if(neg && neg.length) $("neg").value = (typeof neg==='string'? neg : neg.join(", "));
+    else refreshNeg(false);
+    recount(); syncText();
+    toast("预设叠加：" + name + (lv?(" · "+lv):"") + "（+ " + tags.length + " 词，共 " + S.tags.length + "）");
+  }
+}
+
+/* 画师名里的括号会被 ComfyUI 当成权重语法：
+   kanpa_(campagne_9) → 解析成「kanpa_」+ 权重组，画师 tag 直接失效。
+   插进提示词前统一转义成 kanpa_\\(campagne_9\\)。 */
+function escArtist(t){
+  /* Anima 是 Cosmos-Predict2，不吃 (tag:1.3) 这种权重语法，画师要写 @ 前缀、
+     名字里的括号属于名字本身：kanpa_(campagne_9) → @kanpa (campagne 9)。 */
+  const s = String(t).trim();
+  if(s.charAt(0) === '@') return s;
+  return '@' + s.replace(/_/g, ' ');
+}
+function renderArtists(b){
+  b.innerHTML="";
+  const q=document.createElement("input");
+  q.id="artSearch"; q.placeholder="搜索画师（英文 / 中文）";
+  q.style.cssText="width:100%;margin-bottom:8px;padding:7px 10px;border-radius:8px;border:1px solid #333;background:#181b22;color:#e6e9ef";
+  if(S.artQ) q.value=S.artQ;
+  b.appendChild(q);
+  const cnt=document.createElement("div"); cnt.className="small"; cnt.style.marginBottom="6px"; b.appendChild(cnt);
+  const grid=document.createElement("div"); grid.className="grid"; b.appendChild(grid);
+  const all=(S.lib.tags.cats.find(c=>c.id==='artist')||{tags:[]}).tags;
+  function draw(){
+    const k=(q.value||"").trim().toLowerCase();
+    grid.innerHTML="";
+    const hit=all.filter(t=>!k||t.en.toLowerCase().includes(k)||(t.zh||"").toLowerCase().includes(k));
+    cnt.textContent = "画师 "+hit.length+" / "+all.length;
+    hit.slice(0,800).forEach(t=>{
+      const d=document.createElement("span"); d.className="tag";
+      d.innerHTML=esc(t.en)+(t.zh?'<span class="zh">'+esc(t.zh)+'</span>':'');
+      d.onclick=()=>{ addTag(escArtist(t.en)); toast("已加入画师："+(t.zh||t.en)); };
+      grid.appendChild(d);
+    });
+  }
+  q.oninput=()=>{ S.artQ=q.value; draw(); };
+  draw();
+}
+
+/* ============ ③ Studio ============ */
+function renderStudio(){
+  const box=$("secList"); box.innerHTML="";
+  const secs=S.pools.sections;
+  $("studioCount").textContent = secs.length+" 段";
+  secs.forEach((sec,si)=>{
+    const d=document.createElement("div"); d.className="sec"+(S.sectionOpen[sec.id]?" open":"");
+    const hd=document.createElement("div"); hd.className="hd";
+    hd.innerHTML = '<span>'+(sec.title||sec.id)+'</span><span class="n">'+sec.fields.length+' 项</span><span style="flex:1"></span><button style="font-size:11px;padding:2px 7px">本段随机</button>';
+    const bd=document.createElement("div"); bd.className="bd";
+    sec.fields.forEach(f=>{
+      const wrap=document.createElement("div"); wrap.className="fld";
+      const lab=document.createElement("label"); lab.textContent=(f.lab||f.k)+(f.req?' *':'');
+      const sel=document.createElement("select");
+      const cur = S.sel[f.k]!==undefined? S.sel[f.k] : -1;
+      sel.innerHTML='<option value="-1">— 不选 —</option>'+ (f.opts||[]).map((o,i)=>'<option value="'+i+'">'+esc(o[0])+'</option>').join("");
+      sel.value=String(cur);
+      sel.onchange=()=>{ S.sel[f.k]=parseInt(sel.value,10); applyField(f, sel.value); };
+      wrap.appendChild(lab); wrap.appendChild(sel); bd.appendChild(wrap);
+    });
+    hd.onclick=(e)=>{ if(e.target.tagName==='BUTTON'){ rollSection(sec); return;} S.sectionOpen[sec.id]=!S.sectionOpen[sec.id]; d.classList.toggle("open"); };
+    d.appendChild(hd); d.appendChild(bd); box.appendChild(d);
+  });
+}
+function applyField(f, idx){
+  const i=parseInt(idx,10);
+  if(isNaN(i)||i<0) return;
+  const o=(f.opts||[])[i]; if(!o) return;
+  const tags=parseTags(o[1]); if(!tags.length) return;
+  // 角色字段（key=role）替换旧角色
+  if(f.k==='role'){ const prev=S.sel._roleTags||[]; S.tags=S.tags.filter(x=>!prev.map(y=>y.toLowerCase()).includes(x.toLowerCase())); S.sel._roleTags=tags; }
+  addTag(tags);
+  refreshNeg(true);
+}
+function rollSection(sec){
+  sec.fields.forEach(f=>{
+    const i=Math.floor(Math.random()*((f.opts||[]).length));
+    S.sel[f.k]=i; applyField(f, i);
+    const selNode=[...document.querySelectorAll('#secList .sec')][S.pools.sections.indexOf(sec)]?.querySelectorAll('select')[sec.fields.indexOf(f)];
+    if(selNode) selNode.value=String(i);
+  });
+  toast("本段随机："+sec.title);
+}
+function rollAll(){
+  S.pools.sections.forEach(sec=>{ sec.fields.forEach(f=>{ const i=Math.floor(Math.random()*((f.opts||[]).length)); S.sel[f.k]=i; applyField(f,i); }); });
+  renderStudio(); toast("全部随机完成"); pfDryRun();
+}
+
+/* ============ 出图 ============ */
+function paramsFromUI(){
+  const [w,h]=$("qSize").value.split("x").map(Number);
+  return {width:w, height:h, steps:parseInt($("qSteps").value,10)||10, cfg:parseFloat($("qCfg").value)||1,
+          sampler:$("qSampler").value, scheduler:$("qSched").value, seed:parseInt($("qSeed").value,10)};
+}
+function setModelDefaults(m){
+  // 3.1 起只有 Anima 一套底模（WAI v17 已移除）
+  $("qSteps").value=10; $("qCfg").value=1; $("qSampler").value='er_sde';
+  $("qSched").value='beta'; $("qSize").value='1024x1536';
+}
+let PG = {t0:0, timer:null};
+function pgStart(label){
+  PG.t0 = Date.now();
+  const box=$("prog"), txt=$("progTxt");
+  box.className='run'; txt.textContent=label+' · 0.0s';
+  clearInterval(PG.timer);
+  PG.timer=setInterval(()=>{ txt.textContent=label+' · '+((Date.now()-PG.t0)/1000).toFixed(1)+'s'; },200);
+}
+function pgDone(ok, msg){
+  clearInterval(PG.timer);
+  const box=$("prog"), txt=$("progTxt");
+  const sec=((Date.now()-PG.t0)/1000).toFixed(1);
+  box.className = ok ? 'done' : 'err';
+  txt.textContent = (ok?'完成':'失败')+' · '+sec+'s'+(msg?' · '+msg:'');
+  S.lastSec = sec;
+}
+async function generate(){
+  if($("qBubble") && $("qBubble").checked && S.tags.indexOf("speech_bubble")<0) S.tags.push("speech_bubble");
+  if(!S.tags.length){ toast("提示词是空的"); return; }
+  if(S.busy){ toast("上一张还在跑（"+((Date.now()-(S.busyAt||Date.now()))/1000).toFixed(0)+"s）"); return; }
+  // ★ 出图前审查：随机 / 组合之后、真正提交之前，人数与性别必过一次
+  const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh});
+  S.tags = pf.tags;
+  syncText();
+  pfShow(pf.rep, S.tags.length);
+  logline("preflight", "kind=" + pf.rep.kind + " fixes=" + (pf.rep.fixes.join("|") || "-") +
+    " n=" + S.tags.length + " pos=" + S.tags.join(","));
+  if(pf.rep.fixes.length) toast("审查：" + pf.rep.fixes.join("；"));
+  const p=paramsFromUI();
+  S.busy=true; S.busyAt=Date.now();
+  $("btnGen").disabled=true; $("btnGen").textContent="⏳ 生成中";
+  $("stat").textContent="审查"+(PF_KIND_ZH[pf.rep.kind]?"·"+PF_KIND_ZH[pf.rep.kind]:"")+" · 已提交…";
+  pgStart("已提交，等待采样");
+  try{
+    const posStr = S.tags.join(", ");
+    let negStr = $("neg").value;
+    if(/uncensored/.test(posStr)) negStr = stripCensorNeg(negStr) + ", " + CENSOR_HARD;   // 用户选定 C 方案：有 uncensored 就不压 censor 词
+    const r=await fetch('/api/gen',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({positive:posStr, negative:negStr, mode:S.model, steps:p.steps, cfg:p.cfg,
+        sampler:p.sampler, scheduler:p.scheduler, width:p.width, height:p.height, seed:p.seed})});
+    const j=await r.json();
+    if(!j.ok){ toast(j.error||"提交失败"); pgDone(false, j.error||""); throw new Error(j.error||"fail"); }
+    $("qSeed").value = j.seed;
+    let finished=false;
+    for(let i=0;i<300;i++){
+      await new Promise(z=>setTimeout(z,1200));
+      const rr=await fetch('/api/gen/job?id='+encodeURIComponent(j.id)); const jj=await rr.json();
+      if(jj.state==='done'){ finished=true; (jj.images||[]).forEach(im=>addImg(im.filename)); toast("出图完成"); pgDone(true, (jj.images||[]).length+' 张'); S.busy=false; break; }
+      if(jj.state==='error'||jj.state==='timeout'){ finished=true; toast("任务失败："+jj.state); pgDone(false, jj.state); S.busy=false; break; }
+      if(jj.state==='running'){ $("progTxt").textContent='采样中 · '+((Date.now()-PG.t0)/1000).toFixed(1)+'s'; }
+    }
+    if(!finished && S.busy){ pgDone(false, '超时未返回'); S.busy=false; }
+  }catch(e){ toast("出错 "+e); pgDone(false, String(e).slice(0,40)); }
+  S.busy=false;
+  $("btnGen").disabled=false; $("btnGen").textContent="🎨 生成"; $("stat").textContent="就绪";
+}
+function addImg(fn){
+  S.last=fn; const box=$("imgs");
+  const ph=box.querySelector(".ph"); if(ph) ph.remove();
+  const im=new Image(); im.src='/view?filename='+encodeURIComponent(fn)+'&type=output';
+  im.onclick=()=>{ $("big").style.display='flex'; $("big").querySelector('img').src=im.src; };
+  box.prepend(im);
+}
+async function handfix(){
+  if(!S.last){ toast("先出一张图"); return; }
+  $("btnHand").disabled=true; $("stat").textContent="修手中…";
+  try{
+    const r=await fetch('/api/anima/handfix',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({filename:S.last, positive:S.tags.join(", "),
+        negative:(/uncensored/.test(S.tags.join(", ")) ? stripCensorNeg($("neg").value) + ", " + CENSOR_HARD : $("neg").value),
+        steps:8, denoise:0.45})});
+    const j=await r.json();
+    if(j.ok){ addImg(j.filename); toast("修手完成"); } else toast(j.error||"修手失败");
+  }catch(e){ toast("修手出错 "+e); }
+  $("btnHand").disabled=false; $("stat").textContent="就绪";
+}
+
+
+/* ============ 一键批量：按 前戏→暧昧→插入→高潮 递进，档位内抽 ============ */
+
+/* 表情档（批量用）：T1 温柔 → T5 失神 */
+const EXPR_T = {
+  T1: ["light_smile","blush"],
+  T2: ["smirk","half-closed_eyes"],
+  T3: ["tongue_out","half-closed_eyes","sweat"],
+  T4: ["rolling_eyes","drooling","blush"],
+  T5: ["heart-shaped_pupils","torogao","parted_lips"]
+};
+const EXPR_ALL = ["light_smile","smile","smirk","grin","blush","half-closed_eyes","closed_eyes",
+  "tongue_out","open_mouth","parted_lips","rolling_eyes","drooling","ahegao","torogao",
+  "heart-shaped_pupils","empty_eyes","expressionless","shy","surprised","embarrassed","nervous",
+  "disgust","disdain","frown","narrowed_eyes","angry","annoyed","upset","pout","serious",
+  "laughing","crying","tears","sweatdrop","sigh"];
+function setExpr(tier){
+  // 非 R18 档：表情封顶 T2（吐舌/失神/崩坏都算性暗示，不放进日常档）
+  if((S.tier||'sfw') !== 'r18'){
+    const rank = {T1:1,T2:2,T3:3,T4:4,T5:5};
+    const cap = (S.tier === 'sfw') ? 1 : 2;
+    if((rank[tier]||2) > cap) tier = (cap===1 ? 'T1' : 'T2');
+    S.tags = S.tags.filter(t=>!['kneeling','all_fours','spread_legs','legs_up','leg_lift',
+      'arched_back','topless','bottomless','nude','completely_nude','saliva','sweat',
+      'pussy_juice','wet','clothing_aside','clothes_lift','skirt_lift','shirt_lift','bra_lift',
+      'breast_slip','panties_aside','panty_pull','cameltoe'].includes(String(t).toLowerCase()));
+  }
+  const grp = EXPR_T[tier]||EXPR_T.T2;
+  S.tags = S.tags.filter(t=>!EXPR_ALL.includes(String(t).toLowerCase()));
+  grp.forEach(t=>S.tags.push(t));
+  cleanTags();
+  syncText();
+}
+
+const STAGE_PLAN = [
+  {st:0, expr:"T1", tag:"前戏"},
+  {st:1, expr:"T2", tag:"暧昧"},
+  {st:2, expr:"T3", tag:"插入"},
+  {st:3, expr:"T4", tag:"激烈"},
+  {st:4, expr:"T4", tag:"高潮"},
+  {st:5, expr:"T5", tag:"事后"}
+];
+function tierScenes(){
+  const nChar = (S.chars||[]).length;
+  const all = (S.lib.scenes.anima||[]).filter(s=>{
+    const t = (s.tags||[]).map(x=>String(x).toLowerCase());
+    // 档位硬过滤：按 tag 等级（L3 露骨 / L2 擦边）逐条判
+    const lvOf = t.some(x=>EXPLICIT_HARD.includes(x)) ? 3
+               : t.some(x=>EXPLICIT_SOFT.includes(x)) ? 2 : 1;
+    if(S.tier !== 'r18' && lvOf >= 3) return false;
+    if(S.tier === 'sfw' && lvOf >= 2) return false;
+    // 分组硬门：插件自带 group 与 cat 双判（裸肩/隔被这类词进不了 L2 表，靠分组挡住）
+    const grp = String(s.group||'').toLowerCase();
+    if(S.tier === 'sfw' && (grp === 'near' || grp === 'nsfw')) return false;
+    if(S.tier === 'suggestive' && grp === 'nsfw') return false;
+    const SEXCAT = ['体位','高潮','事后','触手','催眠','扶她','机械','调教'];
+    if(S.tier === 'sfw' && SEXCAT.includes(String(s.cat||''))) return false;
+    const duo = t.some(x=>["2girls","multiple_girls","yuri","tribadism","futanari","lesbian"].includes(x));
+    if(duo && nChar < 2) return false;      // 单人不要双女/扶她条目
+    if(!duo && nChar >= 2 && t.includes("solo")) return false;
+    return true;
+  });
+  // 档位选择只看 tag 等级：L1 进 SFW，L2 才进擦边（L1 日常不再混进来），全量进 R18
+  const t = S.tier;
+  if(t==='r18') return all;
+  const lvOf2 = s=>{
+    const tg = (s.tags||[]).map(x=>String(x).toLowerCase());
+    return tg.some(x=>EXPLICIT_HARD.includes(x)) ? 3
+         : tg.some(x=>EXPLICIT_SOFT.includes(x)) ? 2 : 1;
+  };
+  if(t==='sfw') return all.filter(s=>lvOf2(s)===1);
+  const l2 = all.filter(s=>lvOf2(s)===2);
+  return l2.length ? l2 : all.filter(s=>lvOf2(s)<=2);   // 池子空了才拿 L1 兜底
+}
+function stagesForTier(){
+  if(S.tier === 'sfw') return [{st:0,expr:"T1",tag:"前戏"},{st:1,expr:"T1",tag:"暧昧"}];
+  if(S.tier === 'suggestive') return [{st:1,expr:"T2",tag:"暧昧"},{st:1,expr:"T3",tag:"挑逗"},
+                                      {st:0,expr:"T3",tag:"贴近"},{st:1,expr:"T2",tag:"暧昧"}];
+  return STAGE_PLAN;
+}
+const DUO_TAGS = ["2girls","multiple_girls","yuri","tribadism","futanari","lesbian"];
+function pickForStage(st){
+  const pool = tierScenes();
+  if(!pool.length) return null;
+  const nChar = (S.chars||[]).length;
+  const duoOnly = pool.filter(s=>(s.tags||[]).some(x=>DUO_TAGS.includes(String(x).toLowerCase())));
+  const base = (nChar >= 2 && duoOnly.length >= 3) ? duoOnly : pool;
+  const take = arr=>{
+    if(!arr || !arr.length) return null;
+    S.poolUse = S.poolUse || {};
+    // 动作去重：本批已用过的动作词，尽量不再选同款
+    const ACT = ["groping","kiss","hug","hug_from_behind","undressing","dry_humping",
+      "clothed_sex","straddling","sitting_on_lap","whispering","biting_ear","lap_pillow",
+      "mutual_masturbation","breast_sucking","nipple_stimulation","tribadism","paizuri",
+      "fellatio","cunnilingus","handjob","footjob","thigh_sex","sex","vaginal","anal",
+      "masturbation","fingering","headpat"];
+    const usedAct = S.poolUse.act || (S.poolUse.act = []);
+    const actsOf = s2 => (s2.tags||[]).map(x=>String(x).toLowerCase()).filter(x=>ACT.includes(x));
+    const fresh = arr.filter(s2=>!actsOf(s2).some(a=>usedAct.includes(a)));
+    if(fresh.length) arr = fresh;
+    // 整批共用一份"已用"记录：所有阶段都不许重复，抽干后才重置
+    const used = S.poolUse.all || (S.poolUse.all = []);
+    let left = arr.filter(s=>!used.includes(s.id));
+    if(!left.length){
+      const rest = base.filter(s=>!used.includes(s.id));
+      if(rest.length) left = rest;               // 换到还没用过的条目
+      else { used.length = 0; left = arr.slice(); }
+    }
+    const s = left[Math.floor(Math.random()*left.length)];
+    used.push(s.id);
+    actsOf(s).forEach(a=>{ if(!usedAct.includes(a)) usedAct.push(a); });
+    return s;
+  };
+  const near = base.filter(s=>Number(s.stage===undefined?2:s.stage)===st);
+  const soft = base.filter(s=>Math.abs(Number(s.stage===undefined?2:s.stage)-st)<=1);
+  return take(near) || take(soft) || take(base);
+}
+function batchStop(){ S.pauseAsk = false; S.batch = false; }
+async function batchRun(){
+  if($("qCompose")){ S.compose = $("qCompose").checked;
+    if(!S.composeBound){ S.composeBound=true; $("qCompose").onchange = e=>{ S.compose=e.target.checked;
+      toast(S.compose?"组合抽词：开（动作不重复）":"组合抽词：关（走场景库）"); }; } }
+  if(S.batch){ toast("批量已在跑"); return; }
+  if(!S.chars || !S.chars.length){ toast("先选至少一个角色"); return; }
+  const n = Math.max(1, Math.min(60, parseInt(($("batchN").value||"8"),10)));
+  S.batch = true; S.pauseAsk = false;
+  $("btnBatch").disabled = true; $("btnPause").disabled = false;
+  $("btnPause").textContent = "⏸ 暂停";
+  let done = 0;
+  S.poolUse = {};
+  S.__exBatch = {};   // 每批重置表情额度（翻白眼/失神脸最多 2 张）
+  logline("batchStart", "tier="+S.tier+" n="+n+" chars="+(S.chars||[]).join("/")+" outfit="+(S.outfit||[]).join("/"));
+  toast("批量开始：档位 "+S.tier+" · "+n+" 张");
+  for(let i=0;i<n;i++){
+    if(S.pauseAsk){ toast("已暂停：完成 "+done+" / "+n); break; }
+    const useCompose = (S.compose !== false);
+    let plan = {tag:"组合", expr:"T2"};
+    let sc = null;
+    if(useCompose){
+      sc = composeShot(i, n);
+      if(sc){
+        setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[])).concat(sc.tags)));
+        S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
+        S.sceneKind = sc.kind || ''; S.sceneZh = sc.zh || ''; S.scenePool = sc.pool || '';
+        cleanTags(); refreshNeg(true);
+      } else {
+        // 抽空时清池，否则下一张会拿上一张的池规则去收束性别
+        S.sceneKind = ''; S.scenePool = '';
+      }
+    } else {
+      const plans = stagesForTier();
+      plan = plans[i % plans.length];
+      sc = pickForStage(plan.st);
+      S.sceneKind = ''; S.scenePool = '';
+      if(sc) applyScene(sc, "batch");
+      setExpr(plan.expr);
+      refreshNeg(true);
+    }
+    $("stat").textContent = "批量 "+(i+1)+"/"+n+" · "+(sc?(sc.zh||sc.name_zh||sc.id):"无场景");
+    logline("batchShot", (i+1)+"/"+n+" "+(S.compose!==false?"compose":plan.tag)+" kind="+(S.sceneKind||"-")+" scene="+(sc?sc.id:"none")+" chars="+(S.chars||[]).join("/")+" pos="+S.tags.slice(0,8).join(","));
+    await generate();
+    done++;
+    if(S.pauseAsk){ toast("已暂停：完成 "+done+" / "+n); break; }
+  }
+  S.batch = false;
+  $("btnBatch").disabled = false; $("btnPause").disabled = true;
+  if(!S.pauseAsk) toast("批量完成：" + done + " 张");
+}
+
+
+/* ===== 组合抽词：动作原子 × 地点 × 光线 × 强度 × 构图 × 机位 ===== */
+const USED_KEY = 'wb_used_act_v1';
+function usedActs(){
+  try{ return JSON.parse(localStorage.getItem(USED_KEY)||'[]'); }catch(e){ return []; }
+}
+function saveUsedActs(a){ try{ localStorage.setItem(USED_KEY, JSON.stringify(a.slice(-4000))); }catch(e){} }
+const INDOOR = ["bedroom","living_room","kitchen","bathroom","classroom","library","cafe",
+  "elevator","office","hallway","storage_room","changing_room","love_hotel","stairwell",
+  "train_interior","onsen","on_bed","couch","on_floor",
+  // indoors / bed 这类泛室内词以前漏了，导致「床边」抽到天气 cloud、卧室抽到霓虹
+  "indoors","bed","bathtub","desk","car_interior","locker","shower","door"];
+function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+/* 池化抽取：档位 × 人数 → 主池 + 辅池（2026-11-09 重构）
+   单人常规 → 只抽单人日常，不凭空加人
+   单人暧昧 → 单人暧昧为主，掺"双人日常（第二人设为无脸男）"和触手
+   单人 R18 → 单人性交（无脸男补图）为主，掺男伴互动 / 触手 / 机械 / 事后
+   双女常规 → 只抽双人日常（绝不加人，更不许男性）
+   双女暧昧 → 只抽双人暧昧专属池
+   双女 R18 → 女女为主，掺 3P（两女+无脸男）/ 机械 / 触手 / 事后 */
+function sceneType(){
+  try{ const el = $("qScene"); return (el && el.value) || 'auto'; }catch(e){ return 'auto'; }
+}
+function poolPlan(tier, nChar){
+  // 锁定了场景类型就只从该类池抽（用户 2026-11-09 决定：类型交给下拉手动选）
+  const sc = sceneType();
+  const T = tier === 'sfw' ? 'daily' : (tier === 'suggestive' ? 'flirt' : 'sex');
+  if(sc !== 'auto'){
+    const main = [sc + '_' + T];
+    let extra = [];
+    if(sc === 'solo' && tier === 'r18') extra = ['duo_male','tentacle_sex','machine_sex','after'];
+    else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_flirt','duo_daily','tentacle_flirt'];
+    else if(sc === 'yuri' && tier === 'r18') extra = ['triple_sex','group3p','machine_sex','tentacle_sex'];
+    else if(sc === 'yuri' && tier === 'suggestive') extra = [];
+    else if(sc === 'triple') extra = [];
+    else if(sc === 'hypno') extra = (tier === 'r18') ? ['tentacle_sex'] : [];
+    return {main:main, extra:extra};
+  }
+  const two = nChar >= 2;
+  if(!two){
+    if(tier === 'sfw') return {main:['solo_daily'], extra:[]};
+    if(tier === 'suggestive') return {main:['solo_flirt'], extra:['duo_flirt','duo_daily','tentacle_flirt']};
+    return {main:['solo_sex'], extra:['duo_male','tentacle_sex','machine_sex','after']};
+  }
+  if(tier === 'sfw') return {main:['yuri_daily'], extra:[]};
+  if(tier === 'suggestive') return {main:['yuri_flirt'], extra:[]};
+  return {main:['yuri_sex'], extra:['triple_sex','group3p','machine_sex','tentacle_sex']};
+}
+const SOFT_HOT = ['undressing','clothes_removed','panty_pull','panties_around_one_leg','panties_aside',
+  'skirt_lift','shirt_lift','clothes_lift','bra_lift','dress_lift','clothes_pull','open_clothes',
+  'wardrobe_malfunction','breast_slip','bra_slip','strap_slip','hand_under_skirt','hand_under_shirt',
+  'clothes_in_mouth','skirt_pull','shirt_pull','cleavage','underboob','sideboob','downblouse',
+  'against_wall','straddling','sitting_on_lap','grinding','dry_humping','wet_clothes','wet_shirt',
+  'arched_back','bent_over','lingerie','thighhighs','swimsuit','bikini','kiss','french_kiss',
+  'hug_from_behind','grabbing_own_breast','nipple_pull','breast_sucking','nipple_stimulation',
+  'spread_legs','legs_up','leg_lift','bare_back','midriff','bare_legs','bare_shoulders','bra',
+  'panties','underwear','garter_belt','leash','collar','breasts_out','nipple_slip','presenting',
+  'all_the_way_through','sitting_on_face','girl_on_top','exhibitionism','flashing','public_nudity',
+  'skirt_flip','panty_pull','leg_lock','crotch','cameltoe','lactation','breast_milk'];
+
+function composeShot(step, total){
+  if(!S.atoms || !S.atoms.actions) return null;
+  const A = S.atoms.actions || {};
+  const nChar0 = (S.chars||[]).length;
+  const key = a => a.zh;
+  let used = usedActs();
+  // 核心动作词被档位剔光 = 这条动作在这个档位等于没有 → 换下一条，
+  // 否则画面只剩地点+表情，全靠底模发挥（2026-11-09 实测 8 张里 4 张如此）。
+  const coreAlive = a => {
+    const c = a.core || [];
+    if(!c.length) return true;
+    return tierGate(c.slice()).length >= 1;
+  };
+  const plan = poolPlan(S.tier, nChar0);
+  // 主池权重 5、辅池 1：主池抽干不会掉到另一个"人数不对"的池子
+  const bag = [];
+  for(let i=0;i<plan.main.length;i++){
+    const arr = A[plan.main[i]] || [];
+    for(let j=0;j<arr.length;j++){
+      // 第二档专属池里，"真擦边"条目加权：调情池混了太多纯可爱小动作
+      // （撩头发/托腮/顶手指），等权抽出来就像日常片场，用户原话"完全不擦边"。
+      let wmax = 5;
+      if(S.tier === 'suggestive' && (plan.main[i] === 'solo_flirt' || plan.main[i] === 'duo_flirt')){
+        // 强擦边 9 : 纯可爱 2 —— 第二档就是来看衣料和姿势的，
+        // 托腮/顶手指这类日常小动作留一点做缓冲即可
+        wmax = (arr[j].tags||[]).some(t=>SOFT_HOT.includes(String(t).toLowerCase())) ? 9 : 1;
+      }
+      for(let w=0;w<wmax;w++) bag.push({a:arr[j],p:plan.main[i]});
+    }
+  }
+  // 3P 辅池降权：双女 R18 抽到 3P 会多一个人，用户要的是"女同就是女同"，
+  // 3P 要显式选场景；这里把 triple/group3p 压到其它辅池的一半
+  const EX_LOW = {triple_daily:1, triple_flirt:1, triple_sex:1, group3p:1};
+  for(let i=0;i<plan.extra.length;i++){
+    const arr = A[plan.extra[i]] || [];
+    const ew = EX_LOW[plan.extra[i]] ? 1 : 3;
+    for(let w=0;w<ew;w++){
+      for(let j=0;j<arr.length;j++) bag.push({a:arr[j],p:plan.extra[i]});
+    }
+  }
+  // 双女场景：触手/机械只有"两人一起"的条目才成立，单人触手会把第二个人挤出画面
+  const duoScene = (S.chars||[]).length >= 2 || ['yuri','triple'].indexOf(sceneType()) >= 0;
+  const duoOK = x => {
+    if(!duoScene) return true;
+    const pn = String(x.p || '');
+    // 三人构型本来就要一个无脸男，放行
+    if(pn.indexOf('triple') === 0 || pn === 'group3p') return true;
+    // 双人画面里出现男体词（faceless_male / penis / 1boy…）就会长出一根阴茎
+    // —— 用户实测「两女催眠出现阴茎」就是这一条漏的（hyono_sex 有一条
+    //   「被命令自己扶着进去」自带 penis_grab+faceless_male）。
+    const male = (x.a.tags||[]).some(t=>PF_MALE.indexOf(String(t).toLowerCase())>=0);
+    if(male) return false;
+    if(pn.indexOf('tentacle') !== 0 && pn.indexOf('machine') !== 0) return true;
+    return (x.a.tags||[]).some(t=>String(t).toLowerCase()==='2girls');
+  };
+  const mainSet = {}; plan.main.forEach(k=>{ mainSet[k] = 1; });
+  /* used 只用于"辅池不重复"，主池不参与去重：
+     主池 55 条在 40 张批量里必然全用过，一旦也被 used 挡掉，
+     后半段就整片掉进辅池（实测双女 R18 有 50% 抽到 3P）。 */
+  let fresh = bag.filter(x=>coreAlive(x.a) && duoOK(x) &&
+    (mainSet[x.p] || !used.includes(key(x.a))));
+  /* 主池条目被 used 挡光时立刻补回。
+     旧写法只在 fresh 完全为空时才补，可 fresh 里还剩辅池条目就永远不补 ——
+     批量跑到后半段主池 55 条全用过，画面就全变成辅池（3P/机械/触手），
+     实测 yuri_r18 120 抽里 3P 占到 40%。 */
+  if(fresh.length && !fresh.some(x=>mainSet[x.p])){
+    fresh = fresh.concat(bag.filter(x=>mainSet[x.p] && coreAlive(x.a)));
+  }
+  if(!fresh.length){
+    used = used.filter(k=>!bag.some(x=>key(x.a)===k));
+    fresh = bag.filter(x=>coreAlive(x.a));
+  }
+  if(!fresh.length) fresh = bag;
+
+  if(!fresh.length) return null;
+  const hit = pickOne(fresh);
+  const act = hit.a;
+  let poolName = hit.p;
+  // 单人档抽到"双人日常/暧昧"：第二个人按无脸男补全构图（用户规则），池名改判
+  if(nChar0 <= 1 && (poolName === 'duo_daily' || poolName === 'duo_flirt')) poolName = 'duo_solo';
+  used.push(key(act)); saveUsedActs(used);
+  const kind = (POOL_RULE[poolName] || {}).k || act.kind || '';
+
+  // 强度：动作自带强度 + 批量内递增，档位封顶
+  const cap = (S.tier==='sfw') ? 1 : (S.tier==='suggestive') ? 3 : 4;
+  const ramp = Math.floor((step/Math.max(1,total)) * 3);
+  const lv = Math.max(0, Math.min(cap, (act.lv||2) + (ramp>1?1:0)));
+  const IT = (S.atoms.intensity||[])[lv] || {tags:[]};
+
+  // 地点 / 光线 / 天气 / 构图 / 机位
+  // 露出/当众类动作必须有"公共场合"，抽到卧室浴室就成了自相矛盾
+  const PUB_ACT = ['exhibitionism','public_indecency','flashing','public_nudity','upskirt','skirt_lift','downblouse'];
+  const PUBLIC_P = ['cafe','classroom','train_interior','office','library','park','pool','poolside',
+    'beach','shrine','hallway','stairwell','rooftop','balcony','street'];
+  const isPub = (act.tags||[]).some(t=>PUB_ACT.includes(String(t).toLowerCase()));
+  const PLS = isPub ? (S.atoms.places||[]).filter(x=>(x.tags||[]).some(t=>PUBLIC_P.includes(String(t).toLowerCase()))) : (S.atoms.places||[]);
+  const place = pickOne(PLS.length ? PLS : (S.atoms.places||[]));
+  // 光线与地点互斥：沙滩/森林/神社挂霓虹灯、海边摆台灯都很出戏
+  const NATURE_P = ['beach','ocean','sea','forest','field','grass','shrine','park','pool','poolside',
+    'onsen','garden','outdoors','mountain','sky','river','lake','snow','cherry_blossoms'];
+  const placeLow = (place.tags||[]).map(x=>String(x).toLowerCase());
+  const naturey = placeLow.some(t=>NATURE_P.includes(t));
+  const lset = (S.atoms.lights||[]).filter(x=>{
+    const lt = (x.tags||[]).map(t=>String(t).toLowerCase());
+    if(naturey && lt.some(t=>['neon_lights','city_lights','neon','lamp','fluorescent_lamp'].includes(t))) return false;
+    return true;
+  });
+  const light = pickOne(lset.length ? lset : (S.atoms.lights||[]));
+  // 机位/构图先按动作排一遍，别等 preflight 事后修（双人挂 pov = 男性第一视角；
+  // 跨坐 + from_behind/cowboy_shot = 腿被切或被身体挡住）
+  const RIDE_T = ['straddling','sitting_on_lap','girl_on_top','cowgirl_position',
+    'reverse_cowgirl_position','sitting_on_face'];
+  const riding = (act.tags||[]).some(t=>RIDE_T.includes(String(t).toLowerCase()));
+  const tset = (S.atoms.shots||[]).filter(x=>{
+    const tt = x.tags||[];
+    if(riding && tt.includes('cowboy_shot')) return false;
+    // 牛仔镜头是 1/4 身高，双人必然把后面那个切掉
+    if(nChar0 >= 2 && tt.includes('cowboy_shot')) return false;
+    // 第二档要"看得见身体"：特写/半身只会给一张脸，衣料和姿势全被裁到画外，
+    // 出图自然变成"坐着微笑"（2026-11-09 用户第二档样图无一擦边的主因之一）
+    if(S.tier === 'suggestive' && (tt.includes('close-up') || tt.includes('upper_body'))) return false;
+    return true;
+  });
+  const aset = (S.atoms.angles||[]).filter(x=>{
+    const tt = x.tags||[];
+    // pov = 拍摄者入镜：非 R18 档（日常/暧昧不许凭空多一个人）和双人档一律不要
+    if((S.tier !== 'r18' || nChar0 >= 2) && tt.some(t=>String(t).toLowerCase().indexOf('pov')===0)) return false;
+    if(riding && tt.includes('from_behind')) return false;
+    if(nChar0 >= 2 && tt.includes('dutch_angle')) return false;
+    return true;
+  });
+  const shot = pickOne(tset.length ? tset : (S.atoms.shots||[]));
+  const ang  = pickOne(aset.length ? aset : (S.atoms.angles||[]));
+  const indoor = (place.tags||[]).some(t=>INDOOR.includes(t));
+  // 天气与地点互斥：泳池/海滩不下雪，沙漠/室内不下雨
+  const wset = (S.atoms.weather||[]).filter(x=>{
+    const wt = (x.tags||[]).map(t=>String(t).toLowerCase());
+    if(naturey && wt.includes('snow') && (place.tags||[]).some(t=>['pool','poolside','beach','onsen'].includes(String(t).toLowerCase()))) return false;
+    return true;
+  });
+  const weather = (!indoor && Math.random()<0.6) ? pickOne(wset.length ? wset : (S.atoms.weather||[])) : null;
+
+  let tags = [];
+  tags = tags.concat(act.tags||[]);
+  tags = tags.concat(place.tags||[]);
+  tags = tags.concat(light.tags||[]);
+  if(weather) tags = tags.concat(weather.tags||[]);
+  // 表情/生理按档位封顶：词一多就盖过动作，画面变成"底模自己发挥"
+  const EXPR_CAP = (S.tier==='sfw') ? 1 : (S.tier==='suggestive') ? 3 : 5;
+  const lowT = x => String(x).toLowerCase().replace(/ /g, '_');
+  // 表情分型：同一强度有 3–4 组变体，且"翻白眼/失神脸"在整批里最多出现 2 次
+  const EX_HOT = ['torogao','ahegao','rolling_eyes','drooling'];
+  if(!S.__exBatch) S.__exBatch = {};
+  const exLeft = k2 => 2 - (S.__exBatch[k2] || 0);
+  const vs = (IT.variants && IT.variants.length) ? IT.variants : [IT.tags || []];
+  let vpick = vs[Math.floor(Math.random()*vs.length)] || [];
+  for(let t=0;t<6;t++){
+    const hot = vpick.filter(x=>EX_HOT.includes(String(x).toLowerCase()));
+    if(!hot.length || hot.every(x=>exLeft(String(x).toLowerCase()) > 0)) break;
+    const alt = vs.filter(v=>!v.some(x=>EX_HOT.includes(String(x).toLowerCase())));
+    if(!alt.length) break;
+    vpick = alt[Math.floor(Math.random()*alt.length)];
+  }
+  vpick.forEach(x=>{ const k2 = String(x).toLowerCase(); if(EX_HOT.includes(k2)) S.__exBatch[k2] = (S.__exBatch[k2]||0) + 1; });
+  let mood = uniq(vpick.concat(IT.phys||[]));
+  // 高 lv 的表情词（tongue_out / ahegao / torogao）都在 HARD 里，低档位剔完会一个不剩，
+  // 人物变成"没有表情的默认脸" —— 所以剔完空了要按档位补一个底线表情
+  if(S.tier !== 'r18') mood = mood.filter(t=>!EXPLICIT_HARD.includes(lowT(t)));
+  mood = mood.slice(0, EXPR_CAP);
+  if(!mood.length){
+    // 往下降一级取表情，比硬编码一个 blush 自然（lv3 被剔空时用 lv2 的 half-closed_eyes/parted_lips/sweat）
+    for(let q = lv - 1; q >= 0 && !mood.length; q--){
+      const I2 = (S.atoms.intensity||[])[q] || {tags: []};
+      let m2 = uniq((I2.tags||[]).concat(I2.phys||[]));
+      if(S.tier !== 'r18') m2 = m2.filter(t=>!EXPLICIT_HARD.includes(lowT(t)));
+      mood = m2.slice(0, EXPR_CAP);
+    }
+  }
+  if(!mood.length) mood = [S.tier === 'sfw' ? 'light_smile' : (S.tier === 'suggestive' ? 'blush' : 'open_mouth')];
+  tags = tags.concat(mood, shot.tags||[], ang.tags||[]);
+  // 体液只给 R18；暧昧档挂体液会把动作淹掉
+  const PH = (S.atoms.phys||{});
+  if(S.tier==='r18' && lv>=2) tags = tags.concat((PH.L2||[]).slice(0, 1));
+  if(S.tier==='r18' && lv>=4) tags = tags.concat((PH.L3||[]).slice(0, 2));
+  // 双人场景自动 2girls
+  const nChar = (S.chars||[]).length;
+  if(nChar>=2){ tags = tags.filter(t=>!["1girl","solo"].includes(String(t).toLowerCase())); tags.push("2girls"); }
+  else tags.push("1girl");
+  return {id:"compose_"+act.zh, zh:act.zh+" · "+(place.zh||"")+" · "+(light.zh||"")+" · "+IT.zh,
+          tags:uniq(tags), lv:lv, kind:kind, pool:poolName, who:(act.who||""), core:(act.core||[])};
+}
+function applyCompose(list, name){
+  S.sceneTags = list.slice();
+  S.sceneName = name;
+  const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]));
+  setTags(normTags(base.concat(list)));
+  refreshNeg(true);
+  logline("compose", name+" n="+list.length+" lv="+S.lastLv);
+}
+
+/* ===== 出图前审查：人数 / 性别 / 道具一致性 =====
+   随机或组合抽词之后、真正提交之前跑一次，只做两件事：
+   ① 把不可能成立的搭配修掉（女女 / 单人 / 触手 / 机械 / 事后不许有男人；
+      性交 / 口交 / 群交必须有男人，且只能是 faceless_male，第一视角除外）；
+   ② 把修了什么写进日志和提示词面板的「审查」徽标，看得见、能回溯。 */
+const PF_MALE = ['1boy', '2boys', '3boys', 'multiple_boys', 'male', 'faceless_male', 'hetero',
+  'invisible_man', 'disembodied_penis', 'invisible_penis',
+  'penis', 'testicles', 'male_focus', 'male_on_top', 'male_on_bottom', 'cum_on_penis', '1other'];
+const PF_NO_MALE_KIND = ['yuri', 'tentacle', 'machine', 'solo', 'after'];
+// 男体三档：faceless 无脸男（占位最稳）/ invisible 隐形男（只剩压痕，不挤构图）/
+// penis 只有阴茎（disembodied_penis，画面上没有人形）
+function maleMode(){
+  try{ const el = $("qMale"); return (el && el.value) || 'faceless'; }catch(e){ return 'faceless'; }
+}
+function pushMale(push){
+  const m = maleMode();
+  if(m === 'invisible'){ push('invisible_man', 'hetero'); }
+  else if(m === 'penis'){ push('disembodied_penis', 'hetero'); }
+  else { push('faceless_male', 'hetero'); }
+}
+const PF_NEED_MALE_KIND = ['sex', 'oral', 'group'];
+const PF_SEXISH = ['sex', 'vaginal', 'anal', 'sex_from_behind', 'doggystyle', 'missionary',
+  'cowgirl_position', 'reverse_cowgirl_position', 'squatting_cowgirl_position', 'all_fours',
+  'upright_straddle', 'amazon_position', 'mating_press', 'piledriver', 'spooning',
+  'suspended_congress', 'full_nelson', 'prone_bone', 'standing_sex', 'girl_on_top', 'paizuri',
+  'fellatio', 'oral', 'cunnilingus', 'deepthroat', 'irrumatio', 'thigh_sex', 'handjob', 'footjob',
+  '69', 'double_penetration', 'triple_penetration', 'group_sex', 'cum_in_pussy', 'cum_in_ass',
+  'cum_on_body', 'cum_in_mouth', 'facial', 'bukkake', 'cumdrip', 'cum_overflow', 'creampie',
+  'pussyjob', 'grinding', 'dry_humping', 'clothed_sex', 'tribadism', 'fingering', 'masturbation',
+  'mutual_masturbation'];
+const PF_KIND_ZH = {daily: '日常', flirt: '暧昧', solo: '单人', yuri: '女女', tentacle: '触手',
+  machine: '机械', futa: '扶她', sex: '性交', oral: '口交手交', group: '多人', after: '事后'};
+
+/* 池 → 画面性别结构：g 女生数（0=跟随角色配置）, m 是否需要无脸男, k 场景性质 */
+const POOL_RULE = {
+  // 六类 × 三档（m: 0=绝不带男 / 1=必须补男 / 2=看条目自带，缺了也不补）
+  solo_daily:{g:1, m:0, k:'daily'},  solo_flirt:{g:1, m:0, k:'flirt'},  solo_sex:{g:1, m:2, k:'sex'},
+  yuri_daily:{g:2, m:0, k:'daily'},  yuri_flirt:{g:2, m:0, k:'flirt'},  yuri_sex:{g:2, m:0, k:'yuri'},
+  machine_daily:{g:1, m:0, k:'machine'}, machine_flirt:{g:1, m:0, k:'machine'}, machine_sex:{g:1, m:0, k:'machine'},
+  bdsm_daily:{g:1, m:0, k:'daily'},  bdsm_flirt:{g:1, m:0, k:'flirt'},  bdsm_sex:{g:1, m:2, k:'sex'},
+  tentacle_daily:{g:1, m:0, k:'tentacle'}, tentacle_flirt:{g:1, m:0, k:'tentacle'}, tentacle_sex:{g:1, m:0, k:'tentacle'},
+  triple_daily:{g:2, m:1, k:'daily'}, triple_flirt:{g:2, m:1, k:'flirt'}, triple_sex:{g:2, m:1, k:'group'},
+  // 普通双人互动 / 单人补人 / 事后
+  // 催眠三档（m:3 = 条目自带男体词时才落地 faceless_male，施术者要画得出来）
+  hypno_daily:{g:1, m:0, k:'daily'}, hypno_flirt:{g:1, m:3, k:'flirt'}, hypno_sex:{g:1, m:3, k:'sex'},
+  duo_daily:{g:2, m:0, k:'daily'},   duo_flirt:{g:2, m:0, k:'flirt'},   duo_male:{g:1, m:1, k:'flirt'},
+  duo_solo:{g:1, m:1, k:'flirt'},
+  group3p:{g:2, m:1, k:'group'},     after:{g:1, m:1, k:'after'}
+};
+/* 男位/插入/体液词：无男池必须一起剔，否则"画面里没男人却有精液/骑乘位" */
+const MALE_POS = ['sex','missionary','all_fours','doggystyle','sex_from_behind','on_side',
+  'straddling','suspended_congress','mating_press','spooning','upright_straddle','piledriver',
+  'prone_bone','full_nelson','amazon_position','deep_penetration','squatting_cowgirl_position',
+  'cowgirl_position','reverse_cowgirl_position','vaginal','penis','penis_grab',
+  'licking_penis','deepthroat','irrumatio','paizuri','handjob','spitroast','double_penetration',
+  'double_fellatio','fellatio','thigh_sex','footjob','cum_in_pussy','cumdrip','cum_overflow',
+  'cum_on_body','cum_on_breasts','creampie','facial','cum_on_penis','cum'];
+const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_sex:'单人·R18',
+  yuri_daily:'女同·健全', yuri_flirt:'女同·擦边', yuri_sex:'女同·R18',
+  machine_daily:'机械·健全', machine_flirt:'机械·擦边', machine_sex:'机械·R18',
+  bdsm_daily:'调教·健全', bdsm_flirt:'调教·擦边', bdsm_sex:'调教·R18',
+  tentacle_daily:'触手·健全', tentacle_flirt:'触手·擦边', tentacle_sex:'触手·R18',
+  triple_daily:'3P·健全', triple_flirt:'3P·擦边', triple_sex:'3P·R18',
+  hypno_daily:'催眠·健全', hypno_flirt:'催眠·擦边', hypno_sex:'催眠·R18',
+  duo_daily:'双人日常', duo_flirt:'双人暧昧', duo_male:'单人+无脸男', duo_solo:'单人+无脸男',
+  group3p:'双女+无脸男 3P', after:'事后'};
+function preflight(tags, opt){
+  const o = opt || {};
+  let a = uniq((tags || []).map(t=>String(t).trim()).filter(Boolean));
+  const low = x => String(x).toLowerCase().replace(/ /g, '_');
+  const has = k => a.some(x=>low(x) === k);
+  const cut = ks => { const s = new Set(ks); const b = a.length;
+    a = a.filter(x=>!s.has(low(x))); return b - a.length; };
+  const push = function(){ for(let i=0;i<arguments.length;i++){ if(!has(arguments[i])) a.push(arguments[i]); } };
+  const rep = {kind: '', fixes: [], n: 0};
+
+  /* ---- ① 档位护栏：非 R18 不许留露骨词（先做，kind 推断要看干净的词）---- */
+  if(S.tier && S.tier !== 'r18'){
+    const hard = a.filter(x=>EXPLICIT_HARD.includes(low(x)));
+    if(hard.length){ cut(hard.map(low)); rep.fixes.push('剔档位外 ' + hard.length + ' 词'); }
+  }
+
+  const nChar = (S.chars || []).length;
+  const pov = has('pov') || has('pov_hands') || has('pov_crotch');
+  // 第一视角只在单人档成立（男在画面外）；双人档 ⑥ 会改成侧视，那时必须补 faceless_male
+  const povSolo = pov && nChar <= 1;
+
+  /* ---- ② 推断场景性质：原子库 kind 优先，其次看词，再看角色数 ---- */
+  let k = o.kind || '';
+  if(!k){
+    if(a.some(x=>['yuri', 'tribadism', '2girls', 'multiple_girls'].includes(low(x)))) k = 'yuri';
+    else if(a.some(x=>['tentacles', 'tentacle_sex', 'tentaclejob', 'sex_machine',
+      'milking_machine', 'double_dildo'].includes(low(x)))) k = 'tentacle';
+    else if(a.some(x=>['futanari', 'futa_with_female'].includes(low(x)))) k = 'futa';
+    else if(a.some(x=>PF_SEXISH.includes(low(x)))) k = 'sex';
+    else if(nChar >= 2) k = 'yuri';
+    else k = 'daily';
+  }
+
+  /* ---- ②b 按池收束（池是抽取时决定的，规则优先于词面推断）---- */
+  const R = (o.pool && POOL_RULE[o.pool]) || null;
+  if(R){
+    if(R.m === 0){
+      const n0 = cut(PF_MALE) + cut(MALE_POS);
+      if(n0) rep.fixes.push('无男池去男性词/男位/体液 ' + n0);
+    } else if(R.m === 3){
+      /* 催眠/调教这类"有人在对她做"的场景：施术者要画得出来，
+         但只有条目自带男体词时才落地，否则画面里平白多一个人。 */
+      if(a.some(x=>['1boy','2boys','3boys','male','male_focus','male_on_top',
+                    'faceless_male','invisible_man','disembodied_penis','invisible_penis','hetero'].includes(low(x)))){
+        const n0 = cut(['1boy','2boys','3boys','male','male_focus','male_on_top',
+                        'invisible_man','disembodied_penis','invisible_penis']);
+        push('faceless_male','hetero');
+        rep.fixes.push('施术者用无脸男 ' + n0);
+      }
+    } else if(R.m === 2){
+      // 调教/单人 R18 这类池里混着"自己绑自己"和"被主人绑"，池级说不清，
+      // 交给条目自带（faceless_male 出现就补 aria，没出现就别硬塞一个人）
+      if(a.some(x=>PF_MALE.includes(low(x)))){
+        const n0 = cut(['1boy','2boys','3boys','male','male_focus','male_on_top']);
+        if(maleMode() === 'invisible' || maleMode() === 'penis'){
+          const n1 = cut(['faceless_male','hetero']);
+          pushMale(push);
+          if(n0+n1) rep.fixes.push('男体收成 ' + maleMode() + ' ' + (n0+n1));
+        } else if(n0){
+          push('faceless_male','hetero');
+          rep.fixes.push('男体收成 faceless_male ' + n0);
+        }
+      }
+    } else {
+      const n0 = cut(['1boy', '2boys', '3boys', 'male', 'male_focus', 'male_on_top']);
+      if(povSolo){
+        // 第一视角=镜头就是那个人，再补 faceless_male 会画成两个人
+        const n1 = cut(['faceless_male', 'hetero', 'invisible_man', 'disembodied_penis', 'invisible_penis']);
+        // 第一视角下"看得见的人"会和镜头打架，改成隐形男/只有阴茎：插入成立、人形不占位
+        if(maleMode() === 'penis') push('disembodied_penis');
+        else push('invisible_man');
+        if(n0 + n1) rep.fixes.push('第一视角拆成隐形男 ' + (n0 + n1));
+      } else {
+        // 池子要求男性，但词面里一个性动作都没有 → 这条其实是日常条目，
+        // 补人只会变成"画面里多一个人干站着"（anima_pg_00003 就是这样）
+        const sexish = a.some(x=>PF_SEXISH.includes(low(x)) || MALE_POS.includes(low(x)));
+        // 双人互动条目（duo_solo）本身就是"有人在抱她/在她耳边说话"，
+        // 不补第二个人就是空对空；solo_flirt 的独立动作才按"有没有性"决定补不补。
+        const SELF_ONLY = ['masturbation','fingering','vibrator','dildo','sex_toy','dildo_riding',
+                           'sex_machine','tentacle_sex','tentaclejob','object_insertion','egg_laying'];
+        const selfOnly = a.some(x=>SELF_ONLY.includes(low(x))) &&
+                         !a.some(x=>MALE_POS.includes(low(x)));
+        // 中文词面里带"被/让人/按住/抱着/两人…"就是有第二个人在动手，
+        // 光看英文 tags 会漏（「被人掀起裙角」只有 skirt_lift）
+        const passive = /被|让人|命令|按住|按在|抱着|抱住|牵着|拉着|捏着|贴着|引到|对着|一左一右|两人|一起/.test(String(o.zh||''));
+        const needBody = sexish || passive || o.pool === 'duo_solo' || o.pool === 'group3p'
+                         || o.pool === 'duo_male' || (R.k === 'sex' && !selfOnly);
+        if(needBody){
+          /* 三人构型（池要求 2 女 + 1 男：triple_daily/flirt/sex、group3p）：
+             第三个人必须画得出来。隐形男塞进 2girls 画面，底模会把它画成
+             "半透明的多余男性"——用户反馈的"女同 R18 里出现男性"就是这条路径
+             （anima_pg_00119/00121/00125/00127/00131/00132 全是 invisible_man + 2girls）。 */
+          const trio = (R.g === 2);
+          if(trio){
+            cut(['invisible_man','disembodied_penis','invisible_penis']);
+            push('faceless_male','hetero');
+            rep.fixes.push('三人构型用无脸男');
+          } else {
+            pushMale(push);
+          }
+          if(n0) rep.fixes.push('男体收成 ' + (trio ? 'faceless_male' : maleMode()) + ' ' + n0);
+        } else if(R.k === 'sex' || R.k === 'after'){
+          rep.fixes.push('无性动作不补男');
+        }
+      }
+    }
+    if(R.g === 1){
+      cut(['2girls', 'multiple_girls']); push('1girl');
+    } else if(R.g === 2){
+      cut(['1girl', 'solo']); push('2girls');
+    }
+    k = R.k;
+  }
+
+  /* ---- ③ 两个女角色：男性与插入动作都不成立，降级成女女 ---- */
+  if(!R && nChar >= 2 && PF_NEED_MALE_KIND.includes(k)){
+    const n1 = cut(PF_MALE), n2 = cut(PF_SEXISH);
+    push('2girls');
+    k = 'yuri';
+    rep.fixes.push('两女改女女（剔男 ' + n1 + '／插入 ' + n2 + '）');
+  }
+
+  /* ---- ④ 按场景性质收束性别词 ----
+     只有 sex / oral / group 允许有男体；女女、触手、机械、单人、事后、日常、暧昧一律无男。 */
+  if(R){
+    /* 池规则已收束，跳过 kind 收束 */
+  } else if(PF_NEED_MALE_KIND.includes(k)){
+    if(pov){
+      const n = cut(['1boy', '2boys', '3boys', 'male', 'male_focus', 'male_on_top']);
+      if(n) rep.fixes.push('第一视角去露脸男 ' + n);
+    } else {
+      const n = cut(['1boy', '2boys', '3boys', 'male', 'male_focus', 'male_on_top']);
+      pushMale(push);
+      if(n) rep.fixes.push('男体收成 faceless_male ' + n);
+    }
+  } else if(k === 'futa'){
+    if(nChar <= 1) cut(['futa_with_female']);
+    const n = cut(['1boy', '2boys', '3boys', 'multiple_boys', 'male', 'faceless_male',
+      'hetero', 'male_on_top']);
+    push('futanari', 'penis');
+    if(nChar <= 1) push('masturbation');
+    if(n) rep.fixes.push('扶她去男性 ' + n);
+  } else {
+    const n = cut(PF_MALE);
+    if(n) rep.fixes.push('去男性词 ' + n);
+  }
+
+  /* ---- 男体落地后 solo 不成立（隐形男也是一个人在场） ---- */
+  if(a.some(t=>['1boy','2boys','3boys','male','faceless_male','invisible_man',
+                'disembodied_penis','invisible_penis','hetero'].includes(K(t)))){
+    const ns = cut(['solo']);
+    if(ns) rep.fixes.push('有男去 solo');
+  }
+  /* ---- ⑤ 人数词与实际角色数对齐 ---- */
+  if(nChar >= 2){
+    cut(['1girl', 'solo']); push('2girls');
+  } else {
+    cut(['2girls', 'multiple_girls']);
+    if(!a.some(x=>['1girl', 'solo', '1boy', 'faceless_male', '1other'].includes(low(x)))) push('1girl');
+  }
+  if(a.some(x=>['1boy', '2boys', '3boys', 'faceless_male', 'multiple_boys'].includes(low(x)))) cut(['solo']);
+  /* 兜底：画面里已经有两个女生时，隐形男/只有阴茎会被画成"看得见的第三者"，
+     统一升成 faceless_male（真有第三个人就让它站得住，没有就别塞）。 */
+  if(a.some(x=>['2girls','multiple_girls'].includes(low(x))) &&
+     a.some(x=>['invisible_man','disembodied_penis','invisible_penis'].includes(low(x)))){
+    cut(['invisible_man','disembodied_penis','invisible_penis']);
+    push('faceless_male','hetero');
+    rep.fixes.push('双女里的隐形男升成无脸男');
+  }
+
+  /* ---- ⑥ 视角 / 机位冲突 ----
+     · 双人挂 pov：底模会把 2girls 画成"第一人称男性视角"，画面里冒出男性身体（anima_pg_00061）
+     · 跨坐 / 坐腿 / 骑乘 + from_behind：从背后拍跨坐，腿的交叠关系没交代，腿会糊成一片（anima_pg_00063）
+     · 跨坐 + cowboy_shot：牛仔镜头只到大腿，跨坐的两条腿直接被切掉 */
+  if(nChar >= 2 && pov){
+    const n = cut(['pov', 'pov_hands', 'pov_crotch']);
+    if(n){ push('from_side'); rep.fixes.push('双人 pov→侧视（防男性视角身体）'); }
+  }
+  const RIDE = ['straddling', 'sitting_on_lap', 'girl_on_top', 'cowgirl_position',
+    'reverse_cowgirl_position', 'sitting_on_face'];
+  const riding = RIDE.some(k2=>has(k2));
+  if(riding && has('from_behind')){
+    cut(['from_behind']); push('from_side');
+    rep.fixes.push('跨坐改侧视（背后拍腿会糊）');
+  }
+  if(riding && has('cowboy_shot')){
+    cut(['cowboy_shot']); push('full_body');
+    rep.fixes.push('跨坐改全身（牛仔镜头切腿）');
+  }
+  /* 构图与动作的物理冲突：拍不到 / 拍不全 / 多一条腿，都会让底模硬凑 */
+  /* ---- 单主行为：一次只允许一个性行为组 ----
+     实测 anima_pg_00064/00066/00069 同时出现 tribadism + cunnilingus + dry_humping/tentacle_sex，
+     底模只能挑一个画，剩下的变成"和不该存在的东西性交"。 */
+  const ACT_GROUPS = [
+    ['cunnilingus','fellatio','oral','deepthroat','irrumatio','licking_penis','double_fellatio','licking_pussy'],
+    ['sex','vaginal','anal','sex_from_behind','missionary','doggystyle','cowgirl_position',
+     'reverse_cowgirl_position','girl_on_top','standing_sex','mating_press','spooning',
+     'upright_straddle','suspended_congress','prone_bone','full_nelson','piledriver',
+     'amazon_position','squatting_cowgirl_position','double_penetration','spitroast','triple_penetration'],
+    ['tribadism','dry_humping','grinding','thigh_sex','scissoring','clothed_sex'],
+    ['fingering','handjob','masturbation','mutual_masturbation','footjob','paizuri','nipple_stimulation'],
+    ['tentacle_sex','tentaclejob','tentacle_in_mouth'],
+    ['sex_machine','dildo_riding','vibrator','dildo']
+  ];
+  let mainG = -1;
+  for(let i=0;i<a.length && mainG<0;i++){
+    const t0 = low(a[i]);
+    for(let g0=0;g0<ACT_GROUPS.length;g0++) if(ACT_GROUPS[g0].indexOf(t0)>=0){ mainG=g0; break; }
+  }
+  if(mainG>=0){
+    const keepAct = a.find(x=>ACT_GROUPS[mainG].indexOf(low(x))>=0);
+    const drop2 = [];
+    for(let g0=0;g0<ACT_GROUPS.length;g0++){
+      if(g0===mainG) continue;
+      ACT_GROUPS[g0].forEach(t0=>{ if(has(t0)) drop2.push(t0); });
+    }
+    ACT_GROUPS[mainG].forEach(t0=>{ if(has(t0) && t0!==low(keepAct)) drop2.push(t0); });
+    if(drop2.length){ cut(drop2); rep.fixes.push('单主行为「'+keepAct+'」剔掉 '+drop2.length+' 个冲突动作'); }
+  }
+
+  /* ---- 场景词互斥：动作自带的地点/容器与随机地点打架（车里+厨房、浴缸+电车…） ---- */
+  const PLACE_GRP = [
+    ['bed','bedroom','on_bed','pillow','blanket','bedsheet'],
+    ['bathtub','bathroom','shower','showering','bath'],
+    ['car_interior','car','vehicle_interior'],
+    ['train_interior','train'],
+    ['kitchen','counter','dining_table'],
+    ['office','desk','office_chair'],
+    ['classroom','school_desk','blackboard'],
+    ['pool','poolside','swimming_pool'],
+    ['onsen','hot_spring','steam'],
+    ['mirror','bathroom_mirror'],
+    ['cafe','restaurant','table'],
+    ['shrine','torii','hallway'],
+    ['stairwell','stairs','staircase'],
+    ['couch','sofa','living_room'],
+    ['locker','changing_room','locker_room'],
+    ['forest','field','grass','outdoors'],
+    ['beach','ocean','sea'],
+  ];
+  const hitGrp = [];
+  for(let i=0;i<PLACE_GRP.length;i++){
+    const g = PLACE_GRP[i];
+    for(let j=0;j<g.length;j++) if(has(g[j])){ hitGrp.push(i); break; }
+  }
+  if(hitGrp.length > 1){
+    const keep = hitGrp[0];
+    let n = 0;
+    for(let i=1;i<hitGrp.length;i++){
+      const g = PLACE_GRP[hitGrp[i]];
+      for(let j=0;j<g.length;j++){ if(has(g[j])){ cut([g[j]]); n++; } }
+    }
+    if(n) rep.fixes.push('场景互斥保留 ' + PLACE_GRP[keep][0] + '（剔 ' + n + '）');
+  }
+  /* 第一视角看不到自己：坐腿/跨坐/面对面都不成立 */
+  if(pov){
+    const n = cut(['sitting_on_lap','straddling','girl_on_top','cowgirl_position',
+                   'reverse_cowgirl_position','face-to-face','sitting_on_face']);
+    if(n) rep.fixes.push('第一视角去自体动作 ' + n);
+    // 第一视角只可能有一个机位：from_side/from_behind 与 pov 并存 = 两句机位互相打架
+    const n2 = cut(['from_side','from_behind','from_above','from_below','from_front','dutch_angle']);
+    if(n2) rep.fixes.push('第一视角去冲突机位 ' + n2);
+  }
+
+  /* ---- ⑤c 衣物状态锚 ----
+     1) 抽到脱衣/走光类却没有任何"衣物状态"词 → 衣服在画面里等于不存在，
+        底模要么给她穿得好好的（undressing 被服装压过），要么直接画成裸。
+     2) 露出癖同理：exhibitionism 单独出现时模型自由发挥成全裸，
+        必须给一件被掀开的衣物兜住（2026-11-09 anima_pg_00017 就是全裸）。 */
+  const UNDRESS = ['undressing','clothes_removed','panty_pull','panties_around_one_leg','panties_aside',
+                   'skirt_lift','shirt_lift','clothes_lift','bra_lift','dress_lift','clothes_pull',
+                   'open_clothes','wardrobe_malfunction','breast_slip','bra_slip','strap_slip',
+                   'hand_under_skirt','hand_under_shirt','clothes_in_mouth','skirt_pull','shirt_pull'];
+  const FLASH = ['exhibitionism','public_indecency','flashing','public_nudity','breasts_out','nipple_slip'];
+  const hasU = a => a.some(x=>UNDRESS.includes(low(x)));
+  if(hasU(a) && !a.some(x=>['open_clothes','clothes_pull','clothes_lift','skirt_lift','bra_lift','undressing'].includes(low(x)))){
+    a.push('open_clothes');
+    rep.fixes.push('脱衣补衣物状态 open_clothes');
+  }
+  // 3) 用户锁了完整服装（服饰道具里选了 dress/shirt/uniform…）时，
+  //    undressing 会被那套衣服压过，画面上就是"怎么都不脱"。
+  //    抽到脱衣类动作 → 把那几件整件衣服剔掉，只保留"被弄乱的衣物状态"。
+  const FULLGARB = ['dress','shirt','skirt','uniform','school_uniform','kimono','yukata','apron',
+                    'coat','jacket','robe','suit','hoodie','sweater','sailor_collar','serafuku',
+                    'china_dress','hanfu','miko'];
+  if(hasU(a)){
+    const n3 = cut(FULLGARB);
+    if(n3) rep.fixes.push('脱衣场景去整件衣物 ' + n3);
+  }
+  if(a.some(x=>FLASH.includes(low(x))) && !hasU(a)){
+    cut(['breasts_out','nipple_slip']);
+    a.push('open_clothes');
+    rep.fixes.push('露出补衣物锚 open_clothes');
+  }
+
+  // 4) 时间词只能有一个：morning + night + rain 同时出现，模型会画成"看不出来的怪天色"
+  const DAY_W = ['morning','day','afternoon','noon','sunrise','dawn'];
+  const NIGHT_W = ['night','midnight','starry_sky','moonlight','evening','dusk','sunset'];
+  const TIME_W = DAY_W.concat(NIGHT_W);
+  const tHits = a.filter(x=>TIME_W.includes(low(x)));
+  if(tHits.length > 1){
+    // 白天词与夜晚/星空同时出现 = "早上七点的满天星"，先保留下来的第一个
+    cut(tHits.slice(1).map(low));
+    rep.fixes.push('时间词只留一个 ' + (tHits.length-1));
+  }
+
+  const VFIX = [
+    {cut:['cowboy_shot','upper_body'], add:['full_body'],
+     when:['all_fours','kneeling','sitting_on_lap','straddling'], zh:'跪趴/坐腿改全身'},
+    {cut:['cowboy_shot','upper_body','close-up'], add:['full_body'],
+     when:['suspended_congress','carrying','leg_lift','over_shoulder','princess_carry','lifting_person'], zh:'悬空/抱着必须全身'},
+    {cut:['from_behind'], add:['from_side'],
+     when:['fellatio','cunnilingus','paizuri','licking_penis','deepthroat','irrumatio'], zh:'口/胸交不能背向'},
+    {cut:['from_above'], add:['from_side'],
+     when:['fellatio','deepthroat','kneeling'], zh:'俯视看不见跪姿'},
+    {cut:['leg_wrap'], add:[],
+     when:['straddling'], zh:'缠腿+跨坐会多腿'},
+    {cut:['from_below'], add:['from_side'],
+     when:['69','sitting_on_face','lying','on_back','on_stomach'], zh:'叠体仰视会切人'},
+    {cut:['close-up','upper_body'], add:['full_body'],
+     when:['sex','vaginal','anal','double_penetration','doggystyle','missionary','sex_from_behind',
+            'tribadism','cunnilingus','fingering','girl_on_top','69','sitting_on_face','scissoring',
+            'paizuri','irrumatio','handjob','thigh_sex','group_sex','spitroast',
+            'cowgirl_position','reverse_cowgirl_position','straddling','all_fours','leg_lift',
+            'standing_sex','mating_press','spooning','upright_straddle','suspended_congress',
+            'prone_bone','full_nelson','piledriver','amazon_position','squatting_cowgirl_position',
+            'deep_penetration','tentacle_sex','sex_machine','dildo_riding','object_insertion'], zh:'性交动作要全身'},
+    {cut:['from_behind'], add:['from_side'],
+     when:['leg_lift','standing_sex'], zh:'抬腿/站立后入腿位置无解'},
+  ];
+  for(let i=0;i<VFIX.length;i++){
+    const v = VFIX[i];
+    if(!v.when.some(k2=>has(k2))) continue;
+    const hit = v.cut.filter(k2=>has(k2));
+    if(!hit.length) continue;
+    cut(hit);
+    for(let j=0;j<v.add.length;j++) if(!has(v.add[j])) a.push(v.add[j]);
+    rep.fixes.push(v.zh);
+  }
+  // 姿态互斥：站/走 与 床/地 不能同时成立（画成"站着躺在床上"）
+  if(['standing','walking','standing_sex','tiptoes'].some(k2=>has(k2)) &&
+     ['on_bed','on_floor'].some(k2=>has(k2)) && !has('on_side') && !has('on_stomach')){
+    const n3 = cut(['on_bed','on_floor']);
+    if(n3) rep.fixes.push('站姿去掉床/地 ' + n3);
+  }
+  // 姿态互斥：躺 与 跪/趴 不能同时成立（动作侧优先）
+  if(has('lying') && ['kneeling','all_fours','squatting'].some(k2=>has(k2))){
+    cut(['lying']); rep.fixes.push('躺姿与跪趴互斥');
+  }
+  // 无脸男没有脸，不能"对视/面对面"
+  if(has('faceless_male')){
+    const noFace = ['face-to-face','looking_at_another','eye_contact','looking_back'].filter(k2=>has(k2));
+    if(noFace.length){ cut(noFace); rep.fixes.push('无脸男不能对视'); }
+  }
+  // 多人 + 倾斜机位：两人肢体交界处最容易糊
+  if(has('dutch_angle') && (has('group_sex') || has('spitroast') || has('threesome'))){
+    cut(['dutch_angle']); rep.fixes.push('倾斜机位多人会糊');
+  }
+
+  rep.kind = k;
+  rep.pool = R ? o.pool : '';
+  rep.n = a.length;
+  S.sceneKind = k;
+  return {tags: a, rep: rep};
+}
+
+function pfShow(rep, tagN){
+  const el = $("pfLine"); if(!el) return;
+  const zh = PF_KIND_ZH[rep.kind] || rep.kind || '—';
+  const fixed = rep.fixes.length;
+  el.textContent = '审查 ' + (fixed ? '修' + fixed : '✓') + ' · ' + zh + ' · ' + (tagN || rep.n) + ' 词';
+  el.className = 'badge ' + (fixed ? 'warn' : 'ok');
+  el.title = (rep.pool ? '池：' + (POOL_ZH[rep.pool] || rep.pool) + '\n' : '') + (fixed ? rep.fixes.join('；') : '人数 / 性别 / 道具一致');
+}
+
+function pfDryRun(){
+  try{
+    const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh});
+    pfShow(pf.rep, pf.tags.length);
+  }catch(e){}
+}
+
+/* ============ 绑定 ============ */
+function bind(){
+  $("pos").addEventListener("blur",()=>{
+    // 手动改过提示词就不再按上次的池管（否则审查会删掉用户自己写的词）
+    S.scenePool = ''; S.sceneKind = '';
+    setTags(parseTags($("pos").value));
+  });
+  $("pos").addEventListener("input",()=>{ $("posCount").textContent=parseTags($("pos").value).length+" 词"; });
+  $("btnExpand").onclick=doExpand;
+  $("btnNorm").onclick=()=>{ setTags(normTags(parseTags($("pos").value))); refreshNeg(true); toast("已按规则整理"); };
+  $("btnClear").onclick=()=>{
+    // 清空必须把“归属表”一起清掉：历史角色/服饰都存在 userTags/owner 里，
+    // 只清 tags/chars 会让上一次的角色在批量时被 base 重新拼回来（两个角色 tag 的根因）
+    S.tags=[]; S.chars=[]; S.charTag=null; S.scenes=[]; S.sel={}; S.outfit=[];
+    S.userTags=[]; S.owner={}; S.sceneTags=[]; S.sceneName="";
+    setTags([]); recount(); syncText(); $("neg").value=""; refreshNeg(true);
+    logline("clear");
+    toast("已清空（角色/服饰/人数词全部归零）");
+  };
+  $("btnNegReset").onclick=()=>refreshNeg(true);
+  $("btnRoll").onclick=()=>rollLibrary();
+  $("btnCfg").onclick=()=>openCfg();
+  $("cfgCancel").onclick=()=>closeCfg();
+  $("cfgSave").onclick=()=>saveCfg();
+  $("cfgMask").onclick=(e)=>{ if(e.target===$("cfgMask")) closeCfg(); };
+  $("libRoll").onclick=()=>rollLibrary();
+  $("studioRoll").onclick=rollAll;
+  $("btnGen").onclick=generate;
+  $("btnBatch").onclick=batchRun;
+  $("btnLog").onclick=showLog;
+  $("btnPause").onclick=()=>{
+    if(!S.batch){ toast("没有在跑的批量"); return; }
+    S.pauseAsk = true;
+    $("btnPause").textContent = "⏸ 正在停…";
+    $("btnPause").disabled = true;
+    toast("当前这张跑完就暂停");
+  };
+  $("btnHand").onclick=handfix;
+  $("btnCopy").onclick=async()=>{ try{ await navigator.clipboard.writeText(S.tags.join(", ")); toast("已复制"); }catch(e){ toast("复制失败"); } };
+  document.querySelectorAll("#libTabs button[data-t]").forEach(b=>b.onclick=()=>{
+    S.tab=b.dataset.t; document.querySelectorAll("#libTabs button[data-t]").forEach(x=>x.classList.toggle("on",x===b)); renderLib();
+  });
+  document.querySelectorAll("#tierSeg button").forEach(b=>b.onclick=()=>{
+    S.tier=b.dataset.v; document.querySelectorAll("#tierSeg button").forEach(x=>x.classList.toggle("on",x===b));
+    S.presetGrp = (S.tier==='r18') ? 'r18' : 'sfw';
+    refreshNeg(true); renderLib();
+    toast(S.tier==='r18'
+      ? "R18 档：放开 🔞 类目 / r18 场景 / r18 预设"
+      : (S.tier==='suggestive' ? "Suggestive 档：只留非 R18 类目，负面加强" : "SFW 档：隐藏 r18 场景与预设，负面加防护词"));
+  });
+  S.model='anima'; setModelDefaults('anima');
+  $("big").onclick=()=>{ $("big").style.display='none'; };
+  // 滚轮落在 select 上时也滚容器
+  document.addEventListener('wheel', ev=>{
+    const t=ev.target;
+    if(t && (t.tagName==='SELECT' || t.tagName==='INPUT')){}
+    else return;
+    const pane=t.closest('.body')||t.closest('#prev')||t.closest('#imgs');
+    if(!pane) return;
+    ev.preventDefault(); pane.scrollTop += ev.deltaY;
+  }, {passive:false});
+}
+
+const SFW_CATS = ["style","artist","composition","camera","lighting","base","body","pose","expression","hair","face","clothing","accessory","environment","weather","props","extra","text"];
+/* 随机一套 = 与批量完全同一套组合逻辑（composeShot 抽池 → 合并角色/服装 → 审查），
+   不再用旧的"随机 5–9 个类别标签"，否则同一个种子在单张和批量里行为不一致。 */
+function rollLibrary(){
+  const sc = composeShot(0,1);
+  if(!sc){ toast("抽取失败：池为空"); return; }
+  setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[])).concat(sc.tags)));
+  S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
+  S.sceneKind = sc.kind || ''; S.scenePool = sc.pool || '';
+  cleanTags(); refreshNeg(true);
+  const pf = preflight(S.tags, {kind:S.sceneKind, pool:S.scenePool, zh:S.sceneZh});
+  S.tags = pf.tags; syncText(); pfShow(pf.rep, S.tags.length);
+  toast("随机：" + (sc.zh||"组合") + (pf.rep.fixes.length? " · 审查修 "+pf.rep.fixes.length : ""));
+}
+
+(async function boot(){
+  bind();
+  try{ await loadData(); }catch(e){ console.error("boot/loadData", e); $("stat").textContent="数据加载失败 "+(e&&e.stack||e); return; }
+  renderLib(); renderStudio(); syncText();
+  $("neg").value = defaultNeg();
+  $("stat").textContent += " · 就绪";
+})();
+window.__ERR = 0;
+window.addEventListener('error', ()=>{ window.__ERR = (window.__ERR||0)+1; });
+</script>
+</body>
+</html>

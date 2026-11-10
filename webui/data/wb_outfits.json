@@ -1,0 +1,527 @@
+{
+ "_meta": {
+  "n": 130
+ },
+ "items": [
+  {
+   "en": "white_thighhighs",
+   "zh": "白色过膝袜"
+  },
+  {
+   "en": "black_thighhighs",
+   "zh": "黑色过膝袜"
+  },
+  {
+   "en": "thighhighs",
+   "zh": "过膝袜"
+  },
+  {
+   "en": "pantyhose",
+   "zh": "连裤袜"
+  },
+  {
+   "en": "black_pantyhose",
+   "zh": "黑色连裤袜"
+  },
+  {
+   "en": "white_pantyhose",
+   "zh": "白色连裤袜"
+  },
+  {
+   "en": "kneehighs",
+   "zh": "及膝袜"
+  },
+  {
+   "en": "white_socks",
+   "zh": "白短袜"
+  },
+  {
+   "en": "socks",
+   "zh": "短袜"
+  },
+  {
+   "en": "black_socks",
+   "zh": "黑袜"
+  },
+  {
+   "en": "ankle_socks",
+   "zh": "脚踝袜"
+  },
+  {
+   "en": "striped_socks",
+   "zh": "条纹袜"
+  },
+  {
+   "en": "frilled_socks",
+   "zh": "蕾丝边袜"
+  },
+  {
+   "en": "garter_straps",
+   "zh": "吊带袜夹"
+  },
+  {
+   "en": "garter_belt",
+   "zh": "吊袜带"
+  },
+  {
+   "en": "stockings",
+   "zh": "长袜"
+  },
+  {
+   "en": "fishnet",
+   "zh": "网袜"
+  },
+  {
+   "en": "leggings",
+   "zh": "紧身裤"
+  },
+  {
+   "en": "zettai_ryouiki",
+   "zh": "绝对领域"
+  },
+  {
+   "en": "white_lingerie",
+   "zh": "白色内衣"
+  },
+  {
+   "en": "black_lingerie",
+   "zh": "黑色内衣"
+  },
+  {
+   "en": "lace_lingerie",
+   "zh": "蕾丝内衣"
+  },
+  {
+   "en": "white_bra",
+   "zh": "白色胸罩"
+  },
+  {
+   "en": "black_bra",
+   "zh": "黑色胸罩"
+  },
+  {
+   "en": "bra",
+   "zh": "胸罩"
+  },
+  {
+   "en": "white_panties",
+   "zh": "白色内裤"
+  },
+  {
+   "en": "black_panties",
+   "zh": "黑色内裤"
+  },
+  {
+   "en": "panties",
+   "zh": "内裤"
+  },
+  {
+   "en": "side-tie_panties",
+   "zh": "系带内裤"
+  },
+  {
+   "en": "sports_bra",
+   "zh": "运动内衣"
+  },
+  {
+   "en": "crop_top",
+   "zh": "露脐上衣"
+  },
+  {
+   "en": "camisole",
+   "zh": "吊带背心"
+  },
+  {
+   "en": "slip",
+   "zh": "衬裙"
+  },
+  {
+   "en": "babydoll",
+   "zh": "睡衣短裙"
+  },
+  {
+   "en": "negligee",
+   "zh": "薄纱睡衣"
+  },
+  {
+   "en": "pajamas",
+   "zh": "睡衣"
+  },
+  {
+   "en": "nightgown",
+   "zh": "睡裙"
+  },
+  {
+   "en": "maid",
+   "zh": "女仆装"
+  },
+  {
+   "en": "maid_headdress",
+   "zh": "女仆头饰"
+  },
+  {
+   "en": "apron",
+   "zh": "围裙"
+  },
+  {
+   "en": "naked_apron",
+   "zh": "裸围裙"
+  },
+  {
+   "en": "school_uniform",
+   "zh": "校服"
+  },
+  {
+   "en": "serafuku",
+   "zh": "水手服"
+  },
+  {
+   "en": "pleated_skirt",
+   "zh": "百褶裙"
+  },
+  {
+   "en": "long_skirt",
+   "zh": "长裙"
+  },
+  {
+   "en": "pencil_skirt",
+   "zh": "窄裙"
+  },
+  {
+   "en": "blazer",
+   "zh": "西装外套"
+  },
+  {
+   "en": "necktie",
+   "zh": "领带"
+  },
+  {
+   "en": "bowtie",
+   "zh": "领结"
+  },
+  {
+   "en": "nurse",
+   "zh": "护士服"
+  },
+  {
+   "en": "cheongsam",
+   "zh": "旗袍"
+  },
+  {
+   "en": "kimono",
+   "zh": "和服"
+  },
+  {
+   "en": "yukata",
+   "zh": "浴衣"
+  },
+  {
+   "en": "miko",
+   "zh": "巫女服"
+  },
+  {
+   "en": "sailor_collar",
+   "zh": "水手领"
+  },
+  {
+   "en": "swimsuit",
+   "zh": "泳装"
+  },
+  {
+   "en": "one-piece_swimsuit",
+   "zh": "连体泳装"
+  },
+  {
+   "en": "bikini",
+   "zh": "比基尼"
+  },
+  {
+   "en": "white_bikini",
+   "zh": "白色比基尼"
+  },
+  {
+   "en": "black_bikini",
+   "zh": "黑色比基尼"
+  },
+  {
+   "en": "sling_bikini",
+   "zh": "挂颈比基尼"
+  },
+  {
+   "en": "leotard",
+   "zh": "紧身连衣"
+  },
+  {
+   "en": "gym_uniform",
+   "zh": "运动服"
+  },
+  {
+   "en": "track_suit",
+   "zh": "运动套装"
+  },
+  {
+   "en": "bloomers",
+   "zh": "灯笼裤"
+  },
+  {
+   "en": "spats",
+   "zh": "运动短裤"
+  },
+  {
+   "en": "coat",
+   "zh": "大衣"
+  },
+  {
+   "en": "long_coat",
+   "zh": "长外套"
+  },
+  {
+   "en": "cardigan",
+   "zh": "开衫"
+  },
+  {
+   "en": "sweater",
+   "zh": "毛衣"
+  },
+  {
+   "en": "oversized_sweater",
+   "zh": "宽松毛衣"
+  },
+  {
+   "en": "hoodie",
+   "zh": "连帽衫"
+  },
+  {
+   "en": "jacket",
+   "zh": "夹克"
+  },
+  {
+   "en": "trench_coat",
+   "zh": "风衣"
+  },
+  {
+   "en": "cloak",
+   "zh": "斗篷"
+  },
+  {
+   "en": "shirt",
+   "zh": "衬衫"
+  },
+  {
+   "en": "white_shirt",
+   "zh": "白衬衫"
+  },
+  {
+   "en": "off_shoulder",
+   "zh": "露肩"
+  },
+  {
+   "en": "cropped_shirt",
+   "zh": "短上衣"
+  },
+  {
+   "en": "wet_shirt",
+   "zh": "湿衬衫"
+  },
+  {
+   "en": "torn_shirt",
+   "zh": "破衬衫"
+  },
+  {
+   "en": "turtleneck",
+   "zh": "高领"
+  },
+  {
+   "en": "high_heels",
+   "zh": "高跟鞋"
+  },
+  {
+   "en": "boots",
+   "zh": "长靴"
+  },
+  {
+   "en": "thigh_boots",
+   "zh": "过膝靴"
+  },
+  {
+   "en": "barefoot",
+   "zh": "赤脚"
+  },
+  {
+   "en": "hair_ribbon",
+   "zh": "发带"
+  },
+  {
+   "en": "hair_bow",
+   "zh": "发结"
+  },
+  {
+   "en": "hairband",
+   "zh": "发箍"
+  },
+  {
+   "en": "hairpin",
+   "zh": "发夹"
+  },
+  {
+   "en": "hair_flower",
+   "zh": "发花"
+  },
+  {
+   "en": "veil",
+   "zh": "头纱"
+  },
+  {
+   "en": "tiara",
+   "zh": "头冠"
+  },
+  {
+   "en": "witch_hat",
+   "zh": "女巫帽"
+  },
+  {
+   "en": "winter_hat",
+   "zh": "冬帽"
+  },
+  {
+   "en": "beret",
+   "zh": "贝雷帽"
+  },
+  {
+   "en": "cap",
+   "zh": "鸭舌帽"
+  },
+  {
+   "en": "gloves",
+   "zh": "手套"
+  },
+  {
+   "en": "elbow_gloves",
+   "zh": "长手套"
+  },
+  {
+   "en": "white_gloves",
+   "zh": "白手套"
+  },
+  {
+   "en": "choker",
+   "zh": "颈圈"
+  },
+  {
+   "en": "necklace",
+   "zh": "项链"
+  },
+  {
+   "en": "earrings",
+   "zh": "耳环"
+  },
+  {
+   "en": "glasses",
+   "zh": "眼镜"
+  },
+  {
+   "en": "ribbon",
+   "zh": "缎带"
+  },
+  {
+   "en": "scarf",
+   "zh": "围巾"
+  },
+  {
+   "en": "dildo",
+   "zh": "假阳具"
+  },
+  {
+   "en": "vibrator",
+   "zh": "震动棒"
+  },
+  {
+   "en": "sex_toy",
+   "zh": "性玩具"
+  },
+  {
+   "en": "butt_plug",
+   "zh": "肛塞"
+  },
+  {
+   "en": "anal_beads",
+   "zh": "拉珠"
+  },
+  {
+   "en": "onahole",
+   "zh": "飞机杯"
+  },
+  {
+   "en": "whip",
+   "zh": "鞭子"
+  },
+  {
+   "en": "handcuffs",
+   "zh": "手铐"
+  },
+  {
+   "en": "blindfold",
+   "zh": "眼罩"
+  },
+  {
+   "en": "collar",
+   "zh": "项圈"
+  },
+  {
+   "en": "leash",
+   "zh": "牵绳"
+  },
+  {
+   "en": "rope",
+   "zh": "绳子"
+  },
+  {
+   "en": "shibari",
+   "zh": "绳缚"
+  },
+  {
+   "en": "ball_gag",
+   "zh": "口球"
+  },
+  {
+   "en": "ring_gag",
+   "zh": "环口球"
+  },
+  {
+   "en": "nipple_clamps",
+   "zh": "乳夹"
+  },
+  {
+   "en": "condom",
+   "zh": "保险套"
+  },
+  {
+   "en": "used_condom",
+   "zh": "用过的套"
+  },
+  {
+   "en": "pillow",
+   "zh": "枕头"
+  },
+  {
+   "en": "blanket",
+   "zh": "毯子"
+  },
+  {
+   "en": "towel",
+   "zh": "毛巾"
+  },
+  {
+   "en": "ice_cube",
+   "zh": "冰块"
+  },
+  {
+   "en": "candle",
+   "zh": "蜡烛"
+  },
+  {
+   "en": "feather",
+   "zh": "羽毛"
+  }
+ ]
+}
