@@ -1,4 +1,4 @@
-# ComfyUI 模型路径重定向（由 DSH 部署脚本生成）
+# ComfyUI 模型路径重定向（由部署脚本生成）
 # 让 portable 包自带的 models 目录指向统一的 D:\ComfyUI\models，
 # 底模/LoRA/VAE 全部放这一处，重装 ComfyUI 不丢模型。
 
