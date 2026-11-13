@@ -46,7 +46,7 @@ def req(method, url, data=None, ctype="application/json", accept="application/vn
     r.add_header("User-Agent", "anima-workbench-release")
     with urllib.request.urlopen(r, timeout=180) as resp:
         raw = resp.read()
-        return resp.status, (json.loads(raw.decode("utf-8")) if raw[:1] in b"{[" else raw)
+        return resp.status, (json.loads(raw.decode("utf-8")) if raw[:1] in (b"{", b"[") else raw)
 
 try:
     st, rel = req("GET", "%s/repos/%s/%s/releases/tags/%s" % (API, OWNER, REPO, TAG))
