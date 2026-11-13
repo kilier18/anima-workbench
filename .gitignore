@@ -100,3 +100,5 @@ docs/Anima画风LoRA-测评台帐.md
 docs/Anima画风LoRA-搬运清单.md
 docs/Anima-32包编号清单.md
 docs/Anima画风-保留名单.md
+!tools/_pack.py
+!tools/_release.py
