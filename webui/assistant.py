@@ -1561,15 +1561,86 @@ def wb_graph(text, seed=None, w=1024, h=1536):
 ANIMA_UNET  = r"Anima\miaomiaoHarem_anima12.safetensors"
 ANIMA_CLIP  = "qwen_3_06b_base.safetensors"
 ANIMA_VAE   = "qwen_image_vae.safetensors"
-ANIMA_LORAS = [(r"Anima\anima-turbo-lora-v0.2.safetensors", 1.0),
-               (r"Anima\kinokohime_v2.safetensors", 0.6),
-               (r"Anima\konyaKarasue_Anima1_lora_V42.safetensors", 0.3)]
+ANIMA_BASE_LORAS = [(r"Anima\anima-turbo-lora-v0.2.safetensors", 0.7)]
+
+# ---------------- 画风库（社区成品画师包，data/anima_styles.json） ----------------
+# 原来写死的三条 LoRA（turbo/kinokohime/konyaKarasue）已退役：turbo 会削弱画风，
+# 另两条会把别的画师味道掺进来（实测三画风并列稀释 22%）。现在底模只挂 turbo 0.7，
+# 画风由「画师」栏选中的包提供，一次只挂一个。
+ANIMA_STYLE_FILE = os.path.join(HERE, "data", "anima_styles.json")
+_ANIMA_STYLE = {"id": None}
+_ANIMA_STYLE_CACHE = {"mtime": -1.0, "rows": []}
+
+
+def load_anima_styles(only_keep=True):
+    """读画风库。返回 [{id,zh,group,lora,trig,mb,touhou,thumb}]。"""
+    try:
+        mt = os.path.getmtime(ANIMA_STYLE_FILE)
+    except Exception:
+        return []
+    if _ANIMA_STYLE_CACHE["mtime"] != mt:
+        try:
+            with open(ANIMA_STYLE_FILE, encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            data = {}
+        rows = []
+        for x in data.get("styles", []):
+            if only_keep and x.get("verdict") != "keep":
+                continue
+            if not x.get("on_disk"):
+                continue
+            trig = x.get("trig")
+            if isinstance(trig, list):
+                trig = trig[0] if trig else ""
+            rows.append({"id": str(x.get("id")), "zh": x.get("zh") or x.get("name") or "",
+                         "group": x.get("group") or "", "lora": x.get("lora"),
+                         "trig": (trig or "").split(" / ")[0].strip(),
+                         "mb": x.get("mb"), "touhou": bool(x.get("touhou_artist")),
+                         "strength": x.get("strength"),
+                         "thumb": "/style_thumbs/%s.jpg" % x.get("id")})
+        _ANIMA_STYLE_CACHE["rows"] = rows
+        _ANIMA_STYLE_CACHE["mtime"] = mt
+    return _ANIMA_STYLE_CACHE["rows"]
+
+
+def anima_style_get():
+    return _ANIMA_STYLE["id"]
+
+
+def anima_style_set(sid):
+    ids = {r["id"] for r in load_anima_styles()}
+    _ANIMA_STYLE["id"] = str(sid) if str(sid) in ids else None
+    return _ANIMA_STYLE["id"]
+
+
+def anima_loras(style_id=None):
+    """turbo 0.7 + 选中的画风包。style_id 传 "" 表示明确不带画风。"""
+    out = list(ANIMA_BASE_LORAS)
+    sid = _ANIMA_STYLE["id"] if style_id is None else str(style_id)
+    if sid:
+        for r in load_anima_styles():
+            if r["id"] == sid:
+                out.append((r["lora"], float(r.get("strength") or 1.0)))
+                break
+    return out
+
+
+def anima_style_trig(style_id=None):
+    sid = _ANIMA_STYLE["id"] if style_id is None else str(style_id)
+    if not sid:
+        return ""
+    for r in load_anima_styles():
+        if r["id"] == sid:
+            return r["trig"] or ""
+    return ""
 OUT_DIR = os.environ.get("COMFY_OUTPUT", r"D:\ComfyUI\output")  # 兼容旧引用；实际用 outdir()
 
 
 
 def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
-              sampler=None, scheduler=None, width=1024, height=1536, seed=None):
+              sampler=None, scheduler=None, width=1024, height=1536, seed=None,
+              style_id=None):
     """构 Anima 出图图（核心节点，无第三方依赖）。mode 保留兼容，WAI 已于 3.1 移除。"""
     import time as _t
     try:
@@ -1588,7 +1659,7 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
                "inputs": {"clip_name": ANIMA_CLIP, "type": "stable_diffusion"}}
     g["13"] = {"class_type": "VAELoader", "inputs": {"vae_name": ANIMA_VAE}}
     ref = ["1", 0]
-    for i, (name, w) in enumerate(ANIMA_LORAS):
+    for i, (name, w) in enumerate(anima_loras(style_id)):
         nid = str(50 + i)
         g[nid] = {"class_type": "LoraLoaderModelOnly",
                   "inputs": {"model": ref, "lora_name": name, "strength_model": w}}
@@ -1610,6 +1681,15 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
 
 
 def gen_submit(positive, negative="", **kw):
+    # 选中画风包时，把它的触发词补到最前面（一次只挂一个画风，不加权不稀释）
+    sid = kw.get("style_id")
+    if sid is None:
+        sid = anima_style_get()
+    trig = anima_style_trig(sid)
+    if trig:
+        _head = trig.split(",")[0].strip().lower()
+        if not _head or _head not in (positive or "").lower():
+            positive = trig + ", " + (positive or "")
     g, sd = gen_graph(positive, negative, **kw)
     r = http_json(COMFY + "/prompt", {"prompt": g, "client_id": "assistant_gen"}, timeout=60)
     pid = (r or {}).get("prompt_id")
@@ -1710,7 +1790,8 @@ def restart_comfy(out_dir=None, wait=120):
     return False, "启动超时（%d 秒），看日志 _setup/comfy.log" % wait
 
 
-def anima_handfix(filename, positive="", negative="", steps=8, denoise=0.45, seed=None):
+def anima_handfix(filename, positive="", negative="", steps=8, denoise=0.45, seed=None,
+                  style_id=None):
     """把已出的一张图送进 FaceDetailer（只检测手），回写一张修好的图。"""
     import shutil, time as _t
     fn = os.path.basename(str(filename or "").strip())
@@ -1746,7 +1827,7 @@ def anima_handfix(filename, positive="", negative="", steps=8, denoise=0.45, see
                "inputs": {"model_name": "bbox/hand_yolov8s.pt"}},
     }
     ref = ["1", 0]
-    for i, (name, w) in enumerate(ANIMA_LORAS):
+    for i, (name, w) in enumerate(anima_loras(style_id)):
         nid = str(50 + i)
         g[nid] = {"class_type": "LoraLoaderModelOnly",
                   "inputs": {"model": ref, "lora_name": name, "strength_model": w}}
@@ -3080,9 +3161,17 @@ class H(BaseHTTPRequestHandler):
         if p in ("/tool_ext.js", "/tool-ext.js"):
             with open(os.path.join(HERE, "tool_ext.js"), "rb") as f:
                 return self._send(200, f.read(), "application/javascript; charset=utf-8")
+        if p.startswith("/style_thumbs/"):
+            fp = os.path.join(HERE, "static", "style_thumbs", os.path.basename(p))
+            if os.path.isfile(fp):
+                with open(fp, "rb") as f:
+                    return self._send(200, f.read(), "image/jpeg")
+            return self._send(404, b"", "text/plain; charset=utf-8")
         if p == "/api/styles":
             try:
-                return self._send(200, {"ok": True, "styles": load_styles()})
+                return self._send(200, {"ok": True, "styles": load_anima_styles(),
+                                        "current": anima_style_get(),
+                                        "packs": load_styles()})
             except Exception as e:
                 return self._send(200, {"ok": False, "error": str(e), "styles": []})
         if p == "/api/artist":
@@ -3152,6 +3241,7 @@ class H(BaseHTTPRequestHandler):
                     rows = [c for c in rows if q in (c.get("tag", "") + " " + c.get("name", "") + " "
                                                      + c.get("zh", "") + " " + c.get("work", "")).lower()
                             or any(q in k.lower() and v == c.get("tag") for k, v in ALIAS_EXTRA.items())]
+                rows = sorted(rows, key=lambda c: -(c.get("pop") or 0))
                 return self._send(200, {"ok": True, "count": len(rows), "chars": rows[:lim]})
             except Exception as e:
                 return self._send(200, {"ok": False, "error": str(e), "chars": []})
@@ -3321,6 +3411,15 @@ class H(BaseHTTPRequestHandler):
         if p == "/api/comfy/restart":
             ok, msg = restart_comfy()
             return self._send(200 if ok else 500, {"ok": ok, "msg": msg})
+        if p == "/api/style/select":
+            try:
+                q3 = body if isinstance(body, dict) else (json.loads(body.decode("utf-8")) if body else {})
+                sid = anima_style_set(q3.get("id") or "")
+                return self._send(200, {"ok": True, "id": sid,
+                                        "trig": anima_style_trig(sid),
+                                        "loras": [n.split("\\")[-1] for n, _w in anima_loras(sid)]})
+            except Exception as e:
+                return self._send(500, {"ok": False, "error": str(e)})
         if p == "/api/gen":
             try:
                 q2 = body if isinstance(body, dict) else (json.loads(body.decode("utf-8")) if body else {})
@@ -3333,7 +3432,8 @@ class H(BaseHTTPRequestHandler):
                     steps=q2.get("steps"), cfg=q2.get("cfg"),
                     sampler=q2.get("sampler"), scheduler=q2.get("scheduler"),
                     width=q2.get("width") or 1024, height=q2.get("height") or 1536,
-                    seed=q2.get("seed") or None)
+                    seed=q2.get("seed") or None,
+                    style_id=q2.get("style_id"))
                 return self._send(200, {"ok": True, "id": pid, "seed": sd})
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})
@@ -3342,7 +3442,7 @@ class H(BaseHTTPRequestHandler):
                 r = anima_handfix(body.get("filename"), body.get("positive") or "",
                                   body.get("negative") or "",
                                   body.get("steps") or 8, body.get("denoise") or 0.45,
-                                  body.get("seed"))
+                                  body.get("seed"), body.get("style_id"))
                 return self._send(200, r)
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})

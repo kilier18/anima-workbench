@@ -5,6 +5,28 @@
 
 ---
 
+## 2026-11-14
+
+### 画风库（v4.0）
+新增 `webui/data/anima_styles.json`：114 个画风 LoRA 的索引，页面「画风」一栏按卡渲染。
+基座从写死三条 LoRA 改为 `ANIMA_BASE_LORAS`（turbo 0.7）+ 选中画风包叠加；
+`gen_graph` / `gen_submit` / `anima_handfix` 全部接受 `style_id`。
+
+新增接口 `GET /api/styles`、`POST /api/style/select`、`GET /style_thumbs/<file>`。
+114 张缩略图统一固定角色半身，保证画风可比。
+
+**决策**：画风由 JSON 数据驱动，加包不改代码；点卡把触发词写进正向框，再点取消。
+
+### AI 拟人（大模型娘）角色组
+角色库新增 18 条双预设（正常版 / Q 版），作品名「AI 拟人（大模型娘）」：
+鲸鱼娘、白龙娘、Gemini 娘、Claude 娘、Grok 娘、Kimi、GLM。
+
+### 修复
+- 修手图未透传 `style_id`，主图与修手图可能挂不同画风包。
+- 触发词去重按整串比较，前端只写部分词时会重复前置；改为按首个 token 判断。
+- `/api/wb/chars` 未排序就 `[:limit]`，新角色永远显示不出；改为按 `pop` 降序。
+- 画风卡 `strength` 未从索引读出，全部按 1.0 跑，Q 版 0.75/0.85 失效。
+
 ## 2026-11-10
 
 ### 18:20 · 出图目录三处入口对齐

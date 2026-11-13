@@ -188,7 +188,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
       <button data-t="chars">角色</button>
       <button data-t="scenes">场景</button>
       <button data-t="presets">预设</button>
-      <button data-t="artists">画师</button>
+      <button data-t="artists">画风</button>
       <button data-t="outfits">服饰道具</button>
       <button id="libRoll" style="margin-left:auto">🎲 本页随机</button>
     </div>
@@ -266,7 +266,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
 <div id="cfgMask" class="mask"><div class="modal">
   <h3>出图目录</h3>
   <p class="small" style="margin:2px 0 8px">改完会重启 ComfyUI 才生效（约 20–40 秒）。目录必须已存在或能被创建、且可写。</p>
-  <input id="cfgDir" spellcheck="false" placeholder="例如 F:\\Users\\pinn\\Pictures\\libido">
+  <input id="cfgDir" spellcheck="false" placeholder="例如 D:\\ComfyUI\\output">
   <div class="small" id="cfgNow" style="margin:6px 0 2px"></div>
   <div class="row" style="justify-content:flex-end;gap:8px;margin-top:14px">
     <button id="cfgCancel">取消</button>
@@ -279,10 +279,13 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
 const S = {bubble:false, 
   tags: [], neg: [], charTag: null, sceneTags: [], sceneName: '', chars: [], scenes: [], sceneGrp: 'all', sceneCat: '全部', sceneQ: '', sceneScroll: 0,
   tier: 'sfw', model: 'anima', imgs: [], last: null, presetGrp: null,
-  lib: {tags:null, chars:null, scenes:null, presets:null, artists:null, outfits:null},
+  lib: {tags:null, chars:null, scenes:null, presets:null, artists:null, outfits:null, styles:null},
   tab: 'tags', cat: null, charLimit: 160, charWork: '', charQ: '',
   zh: {}, pools: null, sel: {}, sectionOpen: {}, owner: {}, userTags: [],
 };
+/* 支持 #artists / #chars 之类直达链接（图标预览、外部跳转用） */
+try { const _h = (location.hash || '').slice(1);
+  if (['tags','chars','scenes','presets','artists','outfits'].includes(_h)) S.tab = _h; } catch(e) {}
 const $ = id => document.getElementById(id);
 const K = t => String(t).toLowerCase().replace(/[\s-]+/g,'_');
 // 马赛克/打码抑制块（带权重，Illustrious/Anima 系认括号权重）
@@ -985,32 +988,74 @@ function escArtist(t){
   /* Anima 是 Cosmos-Predict2，不吃 (tag:1.3) 这种权重语法，画师要写 @ 前缀、
      名字里的括号属于名字本身：kanpa_(campagne_9) → @kanpa (campagne 9)。 */
   const s = String(t).trim();
+  if(!s) return '';
+  /* 多词触发词（如 claude_girl, orange hair, ...）按列表原样用，不能整串加 @ */
+  if(s.indexOf(',') >= 0) return s;
   if(s.charAt(0) === '@') return s;
   return '@' + s.replace(/_/g, ' ');
 }
 function renderArtists(b){
   b.innerHTML="";
   const q=document.createElement("input");
-  q.id="artSearch"; q.placeholder="搜索画师（英文 / 中文）";
+  q.id="artSearch"; q.placeholder="搜索画风包（画师名 / 触发词）";
   q.style.cssText="width:100%;margin-bottom:8px;padding:7px 10px;border-radius:8px;border:1px solid #333;background:#181b22;color:#e6e9ef";
   if(S.artQ) q.value=S.artQ;
   b.appendChild(q);
   const cnt=document.createElement("div"); cnt.className="small"; cnt.style.marginBottom="6px"; b.appendChild(cnt);
-  const grid=document.createElement("div"); grid.className="grid"; b.appendChild(grid);
-  const all=(S.lib.tags.cats.find(c=>c.id==='artist')||{tags:[]}).tags;
+  const grid=document.createElement("div");
+  grid.style.cssText="display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:8px";
+  b.appendChild(grid);
+  let all = S.lib.styles || [];
+  function mark(){
+    grid.querySelectorAll(".scard").forEach(el=>{
+      const on = el.dataset.id === (S.styleId||"");
+      el.style.outline = on ? "2px solid #63b3ff" : "1px solid #2a2f3a";
+      el.style.background = on ? "#1b2733" : "#141720";
+    });
+  }
   function draw(){
     const k=(q.value||"").trim().toLowerCase();
     grid.innerHTML="";
-    const hit=all.filter(t=>!k||t.en.toLowerCase().includes(k)||(t.zh||"").toLowerCase().includes(k));
-    cnt.textContent = "画师 "+hit.length+" / "+all.length;
-    hit.slice(0,800).forEach(t=>{
-      const d=document.createElement("span"); d.className="tag";
-      d.innerHTML=esc(t.en)+(t.zh?'<span class="zh">'+esc(t.zh)+'</span>':'');
-      d.onclick=()=>{ addTag(escArtist(t.en)); toast("已加入画师："+(t.zh||t.en)); };
+    const hit=all.filter(t=>!k||(t.zh||"").toLowerCase().includes(k)||String(t.trig||"").toLowerCase().includes(k));
+    const cur = all.find(x=>x.id===S.styleId);
+    cnt.textContent = "画风包 "+hit.length+" / "+all.length + (cur? " · 当前："+cur.zh : " · 未选（只挂 turbo）");
+    hit.forEach(t=>{
+      const d=document.createElement("div"); d.className="scard"; d.dataset.id=t.id;
+      d.style.cssText="border-radius:8px;overflow:hidden;cursor:pointer;background:#141720;border:1px solid #2a2f3a";
+      d.innerHTML='<img src="'+t.thumb+'" style="width:100%;display:block;background:#0d0f14" loading="lazy">'
+        +'<div style="padding:5px 6px 2px;font-size:11px;line-height:1.3;color:#dfe5ee">'+esc(t.zh||t.id)+'</div>'
+        +'<div style="padding:0 6px 6px;font-size:10px;color:#7d8899">'+(t.touhou?'东方 · ':'')+(t.trig?esc(t.trig):'无触发词')+'</div>';
+      d.onclick=()=>pickStyle(t);
       grid.appendChild(d);
     });
+    mark();
+  }
+  async function pickStyle(t){
+    const same = S.styleId===t.id;
+    const id = same? "" : t.id;
+    try{
+      const r=await fetch('/api/style/select',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})});
+      const j=await r.json();
+      if(!j.ok) throw new Error(j.error||'fail');
+      S.styleId = id || null;
+      if(same){
+        if(t.trig){ const ks = parseTags(escArtist(t.trig)).map(K);
+          S.tags = S.tags.filter(x=>ks.indexOf(K(x))<0);
+          S.userTags = (S.userTags||[]).filter(x=>ks.indexOf(K(x))<0);
+          ks.forEach(k=>{ delete S.owner[k]; }); }
+        toast("已取消画风");
+      }
+      else { if(j.trig) addTag(escArtist(j.trig)); toast("画风："+t.zh+" · 挂 "+((j.loras||[]).slice(-1)[0]||'')); }
+      if(typeof syncText==='function') syncText();
+      draw();
+    }catch(e){ toast("切换失败 "+e); }
   }
   q.oninput=()=>{ S.artQ=q.value; draw(); };
+  if(!S.lib.styles){
+    fetch('/api/styles').then(r=>r.json()).then(j=>{
+      if(j.ok){ S.lib.styles=j.styles||[]; if(S.styleId===undefined||S.styleId===null) S.styleId=j.current||null; draw(); }
+    }).catch(()=>{});
+  }
   draw();
 }
 
@@ -1102,6 +1147,15 @@ async function generate(){
     " n=" + S.tags.length + " pos=" + S.tags.join(","));
   if(pf.rep.fixes.length) toast("审查：" + pf.rep.fixes.join("；"));
   const p=paramsFromUI();
+  // ★ 画风：preflight 可能删改 tags，出图前把选中画风的触发词补回（以 styleId 为准，不靠文本匹配）
+  if(S.styleId){
+    const st = (S.lib.styles||[]).find(x=>x.id===S.styleId);
+    if(st && st.trig){
+      const want = parseTags(escArtist(st.trig));
+      const miss = want.filter(x=>!S.tags.some(y=>K(y)===K(x)));
+      if(miss.length){ S.tags = miss.concat(S.tags); syncText(); logline("style", "补回触发词 " + miss.join("|")); }
+    }
+  }
   S.busy=true; S.busyAt=Date.now();
   $("btnGen").disabled=true; $("btnGen").textContent="⏳ 生成中";
   $("stat").textContent="审查"+(PF_KIND_ZH[pf.rep.kind]?"·"+PF_KIND_ZH[pf.rep.kind]:"")+" · 已提交…";
@@ -1109,10 +1163,11 @@ async function generate(){
   try{
     const posStr = S.tags.join(", ");
     let negStr = $("neg").value;
-    if(/uncensored/.test(posStr)) negStr = stripCensorNeg(negStr) + ", " + CENSOR_HARD;   // 用户选定 C 方案：有 uncensored 就不压 censor 词
+    if(posStr.indexOf("uncensored") >= 0) negStr = stripCensorNeg(negStr) + ", " + CENSOR_HARD;   // 有 uncensored 就不压 censor 词
     const r=await fetch('/api/gen',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({positive:posStr, negative:negStr, mode:S.model, steps:p.steps, cfg:p.cfg,
-        sampler:p.sampler, scheduler:p.scheduler, width:p.width, height:p.height, seed:p.seed})});
+        sampler:p.sampler, scheduler:p.scheduler, width:p.width, height:p.height, seed:p.seed,
+        style_id:S.styleId||''})});
     const j=await r.json();
     if(!j.ok){ toast(j.error||"提交失败"); pgDone(false, j.error||""); throw new Error(j.error||"fail"); }
     $("qSeed").value = j.seed;
@@ -1142,7 +1197,7 @@ async function handfix(){
   try{
     const r=await fetch('/api/anima/handfix',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({filename:S.last, positive:S.tags.join(", "),
-        negative:(/uncensored/.test(S.tags.join(", ")) ? stripCensorNeg($("neg").value) + ", " + CENSOR_HARD : $("neg").value),
+        negative:(/(uncensored)/.test(S.tags.join(", ")) ? stripCensorNeg($("neg").value) + ", " + CENSOR_HARD : $("neg").value),
         steps:8, denoise:0.45})});
     const j=await r.json();
     if(j.ok){ addImg(j.filename); toast("修手完成"); } else toast(j.error||"修手失败");
@@ -2108,11 +2163,13 @@ function rollLibrary(){
 (async function boot(){
   bind();
   try{ await loadData(); }catch(e){ console.error("boot/loadData", e); $("stat").textContent="数据加载失败 "+(e&&e.stack||e); return; }
+  try{ const r = await fetch('/api/styles'); const j = await r.json();
+    if(j.ok){ S.lib.styles = j.styles || []; S.styleId = j.current || null; }
+  }catch(e){ console.error("boot/styles", e); }
   renderLib(); renderStudio(); syncText();
   $("neg").value = defaultNeg();
   $("stat").textContent += " · 就绪";
 })();
-window.__ERR = 0;
 window.addEventListener('error', ()=>{ window.__ERR = (window.__ERR||0)+1; });
 </script>
 </body>

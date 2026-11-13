@@ -68,3 +68,35 @@ webui/presets/thumbs/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# ---------- 2026-11 画风库评测：本地产物与新增工具白名单 ----------
+_style_test/
+anima-workbench-v3.1.zip
+
+!tools/anima_thumbs.py
+!tools/anima_run_char.py
+!tools/anima_run_pack.py
+!tools/anima_run_all_packs.py
+!tools/anima_run_musume.py
+!tools/anima_build_styles_json.py
+!tools/anima_fetch_batch.py
+!tools/anima_lora_inspect.py
+!tools/anima_grok_preset.py
+!tools/anima_musume_presets5.py
+!tools/anima_rank_all.py
+!tools/anima_style_build_index.py
+!tools/anima_style_previews.py
+!tools/anima_style_wall.py
+!tools/anima_wall_full.py
+!tools/anima_wall_tubs.py
+!tools/anima_scan_musume.py
+!tools/anima_scan_cn_models.py
+!tools/anima_bench_tubs.py
+
+# ---------- 发行包与本地经验文档（不进仓库） ----------
+dist/
+docs/Anima画风LoRA-交接手册.md
+docs/Anima画风LoRA-测评台帐.md
+docs/Anima画风LoRA-搬运清单.md
+docs/Anima-32包编号清单.md
+docs/Anima画风-保留名单.md

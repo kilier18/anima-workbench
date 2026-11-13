@@ -20,7 +20,8 @@
 |---|---|
 | **动作池** | 1222 条结构化动作条目，按「内容分级 × 人物关系」分成 26 个池，随机组合而不是硬拼 |
 | **场景库** | 960+ 条现成场景，一键套用（地点 / 光线 / 天气 / 构图 / 情绪全套） |
-| **角色库** | 2390 个角色条目，带作品分类、搜索、缩略图 |
+| **角色库** | 2390 个角色条目，带作品分类、搜索、缩略图；含「AI 拟人（大模型娘）」18 条双预设 |
+| **画风库** | 114 个画风 LoRA（画师包 / 东方画师 / AI 拟人），点卡即挂，自带触发词、强度与缩略图 |
 | **出图前审查** | 提交前跑一遍一致性检查，自动修人物数量、性别配置、视角与机位冲突 |
 | **批量出图** | 一次排 N 张，逐张过审、逐张记录，出问题能定位到是哪一条 |
 | **出图目录** | 页面里直接改落盘位置，不写代码 |
@@ -37,7 +38,7 @@
                                       ├─ Anima 2B UNet（动漫向扩散模型）
                                       ├─ Qwen3-0.6B 文本编码器
                                       ├─ Qwen-Image VAE
-                                      └─ 3 个 LoRA（turbo / 画风 × 2）
+                                      └─ 画风 LoRA 库（turbo 0.7 + 画风包选挂）
 ```
 
 - 后端只依赖 Python 标准库 + 可选 Pillow，不装框架也能跑。
@@ -68,7 +69,9 @@ ComfyUI/
 │       ├─ wb_presets.json    # 预设
 │       ├─ wb_pools.json      # 池元数据
 │       ├─ wb_outfits.json    # 服饰
-│       └─ wb_zh.json         # 中文词表
+│       ├─ wb_zh.json         # 中文词表
+│       └─ anima_styles.json  # 画风库索引（lora / 触发词 / 强度 / 分组）
+├─ webui/static/style_thumbs/ # 画风卡缩略图（固定角色半身）
 ├─ tools/
 │   ├─ build_atoms.py         # 生成 wb_atoms.json
 │   ├─ gen_workbench.py       # 生成 workbench.html
@@ -135,6 +138,21 @@ python tools/build_atoms.py        :: 重新生成 wb_atoms.json
 python tools/health_check.py       :: 体检：缺词、无核心、同义重复
 python tools/gen_workbench.py      :: 重新生成 workbench.html
 ```
+
+## 画风库
+
+`webui/data/anima_styles.json` 是画风 LoRA 的索引表，页面「画风」一栏就是它的渲染结果。一张卡 = 一个 LoRA 包：
+
+| 字段 | 含义 |
+|---|---|
+| `lora` | 相对 `models/loras/` 的路径，必须带目录前缀（如 `Anima\packs\pako.safetensors`） |
+| `trig` | 触发词，点卡时自动写进正向框；多词触发词用逗号分隔 |
+| `strength` | LoRA 强度，缺省 1.0 |
+| `group` | 分组：画师包 / 东方画师 / 桶外-知名画师 / AI 拟人（大模型娘） |
+
+基座固定 `turbo 0.7`，选中画风包时叠加；再点同一张卡即取消，只留 turbo。
+
+加一个新画风：LoRA 放进 `models/loras/`，`anima_styles.json` 追加一条（`id` 唯一、`on_disk: true`），刷新页面即可。缩略图可选，放 `webui/static/style_thumbs/<id>.jpg`。
 
 ## 内容分级
 

@@ -65,7 +65,6 @@
     "short hair",
     "blue hair",
     "mob cap",
-    "bat wings",
     "bat wings"
    ],
    "th": 1,
@@ -84,7 +83,6 @@
     "side ponytail",
     "mob cap",
     "wings",
-    "wings",
     "one side up",
     "crystal"
    ],
@@ -100,7 +98,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "blue eyes",
     "grey hair",
     "short hair",
@@ -108,6 +105,92 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "deepseek-tan",
+   "zh": "鲸鱼娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 42400,
+   "g": [
+    "deepseek-tan",
+    "1girl",
+    "solo",
+    "blue hair",
+    "very long wavy hair",
+    "curled ahoge",
+    "blue eyes",
+    "whale ear fins",
+    "head fins",
+    "cetacean tail",
+    "big thick dark navy whale tail",
+    "fish tail",
+    "maid",
+    "large white frilly maid headdress",
+    "white frilly apron",
+    "navy blue maid dress",
+    "frilled white blouse",
+    "navy bowtie",
+    "blue diamond brooch",
+    "navy skirt with gold vine embroidery",
+    "puffy sleeves",
+    "juliet sleeves",
+    "white thighhighs",
+    "navy mary janes"
+   ],
+   "th": "",
+   "src": "anima"
+  },
+  {
+   "t": "deepseek-tan-chibi",
+   "zh": "鲸鱼娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 41900,
+   "g": [
+    "chibi",
+    "(chibi:1.3)",
+    "super deformed",
+    "ds_whalemaid",
+    "1girl",
+    "solo",
+    "maid outfit",
+    "large white frilly maid headdress",
+    "white frilled apron",
+    "blue hair",
+    "short hair",
+    "blue eyes",
+    "whale tail",
+    "frills"
+   ],
+   "th": "",
+   "src": "anima"
+  },
+  {
+   "t": "chatgpt-tan",
+   "zh": "白龙娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 38200,
+   "g": [
+    "chatgpt-tan",
+    "1girl",
+    "solo",
+    "white hair",
+    "very long wavy hair",
+    "curled ahoge",
+    "pointed ears",
+    "two large white ridged dragon horns",
+    "pale lavender-grey eyes",
+    "white interlaced-knot hair ornament",
+    "long white tassel earring",
+    "small white bat-like dragon wings",
+    "long thick white scaled dragon tail",
+    "white sleeveless china dress",
+    "qipao collar",
+    "crystal diamond ornaments",
+    "long translucent flowing sleeves",
+    "translucent over-skirt"
+   ],
+   "th": "",
+   "src": "anima"
   },
   {
    "t": "admiral_(kancolle)",
@@ -121,6 +204,30 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "chatgpt-tan-chibi",
+   "zh": "白龙娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 37700,
+   "g": [
+    "chibi",
+    "(chibi:1.2)",
+    "超级变形",
+    "白龙娘",
+    "1girl",
+    "solo",
+    "white hair",
+    "long hair",
+    "white horns",
+    "dragon horns",
+    "pointy ears",
+    "purple eyes",
+    "small dragon wings",
+    "dragon tail"
+   ],
+   "th": "",
+   "src": "anima"
   },
   {
    "t": "artoria_pendragon_(fate)",
@@ -160,6 +267,59 @@
    "src": "local"
   },
   {
+   "t": "claude_girl",
+   "zh": "Claude娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 35200,
+   "g": [
+    "claude_girl",
+    "1girl",
+    "solo",
+    "long wavy copper-orange hair",
+    "loose side-swept bangs",
+    "warm amber eyes",
+    "orange daisy-shaped hair flower",
+    "black striped ribbon bow",
+    "white tassel",
+    "cream-white dress",
+    "short cape collar",
+    "orange flower embroidery",
+    "orange and black front panels",
+    "black waist sash",
+    "orange flower brooch",
+    "dark brown boots",
+    "holding a dark brown hardcover book with an orange flower emblem"
+   ],
+   "th": "",
+   "src": "anima"
+  },
+  {
+   "t": "claude_(chatbot)",
+   "zh": "Claude 娘",
+   "w": "ai_gijinka",
+   "p": 35000,
+   "th": 1,
+   "src": "desc",
+   "g": [
+    "1girl",
+    "claude_(chatbot)",
+    "long straight orange hair",
+    "very long hair",
+    "orange eyes",
+    "radial flower hair ornament",
+    "flower hair ornament",
+    "calm expression",
+    "cool beauty",
+    "layered dress",
+    "black bodice",
+    "beige long skirt",
+    "gold trim",
+    "puff sleeves",
+    "white collar",
+    "holding book"
+   ]
+  },
+  {
    "t": "konpaku_youmu",
    "zh": "魂魄妖梦",
    "w": "touhou",
@@ -191,6 +351,29 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "claude_girl-chibi",
+   "zh": "Claude娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 34700,
+   "g": [
+    "chibi",
+    "(chibi:1.3)",
+    "super deformed",
+    "claude_girl",
+    "1girl",
+    "solo",
+    "orange hair",
+    "long hair",
+    "amber eyes",
+    "orange daisy hair flower",
+    "white dress",
+    "black striped ribbon",
+    "book"
+   ],
+   "th": "",
+   "src": "anima"
   },
   {
    "t": "komeiji_koishi",
@@ -228,8 +411,7 @@
     "blue dress",
     "blue bow",
     "ice wings",
-    "wings",
-    "ice wings"
+    "wings"
    ],
    "th": 1,
    "src": "local"
@@ -279,7 +461,6 @@
     "short hair",
     "black hair",
     "tokin hat",
-    "black wings",
     "black wings"
    ],
    "th": 1,
@@ -330,7 +511,6 @@
     "long hair",
     "black hair",
     "hairband",
-    "magical girl",
     "magical girl"
    ],
    "th": 1,
@@ -371,7 +551,6 @@
     "hair ribbon",
     "hair bow",
     "white gloves",
-    "magical girl",
     "magical girl"
    ],
    "th": 1,
@@ -591,7 +770,6 @@
     "blue hair",
     "short hair",
     "cape",
-    "magical girl",
     "magical girl"
    ],
    "th": 1,
@@ -744,7 +922,6 @@
     "grey hair",
     "white hair",
     "serafuku",
-    "serafuku",
     "flat cap",
     "pleated skirt",
     "long sleeves"
@@ -875,7 +1052,6 @@
     "fingerless gloves",
     "twin drills",
     "magical girl",
-    "magical girl",
     "beret"
    ],
    "th": 1,
@@ -932,9 +1108,7 @@
     "hat",
     "bird wings",
     "wings",
-    "white wings",
-    "bird wings",
-    "wings"
+    "white wings"
    ],
    "th": 1,
    "src": "local"
@@ -996,7 +1170,6 @@
     "long hair",
     "large breasts",
     "head wings",
-    "bat wings",
     "bat wings"
    ],
    "th": 1,
@@ -1016,7 +1189,6 @@
     "brown hair",
     "two side up",
     "medium breasts",
-    "plugsuit",
     "plugsuit",
     "pilot suit",
     "red bodysuit"
@@ -1098,7 +1270,6 @@
     "hairband",
     "large breasts",
     "japanese clothes",
-    "japanese clothes",
     "detached sleeves",
     "bare shoulders"
    ],
@@ -1157,7 +1328,6 @@
     "brown hair",
     "long hair",
     "folded ponytail",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -1234,8 +1404,7 @@
     "black dress",
     "asymmetrical wings",
     "blue wings",
-    "red wings",
-    "asymmetrical wings"
+    "red wings"
    ],
    "th": 1,
    "src": "local"
@@ -1477,7 +1646,6 @@
     "sidelocks",
     "low ponytail",
     "serafuku",
-    "serafuku",
     "pleated skirt"
    ],
    "th": 1,
@@ -1583,7 +1751,6 @@
     "brown hair",
     "short hair",
     "hairclip",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -1643,7 +1810,6 @@
     "long hair",
     "purple hair",
     "black hair",
-    "serafuku",
     "serafuku",
     "flat cap",
     "anchor symbol",
@@ -1750,9 +1916,6 @@
     "hair ribbon",
     "kita high school uniform",
     "serafuku",
-    "winter uniform",
-    "kita high school uniform",
-    "serafuku",
     "winter uniform"
    ],
    "th": 1,
@@ -1771,7 +1934,6 @@
     "grey hair",
     "hairclip",
     "large breasts",
-    "serafuku",
     "serafuku",
     "short sleeves"
    ],
@@ -2072,7 +2234,6 @@
     "short hair",
     "side ponytail",
     "hair bow",
-    "fairy wings",
     "fairy wings"
    ],
    "th": 1,
@@ -2093,8 +2254,7 @@
     "wide sleeves",
     "long sleeves",
     "kariginu",
-    "tate eboshi",
-    "kariginu"
+    "tate eboshi"
    ],
    "th": 1,
    "src": "local"
@@ -2199,7 +2359,6 @@
     "short hair",
     "medium hair",
     "small breasts",
-    "tokiwadai school uniform",
     "tokiwadai school uniform"
    ],
    "th": 1,
@@ -2212,7 +2371,6 @@
    "p": 8960,
    "g": [
     "1girl",
-    "maid",
     "maid",
     "maid headdress",
     "blue eyes",
@@ -2237,7 +2395,6 @@
     "demon horns",
     "demon wings",
     "demon girl",
-    "demon wings",
     "multiple horns",
     "black horns",
     "purple eyes",
@@ -2262,9 +2419,6 @@
     "kita high school uniform",
     "serafuku",
     "winter uniform",
-    "kita high school uniform",
-    "serafuku",
-    "winter uniform",
     "blue skirt",
     "blue sailor collar"
    ],
@@ -2282,7 +2436,6 @@
     "long hair",
     "black hair",
     "twintails",
-    "sakuragaoka high school uniform",
     "sakuragaoka high school uniform"
    ],
    "th": 1,
@@ -2453,7 +2606,6 @@
     "short hair",
     "medium breasts",
     "plugsuit",
-    "plugsuit",
     "white bodysuit"
    ],
    "th": 1,
@@ -2541,7 +2693,6 @@
     "brown hair",
     "short hair",
     "hairclip",
-    "sakuragaoka high school uniform",
     "sakuragaoka high school uniform"
    ],
    "th": 1,
@@ -2602,7 +2753,6 @@
     "blunt bangs",
     "large breasts",
     "cleavage",
-    "virtual youtuber",
     "virtual youtuber",
     "nail polish"
    ],
@@ -2736,7 +2886,6 @@
     "brown hair",
     "long hair",
     "twintails",
-    "magical girl",
     "magical girl"
    ],
    "th": 1,
@@ -2908,7 +3057,6 @@
    "p": 7575,
    "g": [
     "1girl",
-    "angel wings",
     "angel wings",
     "yellow eyes",
     "pink hair",
@@ -3140,7 +3288,6 @@
     "brown hair",
     "short hair",
     "hairband",
-    "sakuragaoka high school uniform",
     "sakuragaoka high school uniform"
    ],
    "th": 1,
@@ -3275,7 +3422,6 @@
     "black hair",
     "ahoge",
     "large breasts",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -3314,7 +3460,6 @@
     "long hair",
     "brown hair",
     "medium breasts",
-    "school uniform",
     "school uniform"
    ],
    "th": 1,
@@ -3354,7 +3499,6 @@
     "black hair",
     "sailor hat",
     "sailor",
-    "sailor",
     "anchor"
    ],
    "th": 1,
@@ -3375,7 +3519,6 @@
     "large breasts",
     "medium breasts",
     "cleavage",
-    "virtual youtuber",
     "virtual youtuber",
     "feather earrings"
    ],
@@ -3431,7 +3574,6 @@
     "brown hair",
     "short hair",
     "antenna hair",
-    "magical girl",
     "magical girl"
    ],
    "th": 1,
@@ -3491,7 +3633,6 @@
     "large breasts",
     "thick thighs",
     "china dress",
-    "china dress",
     "pelvic curtain",
     "spiked bracelet"
    ],
@@ -3533,7 +3674,6 @@
     "black hair",
     "hair intakes",
     "large breasts",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 1,
@@ -3701,7 +3841,6 @@
     "hair flower",
     "hair bell",
     "serafuku",
-    "serafuku",
     "jingle bell"
    ],
    "th": 1,
@@ -3745,7 +3884,6 @@
     "hairclip",
     "large breasts",
     "medium breasts",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 1,
@@ -3928,7 +4066,6 @@
     "blunt bangs",
     "sidelocks",
     "hair over shoulder",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -4060,7 +4197,6 @@
     "long hair",
     "ponytail",
     "large breasts",
-    "zero suit",
     "zero suit"
    ],
    "th": 1,
@@ -4222,7 +4358,6 @@
     "striped clothes",
     "short sleeves",
     "fairy wings",
-    "fairy wings",
     "neck ruff"
    ],
    "th": 1,
@@ -4300,7 +4435,6 @@
     "hair ribbon",
     "large breasts",
     "lycoris uniform",
-    "lycoris uniform",
     "red dress",
     "red ribbon",
     "one side up"
@@ -4319,8 +4453,6 @@
     "long hair",
     "purple hair",
     "twintails",
-    "serafuku",
-    "ryouou school uniform",
     "serafuku",
     "ryouou school uniform"
    ],
@@ -4709,7 +4841,6 @@
     "large breasts",
     "chinese clothes",
     "hat",
-    "chinese clothes",
     "black dress",
     "long sleeves"
    ],
@@ -4836,7 +4967,6 @@
     "black hairband",
     "ahoge",
     "low ponytail",
-    "asticassia school uniform",
     "asticassia school uniform"
    ],
    "th": 1,
@@ -4902,8 +5032,6 @@
     "very long hair",
     "ahoge",
     "serafuku",
-    "ryouou school uniform",
-    "serafuku",
     "ryouou school uniform"
    ],
    "th": 1,
@@ -4918,7 +5046,6 @@
     "1girl",
     "angel wings",
     "angel",
-    "angel wings",
     "purple eyes",
     "hair between eyes",
     "blue eyes",
@@ -5064,7 +5191,6 @@
     "small breasts",
     "thighs",
     "china dress",
-    "china dress",
     "black dress"
    ],
    "th": 1,
@@ -5140,7 +5266,6 @@
     "green hair",
     "twintails",
     "hair ribbon",
-    "anzio school uniform",
     "anzio school uniform",
     "white shirt",
     "black ribbon",
@@ -5252,8 +5377,7 @@
     "hair ornament",
     "serafuku",
     "elbow gloves",
-    "white scarf",
-    "serafuku"
+    "white scarf"
    ],
    "th": 1,
    "src": "local"
@@ -5271,7 +5395,6 @@
     "large breasts",
     "military uniform",
     "peaked cap",
-    "military uniform",
     "detached sleeves",
     "bare shoulders"
    ],
@@ -5289,7 +5412,6 @@
     "long hair",
     "brown hair",
     "large breasts",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -5345,7 +5467,6 @@
     "pink hair",
     "long hair",
     "large breasts",
-    "serafuku",
     "serafuku",
     "tress ribbon"
    ],
@@ -5522,7 +5643,6 @@
     "kimono",
     "red kimono",
     "bowl hat",
-    "kimono",
     "wide sleeves",
     "long sleeves",
     "mini person"
@@ -5603,7 +5723,6 @@
     "pink hair",
     "short hair",
     "ponytail",
-    "school uniform",
     "school uniform",
     "white gloves",
     "white shirt",
@@ -5693,7 +5812,6 @@
     "medium breasts",
     "pilot suit",
     "headphones",
-    "pilot suit",
     "white gloves"
    ],
    "th": 1,
@@ -5734,7 +5852,6 @@
     "twintails",
     "hair bobbles",
     "serafuku",
-    "serafuku",
     "rabbit"
    ],
    "th": 1,
@@ -5756,8 +5873,7 @@
     "medium breasts",
     "short kimono",
     "white kimono",
-    "black scarf",
-    "short kimono"
+    "black scarf"
    ],
    "th": 1,
    "src": "local"
@@ -5836,7 +5952,6 @@
     "messy hair",
     "ooarai school uniform",
     "serafuku",
-    "ooarai school uniform",
     "long sleeves"
    ],
    "th": 1,
@@ -5913,8 +6028,7 @@
     "gradient hair",
     "swept bangs",
     "serafuku",
-    "elbow gloves",
-    "serafuku"
+    "elbow gloves"
    ],
    "th": 1,
    "src": "local"
@@ -6008,7 +6122,6 @@
     "grey hair",
     "white hair",
     "ahoge",
-    "asticassia school uniform",
     "asticassia school uniform",
     "long sleeves",
     "shoulder boards"
@@ -6198,7 +6311,6 @@
     "large breasts",
     "japanese clothes",
     "detached sleeves",
-    "nontraditional miko",
     "nontraditional miko"
    ],
    "th": 1,
@@ -6214,7 +6326,6 @@
     "purple eyes",
     "black hair",
     "long hair",
-    "lycoris uniform",
     "lycoris uniform",
     "blue dress",
     "white shirt",
@@ -6414,8 +6525,7 @@
     "japanese clothes",
     "detached sleeves",
     "nontraditional miko",
-    "headgear",
-    "nontraditional miko"
+    "headgear"
    ],
    "th": 1,
    "src": "local"
@@ -6508,7 +6618,6 @@
     "shark girl",
     "maid",
     "maid headdress",
-    "maid",
     "shark tail",
     "red eyes",
     "hair between eyes",
@@ -6737,7 +6846,6 @@
     "long hair",
     "grey hair",
     "white hair",
-    "serafuku",
     "serafuku",
     "black thighhighs",
     "pleated skirt",
@@ -7236,7 +7344,6 @@
     "hair bow",
     "navel",
     "serafuku",
-    "serafuku",
     "short sleeves"
    ],
    "th": 1,
@@ -7435,7 +7542,6 @@
     "short hair",
     "drill hair",
     "green kimono",
-    "green kimono",
     "long sleeves",
     "wide sleeves",
     "head fins",
@@ -7477,7 +7583,6 @@
     "green hair",
     "short hair",
     "long hair",
-    "serafuku",
     "serafuku",
     "hat",
     "cape"
@@ -7622,7 +7727,6 @@
     "hair over one eye",
     "long hair",
     "black hair",
-    "school uniform",
     "school uniform"
    ],
    "th": 1,
@@ -7872,7 +7976,6 @@
     "twin braids",
     "blue capelet",
     "blue robe",
-    "blue robe",
     "long sleeves",
     "elf"
    ],
@@ -7914,7 +8017,6 @@
     "hat",
     "white dress",
     "long sleeves",
-    "fairy wings",
     "fairy wings",
     "fairy"
    ],
@@ -7959,8 +8061,7 @@
     "hair ornament",
     "garreg mach monastery uniform",
     "uniform",
-    "red cape",
-    "garreg mach monastery uniform"
+    "red cape"
    ],
    "th": 1,
    "src": "local"
@@ -7994,7 +8095,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "blue eyes",
     "purple eyes",
     "white hair",
@@ -8197,7 +8297,6 @@
     "thighs",
     "ass",
     "school uniform",
-    "school uniform",
     "black skirt",
     "pleated skirt",
     "white shirt",
@@ -8344,7 +8443,6 @@
     "large breasts",
     "ooarai school uniform",
     "serafuku",
-    "ooarai school uniform",
     "long sleeves"
    ],
    "th": 1,
@@ -8450,7 +8548,6 @@
     "antenna hair",
     "short hair",
     "double bun",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -9370,7 +9467,6 @@
     "black hair",
     "short hair",
     "paradis military uniform",
-    "paradis military uniform",
     "scarf",
     "jacket"
    ],
@@ -9691,9 +9787,7 @@
     "hair bell",
     "checkered kimono",
     "apron",
-    "checkered clothes",
-    "checkered kimono",
-    "apron"
+    "checkered clothes"
    ],
    "th": 1,
    "src": "local"
@@ -9809,7 +9903,6 @@
     "hair bow",
     "small breasts",
     "tokiwadai school uniform",
-    "tokiwadai school uniform",
     "summer uniform"
    ],
    "th": 1,
@@ -9845,8 +9938,6 @@
     "blue eyes",
     "purple hair",
     "short hair",
-    "serafuku",
-    "ryouou school uniform",
     "serafuku",
     "ryouou school uniform"
    ],
@@ -9943,7 +10034,6 @@
     "hair ornament",
     "serafuku",
     "school swimsuit",
-    "serafuku",
     "swimsuit under clothes"
    ],
    "th": 1,
@@ -10289,7 +10379,6 @@
     "hair bow",
     "blue dress",
     "blue bow",
-    "fairy wings",
     "fairy wings"
    ],
    "th": 1,
@@ -10515,8 +10604,7 @@
     "two side up",
     "hasu no sora school uniform",
     "school uniform",
-    "winter uniform",
-    "hasu no sora school uniform"
+    "winter uniform"
    ],
    "th": 1,
    "src": "local"
@@ -10833,8 +10921,7 @@
     "small breasts",
     "sailor bikini",
     "sailor hat",
-    "clothes writing",
-    "sailor bikini"
+    "clothes writing"
    ],
    "th": 1,
    "src": "local"
@@ -10925,7 +11012,6 @@
     "white hairband",
     "ooarai school uniform",
     "serafuku",
-    "ooarai school uniform",
     "long sleeves"
    ],
    "th": 1,
@@ -11086,7 +11172,6 @@
     "brown hair",
     "bandaid on face",
     "serafuku",
-    "serafuku",
     "crab"
    ],
    "th": 1,
@@ -11126,7 +11211,6 @@
     "long hair",
     "huge ahoge",
     "ahoge",
-    "serafuku",
     "serafuku"
    ],
    "th": 1,
@@ -11146,7 +11230,6 @@
     "large breasts",
     "japanese clothes",
     "detached sleeves",
-    "nontraditional miko",
     "nontraditional miko"
    ],
    "th": 1,
@@ -11164,7 +11247,6 @@
     "drill hair",
     "short hair",
     "hat",
-    "fairy wings",
     "fairy wings"
    ],
    "th": 1,
@@ -11184,7 +11266,6 @@
     "pink hair",
     "ponytail",
     "ahoge",
-    "serafuku",
     "serafuku",
     "blue scrunchie"
    ],
@@ -11256,7 +11337,6 @@
     "brown hair",
     "long hair",
     "ponytail",
-    "school uniform",
     "school uniform"
    ],
    "th": 1,
@@ -11448,8 +11528,6 @@
     "single side bun",
     "hair flower",
     "school uniform",
-    "hasu no sora school uniform",
-    "school uniform",
     "hasu no sora school uniform"
    ],
    "th": 1,
@@ -11529,7 +11607,6 @@
     "large breasts",
     "navel",
     "bare shoulders",
-    "asymmetrical wings",
     "asymmetrical wings"
    ],
    "th": 1,
@@ -11549,7 +11626,6 @@
     "orange hair",
     "two side up",
     "twintails",
-    "fairy wings",
     "fairy wings",
     "fairy",
     "headdress"
@@ -11617,7 +11693,6 @@
     "long hair",
     "hair ribbon",
     "pink kimono",
-    "pink kimono",
     "pink ribbon"
    ],
    "th": 1,
@@ -11639,7 +11714,6 @@
     "white shirt",
     "hat ribbon",
     "collared shirt",
-    "school uniform",
     "blue headwear"
    ],
    "th": 1,
@@ -11718,7 +11792,6 @@
     "brown hair",
     "bob cut",
     "serafuku",
-    "serafuku",
     "hat",
     "blue skirt"
    ],
@@ -11759,9 +11832,7 @@
     "long hair",
     "hairclip",
     "school uniform",
-    "school uniform",
     "long sleeves",
-    "virtual youtuber",
     "virtual youtuber",
     "blazer"
    ],
@@ -11815,8 +11886,6 @@
     "hasu no sora school uniform",
     "school uniform",
     "winter uniform",
-    "hasu no sora school uniform",
-    "school uniform",
     "long sleeves",
     "virtual youtuber"
    ],
@@ -11930,7 +11999,6 @@
     "green hair",
     "long hair",
     "ponytail",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -12140,7 +12208,6 @@
     "serafuku",
     "elbow gloves",
     "white headwear",
-    "serafuku",
     "white gloves",
     "sailor hat"
    ],
@@ -12179,7 +12246,6 @@
     "tulip hat",
     "hat",
     "blue headwear",
-    "keizoku military uniform",
     "long sleeves"
    ],
    "th": 0,
@@ -12218,7 +12284,6 @@
     "twintails",
     "ahoge",
     "hair ribbon",
-    "school uniform",
     "school uniform",
     "white shirt",
     "short sleeves",
@@ -12299,7 +12364,6 @@
    "g": [
     "1girl",
     "maid",
-    "maid",
     "maid headdress",
     "red eyes",
     "pink eyes",
@@ -12346,8 +12410,7 @@
     "black hairband",
     "frilled hairband",
     "fleur de lapin uniform",
-    "white shirt",
-    "fleur de lapin uniform"
+    "white shirt"
    ],
    "th": 0,
    "src": ""
@@ -12367,7 +12430,6 @@
     "ponytail",
     "yellow skirt",
     "yellow bow",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -12628,7 +12690,6 @@
     "black hair",
     "blunt bangs",
     "serafuku",
-    "serafuku",
     "pleated skirt",
     "hime cut"
    ],
@@ -12646,7 +12707,6 @@
     "black hair",
     "long hair",
     "medium breasts",
-    "serafuku",
     "serafuku",
     "white gloves",
     "pleated skirt",
@@ -12768,8 +12828,6 @@
     "purple eyes",
     "black hair",
     "long hair",
-    "serafuku",
-    "kamiyama high school uniform (hyouka)",
     "serafuku",
     "kamiyama high school uniform (hyouka)"
    ],
@@ -12980,7 +13038,6 @@
     "hair flaps",
     "hairband",
     "medium breasts",
-    "serafuku",
     "serafuku",
     "hachimaki"
    ],
@@ -13281,7 +13338,6 @@
     "large breasts",
     "military uniform",
     "peaked cap",
-    "military uniform",
     "white gloves"
    ],
    "th": 0,
@@ -13317,7 +13373,6 @@
     "purple hair",
     "long hair",
     "medium breasts",
-    "naoetsu high school uniform",
     "naoetsu high school uniform"
    ],
    "th": 1,
@@ -13358,7 +13413,6 @@
     "hairband",
     "medium breasts",
     "large breasts",
-    "plugsuit",
     "plugsuit"
    ],
    "th": 0,
@@ -13474,7 +13528,6 @@
     "hair tubes",
     "blue skirt",
     "head wings",
-    "magical girl",
     "magical girl",
     "tiara"
    ],
@@ -13630,7 +13683,6 @@
     "blue hair",
     "white hair",
     "school uniform",
-    "school uniform",
     "blazer"
    ],
    "th": 0,
@@ -13741,9 +13793,6 @@
     "blue eyes",
     "blue hair",
     "long hair",
-    "kita high school uniform",
-    "serafuku",
-    "winter uniform",
     "kita high school uniform",
     "serafuku",
     "winter uniform",
@@ -14035,7 +14084,6 @@
     "red hair",
     "gradient hair",
     "serafuku",
-    "serafuku",
     "pleated skirt"
    ],
    "th": 0,
@@ -14199,7 +14247,6 @@
    "g": [
     "1girl",
     "demon slayer uniform",
-    "demon slayer uniform",
     "purple eyes",
     "black hair",
     "purple hair",
@@ -14270,8 +14317,6 @@
     "long hair",
     "hair flower",
     "medium breasts",
-    "sakugawa school uniform",
-    "serafuku",
     "sakugawa school uniform",
     "serafuku",
     "summer uniform"
@@ -14447,8 +14492,7 @@
     "collarbone",
     "hasu no sora school uniform",
     "school uniform",
-    "winter uniform",
-    "hasu no sora school uniform"
+    "winter uniform"
    ],
    "th": 0,
    "src": ""
@@ -14481,7 +14525,6 @@
     "ponytail",
     "ahoge",
     "medium breasts",
-    "serafuku",
     "serafuku",
     "hachimaki"
    ],
@@ -14525,8 +14568,7 @@
     "large breasts",
     "cleavage",
     "garreg mach monastery uniform",
-    "uniform",
-    "garreg mach monastery uniform"
+    "uniform"
    ],
    "th": 0,
    "src": ""
@@ -14542,9 +14584,6 @@
     "brown hair",
     "long hair",
     "ponytail",
-    "kita high school uniform",
-    "winter uniform",
-    "serafuku",
     "kita high school uniform",
     "winter uniform",
     "serafuku",
@@ -14667,7 +14706,6 @@
     "red hair",
     "orange hair",
     "single hair bun",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -14685,8 +14723,7 @@
     "blonde hair",
     "military uniform",
     "garrison cap",
-    "cropped jacket",
-    "military uniform"
+    "cropped jacket"
    ],
    "th": 0,
    "src": ""
@@ -14705,7 +14742,6 @@
     "long hair",
     "colored inner hair",
     "blunt bangs",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 0,
@@ -14759,7 +14795,6 @@
    "p": 2302,
    "g": [
     "1girl",
-    "angel wings",
     "angel wings",
     "hair between eyes",
     "purple eyes",
@@ -14831,7 +14866,6 @@
     "ponytail",
     "hair ribbon",
     "serafuku",
-    "serafuku",
     "pleated skirt"
    ],
    "th": 0,
@@ -14844,7 +14878,6 @@
    "p": 2291,
    "g": [
     "1girl",
-    "nun",
     "nun",
     "red eyes",
     "hair between eyes",
@@ -15011,8 +15044,6 @@
     "long hair",
     "garreg mach monastery uniform",
     "uniform",
-    "garreg mach monastery uniform",
-    "uniform",
     "long sleeves"
    ],
    "th": 0,
@@ -15029,8 +15060,6 @@
     "blonde hair",
     "long hair",
     "hair bow",
-    "nanamori school uniform",
-    "serafuku",
     "nanamori school uniform",
     "serafuku"
    ],
@@ -15114,7 +15143,6 @@
     "double bun",
     "twintails",
     "hair rings",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -15153,7 +15181,6 @@
     "medium breasts",
     "yasogami school uniform",
     "serafuku",
-    "yasogami school uniform",
     "earrings"
    ],
    "th": 0,
@@ -15479,9 +15506,7 @@
     "hair bow",
     "meiji schoolgirl uniform",
     "red kimono",
-    "meiji schoolgirl uniform",
     "hakama skirt",
-    "red kimono",
     "yellow bow",
     "pink hakama"
    ],
@@ -15517,7 +15542,6 @@
     "long hair",
     "brown hair",
     "hair ornament",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -15537,7 +15561,6 @@
     "blue hair",
     "ahoge",
     "hair ribbon",
-    "icho private high school uniform",
     "icho private high school uniform",
     "black thighhighs",
     "plaid skirt"
@@ -15633,7 +15656,6 @@
     "hair ribbon",
     "small breasts",
     "collarbone",
-    "shuuchiin academy school uniform",
     "shuuchiin academy school uniform"
    ],
    "th": 0,
@@ -15668,7 +15690,6 @@
     "short hair",
     "black hair",
     "brown hair",
-    "serafuku",
     "serafuku",
     "pleated skirt",
     "blue skirt"
@@ -15880,8 +15901,7 @@
     "black hair",
     "brown hair",
     "kimono",
-    "red jacket",
-    "kimono"
+    "red jacket"
    ],
    "th": 0,
    "src": ""
@@ -15957,7 +15977,6 @@
     "brown hair",
     "twintails",
     "fingerless gloves",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -15991,7 +16010,6 @@
     "long hair",
     "blue skirt",
     "blue choker",
-    "magical girl",
     "magical girl",
     "heart brooch"
    ],
@@ -16028,8 +16046,6 @@
     "brown eyes",
     "brown hair",
     "short hair",
-    "kitauji high school uniform",
-    "serafuku",
     "kitauji high school uniform",
     "serafuku",
     "pleated skirt"
@@ -16175,7 +16191,6 @@
     "blue skirt",
     "blue sailor collar",
     "blue choker",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -16257,7 +16272,6 @@
     "hair ribbon",
     "serafuku",
     "school swimsuit",
-    "serafuku",
     "swimsuit under clothes"
    ],
    "th": 0,
@@ -16471,7 +16485,6 @@
     "brown hair",
     "short hair",
     "hairclip",
-    "gekkoukan high school uniform",
     "gekkoukan high school uniform"
    ],
    "th": 0,
@@ -16493,7 +16506,6 @@
     "pink choker",
     "pink bow",
     "head wings",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -16566,7 +16578,6 @@
     "mask on head",
     "bird mask",
     "black gloves",
-    "japanese clothes",
     "detached sleeves"
    ],
    "th": 0,
@@ -16749,7 +16760,6 @@
     "single braid",
     "ahoge",
     "medium breasts",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -16783,8 +16793,6 @@
     "short hair",
     "double bun",
     "ahoge",
-    "nanamori school uniform",
-    "serafuku",
     "nanamori school uniform",
     "serafuku"
    ],
@@ -17152,7 +17160,6 @@
     "ahoge",
     "medium breasts",
     "serafuku",
-    "serafuku",
     "one side up"
    ],
    "th": 0,
@@ -17235,7 +17242,6 @@
     "peaked cap",
     "military hat",
     "red cape",
-    "military uniform",
     "long sleeves"
    ],
    "th": 0,
@@ -17290,7 +17296,6 @@
    "p": 2012,
    "g": [
     "1girl",
-    "demon slayer uniform",
     "demon slayer uniform",
     "green eyes",
     "hair between eyes",
@@ -17662,7 +17667,6 @@
     "blonde hair",
     "short hair",
     "long hair",
-    "paradis military uniform",
     "paradis military uniform"
    ],
    "th": 0,
@@ -17762,7 +17766,6 @@
     "long hair",
     "black hair",
     "large breasts",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -17800,7 +17803,6 @@
     "bat hair ornament",
     "school uniform",
     "little busters! school uniform",
-    "school uniform",
     "hat",
     "cape"
    ],
@@ -18352,8 +18354,6 @@
     "scar on cheek",
     "cross scar",
     "school uniform",
-    "fourth east high school uniform",
-    "school uniform",
     "fourth east high school uniform"
    ],
    "th": 0,
@@ -18368,7 +18368,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "purple eyes",
     "two-tone hair",
     "colored inner hair",
@@ -18450,7 +18449,6 @@
     "demon girl",
     "demon wings",
     "demon tail",
-    "demon wings",
     "pointy ears",
     "black horns",
     "horn ring",
@@ -18516,7 +18514,6 @@
     "medium hair",
     "messy hair",
     "bc freedom military uniform",
-    "bc freedom military uniform",
     "long sleeves"
    ],
    "th": 0,
@@ -18554,7 +18551,6 @@
     "short hair",
     "blonde hair",
     "large breasts",
-    "feathered wings",
     "feathered wings",
     "chimera",
     "body fur"
@@ -18727,12 +18723,10 @@
    "g": [
     "1girl",
     "nun",
-    "nun",
     "green eyes",
     "long hair",
     "blue hair",
     "grey hair",
-    "habit",
     "habit",
     "safety pin"
    ],
@@ -18794,7 +18788,6 @@
     "demon tail",
     "demon horns",
     "demon girl",
-    "demon wings",
     "black tail",
     "black horns",
     "pointy ears",
@@ -18818,7 +18811,6 @@
     "school uniform",
     "pinafore dress",
     "white shirt",
-    "school uniform",
     "black thighhighs",
     "long sleeves",
     "red ribbon",
@@ -18862,7 +18854,6 @@
     "brown hair",
     "orange hair",
     "fingerless gloves",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -18994,7 +18985,6 @@
     "demon girl",
     "demon tail",
     "demon wings",
-    "demon wings",
     "pointy ears",
     "red eyes",
     "red hair",
@@ -19084,8 +19074,6 @@
     "long hair",
     "large breasts",
     "ryouou school uniform",
-    "serafuku",
-    "ryouou school uniform",
     "serafuku"
    ],
    "th": 0,
@@ -19146,7 +19134,6 @@
     "short hair",
     "hair intakes",
     "hairclip",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 0,
@@ -19439,7 +19426,6 @@
     "hooded jacket",
     "orange jacket",
     "blue gloves",
-    "hooded bodysuit",
     "blue headwear"
    ],
    "th": 0,
@@ -19521,7 +19507,6 @@
     "large breasts",
     "collarbone",
     "shuuchiin academy school uniform",
-    "shuuchiin academy school uniform",
     "black dress",
     "black bow"
    ],
@@ -19555,7 +19540,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "green eyes",
     "short hair",
     "grey hair",
@@ -19581,7 +19565,6 @@
     "low twintails",
     "short twintails",
     "parted bangs",
-    "serafuku",
     "serafuku",
     "pleated skirt"
    ],
@@ -19708,8 +19691,6 @@
     "hasu no sora school uniform",
     "school uniform",
     "winter uniform",
-    "hasu no sora school uniform",
-    "school uniform",
     "sailor dress"
    ],
    "th": 0,
@@ -19737,7 +19718,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "dragon horns",
     "dragon tail",
     "large tail",
@@ -19810,7 +19790,6 @@
     "pink bow",
     "pink choker",
     "magical girl",
-    "magical girl",
     "heart brooch"
    ],
    "th": 0,
@@ -19848,7 +19827,6 @@
     "short hair",
     "pink hair",
     "purple hair",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -19887,8 +19865,6 @@
     "short hair",
     "brown hair",
     "large breasts",
-    "jujutsu tech uniform",
-    "school uniform",
     "jujutsu tech uniform",
     "school uniform",
     "long sleeves"
@@ -19999,7 +19975,6 @@
     "ponytail",
     "ahoge",
     "school uniform",
-    "school uniform",
     "white shirt"
    ],
    "th": 0,
@@ -20055,8 +20030,7 @@
     "low twintails",
     "hair ribbon",
     "serafuku",
-    "elbow gloves",
-    "serafuku"
+    "elbow gloves"
    ],
    "th": 0,
    "src": ""
@@ -20116,7 +20090,6 @@
     "ponytail",
     "purple skirt",
     "purple choker",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -20173,7 +20146,6 @@
     "elbow gloves",
     "red skirt",
     "red sailor collar",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -20317,7 +20289,6 @@
     "school uniform",
     "pinafore dress",
     "white shirt",
-    "school uniform",
     "long sleeves",
     "red ribbon"
    ],
@@ -20467,7 +20438,6 @@
     "pleated skirt",
     "black thighhighs",
     "black skirt",
-    "serafuku",
     "halo"
    ],
    "th": 0,
@@ -20662,7 +20632,6 @@
     "medium hair",
     "st. gloriana's military uniform",
     "military uniform",
-    "st. gloriana's military uniform",
     "pleated skirt",
     "long sleeves"
    ],
@@ -20705,8 +20674,7 @@
     "hakama skirt",
     "detached sleeves",
     "miko",
-    "red hakama",
-    "miko"
+    "red hakama"
    ],
    "th": 0,
    "src": ""
@@ -20718,7 +20686,6 @@
    "p": 1733,
    "g": [
     "1girl",
-    "demon wings",
     "demon wings",
     "tail",
     "red eyes",
@@ -20848,7 +20815,6 @@
     "brown hair",
     "serafuku",
     "fingerless gloves",
-    "serafuku",
     "blue sailor collar",
     "headband"
    ],
@@ -20870,7 +20836,6 @@
     "two-tone hair",
     "long hair",
     "red hair",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 0,
@@ -21015,7 +20980,6 @@
     "long hair",
     "side ponytail",
     "hair ribbon",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -21356,7 +21320,6 @@
     "small breasts",
     "feet",
     "hood up",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -21455,8 +21418,7 @@
     "cleavage",
     "navel",
     "serafuku",
-    "white gloves",
-    "serafuku"
+    "white gloves"
    ],
    "th": 0,
    "src": ""
@@ -21670,7 +21632,6 @@
     "sidelocks",
     "hair bow",
     "hair ribbon",
-    "school uniform",
     "school uniform",
     "white ribbon"
    ],
@@ -21923,7 +21884,6 @@
     "medium breasts",
     "navel",
     "detached sleeves",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 0,
@@ -22022,8 +21982,7 @@
     "ponytail",
     "white choker",
     "magical girl",
-    "half updo",
-    "magical girl"
+    "half updo"
    ],
    "th": 0,
    "src": ""
@@ -22218,8 +22177,7 @@
     "blunt bangs",
     "school uniform",
     "white shirt",
-    "collared shirt",
-    "school uniform"
+    "collared shirt"
    ],
    "th": 0,
    "src": ""
@@ -22410,7 +22368,6 @@
     "red hair",
     "double bun",
     "bun cover",
-    "china dress",
     "china dress"
    ],
    "th": 0,
@@ -22471,7 +22428,6 @@
     "blunt bangs",
     "tomoeda elementary school uniform",
     "serafuku",
-    "tomoeda elementary school uniform",
     "long sleeves"
    ],
    "th": 0,
@@ -22508,7 +22464,6 @@
     "ahoge",
     "hair ribbon",
     "small breasts",
-    "sobu high school uniform",
     "sobu high school uniform",
     "plaid skirt",
     "red ribbon"
@@ -22656,7 +22611,6 @@
     "short hair",
     "brown hair",
     "hairclip",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -22675,7 +22629,6 @@
     "long hair",
     "ponytail",
     "hair ribbon",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -22760,9 +22713,7 @@
     "ahoge",
     "school uniform",
     "little busters! school uniform",
-    "school uniform",
-    "plaid skirt",
-    "little busters! school uniform"
+    "plaid skirt"
    ],
    "th": 0,
    "src": ""
@@ -22952,7 +22903,6 @@
     "long hair",
     "twintails",
     "hair ribbon",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -23069,8 +23019,7 @@
     "blue hair",
     "black hair",
     "magical girl",
-    "half updo",
-    "magical girl"
+    "half updo"
    ],
    "th": 0,
    "src": ""
@@ -23127,10 +23076,8 @@
     "large breasts",
     "scar",
     "leotard",
-    "leotard",
     "detached sleeves",
     "bare shoulders",
-    "nontraditional miko",
     "nontraditional miko"
    ],
    "th": 1,
@@ -23238,7 +23185,6 @@
     "medium hair",
     "yuigaoka school uniform",
     "white shirt",
-    "yuigaoka school uniform",
     "long sleeves",
     "neck ribbon"
    ],
@@ -23316,7 +23262,6 @@
     "black hair",
     "short hair",
     "serafuku",
-    "serafuku",
     "pleated skirt",
     "black skirt",
     "halo"
@@ -23357,7 +23302,6 @@
     "antenna hair",
     "brown hair",
     "short hair",
-    "hikarizaka private high school uniform",
     "hikarizaka private high school uniform"
    ],
    "th": 0,
@@ -23373,7 +23317,6 @@
     "demon horns",
     "demon wings",
     "demon girl",
-    "demon wings",
     "multiple horns",
     "purple eyes",
     "white hair",
@@ -23399,7 +23342,6 @@
     "long hair",
     "twin braids",
     "sidelocks",
-    "serafuku",
     "serafuku",
     "pleated skirt"
    ],
@@ -23486,7 +23428,6 @@
     "elbow gloves",
     "necktie",
     "vocaloid append",
-    "vocaloid append",
     "bridal gauntlets"
    ],
    "th": 0,
@@ -23527,8 +23468,7 @@
     "very long hair",
     "hair intakes",
     "hikarizaka private high school uniform",
-    "gym uniform",
-    "hikarizaka private high school uniform"
+    "gym uniform"
    ],
    "th": 0,
    "src": ""
@@ -23544,8 +23484,6 @@
     "short hair",
     "black hair",
     "brown hair",
-    "nanamori school uniform",
-    "serafuku",
     "nanamori school uniform",
     "serafuku"
    ],
@@ -23650,7 +23588,6 @@
     "parted bangs",
     "large breasts",
     "military uniform",
-    "military uniform",
     "white gloves"
    ],
    "th": 0,
@@ -23667,8 +23604,6 @@
     "short hair",
     "black hair",
     "hair flower",
-    "sakugawa school uniform",
-    "serafuku",
     "sakugawa school uniform",
     "serafuku",
     "summer uniform",
@@ -23927,8 +23862,7 @@
     "black hair",
     "long hair",
     "kitauji high school uniform",
-    "serafuku",
-    "kitauji high school uniform"
+    "serafuku"
    ],
    "th": 0,
    "src": ""
@@ -24458,7 +24392,6 @@
     "long hair",
     "low twintails",
     "large breasts",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -24499,7 +24432,6 @@
     "very long hair",
     "long hair",
     "hair ribbon",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -24664,7 +24596,6 @@
    "g": [
     "1girl",
     "maid",
-    "maid",
     "purple eyes",
     "pink eyes",
     "long hair",
@@ -24797,7 +24728,6 @@
     "hair ribbon",
     "black gloves",
     "green ribbon",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 0,
@@ -24817,7 +24747,6 @@
     "parted bangs",
     "serafuku",
     "white shirt",
-    "serafuku",
     "forehead"
    ],
    "th": 0,
@@ -24838,7 +24767,6 @@
     "two side up",
     "short twintails",
     "hair scrunchie",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -24963,7 +24891,6 @@
     "hairband",
     "school uniform",
     "suspender skirt",
-    "school uniform",
     "green ribbon"
    ],
    "th": 1,
@@ -25094,7 +25021,6 @@
     "twin braids",
     "bob cut",
     "side braid",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -25243,7 +25169,6 @@
     "purple hair",
     "long hair",
     "hair flower",
-    "magical girl",
     "magical girl",
     "heart brooch"
    ],
@@ -25477,7 +25402,6 @@
     "sidelocks",
     "large breasts",
     "sideboob",
-    "ainu clothes",
     "ainu clothes"
    ],
    "th": 0,
@@ -25697,7 +25621,6 @@
     "brown eyes",
     "brown hair",
     "short hair",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -25755,7 +25678,6 @@
     "long hair",
     "very long hair",
     "hairclip",
-    "school uniform",
     "school uniform",
     "black jacket",
     "white thighhighs",
@@ -25845,7 +25767,6 @@
     "hair tubes",
     "aria company uniform",
     "uniform",
-    "aria company uniform",
     "white dress"
    ],
    "th": 0,
@@ -26015,7 +25936,6 @@
    "g": [
     "1girl",
     "angel wings",
-    "angel wings",
     "hair between eyes",
     "yellow eyes",
     "brown eyes",
@@ -26044,7 +25964,6 @@
     "small breasts",
     "ooarai school uniform",
     "serafuku",
-    "ooarai school uniform",
     "long sleeves"
    ],
    "th": 0,
@@ -26062,8 +25981,6 @@
     "short hair",
     "twintails",
     "hair bobbles",
-    "nanamori school uniform",
-    "serafuku",
     "nanamori school uniform",
     "serafuku"
    ],
@@ -26209,8 +26126,6 @@
     "low twintails",
     "school uniform",
     "fourth east high school uniform",
-    "school uniform",
-    "fourth east high school uniform",
     "pinafore dress"
    ],
    "th": 0,
@@ -26336,7 +26251,6 @@
     "sidelocks",
     "low ponytail",
     "serafuku",
-    "serafuku",
     "pleated skirt"
    ],
    "th": 0,
@@ -26380,8 +26294,7 @@
     "grey hair",
     "single head wing",
     "red wings",
-    "bird wings",
-    "single head wing"
+    "bird wings"
    ],
    "th": 1,
    "src": ""
@@ -26416,8 +26329,6 @@
     "blonde hair",
     "medium hair",
     "hairclip",
-    "nanamori school uniform",
-    "serafuku",
     "nanamori school uniform",
     "serafuku"
    ],
@@ -26520,7 +26431,6 @@
     "brown hair",
     "long hair",
     "blunt bangs",
-    "kigurumi",
     "kigurumi"
    ],
    "th": 0,
@@ -26601,7 +26511,6 @@
     "hairclip",
     "serafuku",
     "school uniform",
-    "serafuku",
     "pleated skirt",
     "long sleeves",
     "pink bowtie"
@@ -26646,7 +26555,6 @@
     "large breasts",
     "navel",
     "baseball cap",
-    "k/da (league of legends)",
     "k/da (league of legends)",
     "crop top"
    ],
@@ -27089,7 +26997,6 @@
     "drill hair",
     "bc freedom military uniform",
     "military uniform",
-    "bc freedom military uniform",
     "pleated skirt",
     "blue jacket",
     "white shirt",
@@ -27162,8 +27069,6 @@
     "hair bow",
     "large breasts",
     "huge breasts",
-    "serafuku",
-    "kiyosumi school uniform",
     "serafuku",
     "kiyosumi school uniform"
    ],
@@ -27636,7 +27541,6 @@
     "blonde hair",
     "blunt bangs",
     "large breasts",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -27925,8 +27829,7 @@
     "hair bow",
     "hairband",
     "shinda sekai sensen uniform",
-    "serafuku",
-    "shinda sekai sensen uniform"
+    "serafuku"
    ],
    "th": 0,
    "src": ""
@@ -28025,7 +27928,6 @@
     "white thighhighs",
     "blue choker",
     "magical girl",
-    "magical girl",
     "heart brooch",
     "wrist cuffs"
    ],
@@ -28103,7 +28005,6 @@
     "short hair",
     "ponytail",
     "parted bangs",
-    "school uniform",
     "school uniform",
     "pleated skirt",
     "white gloves",
@@ -28389,7 +28290,6 @@
     "1girl",
     "angel wings",
     "angel",
-    "angel wings",
     "purple eyes",
     "hair between eyes",
     "blue eyes",
@@ -28458,7 +28358,6 @@
     "twintails",
     "pink choker",
     "pink bow",
-    "magical girl",
     "magical girl",
     "wrist cuffs",
     "pink wrist cuffs"
@@ -28581,7 +28480,6 @@
    "p": 1277,
    "g": [
     "1girl",
-    "nun",
     "nun",
     "purple eyes",
     "hair between eyes",
@@ -28846,7 +28744,6 @@
     "armor",
     "gold armor",
     "winged helmet",
-    "armor",
     "red cape",
     "prosthetic arm"
    ],
@@ -29129,8 +29026,6 @@
     "twin braids",
     "hairband",
     "large breasts",
-    "nanamori school uniform",
-    "serafuku",
     "nanamori school uniform",
     "serafuku"
    ],
@@ -29518,7 +29413,6 @@
     "long hair",
     "pink hair",
     "two side up",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -29539,8 +29433,6 @@
     "medium breasts",
     "breasts",
     "hooded bodysuit",
-    "hooded bodysuit",
-    "superhero costume",
     "superhero costume"
    ],
    "th": 0,
@@ -29579,7 +29471,6 @@
     "blunt bangs",
     "sidelocks",
     "hair bow",
-    "serafuku",
     "serafuku",
     "red bow"
    ],
@@ -29644,7 +29535,6 @@
     "very long hair",
     "twintails",
     "black gloves",
-    "race queen",
     "race queen"
    ],
    "th": 0,
@@ -29692,7 +29582,6 @@
     "hairband",
     "large breasts",
     "japanese clothes",
-    "japanese clothes",
     "detached sleeves",
     "ribbon-trimmed sleeves"
    ],
@@ -29730,7 +29619,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "fake animal ears",
     "aqua eyes",
     "blue eyes",
@@ -29822,8 +29710,6 @@
     "black hair",
     "kitauji high school uniform",
     "serafuku",
-    "kitauji high school uniform",
-    "serafuku",
     "white shirt",
     "blue sailor collar",
     "short sleeves"
@@ -29889,7 +29775,6 @@
     "long hair",
     "school uniform",
     "pleated skirt",
-    "school uniform",
     "blazer"
    ],
    "th": 0,
@@ -29910,7 +29795,6 @@
     "hair bow",
     "large breasts",
     "scar on forehead",
-    "school uniform",
     "school uniform",
     "polka dot bow"
    ],
@@ -30009,8 +29893,7 @@
     "blunt bangs",
     "school uniform",
     "white gloves",
-    "white shirt",
-    "school uniform"
+    "white shirt"
    ],
    "th": 0,
    "src": ""
@@ -30028,8 +29911,6 @@
     "twintails",
     "ahoge",
     "hair ribbon",
-    "school uniform",
-    "little busters! school uniform",
     "school uniform",
     "little busters! school uniform",
     "pink bow"
@@ -30245,7 +30126,6 @@
     "double bun",
     "sidelocks",
     "hair bell",
-    "china dress",
     "china dress"
    ],
    "th": 0,
@@ -30327,8 +30207,6 @@
     "kita high school uniform",
     "serafuku",
     "winter uniform",
-    "kita high school uniform",
-    "serafuku",
     "long sleeves"
    ],
    "th": 0,
@@ -30492,8 +30370,7 @@
     "short hair",
     "sidelocks",
     "serafuku",
-    "white gloves",
-    "serafuku"
+    "white gloves"
    ],
    "th": 0,
    "src": ""
@@ -30612,8 +30489,6 @@
     "two side up",
     "thigh strap",
     "serafuku",
-    "shinda sekai sensen uniform",
-    "serafuku",
     "shinda sekai sensen uniform"
    ],
    "th": 0,
@@ -30670,7 +30545,6 @@
     "grey hair",
     "white hair",
     "large breasts",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -30744,7 +30618,6 @@
     "messy hair",
     "ahoge",
     "ponytail",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -30922,7 +30795,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "maid apron",
     "blue eyes",
     "black hair",
@@ -31145,7 +31017,6 @@
     "long hair",
     "blonde hair",
     "anzio school uniform",
-    "anzio school uniform",
     "white shirt",
     "long sleeves"
    ],
@@ -31229,7 +31100,6 @@
     "black hair",
     "short hair",
     "hair ribbon",
-    "school uniform",
     "school uniform",
     "white shirt",
     "red ribbon"
@@ -31317,7 +31187,6 @@
     "hair flower",
     "medium breasts",
     "navel",
-    "virtual youtuber",
     "virtual youtuber",
     "head fins"
    ],
@@ -31450,16 +31319,13 @@
    "g": [
     "1girl",
     "nun",
-    "nun",
     "blue eyes",
     "blonde hair",
     "habit",
     "traditional nun",
     "duckling",
     "duck",
-    "bird on head",
-    "habit",
-    "traditional nun"
+    "bird on head"
    ],
    "th": 0,
    "src": ""
@@ -31981,7 +31847,6 @@
     "very long hair",
     "large breasts",
     "medium breasts",
-    "duel academy uniform (yu-gi-oh! gx)",
     "duel academy uniform (yu-gi-oh! gx)"
    ],
    "th": 0,
@@ -32004,7 +31869,6 @@
    "g": [
     "1girl",
     "demon horns",
-    "demon wings",
     "demon wings",
     "black horns",
     "multiple horns",
@@ -32256,7 +32120,6 @@
     "purple hair",
     "luna nova school uniform",
     "witch hat",
-    "witch",
     "witch"
    ],
    "th": 0,
@@ -32278,7 +32141,6 @@
     "knee boots",
     "pink bow",
     "pink choker",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -32455,7 +32317,6 @@
     "bob cut",
     "small breasts",
     "naoetsu high school uniform",
-    "naoetsu high school uniform",
     "pink shirt"
    ],
    "th": 1,
@@ -32515,7 +32376,6 @@
     "short hair",
     "blonde hair",
     "green hair",
-    "bruce lee's jumpsuit",
     "bruce lee's jumpsuit"
    ],
    "th": 0,
@@ -32632,7 +32492,6 @@
     "swept bangs",
     "hair ribbon",
     "hairclip",
-    "school uniform",
     "school uniform",
     "white shirt"
    ],
@@ -32784,7 +32643,6 @@
    "g": [
     "1girl",
     "nun",
-    "nun",
     "brown eyes",
     "yellow eyes",
     "long hair",
@@ -32811,7 +32669,6 @@
     "brown hair",
     "light brown hair",
     "medium breasts",
-    "yuigaoka school uniform",
     "yuigaoka school uniform",
     "white shirt",
     "neck ribbon",
@@ -33099,8 +32956,6 @@
     "ponytail",
     "kitauji high school uniform",
     "serafuku",
-    "kitauji high school uniform",
-    "serafuku",
     "white shirt",
     "pleated skirt",
     "blue sailor collar"
@@ -33233,9 +33088,7 @@
     "short hair",
     "medium breasts",
     "hooded bodysuit",
-    "hooded bodysuit",
     "hood down",
-    "superhero costume",
     "superhero costume"
    ],
    "th": 0,
@@ -33522,7 +33375,6 @@
    "p": 1066,
    "g": [
     "1girl",
-    "maid",
     "maid",
     "maid headdress",
     "blue eyes",
@@ -33848,7 +33700,6 @@
    "g": [
     "1girl",
     "maid",
-    "maid",
     "maid headdress",
     "blue eyes",
     "black hair",
@@ -34125,7 +33976,6 @@
     "blue eyes",
     "blonde hair",
     "short hair",
-    "paradis military uniform",
     "paradis military uniform",
     "long sleeves"
    ],
@@ -34457,8 +34307,6 @@
     "ponytail",
     "large breasts",
     "apron",
-    "apron",
-    "waitress",
     "waitress"
    ],
    "th": 0,
@@ -34541,7 +34389,6 @@
     "long hair",
     "brown hair",
     "low-tied long hair",
-    "hikarizaka private high school uniform",
     "hikarizaka private high school uniform",
     "starfish"
    ],
@@ -34755,8 +34602,7 @@
     "white gloves",
     "pink headwear",
     "magical girl",
-    "one side up",
-    "magical girl"
+    "one side up"
    ],
    "th": 0,
    "src": ""
@@ -34816,7 +34662,6 @@
     "brown hair",
     "short hair",
     "medium hair",
-    "tokiwadai school uniform",
     "tokiwadai school uniform",
     "head-mounted display"
    ],
@@ -35006,7 +34851,6 @@
     "purple hair",
     "headphones",
     "virtual youtuber",
-    "virtual youtuber",
     "penguin girl"
    ],
    "th": 0,
@@ -35024,7 +34868,6 @@
     "long hair",
     "low twintails",
     "mole on neck",
-    "school uniform",
     "school uniform"
    ],
    "th": 0,
@@ -35085,7 +34928,6 @@
     "long hair",
     "two side up",
     "hair rings",
-    "magical girl",
     "magical girl",
     "butterfly brooch"
    ],
@@ -35173,7 +35015,6 @@
     "pink bow",
     "pink choker",
     "magical girl",
-    "magical girl",
     "wrist cuffs",
     "pink wrist cuffs"
    ],
@@ -35193,8 +35034,7 @@
     "black hair",
     "white footwear",
     "magical girl",
-    "half updo",
-    "magical girl"
+    "half updo"
    ],
    "th": 0,
    "src": ""
@@ -35234,7 +35074,6 @@
     "under-rim eyewear",
     "brown hair",
     "short hair",
-    "sakuragaoka high school uniform",
     "sakuragaoka high school uniform"
    ],
    "th": 0,
@@ -35272,7 +35111,6 @@
     "short hair",
     "aqua hair",
     "blue hair",
-    "gekkoukan high school uniform",
     "gekkoukan high school uniform"
    ],
    "th": 0,
@@ -35292,7 +35130,6 @@
     "very long hair",
     "hairclip",
     "large breasts",
-    "school uniform",
     "school uniform",
     "long sleeves"
    ],
@@ -35483,7 +35320,6 @@
     "two side up",
     "small breasts",
     "white gloves",
-    "magical girl",
     "magical girl"
    ],
    "th": 1,
@@ -35539,7 +35375,6 @@
    "g": [
     "1girl",
     "nun",
-    "nun",
     "triangle mouth",
     "brown eyes",
     "v-shaped eyebrows",
@@ -35547,8 +35382,7 @@
     "traditional nun",
     "habit",
     "frog",
-    "duck",
-    "traditional nun"
+    "duck"
    ],
    "th": 0,
    "src": ""
@@ -35568,7 +35402,6 @@
     "ahoge",
     "serafuku",
     "white gloves",
-    "serafuku",
     "blue skirt",
     "pleated skirt"
    ],
@@ -35605,7 +35438,6 @@
     "long hair",
     "twintails",
     "blue skirt",
-    "magical girl",
     "magical girl",
     "heart brooch"
    ],
@@ -35788,7 +35620,6 @@
     "short hair",
     "medium breasts",
     "collarbone",
-    "sobu high school uniform",
     "sobu high school uniform"
    ],
    "th": 0,
@@ -35950,7 +35781,6 @@
     "double bun",
     "serafuku",
     "dixie cup hat",
-    "serafuku",
     "white headwear",
     "white shirt"
    ],
@@ -36054,7 +35884,6 @@
     "1girl",
     "long hair",
     "thighhighs",
-    "priest",
     "priest"
    ],
    "th": 0,
@@ -36076,7 +35905,6 @@
     "blue sailor collar",
     "blue choker",
     "earrings",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -36137,8 +35965,6 @@
     "purple hair",
     "large breasts",
     "school uniform",
-    "school uniform",
-    "virtual youtuber",
     "virtual youtuber"
    ],
    "th": 0,
@@ -36197,7 +36023,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "maid apron",
     "purple eyes",
     "hair between eyes",
@@ -36245,8 +36070,7 @@
     "sword",
     "magical girl",
     "mermaid",
-    "witch (madoka magica)",
-    "magical girl"
+    "witch (madoka magica)"
    ],
    "th": 0,
    "src": ""
@@ -36490,7 +36314,6 @@
     "short hair",
     "large breasts",
     "sweat",
-    "volleyball uniform",
     "volleyball uniform",
     "sleeveless shirt",
     "red headband",
@@ -36758,9 +36581,7 @@
     "long hair",
     "azumanga daioh's school uniform",
     "serafuku",
-    "winter uniform",
-    "azumanga daioh's school uniform",
-    "serafuku"
+    "winter uniform"
    ],
    "th": 0,
    "src": ""
@@ -37045,7 +36866,6 @@
     "red hair",
     "medium breasts",
     "serafuku",
-    "serafuku",
     "short sleeves"
    ],
    "th": 0,
@@ -37171,7 +36991,6 @@
     "yellow eyes",
     "pink hair",
     "long hair",
-    "hakuo school uniform",
     "hakuo school uniform"
    ],
    "th": 0,
@@ -37355,7 +37174,6 @@
     "brown hair",
     "short hair",
     "medium hair",
-    "tokiwadai school uniform",
     "tokiwadai school uniform"
    ],
    "th": 0,
@@ -37520,7 +37338,6 @@
     "wavy hair",
     "sailor senshi uniform",
     "white gloves",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -37585,7 +37402,6 @@
     "freckles",
     "serafuku",
     "blue skirt",
-    "serafuku",
     "pleated skirt",
     "white headwear"
    ],
@@ -37607,7 +37423,6 @@
     "very long hair",
     "long hair",
     "parted bangs",
-    "black kimono",
     "black kimono",
     "fingerless gloves"
    ],
@@ -37649,7 +37464,6 @@
     "short hair",
     "ahoge",
     "ponytail",
-    "military uniform",
     "military uniform",
     "long sleeves"
    ],
@@ -37792,7 +37606,6 @@
     "side ponytail",
     "blue skirt",
     "blue choker",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -37995,8 +37808,6 @@
     "ponytail",
     "ahoge",
     "nanamori school uniform",
-    "serafuku",
-    "nanamori school uniform",
     "serafuku"
    ],
    "th": 0,
@@ -38037,7 +37848,6 @@
     "ponytail",
     "wide ponytail",
     "pink skirt",
-    "magical girl",
     "magical girl",
     "heart brooch"
    ],
@@ -38102,7 +37912,6 @@
     "twintails",
     "flat chest",
     "elbow gloves",
-    "bat wings",
     "bat wings"
    ],
    "th": 0,
@@ -38163,7 +37972,6 @@
     "large breasts",
     "military uniform",
     "peaked cap",
-    "military uniform",
     "white gloves",
     "pleated skirt",
     "black thighhighs"
@@ -38199,7 +38007,6 @@
     "1girl",
     "angel wings",
     "angel",
-    "angel wings",
     "purple eyes",
     "hair over one eye",
     "blue hair",
@@ -38282,7 +38089,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "maid apron",
     "blue eyes",
     "hair between eyes",
@@ -38607,7 +38413,6 @@
    "g": [
     "1girl",
     "nun",
-    "nun",
     "red eyes",
     "hair over one eye",
     "one eye covered",
@@ -38768,7 +38573,6 @@
     "long hair",
     "large breasts",
     "cleavage",
-    "green leotard",
     "green leotard"
    ],
    "th": 0,
@@ -38806,7 +38610,6 @@
     "sidelocks",
     "blunt bangs",
     "blue dress",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -38923,7 +38726,6 @@
     "parted bangs",
     "sidelocks",
     "hair bow",
-    "meiji schoolgirl uniform",
     "meiji schoolgirl uniform",
     "hakama skirt"
    ],
@@ -39708,7 +39510,6 @@
     "blue skirt",
     "blue choker",
     "magical girl",
-    "magical girl",
     "heart"
    ],
    "th": 0,
@@ -39774,7 +39575,6 @@
     "black hair",
     "brown hair",
     "twin braids",
-    "serafuku",
     "serafuku"
    ],
    "th": 0,
@@ -39813,8 +39613,6 @@
     "brown hair",
     "long hair",
     "hair bow",
-    "meiji schoolgirl uniform",
-    "pink kimono",
     "meiji schoolgirl uniform",
     "pink kimono",
     "hakama skirt",
@@ -40095,7 +39893,6 @@
     "black hair",
     "medium breasts",
     "ribbon choker",
-    "dougi",
     "dougi"
    ],
    "th": 0,
@@ -40116,9 +39913,7 @@
     "huge breasts",
     "highleg leotard",
     "purple leotard",
-    "highleg leotard",
-    "white leotard",
-    "purple leotard"
+    "white leotard"
    ],
    "th": 0,
    "src": ""
@@ -40134,7 +39929,6 @@
     "long hair",
     "orange hair",
     "hair bow",
-    "rouman academy school uniform",
     "rouman academy school uniform",
     "polka dot bow"
    ],
@@ -40256,8 +40050,7 @@
     "purple hair",
     "ahoge",
     "serafuku",
-    "white gloves",
-    "serafuku"
+    "white gloves"
    ],
    "th": 0,
    "src": ""
@@ -40441,7 +40234,6 @@
     "blue dress",
     "blue bow",
     "puffy short sleeves",
-    "ice wings",
     "ice wings"
    ],
    "th": 1,
@@ -40540,7 +40332,6 @@
     "brown hair",
     "white hairband",
     "hairband",
-    "serafuku",
     "serafuku",
     "pleated skirt",
     "white gloves"
@@ -40739,8 +40530,6 @@
     "ponytail",
     "kitauji high school uniform",
     "serafuku",
-    "kitauji high school uniform",
-    "serafuku",
     "blue neckerchief"
    ],
    "th": 0,
@@ -40759,7 +40548,6 @@
     "pink hair",
     "brown hair",
     "hair bow",
-    "school uniform",
     "school uniform",
     "red bow",
     "long sleeves"
@@ -40782,7 +40570,6 @@
     "hair bow",
     "hair tubes",
     "white kimono",
-    "white kimono",
     "red bow",
     "long sleeves"
    ],
@@ -40800,7 +40587,6 @@
     "blonde hair",
     "long hair",
     "large breasts",
-    "military uniform",
     "military uniform",
     "long sleeves",
     "headgear"
@@ -40983,7 +40769,6 @@
     "long hair",
     "x hair ornament",
     "ahoge",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -41002,7 +40787,6 @@
     "black hair",
     "twintails",
     "ahoge",
-    "serafuku",
     "serafuku",
     "long sleeves"
    ],
@@ -41143,8 +40927,7 @@
     "blunt bangs",
     "hair tie",
     "keizoku military uniform",
-    "military uniform",
-    "keizoku military uniform"
+    "military uniform"
    ],
    "th": 0,
    "src": ""
@@ -41160,8 +40943,6 @@
     "brown eyes",
     "short hair",
     "brown hair",
-    "serafuku",
-    "kiyosumi school uniform",
     "serafuku",
     "kiyosumi school uniform",
     "red neckerchief"
@@ -41284,7 +41065,6 @@
     "large breasts",
     "military uniform",
     "pink skirt",
-    "military uniform",
     "black thighhighs"
    ],
    "th": 0,
@@ -41367,8 +41147,7 @@
     "single braid",
     "sophist's robe (ff14)",
     "white robe",
-    "white capelet",
-    "sophist's robe (ff14)"
+    "white capelet"
    ],
    "th": 0,
    "src": ""
@@ -41531,7 +41310,6 @@
     "purple hair",
     "long hair",
     "blunt bangs",
-    "magical girl",
     "magical girl"
    ],
    "th": 0,
@@ -41624,7 +41402,6 @@
    "g": [
     "1girl",
     "maid",
-    "maid",
     "maid headdress",
     "maid apron",
     "yellow eyes",
@@ -41653,7 +41430,6 @@
     "large breasts",
     "hip vent",
     "fingerless gloves",
-    "ninja",
     "ninja"
    ],
    "th": 0,
@@ -41993,7 +41769,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "red eyes",
     "hair between eyes",
     "grey hair",
@@ -42147,7 +41922,6 @@
     "grey hair",
     "low twintails",
     "hairclip",
-    "chinese clothes",
     "chinese clothes",
     "detached sleeves",
     "bare shoulders"
@@ -42507,7 +42281,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "maid apron",
     "cat ears",
     "cat tail",
@@ -42672,7 +42445,6 @@
     "1girl",
     "maid",
     "maid headdress",
-    "maid",
     "maid apron",
     "rabbit ears",
     "upper teeth only",
@@ -43172,7 +42944,6 @@
     "hair bell",
     "large breasts",
     "medium breasts",
-    "chinese clothes",
     "chinese clothes"
    ],
    "th": 0,
@@ -45538,6 +45309,10 @@
  ],
  "works": [
   [
+   "ai_gijinka",
+   3
+  ],
+  [
    "kantai collection",
    240
   ],
@@ -45696,6 +45471,18 @@
   [
    "gochuumon wa usagi desu ka?",
    8
+  ],
+  [
+   "deepseek",
+   1
+  ],
+  [
+   "chatgpt",
+   1
+  ],
+  [
+   "claude",
+   1
   ]
  ],
  "works_zh": {
@@ -45738,6 +45525,7 @@
   "lyrical nanoha": "魔法少女奈叶",
   "toaru majutsu no index": "魔法禁书目录",
   "chainsaw man": "电锯人",
-  "gochuumon wa usagi desu ka?": "请问您今天要来点兔子吗"
+  "gochuumon wa usagi desu ka?": "请问您今天要来点兔子吗",
+  "ai_gijinka": "AI拟人"
  }
 }
