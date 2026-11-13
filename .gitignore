@@ -102,3 +102,5 @@ docs/Anima-32包编号清单.md
 docs/Anima画风-保留名单.md
 !tools/_pack.py
 !tools/_release.py
+!tools/anima_dedupe.py
+!tools/anima_touhou_verify.py
