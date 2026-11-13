@@ -991,8 +991,8 @@ function escArtist(t){
   if(!s) return '';
   /* 多词触发词（如 claude_girl, orange hair, ...）按列表原样用，不能整串加 @ */
   if(s.indexOf(',') >= 0) return s;
-  if(s.charAt(0) === '@') return s;
-  return '@' + s.replace(/_/g, ' ');
+  const core = s.charAt(0) === '@' ? s.slice(1) : s;
+  return '@' + core.replace(/_/g, ' ');
 }
 function renderArtists(b){
   b.innerHTML="";

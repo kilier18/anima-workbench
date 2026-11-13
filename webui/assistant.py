@@ -1626,13 +1626,26 @@ def anima_loras(style_id=None):
     return out
 
 
+def _anima_trig_norm(t):
+    """触发词归一：画师名里的下划线是 danbooru 写法，Anima 要用空格；
+    多词触发词（含逗号）原样返回。"""
+    s = (t or "").strip()
+    if not s:
+        return ""
+    if "," in s:
+        return s
+    core = s[1:] if s.startswith("@") else s
+    core = core.replace("_", " ")
+    return "@" + core
+
+
 def anima_style_trig(style_id=None):
     sid = _ANIMA_STYLE["id"] if style_id is None else str(style_id)
     if not sid:
         return ""
     for r in load_anima_styles():
         if r["id"] == sid:
-            return r["trig"] or ""
+            return _anima_trig_norm(r["trig"] or "")
     return ""
 OUT_DIR = os.environ.get("COMFY_OUTPUT", r"D:\ComfyUI\output")  # 兼容旧引用；实际用 outdir()
 
