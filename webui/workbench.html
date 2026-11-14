@@ -764,7 +764,7 @@ function renderChars(b){
   q.value=S.charQ; q.style.flex="1";
   q.oninput=()=>{ S.charQ=q.value; S.charLimit=160; drawChars(); };
   const sel=document.createElement("select");
-  const works=S.lib.chars.works.slice(0,40);
+  const works=S.lib.chars.works.slice();
   const WZ = (S.lib.chars.works_zh || {});
   sel.innerHTML = '<option value="">全部作品</option>' + works.map(w=>{
     const zh = WZ[w[0]] || w[0] || '其他';

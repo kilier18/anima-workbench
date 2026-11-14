@@ -1,5 +1,5 @@
 {
- "version": 17,
+ "version": 18,
  "base": "Anima\\miaomiaoHarem_anima12.safetensors",
  "turbo": "Anima\\anima-turbo-lora-v0.2.safetensors",
  "note": "verdict=keep 才进工作台下拉；touhou_artist=true 的是已核实的东方画师",
@@ -1318,7 +1318,7 @@
    "wall_no": 8,
    "batch": "p7_artists",
    "name": "画风 kanpa_(campagne_9) style 【anima】",
-   "zh": "kanpa (campagne 9) ★用户最爱",
+   "zh": "kanpa (campagne 9)",
    "group": "东方画师",
    "lora": "Anima\\packs\\kanpa-campagne9.safetensors",
    "mb": 87.6,

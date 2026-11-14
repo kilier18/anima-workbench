@@ -107,6 +107,98 @@
    "src": "local"
   },
   {
+   "t": "deepseek-tan",
+   "zh": "鲸鱼娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 42400,
+   "g": [
+    "deepseek-tan",
+    "1girl",
+    "solo",
+    "blue hair",
+    "very long wavy hair",
+    "curled ahoge",
+    "blue eyes",
+    "whale ear fins",
+    "head fins",
+    "cetacean tail",
+    "big thick dark navy whale tail",
+    "fish tail",
+    "maid",
+    "large white frilly maid headdress",
+    "white frilly apron",
+    "navy blue maid dress",
+    "frilled white blouse",
+    "navy bowtie",
+    "blue diamond brooch",
+    "navy skirt with gold vine embroidery",
+    "puffy sleeves",
+    "juliet sleeves",
+    "white thighhighs",
+    "navy mary janes"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\musume-deepseek-whale.safetensors",
+   "lora_w": 1.0
+  },
+  {
+   "t": "deepseek-tan-chibi",
+   "zh": "鲸鱼娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 41900,
+   "g": [
+    "chibi",
+    "(chibi:1.3)",
+    "super deformed",
+    "ds_whalemaid",
+    "1girl",
+    "solo",
+    "maid outfit",
+    "large white frilly maid headdress",
+    "white frilled apron",
+    "blue hair",
+    "short hair",
+    "blue eyes",
+    "whale tail",
+    "frills"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\deepseek-whalemaid-chibi.safetensors",
+   "lora_w": 1.0
+  },
+  {
+   "t": "chatgpt-tan",
+   "zh": "白龙娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 38200,
+   "g": [
+    "chatgpt-tan",
+    "1girl",
+    "solo",
+    "white hair",
+    "very long wavy hair",
+    "curled ahoge",
+    "pointed ears",
+    "two large white ridged dragon horns",
+    "pale lavender-grey eyes",
+    "white interlaced-knot hair ornament",
+    "long white tassel earring",
+    "small white bat-like dragon wings",
+    "long thick white scaled dragon tail",
+    "white sleeveless china dress",
+    "qipao collar",
+    "crystal diamond ornaments",
+    "long translucent flowing sleeves",
+    "translucent over-skirt"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\chatgpt-dragon-alt.safetensors",
+   "lora_w": 1.0
+  },
+  {
    "t": "admiral_(kancolle)",
    "zh": "提督LOVE",
    "w": "kantai collection",
@@ -118,6 +210,31 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "chatgpt-tan-chibi",
+   "zh": "白龙娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 37700,
+   "g": [
+    "chibi",
+    "(chibi:1.2)",
+    "白龙娘",
+    "1girl",
+    "solo",
+    "white hair",
+    "long hair",
+    "white horns",
+    "dragon horns",
+    "pointy ears",
+    "purple eyes",
+    "small dragon wings",
+    "dragon tail"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\musume-gpt-white-dragon.safetensors",
+   "lora_w": 1.0
   },
   {
    "t": "artoria_pendragon_(fate)",
@@ -135,6 +252,110 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "gemini-ai",
+   "zh": "Gemini娘（紫猫娘）",
+   "w": "ai_gijinka",
+   "p": 37200,
+   "g": [
+    "gemini_ai",
+    "1girl",
+    "solo",
+    "blue hair",
+    "purple hair",
+    "multicolored hair",
+    "gradient hair",
+    "long hair",
+    "hair bun",
+    "ahoge",
+    "cat ears",
+    "animal ear fluff",
+    "(heterochromia:1.2)",
+    "red eye",
+    "yellow eye"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\gemini-chan-anima.safetensors",
+   "lora_w": 1.0
+  },
+  {
+   "t": "gemini-ai-chibi",
+   "zh": "Gemini娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 36700,
+   "g": [
+    "chibi",
+    "2head",
+    "gemini_ai",
+    "1girl",
+    "solo",
+    "blue hair",
+    "purple hair",
+    "multicolored hair",
+    "gradient hair",
+    "long hair",
+    "hair bun",
+    "ahoge",
+    "cat ears",
+    "animal ear fluff",
+    "(heterochromia:1.4)",
+    "red eye",
+    "yellow eye"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\gemini-chan-anima.safetensors",
+   "lora_w": 0.85
+  },
+  {
+   "t": "gemini-carborn",
+   "zh": "Gemini娘（彩虹版）",
+   "w": "ai_gijinka",
+   "p": 36200,
+   "g": [
+    "Gemini_(Carborn)",
+    "1girl",
+    "solo",
+    "rainbow hair",
+    "multicolored hair",
+    "streaked hair",
+    "long hair",
+    "heterochromia",
+    "star hair ornament",
+    "crop top",
+    "midriff"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\gemini-carborn.safetensors",
+   "lora_w": 1.0
+  },
+  {
+   "t": "gemini-carborn-chibi",
+   "zh": "Gemini娘（彩虹Q版）",
+   "w": "ai_gijinka",
+   "p": 35700,
+   "g": [
+    "chibi",
+    "2head",
+    "Gemini_(Carborn)",
+    "1girl",
+    "solo",
+    "rainbow hair",
+    "multicolored hair",
+    "streaked hair",
+    "long hair",
+    "heterochromia",
+    "star hair ornament",
+    "crop top",
+    "midriff"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\gemini-carborn.safetensors",
+   "lora_w": 0.9
   },
   {
    "t": "kochiya_sanae",
@@ -155,6 +376,35 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "claude_girl",
+   "zh": "Claude娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 35200,
+   "g": [
+    "claude_girl",
+    "1girl",
+    "solo",
+    "long wavy copper-orange hair",
+    "loose side-swept bangs",
+    "warm amber eyes",
+    "orange daisy-shaped hair flower",
+    "black striped ribbon bow",
+    "white tassel",
+    "cream-white dress",
+    "short cape collar",
+    "orange flower embroidery",
+    "orange and black front panels",
+    "black waist sash",
+    "orange flower brooch",
+    "dark brown boots",
+    "holding a dark brown hardcover book with an orange flower emblem"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\claude-girl.safetensors",
+   "lora_w": 1.0
   },
   {
    "t": "konpaku_youmu",
@@ -188,6 +438,34 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "claude_girl-chibi",
+   "zh": "Claude娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 34700,
+   "g": [
+    "chibi",
+    "2head",
+    "claude_girl",
+    "1girl",
+    "solo",
+    "long wavy copper-orange hair",
+    "amber eyes",
+    "orange daisy-shaped hair flower",
+    "black striped ribbon bow",
+    "white tassel",
+    "cream-white dress",
+    "short cape collar",
+    "black waist sash",
+    "orange flower brooch",
+    "dark brown boots",
+    "book"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\claude-girl.safetensors",
+   "lora_w": 0.75
   },
   {
    "t": "komeiji_koishi",
@@ -231,6 +509,38 @@
    "src": "local"
   },
   {
+   "t": "grok-tan",
+   "zh": "Grok娘（ZipZipPipe版）",
+   "w": "ai_gijinka",
+   "p": 34500,
+   "g": [
+    "aigirls",
+    "grok",
+    "1girl",
+    "full body",
+    "standing",
+    "blonde hair",
+    "long hair",
+    "twintails",
+    "gold crown",
+    "two bat wing hair ornaments, one on each side of head",
+    "blue eyes",
+    "sharp eyes",
+    "smirk",
+    "raised eyebrow",
+    "black and red dress",
+    "short dress",
+    "red lining",
+    "gold trim",
+    "black pantyhose",
+    "black boots"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\ai-girls-pack.safetensors",
+   "lora_w": 1.0
+  },
+  {
    "t": "patchouli_knowledge",
    "zh": "帕秋莉",
    "w": "touhou",
@@ -245,6 +555,53 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "grok-tan-chibi",
+   "zh": "Grok娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 34000,
+   "g": [
+    "aigirls",
+    "grok",
+    "1girl",
+    "full body",
+    "standing",
+    "blonde hair",
+    "long hair",
+    "twintails",
+    "gold crown",
+    "two bat wing hair ornaments, one on each side of head",
+    "blue eyes",
+    "sharp eyes",
+    "smirk",
+    "raised eyebrow",
+    "black and red dress",
+    "short dress",
+    "red lining",
+    "gold trim",
+    "black pantyhose",
+    "black boots"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\ai-girls-pack.safetensors",
+   "lora_w": 0.85
+  },
+  {
+   "t": "kimi-chan",
+   "zh": "Kimi娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 32500,
+   "g": [
+    "kimi chan",
+    "1girl",
+    "solo"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\kimi-chan.safetensors",
+   "lora_w": 1.0
   },
   {
    "t": "yakumo_yukari",
@@ -262,6 +619,91 @@
    ],
    "th": 1,
    "src": "local"
+  },
+  {
+   "t": "kimi-chan-chibi",
+   "zh": "Kimi娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 32000,
+   "g": [
+    "kimi chan",
+    "1girl",
+    "solo"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\kimi-chan.safetensors",
+   "lora_w": 0.85
+  },
+  {
+   "t": "glm-zhipu",
+   "zh": "智谱GLM娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 31500,
+   "g": [
+    "glm_fox_girl",
+    "1girl",
+    "solo",
+    "fox ears",
+    "frills",
+    "white shirt",
+    "puffy sleeves",
+    "black bow"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\glm-zhipu.safetensors",
+   "lora_w": 1.0
+  },
+  {
+   "t": "glm-zhipu-chibi",
+   "zh": "智谱GLM娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 31000,
+   "g": [
+    "glm_fox_girl",
+    "1girl",
+    "solo",
+    "fox ears",
+    "frills",
+    "white shirt",
+    "puffy sleeves",
+    "black bow"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\glm-zhipu.safetensors",
+   "lora_w": 0.85
+  },
+  {
+   "t": "qwen-chan",
+   "zh": "千问娘（正常版）",
+   "w": "ai_gijinka",
+   "p": 30500,
+   "g": [
+    "qwen \\(girl\\)",
+    "1girl",
+    "solo"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\qwen-chan.safetensors",
+   "lora_w": 1.0
+  },
+  {
+   "t": "qwen-chan-chibi",
+   "zh": "千问娘（Q版）",
+   "w": "ai_gijinka",
+   "p": 30000,
+   "g": [
+    "qwen \\(girl\\)",
+    "1girl",
+    "solo"
+   ],
+   "th": 1,
+   "src": "lora",
+   "lora": "Anima\\packs\\qwen-chan.safetensors",
+   "lora_w": 0.85
   },
   {
    "t": "shameimaru_aya",
@@ -45123,6 +45565,10 @@
  ],
  "works": [
   [
+   "ai_gijinka",
+   18
+  ],
+  [
    "kantai collection",
    240
   ],
@@ -45336,6 +45782,6 @@
   "toaru majutsu no index": "魔法禁书目录",
   "chainsaw man": "电锯人",
   "gochuumon wa usagi desu ka?": "请问您今天要来点兔子吗",
-  "ai_gijinka": "AI拟人"
+  "ai_gijinka": "AI 拟人（大模型娘）"
  }
 }
