@@ -2590,6 +2590,89 @@
     "lv": 4,
     "kind": "sex",
     "who": "m"
+   },
+   {
+    "zh": "衣服没脱，手从下摆伸进去",
+    "tags": [
+     "clothes_lift",
+     "hand_under_skirt",
+     "masturbation"
+    ],
+    "core": [
+     "clothes_lift",
+     "hand_under_skirt",
+     "masturbation"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "上衣褪到一边肩膀",
+    "tags": [
+     "clothes_pull",
+     "bare_shoulders",
+     "masturbation"
+    ],
+    "core": [
+     "clothes_pull",
+     "bare_shoulders",
+     "masturbation"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "内裤拨到一边，裙子还穿着",
+    "tags": [
+     "panties_aside",
+     "skirt",
+     "fingering"
+    ],
+    "core": [
+     "panties_aside",
+     "skirt",
+     "fingering"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "上衣卷到胸口，下面什么都没穿",
+    "tags": [
+     "clothes_lift",
+     "breasts_out",
+     "bottomless",
+     "fingering"
+    ],
+    "core": [
+     "clothes_lift",
+     "breasts_out",
+     "bottomless",
+     "fingering"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "衣服半褪在手臂上，人已经软了",
+    "tags": [
+     "open_clothes",
+     "undressing",
+     "orgasm",
+     "on_bed"
+    ],
+    "core": [
+     "open_clothes",
+     "undressing",
+     "orgasm"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "yuri_daily": [
@@ -4825,6 +4908,69 @@
     "lv": 4,
     "kind": "yuri",
     "who": "duo"
+   },
+   {
+    "zh": "两人的衣服都只剩一边",
+    "tags": [
+     "open_clothes",
+     "clothes_pull",
+     "cunnilingus"
+    ],
+    "core": [
+     "open_clothes",
+     "clothes_pull",
+     "cunnilingus"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "裙子被对方掀起来",
+    "tags": [
+     "skirt_lift",
+     "panties",
+     "tribadism"
+    ],
+    "core": [
+     "skirt_lift",
+     "panties",
+     "tribadism"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "上衣被推到锁骨，胸口贴着胸口",
+    "tags": [
+     "clothes_lift",
+     "breasts_out",
+     "breast_press"
+    ],
+    "core": [
+     "clothes_lift",
+     "breasts_out",
+     "breast_press"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "内裤挂在一只脚上",
+    "tags": [
+     "panties_around_one_leg",
+     "fingering",
+     "on_bed"
+    ],
+    "core": [
+     "panties_around_one_leg",
+     "fingering"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "machine_daily": [
@@ -7065,6 +7211,40 @@
     "lv": 4,
     "kind": "machine",
     "who": "solo"
+   },
+   {
+    "zh": "衣服被机械臂扯开",
+    "tags": [
+     "clothes_pull",
+     "torn_clothes",
+     "machine",
+     "sex"
+    ],
+    "core": [
+     "clothes_pull",
+     "torn_clothes",
+     "machine",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "衣料被固定装置拉开",
+    "tags": [
+     "open_clothes",
+     "machine",
+     "breasts_out"
+    ],
+    "core": [
+     "open_clothes",
+     "machine",
+     "breasts_out"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "bdsm_daily": [
@@ -9292,6 +9472,78 @@
     "lv": 2,
     "kind": "sex",
     "who": "any"
+   },
+   {
+    "zh": "衣服被撕开还挂在绳子上",
+    "tags": [
+     "torn_clothes",
+     "bondage",
+     "open_clothes",
+     "sex"
+    ],
+    "core": [
+     "torn_clothes",
+     "bondage",
+     "open_clothes",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "项圈连着绳子，裙子被掀起来",
+    "tags": [
+     "collar",
+     "leash",
+     "skirt_lift",
+     "sex"
+    ],
+    "core": [
+     "collar",
+     "leash",
+     "skirt_lift",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "被命令自己把衣服脱到一半",
+    "tags": [
+     "undressing",
+     "obeying",
+     "blush",
+     "standing"
+    ],
+    "core": [
+     "undressing",
+     "obeying",
+     "blush",
+     "standing"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "衣料被夹子扯着，整片敞开",
+    "tags": [
+     "clothes_pin",
+     "open_clothes",
+     "breasts_out",
+     "trembling"
+    ],
+    "core": [
+     "clothes_pin",
+     "open_clothes",
+     "breasts_out",
+     "trembling"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "tentacle_daily": [
@@ -11319,6 +11571,40 @@
     "lv": 4,
     "kind": "tentacle",
     "who": "solo"
+   },
+   {
+    "zh": "触手从衣服破口钻进去",
+    "tags": [
+     "torn_clothes",
+     "clothes_lift",
+     "tentacles",
+     "sex"
+    ],
+    "core": [
+     "torn_clothes",
+     "clothes_lift",
+     "tentacles",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "衣服被缠住撕开大半",
+    "tags": [
+     "torn_clothes",
+     "open_clothes",
+     "tentacles"
+    ],
+    "core": [
+     "torn_clothes",
+     "open_clothes",
+     "tentacles"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "triple_daily": [
@@ -13383,6 +13669,38 @@
     "lv": 3,
     "kind": "group",
     "who": "trio"
+   },
+   {
+    "zh": "衣服被两边一起扯开",
+    "tags": [
+     "clothes_pull",
+     "open_clothes",
+     "group_sex"
+    ],
+    "core": [
+     "clothes_pull",
+     "open_clothes",
+     "group_sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "裙子和内裤都被拽到腿弯",
+    "tags": [
+     "clothes_lift",
+     "panties_around_one_leg",
+     "sex"
+    ],
+    "core": [
+     "clothes_lift",
+     "panties_around_one_leg",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "hypno_daily": [
@@ -15564,6 +15882,40 @@
      "sex",
      "empty_eyes",
      "blank_stare"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "被命令自己脱，手停在半路",
+    "tags": [
+     "undressing",
+     "mind_control",
+     "blank_eyes",
+     "standing"
+    ],
+    "core": [
+     "undressing",
+     "mind_control",
+     "blank_eyes",
+     "standing"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "衣服被脱到腰上，人还没醒",
+    "tags": [
+     "open_clothes",
+     "undressing",
+     "half-closed_eyes"
+    ],
+    "core": [
+     "open_clothes",
+     "undressing",
+     "half-closed_eyes"
     ],
     "lv": 4,
     "kind": "sex",
@@ -18267,6 +18619,147 @@
     "lv": 4,
     "kind": "flirt",
     "who": "m"
+   },
+   {
+    "zh": "衣领被扯开，锁骨和肩线全露出来",
+    "tags": [
+     "clothes_pull",
+     "collar",
+     "bare_shoulders",
+     "blush"
+    ],
+    "core": [
+     "clothes_pull",
+     "collar",
+     "bare_shoulders",
+     "blush"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "裙子被掀到腰上，动作没停",
+    "tags": [
+     "skirt_lift",
+     "panties",
+     "sex",
+     "standing"
+    ],
+    "core": [
+     "skirt_lift",
+     "panties",
+     "sex",
+     "standing"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "上衣被推到胸口以上",
+    "tags": [
+     "clothes_lift",
+     "breasts_out",
+     "underboob",
+     "sex"
+    ],
+    "core": [
+     "clothes_lift",
+     "breasts_out",
+     "underboob",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "内裤只剩一只脚踝挂着",
+    "tags": [
+     "panties_around_one_leg",
+     "sex",
+     "on_bed"
+    ],
+    "core": [
+     "panties_around_one_leg",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "衣服扯开一半还挂在身上",
+    "tags": [
+     "open_clothes",
+     "torn_clothes",
+     "sex",
+     "sweat"
+    ],
+    "core": [
+     "open_clothes",
+     "torn_clothes",
+     "sex",
+     "sweat"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "扣子全解了，里面什么都没穿",
+    "tags": [
+     "undressing",
+     "buttons",
+     "open_shirt",
+     "breasts_out"
+    ],
+    "core": [
+     "undressing",
+     "buttons",
+     "open_shirt",
+     "breasts_out"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "从背后解开拉链，后背整片露着",
+    "tags": [
+     "undressing",
+     "zipper",
+     "bare_back",
+     "sex_from_behind"
+    ],
+    "core": [
+     "undressing",
+     "zipper",
+     "bare_back",
+     "sex_from_behind"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   },
+   {
+    "zh": "裙子被推到腰间，髋线露出来",
+    "tags": [
+     "clothes_lift",
+     "skirt_lift",
+     "bare_hips",
+     "sex"
+    ],
+    "core": [
+     "clothes_lift",
+     "skirt_lift",
+     "bare_hips",
+     "sex"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
    }
   ],
   "group3p": [
@@ -18995,6 +19488,890 @@
     "lv": 3,
     "kind": "after",
     "who": "any"
+   },
+   {
+    "zh": "衣服皱在身上没穿好",
+    "tags": [
+     "open_clothes",
+     "messy_clothes",
+     "after_sex",
+     "lying"
+    ],
+    "core": [
+     "open_clothes",
+     "messy_clothes",
+     "after_sex",
+     "lying"
+    ],
+    "lv": 4,
+    "kind": "sex",
+    "who": "m"
+   }
+  ],
+  "duo_sfw": [
+   {
+    "zh": "壁咚，手撑在墙上",
+    "tags": [
+     "kabedon",
+     "hand_on_wall",
+     "looking_at_another",
+     "blush"
+    ],
+    "core": [
+     "kabedon",
+     "hand_on_wall",
+     "looking_at_another",
+     "blush"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "替对方系领带",
+    "tags": [
+     "adjusting_necktie",
+     "standing",
+     "looking_at_another"
+    ],
+    "core": [
+     "adjusting_necktie",
+     "standing",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "并排坐着比手大小",
+    "tags": [
+     "comparing_hands",
+     "sitting",
+     "looking_at_another",
+     "smile"
+    ],
+    "core": [
+     "comparing_hands",
+     "sitting",
+     "looking_at_another",
+     "smile"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "靠在对方肩上睡着",
+    "tags": [
+     "head_rest",
+     "sleeping",
+     "sitting",
+     "blush"
+    ],
+    "core": [
+     "head_rest",
+     "sleeping",
+     "sitting",
+     "blush"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "被摸头，低头笑",
+    "tags": [
+     "headpat",
+     "looking_down",
+     "smile",
+     "blush"
+    ],
+    "core": [
+     "headpat",
+     "looking_down",
+     "smile",
+     "blush"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "挽着手臂走在街上",
+    "tags": [
+     "arm_hug",
+     "walking",
+     "smile",
+     "outdoors"
+    ],
+    "core": [
+     "arm_hug",
+     "walking",
+     "smile",
+     "outdoors"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "共撑一把伞，肩膀贴着",
+    "tags": [
+     "holding_umbrella",
+     "rain",
+     "shoulder-to-shoulder"
+    ],
+    "core": [
+     "holding_umbrella",
+     "shoulder-to-shoulder"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "从背后被抱住，回头看",
+    "tags": [
+     "hug_from_behind",
+     "looking_back",
+     "blush"
+    ],
+    "core": [
+     "hug_from_behind",
+     "looking_back",
+     "blush"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "额头相抵，闭着眼",
+    "tags": [
+     "forehead-to-forehead",
+     "closed_eyes",
+     "blush"
+    ],
+    "core": [
+     "forehead-to-forehead",
+     "closed_eyes",
+     "blush"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "被公主抱起来",
+    "tags": [
+     "princess_carry",
+     "carrying",
+     "looking_at_another"
+    ],
+    "core": [
+     "princess_carry",
+     "carrying",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "膝枕，低头看着",
+    "tags": [
+     "lap_pillow",
+     "lying",
+     "looking_down",
+     "smile"
+    ],
+    "core": [
+     "lap_pillow",
+     "lying",
+     "looking_down",
+     "smile"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "手牵手走在前头",
+    "tags": [
+     "holding_hands",
+     "walking",
+     "from_behind"
+    ],
+    "core": [
+     "holding_hands",
+     "walking"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "靠在窗边聊到天黑",
+    "tags": [
+     "through_window",
+     "standing",
+     "looking_at_another",
+     "evening"
+    ],
+    "core": [
+     "through_window",
+     "standing",
+     "looking_at_another",
+     "evening"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起看手机，头挨着头",
+    "tags": [
+     "looking_at_phone",
+     "sitting",
+     "head_rest"
+    ],
+    "core": [
+     "looking_at_phone",
+     "sitting",
+     "head_rest"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "递过一杯热饮",
+    "tags": [
+     "holding_cup",
+     "reaching",
+     "smile"
+    ],
+    "core": [
+     "holding_cup",
+     "reaching",
+     "smile"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "并肩走路",
+    "tags": [
+     "holding_hands",
+     "walking",
+     "shoulder-to-shoulder"
+    ],
+    "core": [
+     "holding_hands",
+     "walking",
+     "shoulder-to-shoulder"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "背靠背坐着",
+    "tags": [
+     "back-to-back",
+     "sitting",
+     "closed_eyes"
+    ],
+    "core": [
+     "back-to-back",
+     "sitting"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "共撑一把伞",
+    "tags": [
+     "holding_umbrella",
+     "holding_hands",
+     "rain"
+    ],
+    "core": [
+     "holding_umbrella",
+     "holding_hands"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "互相喂食",
+    "tags": [
+     "feeding",
+     "eating",
+     "smile"
+    ],
+    "core": [
+     "feeding",
+     "eating"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "公主抱",
+    "tags": [
+     "princess_carry",
+     "carrying",
+     "smile"
+    ],
+    "core": [
+     "princess_carry",
+     "carrying"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "背着走",
+    "tags": [
+     "piggyback",
+     "carrying",
+     "laughing"
+    ],
+    "core": [
+     "piggyback",
+     "carrying"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "摸头",
+    "tags": [
+     "headpat",
+     "smile",
+     "closed_eyes"
+    ],
+    "core": [
+     "headpat"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "捏对方的脸",
+    "tags": [
+     "cheek_pinching",
+     "smile",
+     "looking_at_another"
+    ],
+    "core": [
+     "cheek_pinching",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "靠肩打盹",
+    "tags": [
+     "head_rest",
+     "sleeping",
+     "sitting"
+    ],
+    "core": [
+     "head_rest",
+     "sleeping",
+     "sitting"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "膝枕",
+    "tags": [
+     "lap_pillow",
+     "lying",
+     "looking_at_another"
+    ],
+    "core": [
+     "lap_pillow",
+     "lying",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "紧紧拥抱",
+    "tags": [
+     "hug",
+     "closed_eyes",
+     "smile"
+    ],
+    "core": [
+     "hug"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "从背后抱住",
+    "tags": [
+     "hug_from_behind",
+     "smile"
+    ],
+    "core": [
+     "hug_from_behind"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "搂着肩",
+    "tags": [
+     "arm_around_shoulder",
+     "walking"
+    ],
+    "core": [
+     "arm_around_shoulder",
+     "walking"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "搂着腰",
+    "tags": [
+     "arm_around_waist",
+     "standing"
+    ],
+    "core": [
+     "arm_around_waist",
+     "standing"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "十指相扣",
+    "tags": [
+     "interlocked_fingers",
+     "holding_hands"
+    ],
+    "core": [
+     "interlocked_fingers",
+     "holding_hands"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "对视",
+    "tags": [
+     "looking_at_another",
+     "eye_contact",
+     "smile"
+    ],
+    "core": [
+     "looking_at_another",
+     "eye_contact"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起躺下",
+    "tags": [
+     "lying",
+     "on_bed",
+     "hug"
+    ],
+    "core": [
+     "lying",
+     "hug"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "替她把头发梳顺",
+    "tags": [
+     "brushing_hair",
+     "sitting",
+     "smile"
+    ],
+    "core": [
+     "brushing_hair",
+     "sitting"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "帮对方整理领口",
+    "tags": [
+     "adjusting_clothes",
+     "arm_around_neck",
+     "looking_at_another"
+    ],
+    "core": [
+     "adjusting_clothes",
+     "arm_around_neck",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "亲额头",
+    "tags": [
+     "kiss",
+     "forehead",
+     "closed_eyes"
+    ],
+    "core": [
+     "kiss",
+     "forehead"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "扛在肩上",
+    "tags": [
+     "carrying",
+     "over_shoulder"
+    ],
+    "core": [
+     "carrying",
+     "over_shoulder"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起野餐",
+    "tags": [
+     "picnic",
+     "sitting",
+     "outdoors",
+     "holding_food"
+    ],
+    "core": [
+     "picnic",
+     "sitting",
+     "holding_food"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起自拍",
+    "tags": [
+     "selfie",
+     "hug",
+     "smile"
+    ],
+    "core": [
+     "selfie",
+     "hug"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起看书",
+    "tags": [
+     "reading",
+     "book",
+     "sitting",
+     "leaning_on_person"
+    ],
+    "core": [
+     "reading",
+     "sitting",
+     "leaning_on_person"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "依偎在沙发上",
+    "tags": [
+     "leaning_on_person",
+     "couch",
+     "closed_eyes"
+    ],
+    "core": [
+     "leaning_on_person"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "睡在一起",
+    "tags": [
+     "sleeping",
+     "cuddling",
+     "on_bed"
+    ],
+    "core": [
+     "sleeping",
+     "cuddling"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起照镜子",
+    "tags": [
+     "mirror",
+     "posing",
+     "looking_at_viewer"
+    ],
+    "core": [
+     "posing"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "拍对方肩膀",
+    "tags": [
+     "hand_on_another's_shoulder",
+     "smile"
+    ],
+    "core": [
+     "hand_on_another's_shoulder"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起靠着栏杆",
+    "tags": [
+     "leaning_forward",
+     "standing",
+     "looking_at_another"
+    ],
+    "core": [
+     "leaning_forward",
+     "standing",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "搂着对方手臂",
+    "tags": [
+     "arm_hug",
+     "walking",
+     "smile"
+    ],
+    "core": [
+     "arm_hug",
+     "walking"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "互相整理头发",
+    "tags": [
+     "adjusting_hair",
+     "looking_at_another"
+    ],
+    "core": [
+     "adjusting_hair",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "抱着转圈",
+    "tags": [
+     "spinning",
+     "hug",
+     "laughing"
+    ],
+    "core": [
+     "spinning",
+     "hug"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "摸着对方的脸",
+    "tags": [
+     "hand_on_another's_face",
+     "looking_at_another"
+    ],
+    "core": [
+     "hand_on_another's_face",
+     "looking_at_another"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "举高高",
+    "tags": [
+     "lifting_person",
+     "carrying",
+     "laughing"
+    ],
+    "core": [
+     "lifting_person",
+     "carrying"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起摆姿势",
+    "tags": [
+     "posing",
+     "v",
+     "smile"
+    ],
+    "core": [
+     "posing",
+     "v"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起跳双人舞",
+    "tags": [
+     "dancing",
+     "holding_hands",
+     "smile"
+    ],
+    "core": [
+     "dancing",
+     "holding_hands"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "靠在对方背上",
+    "tags": [
+     "leaning_on_person",
+     "hug_from_behind",
+     "closed_eyes"
+    ],
+    "core": [
+     "leaning_on_person",
+     "hug_from_behind"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起听同一副耳机",
+    "tags": [
+     "headphones",
+     "hug",
+     "sitting"
+    ],
+    "core": [
+     "hug",
+     "sitting"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "互相靠着睡",
+    "tags": [
+     "sleeping",
+     "head_rest",
+     "hug"
+    ],
+    "core": [
+     "sleeping",
+     "head_rest",
+     "hug"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起看窗外",
+    "tags": [
+     "looking_down",
+     "window",
+     "leaning_forward"
+    ],
+    "core": [
+     "looking_down",
+     "leaning_forward"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
+   },
+   {
+    "zh": "一起围着围巾",
+    "tags": [
+     "scarf",
+     "hug",
+     "winter"
+    ],
+    "core": [
+     "scarf",
+     "hug",
+     "winter"
+    ],
+    "lv": 1,
+    "kind": "daily",
+    "who": "duo"
    }
   ]
  },
@@ -19647,32 +21024,33 @@
   "actions": {
    "solo_daily": 55,
    "solo_flirt": 60,
-   "solo_sex": 55,
+   "solo_sex": 60,
    "yuri_daily": 45,
    "yuri_flirt": 50,
-   "yuri_sex": 55,
+   "yuri_sex": 59,
    "machine_daily": 40,
    "machine_flirt": 45,
-   "machine_sex": 50,
+   "machine_sex": 52,
    "bdsm_daily": 40,
    "bdsm_flirt": 50,
-   "bdsm_sex": 55,
+   "bdsm_sex": 59,
    "tentacle_daily": 30,
    "tentacle_flirt": 45,
-   "tentacle_sex": 55,
+   "tentacle_sex": 57,
    "triple_daily": 35,
    "triple_flirt": 45,
-   "triple_sex": 50,
+   "triple_sex": 52,
    "hypno_daily": 40,
    "hypno_flirt": 45,
-   "hypno_sex": 50,
+   "hypno_sex": 52,
    "duo_daily": 74,
    "duo_flirt": 65,
-   "duo_male": 42,
+   "duo_male": 50,
    "group3p": 34,
-   "after": 12
+   "after": 13,
+   "duo_sfw": 56
   },
-  "total": 1222,
+  "total": 1308,
   "kinds": {
    "daily": 289,
    "flirt": 357,

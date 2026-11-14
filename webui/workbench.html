@@ -1457,11 +1457,12 @@ function poolPlan(tier, nChar){
   const T = tier === 'sfw' ? 'daily' : (tier === 'suggestive' ? 'flirt' : 'sex');
   if(sc !== 'auto'){
     let main = [sc + '_' + T];
-    // 双人·男女：没有 duo_sex 池，R18 档直接用 duo_male（42 条"她 + 无脸男"）
-    if(sc === 'duo' && tier === 'r18') main = ['duo_male'];
+    // 双人·男女：没有 duo_sex 池，R18 档用 duo_male（"她 + 无脸男"）；
+    // 健全档用 duo_sfw（一男一女通用互动，56 条），擦边档用 duo_flirt。
+    if(sc === 'duo') main = [(tier === 'r18') ? 'duo_male'
+                             : (tier === 'sfw' ? 'duo_sfw' : 'duo_flirt')];
     let extra = [];
-    if(sc === 'duo') extra = (tier === 'r18') ? ['duo_flirt','solo_sex','after']
-                            : (tier === 'suggestive' ? ['duo_daily'] : []);
+    if(sc === 'duo') extra = (tier === 'r18') ? ['duo_flirt','solo_sex','after'] : [];
     else if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
     else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_flirt','duo_daily','tentacle_flirt'];
     else if(sc === 'yuri' && tier === 'r18') extra = ['triple_sex','group3p','machine_sex','tentacle_sex'];
@@ -1742,6 +1743,7 @@ const POOL_RULE = {
   // 普通双人互动 / 单人补人 / 事后
   // 催眠三档（m:3 = 条目自带男体词时才落地 faceless_male，施术者要画得出来）
   hypno_daily:{g:1, m:0, k:'daily'}, hypno_flirt:{g:1, m:3, k:'flirt'}, hypno_sex:{g:1, m:3, k:'sex'},
+  duo_sfw:{g:1, m:1, k:'daily'},
   duo_daily:{g:2, m:0, k:'daily'},   duo_flirt:{g:2, m:0, k:'flirt'},   duo_male:{g:1, m:1, k:'sex'},
   duo_solo:{g:1, m:1, k:'flirt'},
   group3p:{g:2, m:1, k:'group'},     after:{g:1, m:1, k:'after'}
@@ -1761,7 +1763,8 @@ const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_
   tentacle_daily:'触手·健全', tentacle_flirt:'触手·擦边', tentacle_sex:'触手·R18',
   triple_daily:'3P·健全', triple_flirt:'3P·擦边', triple_sex:'3P·R18',
   hypno_daily:'催眠·健全', hypno_flirt:'催眠·擦边', hypno_sex:'催眠·R18',
-  duo_daily:'双人日常', duo_flirt:'双人暧昧', duo_male:'单人+无脸男', duo_solo:'单人+无脸男',
+  duo_daily:'双人日常', duo_flirt:'双人暧昧', duo_male:'双人·男女R18', duo_solo:'单人+无脸男',
+  duo_sfw:'双人·男女(健全)',
   group3p:'双女+无脸男 3P', after:'事后'};
 function preflight(tags, opt){
   const o = opt || {};
@@ -2068,9 +2071,33 @@ function preflight(tags, opt){
   const FULLGARB = ['dress','shirt','skirt','uniform','school_uniform','kimono','yukata','apron',
                     'coat','jacket','robe','suit','hoodie','sweater','sailor_collar','serafuku',
                     'china_dress','hanfu','miko'];
+  // R18 性交场景不能"整整齐齐穿着"：池里 90% 的条目只有体位没有衣物状态，
+  // 模型就把衣服画得板板正正，身体曲线和半遮半掩全没了。
+  // 用户 2026-11-14 原话："像是搁这衣服进去的，没有身体曲线，也没有半遮半掩的诱惑"。
+  const USTATE = ['open_clothes','undressing','clothes_lift','clothes_pull','skirt_lift',
+                  'panty_pull','panties_aside','panties_around_one_leg','bra_lift','shirt_lift',
+                  'dress_lift','torn_clothes','breasts_out','nipple_slip','bare_shoulders',
+                  'bare_back','bare_legs','clothes_removed','bottomless','topless',
+                  'wardrobe_malfunction','strap_slip','clothes_in_mouth'];
+  if(k === 'sex' && a.some(t=>PF_SEXISH.includes(low(t))) && !a.some(t=>USTATE.includes(low(t)))){
+    a.push('open_clothes');
+    rep.fixes.push('性交场景补衣物敞开');
+  }
   if(hasU(a)){
-    const n3 = cut(FULLGARB);
-    if(n3) rep.fixes.push('脱衣场景去整件衣物 ' + n3);
+    // 子串匹配：新角色卡里的服装是词组（gothic maid outfit / black red short dress /
+    // white frilled dress），只按单词比会把它们全漏掉，结果"动作写了脱衣、衣服纹丝不动"。
+    const keep = [];
+    let n3 = 0;
+    for(const t of a){
+      const k = low(t);
+      if(FULLGARB.some(w => k === w || k.indexOf(w) >= 0)){ n3++; continue; }
+      keep.push(t);
+    }
+    if(n3){
+      a.length = 0;
+      for(const t of keep) a.push(t);
+      rep.fixes.push('脱衣场景去整件衣物 ' + n3);
+    }
   }
   if(a.some(x=>FLASH.includes(low(x))) && !hasU(a)){
     cut(['breasts_out','nipple_slip']);
