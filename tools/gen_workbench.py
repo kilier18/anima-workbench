@@ -1502,7 +1502,10 @@ function poolPlan(tier, nChar){
     // 锁「双人·男女」时辅池只能放"也要两个人"的池：
     // 之前 r18 的 extra 带 solo_sex（自慰）和 duo_flirt（女女文本），
     // 复算权重后 duo_male 只占 37%、solo_sex 占 27% —— 锁双人却拿到单人自慰图。
-    if(sc === 'duo') extra = (tier === 'r18') ? ['after'] : [];
+    // 玩法池进辅池：主池权重 5×辅池数，duo_male 50 条仍占 ~79%
+    if(sc === 'duo') extra = (tier === 'r18')
+      ? ['foreplay_sex','oral_sex','paizuri_sex','handjob_sex','footjob_sex','after']
+      : (tier === 'suggestive' ? ['foreplay_flirt'] : []);
     else if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
     // 单人擦边不掺 duo_flirt：那 65 条是女女动作，池规则 g:2 会把单人画面变成两个女孩
     else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_daily','tentacle_flirt'];
@@ -1523,7 +1526,8 @@ function poolPlan(tier, nChar){
     // 拆出来变成双人池固定是男女互动" —— 之前 main 是 solo_sex，单人跑 R18
     // 五分之四都是自我演出，看着就像"批量丢了一个人"。
     // 要纯自慰：场景类型下拉选「单人/自我」，走上面 sc==='solo' 分支。
-    return {main:['duo_male'], extra:['solo_sex','tentacle_sex','machine_sex','after']};
+    return {main:['duo_male'], extra:['foreplay_sex','oral_sex','paizuri_sex','handjob_sex',
+      'footjob_sex','solo_sex','tentacle_sex','machine_sex','after']};
   }
   if(tier === 'sfw') return {main:['yuri_daily'], extra:[]};
   if(tier === 'suggestive') return {main:['yuri_flirt'], extra:[]};
@@ -1795,7 +1799,18 @@ const POOL_RULE = {
   duo_sfw:{g:1, m:1, k:'daily'},
   duo_daily:{g:2, m:0, k:'daily'},   duo_flirt:{g:2, m:0, k:'flirt'},   duo_male:{g:1, m:1, k:'sex'},
   duo_solo:{g:1, m:1, k:'flirt'},
-  group3p:{g:2, m:1, k:'group'},     after:{g:1, m:1, k:'after'}
+  group3p:{g:2, m:1, k:'group'},
+  // 事后：g:0 跟随 —— 单人独处和双人温存都成立，不能强制成单人（31 条里一半是两人搂着）
+  after:{g:0, m:1, k:'after'},
+  // 玩法池（2026-11-14）：以前前戏/口交/足交/乳交/手交全散在 duo_male 的 42 条里，
+  // PF_KIND_ZH 的 oral 永远命中 0。拆成独立池后按辅池挂，主池仍是 duo_male。
+  // 一律 m:1 —— 这些动作必须有男人在画面里（m:0 会把 penis/fellatio 全删）。
+  foreplay_flirt:{g:1, m:1, k:'flirt'},
+  foreplay_sex:{g:1, m:1, k:'sex'},
+  oral_sex:{g:1, m:1, k:'sex'},
+  footjob_sex:{g:1, m:1, k:'sex'},
+  paizuri_sex:{g:1, m:1, k:'sex'},
+  handjob_sex:{g:1, m:1, k:'sex'}
 };
 /* 男位/插入/体液词：无男池必须一起剔，否则"画面里没男人却有精液/骑乘位" */
 /* 只放"必须有男人"的词：插入体位、精液、阴茎。
@@ -1825,7 +1840,8 @@ const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_
   hypno_daily:'催眠·健全', hypno_flirt:'催眠·擦边', hypno_sex:'催眠·R18',
   duo_daily:'双人日常', duo_flirt:'双人暧昧', duo_male:'双人·男女R18', duo_solo:'单人+无脸男',
   duo_sfw:'双人·男女(健全)',
-  group3p:'双女+无脸男 3P', after:'事后'};
+  group3p:'双女+无脸男 3P', after:'事后',
+  foreplay_flirt:'前戏·擦边', foreplay_sex:'前戏·赤裸', oral_sex:'口交', footjob_sex:'足交', paizuri_sex:'乳交', handjob_sex:'手交'};
 function preflight(tags, opt){
   const o = opt || {};
   let a = uniq((tags || []).map(t=>String(t).trim()).filter(Boolean));
