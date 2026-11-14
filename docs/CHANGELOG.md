@@ -5,6 +5,68 @@
 
 ---
 
+### 场景池：玩法拆分与扩库（2026-11-14 下午）
+
+池数 **27 → 37**，条目 **1308 → 1529**。生成链从"直接改 json"改为三层脚本固化
+（`build_atoms.py` → `atoms_extra.py` → `atoms_extra2.py`），重跑构建不再冲掉手改。
+
+**新增场景类型（下拉第 8 项）**
+- `exhibition` 露出·偷窥：`exhibition_daily` 15 / `exhibition_flirt` 20 / `exhibition_sex` 20 / `voyeur_flirt` 15
+
+**新增玩法池（细分动作，替代过去只能抽 `duo_male` 一刀切）**
+- `foreplay_flirt` 20（隔衣）/ `foreplay_sex` 20 / `oral_sex` 20 / `paizuri_sex` 20 / `handjob_sex` 20 / `footjob_sex` 40
+- 全部 `g:1, m:1` —— `m:0` 会把 `penis`/`fellatio` 当男位词删掉，画面变成对空气做动作
+
+**池引用去重**
+- `duo_sfw` 从 56 条删到 15 条（只留男女特有），其余 41 条标 `shared:true` 留在 `duo_daily`，
+  由 `POOL_INHERIT` + `poolItems()` 单份引用，不再双写维护
+
+**扩库**
+- `after` 13 → 46：温存 + 事后结算（`creampie` / `cumdrip` / `trembling` / `partially_clothed`）
+- 丝袜载体 40 条按 target 分发，`footjob_sex` 22/40 带袜子（此前全库 `pantyhose` 仅 3 条）
+
+**修复**
+- **`EXPLICIT_SOFT` 误伤日常穿着**：丝袜 9 个、露肩 4 个、汗/湿 2 个共 15 个词被当擦边，
+  健全档会静默删掉角色身上的丝袜和露肩。已移出该表。
+- **复杂构图黑名单**：新增 `NO_POSE`（69 / 悬空 / 倒立 / 折身位 / 多人交错 / 抱起离地），
+  `preflight` ①b 段命中即剔。用户明确"这类构图出图效果很差"。
+- **袜子被连带删衣**：`pantyhose` 触发 `open_clothes` → `FULLGARB` 删裙子。`USTATE`/`CLOTHED_KEEP` 补袜子类。
+- **`duoOK` 误剔玩法池**：锁「双人·男女」时"男"是无脸男不是第二张卡，带 `penis` 的池曾被 100% 剔除。
+- **`rollLibrary` 顺序**：`sceneKind/scenePool` 赋值晚于 `setTags`，随机一套读到上一张的池。
+- **`duo_flirt` 死池复活**：65 条双女文本此前没有任何出口。
+
+**权重与配比**
+- 新增模块级 `POOL_W`（`oral 4 / foreplay 4 / paizuri 3 / handjob 2 / footjob 2 / after 3`），
+  取代 `EX_LOW` 硬编码；主池权重 `5 × 辅池数` 动态化。
+- 真配比：duo/r18 → `duo_male 79.2% + 玩法 19.4%`；yuri/suggestive → `yuri_flirt 56% / duo_flirt 44%`。
+
+**测试**
+- `_style_test/test_preflight.js` 20/20、`test_plan.js` 11/11，用本机 node 直接调内部函数。
+
+### 角色 LoRA 与画风 LoRA 叠加（2026-11-14 下午）
+
+此前角色卡只有 `trigger` 文本、没有 `lora` 字段 —— 点角色只是把 tag 写进提示词，
+角色 LoRA 从未被加载。已给 18 张 AI 拟人卡补 `lora` / `lora_w`。
+
+- `anima_loras()` 改三层：基座（turbo 0.7）→ 角色包 → 画风包
+- `gen_graph` / `anima_handfix` / `gen_submit` 全部接受 `char_id`
+- **多人一律卸角色 LoRA**：`_anima_multi()` 命中 `2girls` 等即清空 `char_id`。
+  实测四组对照（不挂 / 双挂 0.5+0.5 / 只挂 A / 只挂 B）全部串味 —— 单包特征覆盖整张图，
+  而东方角色没有 LoRA 所以双人从来不串。
+- **角色词条分层**：拆 `trig_core`（身份）+ `trig_outfit`（整件衣物），性场景自动只留身份。
+  实测 grok-tan 健全 → 带 `black red short dress`；性场景 → 只剩 `gold crown, blue eyes, blonde twintails`。
+
+### 文档整理（2026-11-14 晚）
+
+`docs/` 从 11 份精简到 6 份。归档到 `docs/_archive/`（不进仓库）：
+`历史与回退-v3.md`（278KB 旧流水）、`手册-v3.md`（v3 工作台手册）、`画师tag-实测清单.md`、
+`Anima画风-保留名单.md`、`Anima-32包编号清单.md`、`Anima画风LoRA-搬运清单.md`。
+
+保留：`提示词与场景-v3.md`（主文档）、`Anima画风LoRA-交接手册.md`、`Anima画风LoRA-测评台帐.md`、
+`Anima知识-v3.md`、`multi-turn-连续动作-方案.md`（新增）、本文件。
+
+---
+
 ## 2026-11-14
 
 ### 画风库（v4.0）
