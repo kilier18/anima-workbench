@@ -104,3 +104,7 @@ docs/Anima画风-保留名单.md
 !tools/_release.py
 !tools/anima_dedupe.py
 !tools/anima_touhou_verify.py
+!tools/anima_musume_thumbs.py
+!tools/anima_musume_thumbs2.py
+!tools/anima_move_musume_out.py
+!tools/anima_refill_chars.py
