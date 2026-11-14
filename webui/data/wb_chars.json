@@ -611,10 +611,12 @@
     "solo"
    ],
    "th": 1,
-   "src": "kimi chan, very long hair, silver hair, subtle lavender highlights, blue eyes, pale skin, gothic maid outfit, frilled maid headdress, white frilled dress, navy blue cape, asymmetrical skirt, navy corset, white puff sleeves, white stockings, navy mary janes, crescent moon ornament, triangular hair ornament, large navy bow, rainbow accents, silver chains, musical ornaments, flute",
+   "src": "kimi chan, very long hair, silver hair, subtle lavender highlights, blue eyes, crescent moon ornament, triangular hair ornament, large navy bow, gothic maid outfit, frilled maid headdress",
    "lora": "Anima\\packs\\kimi-chan.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_kimi_chan"
+   "thumb": "musume_kimi_chan",
+   "trig_core": "kimi chan, very long hair, silver hair, subtle lavender highlights, blue eyes, crescent moon ornament, triangular hair ornament, large navy bow",
+   "trig_outfit": "gothic maid outfit, frilled maid headdress"
   },
   {
    "t": "yakumo_yukari",
@@ -644,10 +646,12 @@
     "solo"
    ],
    "th": 1,
-   "src": "kimi chan, very long hair, silver hair, subtle lavender highlights, blue eyes, pale skin, gothic maid outfit, frilled maid headdress, white frilled dress, navy blue cape, asymmetrical skirt, navy corset, white puff sleeves, white stockings, navy mary janes, crescent moon ornament, triangular hair ornament, large navy bow, rainbow accents, silver chains, musical ornaments, flute",
+   "src": "kimi chan, very long hair, silver hair, subtle lavender highlights, blue eyes, crescent moon ornament, triangular hair ornament, large navy bow, gothic maid outfit, frilled maid headdress",
    "lora": "Anima\\packs\\kimi-chan.safetensors",
    "lora_w": 0.85,
-   "thumb": "musume_kimi_chan_chibi"
+   "thumb": "musume_kimi_chan_chibi",
+   "trig_core": "kimi chan, very long hair, silver hair, subtle lavender highlights, blue eyes, crescent moon ornament, triangular hair ornament, large navy bow",
+   "trig_outfit": "gothic maid outfit, frilled maid headdress"
   },
   {
    "t": "glm-zhipu",

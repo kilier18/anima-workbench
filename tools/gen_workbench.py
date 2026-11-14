@@ -1473,7 +1473,7 @@ function poolPlan(tier, nChar){
   if(sc !== 'auto'){
     const main = [sc + '_' + T];
     let extra = [];
-    if(sc === 'solo' && tier === 'r18') extra = ['duo_male','tentacle_sex','machine_sex','after'];
+    if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
     else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_flirt','duo_daily','tentacle_flirt'];
     else if(sc === 'yuri' && tier === 'r18') extra = ['triple_sex','group3p','machine_sex','tentacle_sex'];
     else if(sc === 'yuri' && tier === 'suggestive') extra = [];
@@ -1485,7 +1485,12 @@ function poolPlan(tier, nChar){
   if(!two){
     if(tier === 'sfw') return {main:['solo_daily'], extra:[]};
     if(tier === 'suggestive') return {main:['solo_flirt'], extra:['duo_flirt','duo_daily','tentacle_flirt']};
-    return {main:['solo_sex'], extra:['duo_male','tentacle_sex','machine_sex','after']};
+    // 单人 + R18：默认给"她 + 无脸男"（duo_male 42 条全是男女互动），
+    // 自慰（solo_sex 55 条）降到辅池。2026-11-14 用户原话："单人里的双人行为
+    // 拆出来变成双人池固定是男女互动" —— 之前 main 是 solo_sex，单人跑 R18
+    // 五分之四都是自我演出，看着就像"批量丢了一个人"。
+    // 要纯自慰：场景类型下拉选「单人/自我」，走上面 sc==='solo' 分支。
+    return {main:['duo_male'], extra:['solo_sex','tentacle_sex','machine_sex','after']};
   }
   if(tier === 'sfw') return {main:['yuri_daily'], extra:[]};
   if(tier === 'suggestive') return {main:['yuri_flirt'], extra:[]};
