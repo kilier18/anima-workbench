@@ -1776,6 +1776,10 @@ function preflight(tags, opt){
 
   /* ---- ② 推断场景性质：原子库 kind 优先，其次看词，再看角色数 ---- */
   let k = o.kind || '';
+  // 手写场景（没有池）时，词面里的性动作优先于残留的 kind —— 否则上次选过"日常"，
+  // 这次手写 sex 场景也会被当成 daily，末尾 ④ 直接把男体词全删掉，出图只剩一个人（用户 m04025）
+  if(!o.pool && PF_SEXISH.some(t=>a.some(x=>low(x)===t)) && (!k || k==='daily' || k==='flirt'))
+    k = 'sex';
   if(!k){
     if(a.some(x=>['yuri', 'tribadism', '2girls', 'multiple_girls'].includes(low(x)))) k = 'yuri';
     else if(a.some(x=>['tentacles', 'tentacle_sex', 'tentaclejob', 'sex_machine',
@@ -1815,6 +1819,14 @@ function preflight(tags, opt){
           push('faceless_male','hetero');
           rep.fixes.push('男体收成 faceless_male ' + n0);
         }
+      } else if(a.some(x=>PF_SEXISH.includes(low(x))) &&
+                !a.some(x=>['masturbation','fingering','vibrator','dildo','sex_toy','sex_toys',
+                            'dildo_riding','sex_machine','tentacle_sex','tentaclejob',
+                            'object_insertion','egg_laying'].includes(low(x)))){
+        // 条目写的是性交/插入（sex、vaginal、against_wall…）却一个男体词都没有
+        // → 旧逻辑原样放行，出图变成单人（用户批量图丢人就是这个分支）
+        push('1boy','faceless_male','hetero'); cut(['solo']);
+        rep.fixes.push('性交动作补无脸男');
       }
     } else {
       const n0 = cut(['1boy', '2boys', '3boys', 'male', 'male_focus', 'male_on_top']);
@@ -1913,7 +1925,15 @@ function preflight(tags, opt){
     cut(['2girls', 'multiple_girls']);
     if(!a.some(x=>['1girl', 'solo', '1boy', 'faceless_male', '1other'].includes(low(x)))) push('1girl');
   }
-  if(a.some(x=>['1boy', '2boys', '3boys', 'faceless_male', 'multiple_boys'].includes(low(x)))) cut(['solo']);
+  /* ---- ⑦ 手写兜底：词面有性动作、却一个男体词都没有 → 补无脸男（不然只剩单人）
+     Anima 里 solo 会让画面锁单人，必须一起去掉。 */
+  if(!R && !a.some(x=>['1boy','2boys','3boys','male','male_focus','male_on_top',
+                        'faceless_male','invisible_man','disembodied_penis','hetero'].includes(low(x)))
+     && a.some(t=>PF_SEXISH.some(s=>low(t)===s)) && !/tentacle|machine|futanari|yuri/.test(k)){
+    push('1boy','faceless_male','hetero'); cut(['solo']);
+    rep.fixes.push('手写场景补无脸男');
+  }
+  if(a.some(x=>['1boy','2boys','3boys','faceless_male','multiple_boys'].includes(low(x)))) cut(['solo']);
   /* 兜底：画面里已经有两个女生时，隐形男/只有阴茎会被画成"看得见的第三者"，
      统一升成 faceless_male（真有第三个人就让它站得住，没有就别塞）。 */
   if(a.some(x=>['2girls','multiple_girls'].includes(low(x))) &&
