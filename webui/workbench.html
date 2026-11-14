@@ -232,6 +232,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
       <select id="qScene" title="场景类型：自动=按角色数推断；锁定后只从该类三档池抽动作">
         <option value="auto" selected>自动</option>
         <option value="solo">单人</option>
+        <option value="duo">双人·男女</option>
         <option value="yuri">女同</option>
         <option value="machine">机械</option>
         <option value="bdsm">调教</option>
@@ -1455,9 +1456,13 @@ function poolPlan(tier, nChar){
   const sc = sceneType();
   const T = tier === 'sfw' ? 'daily' : (tier === 'suggestive' ? 'flirt' : 'sex');
   if(sc !== 'auto'){
-    const main = [sc + '_' + T];
+    let main = [sc + '_' + T];
+    // 双人·男女：没有 duo_sex 池，R18 档直接用 duo_male（42 条"她 + 无脸男"）
+    if(sc === 'duo' && tier === 'r18') main = ['duo_male'];
     let extra = [];
-    if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
+    if(sc === 'duo') extra = (tier === 'r18') ? ['duo_flirt','solo_sex','after']
+                            : (tier === 'suggestive' ? ['duo_daily'] : []);
+    else if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
     else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_flirt','duo_daily','tentacle_flirt'];
     else if(sc === 'yuri' && tier === 'r18') extra = ['triple_sex','group3p','machine_sex','tentacle_sex'];
     else if(sc === 'yuri' && tier === 'suggestive') extra = [];
@@ -1737,7 +1742,7 @@ const POOL_RULE = {
   // 普通双人互动 / 单人补人 / 事后
   // 催眠三档（m:3 = 条目自带男体词时才落地 faceless_male，施术者要画得出来）
   hypno_daily:{g:1, m:0, k:'daily'}, hypno_flirt:{g:1, m:3, k:'flirt'}, hypno_sex:{g:1, m:3, k:'sex'},
-  duo_daily:{g:2, m:0, k:'daily'},   duo_flirt:{g:2, m:0, k:'flirt'},   duo_male:{g:1, m:1, k:'flirt'},
+  duo_daily:{g:2, m:0, k:'daily'},   duo_flirt:{g:2, m:0, k:'flirt'},   duo_male:{g:1, m:1, k:'sex'},
   duo_solo:{g:1, m:1, k:'flirt'},
   group3p:{g:2, m:1, k:'group'},     after:{g:1, m:1, k:'after'}
 };
