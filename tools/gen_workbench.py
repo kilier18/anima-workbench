@@ -1478,6 +1478,17 @@ function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 function sceneType(){
   try{ const el = $("qScene"); return (el && el.value) || 'auto'; }catch(e){ return 'auto'; }
 }
+// 池引用：duo_sfw 只存"男女特有"的条目，通用条目留在 duo_daily 里打 shared 标记，
+// 抽池时按需并进来 —— 避免 41 条数据写两份（改一处忘另一处的老坑）。
+const POOL_INHERIT = {duo_sfw: 'duo_daily'};
+function poolItems(name){
+  const A = S.atoms.actions || {};
+  const own = A[name] || [];
+  const src = POOL_INHERIT[name];
+  if(!src) return own;
+  const extra = (A[src] || []).filter(x => x.shared);
+  return extra.length ? own.concat(extra) : own;
+}
 function poolPlan(tier, nChar){
   // 锁定了场景类型就只从该类池抽（用户 2026-11-09 决定：类型交给下拉手动选）
   const sc = sceneType();
@@ -1547,7 +1558,7 @@ function composeShot(step, total){
   // 主池权重 5、辅池 1：主池抽干不会掉到另一个"人数不对"的池子
   const bag = [];
   for(let i=0;i<plan.main.length;i++){
-    const arr = A[plan.main[i]] || [];
+    const arr = poolItems(plan.main[i]);
     for(let j=0;j<arr.length;j++){
       // 第二档专属池里，"真擦边"条目加权：调情池混了太多纯可爱小动作
       // （撩头发/托腮/顶手指），等权抽出来就像日常片场，用户原话"完全不擦边"。
@@ -1567,7 +1578,7 @@ function composeShot(step, total){
   // 3P 要显式选场景；这里把 triple/group3p 压到其它辅池的一半
   const EX_LOW = {triple_daily:1, triple_flirt:1, triple_sex:1, group3p:1};
   for(let i=0;i<plan.extra.length;i++){
-    const arr = A[plan.extra[i]] || [];
+    const arr = poolItems(plan.extra[i]);
     const ew = EX_LOW[plan.extra[i]] ? 1 : 3;
     for(let w=0;w<ew;w++){
       for(let j=0;j<arr.length;j++) bag.push({a:arr[j],p:plan.extra[i]});
@@ -1798,6 +1809,13 @@ const MALE_POS = ['sex','missionary','doggystyle','sex_from_behind',
   'licking_penis','deepthroat','irrumatio','paizuri','handjob','spitroast','double_penetration',
   'double_fellatio','fellatio','thigh_sex','footjob','cum_in_pussy','cumdrip','cum_overflow',
   'cum_on_body','cum_on_breasts','creampie','facial','cum_on_penis','cum'];
+/* 构图黑名单（用户 2026-11-14 明确）：69 出图效果差，太复杂的构图也一样。
+   池数据里不该出现，但手工输入 / 旧数据可能带进来，这里统一兜掉。 */
+const NO_POSE = ['69','sixty_nine','sixtynine','mutual_oral','simultaneous_oral',
+  'suspended','suspension','inverted','inverted_nipple','headstand','handstand',
+  'shoulder_stand','piledriver','full_nelson','suspended_congress','upright_straddle',
+  'mating_press','spitroast','double_penetration','triple_penetration','stacked','body_pile',
+  'carrying','princess_carry','standing_on_hands'];
 const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_sex:'单人·R18',
   yuri_daily:'女同·健全', yuri_flirt:'女同·擦边', yuri_sex:'女同·R18',
   machine_daily:'机械·健全', machine_flirt:'机械·擦边', machine_sex:'机械·R18',
@@ -1823,6 +1841,15 @@ function preflight(tags, opt){
     const hard = a.filter(x=>EXPLICIT_HARD.includes(low(x)));
     if(hard.length){ cut(hard.map(low)); rep.fixes.push('剔档位外 ' + hard.length + ' 词'); }
   }
+
+  /* ---- ①b 构图黑名单：69 / 悬空 / 倒立 / 叠人，出图崩率高 ---- */
+  const badpose = a.filter(x=>{
+    const k2 = low(x);
+    if(NO_POSE.includes(k2)) return true;
+    if(k2 === '69' || k2.indexOf('69_') === 0 || k2.slice(-3) === '_69') return true;
+    return k2.indexOf('sixty_nine') >= 0 || k2.indexOf('sixtynine') >= 0;
+  });
+  if(badpose.length){ cut(badpose.map(low)); rep.fixes.push('剔复杂构图 ' + badpose.length + ' 词'); }
 
   const nChar = (S.chars || []).length;
   const pov = has('pov') || has('pov_hands') || has('pov_crotch');

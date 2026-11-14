@@ -15968,7 +15968,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "背靠背坐着",
@@ -15983,7 +15984,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "共撑一把伞",
@@ -15998,7 +16000,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "互相喂食",
@@ -16013,7 +16016,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "公主抱",
@@ -16028,7 +16032,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "背着走",
@@ -16043,7 +16048,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "摸头",
@@ -16057,7 +16063,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "捏对方的脸",
@@ -16072,7 +16079,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "靠肩打盹",
@@ -16088,7 +16096,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "膝枕",
@@ -16104,7 +16113,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "脸贴脸",
@@ -16146,7 +16156,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "从背后抱住",
@@ -16159,7 +16170,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "搂着肩",
@@ -16173,7 +16185,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "搂着腰",
@@ -16187,7 +16200,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "十指相扣",
@@ -16201,7 +16215,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "对视",
@@ -16216,7 +16231,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起躺下",
@@ -16231,7 +16247,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "打枕头仗",
@@ -16318,7 +16335,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "帮对方整理领口",
@@ -16334,7 +16352,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "亲额头",
@@ -16349,7 +16368,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "亲脸颊",
@@ -16376,7 +16396,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起野餐",
@@ -16393,7 +16414,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起自拍",
@@ -16408,7 +16430,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "把东西递给对方",
@@ -16457,7 +16480,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起做饭",
@@ -16518,7 +16542,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "睡在一起",
@@ -16533,7 +16558,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "牵着手跑",
@@ -16562,7 +16588,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "帮对方系鞋带",
@@ -16590,7 +16617,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起靠着栏杆",
@@ -16606,7 +16634,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起看手机",
@@ -16637,7 +16666,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起看电影",
@@ -16697,7 +16727,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "牵着手上台阶",
@@ -16727,7 +16758,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "摸着对方的脸",
@@ -16741,7 +16773,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "举高高",
@@ -16756,7 +16789,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起摆姿势",
@@ -16771,7 +16805,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "背对背看不同方向",
@@ -16862,7 +16897,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "帮对方擦眼泪",
@@ -16938,7 +16974,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起听同一副耳机",
@@ -16953,7 +16990,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "递上一杯热饮",
@@ -16984,7 +17022,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "一起看窗外",
@@ -16999,7 +17038,8 @@
     ],
     "lv": 0,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    },
    {
     "zh": "拍合照",
@@ -17030,7 +17070,8 @@
     ],
     "lv": 1,
     "kind": "daily",
-    "who": "duo"
+    "who": "duo",
+    "shared": true
    }
   ],
   "duo_flirt": [
@@ -19760,618 +19801,6 @@
     "lv": 1,
     "kind": "daily",
     "who": "duo"
-   },
-   {
-    "zh": "并肩走路",
-    "tags": [
-     "holding_hands",
-     "walking",
-     "shoulder-to-shoulder"
-    ],
-    "core": [
-     "holding_hands",
-     "walking",
-     "shoulder-to-shoulder"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "背靠背坐着",
-    "tags": [
-     "back-to-back",
-     "sitting",
-     "closed_eyes"
-    ],
-    "core": [
-     "back-to-back",
-     "sitting"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "共撑一把伞",
-    "tags": [
-     "holding_umbrella",
-     "holding_hands",
-     "rain"
-    ],
-    "core": [
-     "holding_umbrella",
-     "holding_hands"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "互相喂食",
-    "tags": [
-     "feeding",
-     "eating",
-     "smile"
-    ],
-    "core": [
-     "feeding",
-     "eating"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "公主抱",
-    "tags": [
-     "princess_carry",
-     "carrying",
-     "smile"
-    ],
-    "core": [
-     "princess_carry",
-     "carrying"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "背着走",
-    "tags": [
-     "piggyback",
-     "carrying",
-     "laughing"
-    ],
-    "core": [
-     "piggyback",
-     "carrying"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "摸头",
-    "tags": [
-     "headpat",
-     "smile",
-     "closed_eyes"
-    ],
-    "core": [
-     "headpat"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "捏对方的脸",
-    "tags": [
-     "cheek_pinching",
-     "smile",
-     "looking_at_another"
-    ],
-    "core": [
-     "cheek_pinching",
-     "looking_at_another"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "靠肩打盹",
-    "tags": [
-     "head_rest",
-     "sleeping",
-     "sitting"
-    ],
-    "core": [
-     "head_rest",
-     "sleeping",
-     "sitting"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "膝枕",
-    "tags": [
-     "lap_pillow",
-     "lying",
-     "looking_at_another"
-    ],
-    "core": [
-     "lap_pillow",
-     "lying",
-     "looking_at_another"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "紧紧拥抱",
-    "tags": [
-     "hug",
-     "closed_eyes",
-     "smile"
-    ],
-    "core": [
-     "hug"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "从背后抱住",
-    "tags": [
-     "hug_from_behind",
-     "smile"
-    ],
-    "core": [
-     "hug_from_behind"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "搂着肩",
-    "tags": [
-     "arm_around_shoulder",
-     "walking"
-    ],
-    "core": [
-     "arm_around_shoulder",
-     "walking"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "搂着腰",
-    "tags": [
-     "arm_around_waist",
-     "standing"
-    ],
-    "core": [
-     "arm_around_waist",
-     "standing"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "十指相扣",
-    "tags": [
-     "interlocked_fingers",
-     "holding_hands"
-    ],
-    "core": [
-     "interlocked_fingers",
-     "holding_hands"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "对视",
-    "tags": [
-     "looking_at_another",
-     "eye_contact",
-     "smile"
-    ],
-    "core": [
-     "looking_at_another",
-     "eye_contact"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起躺下",
-    "tags": [
-     "lying",
-     "on_bed",
-     "hug"
-    ],
-    "core": [
-     "lying",
-     "hug"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "替她把头发梳顺",
-    "tags": [
-     "brushing_hair",
-     "sitting",
-     "smile"
-    ],
-    "core": [
-     "brushing_hair",
-     "sitting"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "帮对方整理领口",
-    "tags": [
-     "adjusting_clothes",
-     "arm_around_neck",
-     "looking_at_another"
-    ],
-    "core": [
-     "adjusting_clothes",
-     "arm_around_neck",
-     "looking_at_another"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "亲额头",
-    "tags": [
-     "kiss",
-     "forehead",
-     "closed_eyes"
-    ],
-    "core": [
-     "kiss",
-     "forehead"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "扛在肩上",
-    "tags": [
-     "carrying",
-     "over_shoulder"
-    ],
-    "core": [
-     "carrying",
-     "over_shoulder"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起野餐",
-    "tags": [
-     "picnic",
-     "sitting",
-     "outdoors",
-     "holding_food"
-    ],
-    "core": [
-     "picnic",
-     "sitting",
-     "holding_food"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起自拍",
-    "tags": [
-     "selfie",
-     "hug",
-     "smile"
-    ],
-    "core": [
-     "selfie",
-     "hug"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起看书",
-    "tags": [
-     "reading",
-     "book",
-     "sitting",
-     "leaning_on_person"
-    ],
-    "core": [
-     "reading",
-     "sitting",
-     "leaning_on_person"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "依偎在沙发上",
-    "tags": [
-     "leaning_on_person",
-     "couch",
-     "closed_eyes"
-    ],
-    "core": [
-     "leaning_on_person"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "睡在一起",
-    "tags": [
-     "sleeping",
-     "cuddling",
-     "on_bed"
-    ],
-    "core": [
-     "sleeping",
-     "cuddling"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起照镜子",
-    "tags": [
-     "mirror",
-     "posing",
-     "looking_at_viewer"
-    ],
-    "core": [
-     "posing"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "拍对方肩膀",
-    "tags": [
-     "hand_on_another's_shoulder",
-     "smile"
-    ],
-    "core": [
-     "hand_on_another's_shoulder"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起靠着栏杆",
-    "tags": [
-     "leaning_forward",
-     "standing",
-     "looking_at_another"
-    ],
-    "core": [
-     "leaning_forward",
-     "standing",
-     "looking_at_another"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "搂着对方手臂",
-    "tags": [
-     "arm_hug",
-     "walking",
-     "smile"
-    ],
-    "core": [
-     "arm_hug",
-     "walking"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "互相整理头发",
-    "tags": [
-     "adjusting_hair",
-     "looking_at_another"
-    ],
-    "core": [
-     "adjusting_hair",
-     "looking_at_another"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "抱着转圈",
-    "tags": [
-     "spinning",
-     "hug",
-     "laughing"
-    ],
-    "core": [
-     "spinning",
-     "hug"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "摸着对方的脸",
-    "tags": [
-     "hand_on_another's_face",
-     "looking_at_another"
-    ],
-    "core": [
-     "hand_on_another's_face",
-     "looking_at_another"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "举高高",
-    "tags": [
-     "lifting_person",
-     "carrying",
-     "laughing"
-    ],
-    "core": [
-     "lifting_person",
-     "carrying"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起摆姿势",
-    "tags": [
-     "posing",
-     "v",
-     "smile"
-    ],
-    "core": [
-     "posing",
-     "v"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起跳双人舞",
-    "tags": [
-     "dancing",
-     "holding_hands",
-     "smile"
-    ],
-    "core": [
-     "dancing",
-     "holding_hands"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "靠在对方背上",
-    "tags": [
-     "leaning_on_person",
-     "hug_from_behind",
-     "closed_eyes"
-    ],
-    "core": [
-     "leaning_on_person",
-     "hug_from_behind"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起听同一副耳机",
-    "tags": [
-     "headphones",
-     "hug",
-     "sitting"
-    ],
-    "core": [
-     "hug",
-     "sitting"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "互相靠着睡",
-    "tags": [
-     "sleeping",
-     "head_rest",
-     "hug"
-    ],
-    "core": [
-     "sleeping",
-     "head_rest",
-     "hug"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起看窗外",
-    "tags": [
-     "looking_down",
-     "window",
-     "leaning_forward"
-    ],
-    "core": [
-     "looking_down",
-     "leaning_forward"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
-   },
-   {
-    "zh": "一起围着围巾",
-    "tags": [
-     "scarf",
-     "hug",
-     "winter"
-    ],
-    "core": [
-     "scarf",
-     "hug",
-     "winter"
-    ],
-    "lv": 1,
-    "kind": "daily",
-    "who": "duo"
    }
   ]
  },
@@ -21050,7 +20479,7 @@
    "after": 13,
    "duo_sfw": 56
   },
-  "total": 1308,
+  "total": 1267,
   "kinds": {
    "daily": 289,
    "flirt": 357,
