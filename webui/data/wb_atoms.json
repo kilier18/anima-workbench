@@ -22438,7 +22438,7 @@
    "solo_sex": 60,
    "yuri_daily": 45,
    "yuri_flirt": 50,
-   "yuri_sex": 59,
+   "yuri_sex": 58,
    "machine_daily": 40,
    "machine_flirt": 45,
    "machine_sex": 52,
@@ -22458,26 +22458,32 @@
    "duo_flirt": 65,
    "duo_male": 50,
    "group3p": 34,
-   "after": 13,
-   "duo_sfw": 56
+   "after": 31,
+   "duo_sfw": 15,
+   "foreplay_flirt": 20,
+   "foreplay_sex": 20,
+   "oral_sex": 20,
+   "footjob_sex": 20,
+   "paizuri_sex": 20,
+   "handjob_sex": 20
   },
   "total": 1404,
   "kinds": {
-   "daily": 289,
-   "flirt": 357,
-   "sex": 160,
-   "yuri": 55,
+   "daily": 304,
+   "flirt": 377,
+   "sex": 290,
+   "yuri": 54,
    "machine": 135,
    "tentacle": 130,
    "group": 84,
-   "after": 12
+   "after": 30
   },
   "whos": {
-   "solo": 420,
-   "m": 147,
-   "duo": 289,
-   "any": 202,
-   "trio": 164
+   "solo": 424,
+   "m": 162,
+   "duo": 427,
+   "any": 225,
+   "trio": 166
   },
   "weak": 0,
   "banned": {},
@@ -22487,6 +22493,6 @@
   "intensity": 5,
   "shots": 4,
   "angles": 7,
-  "combinations": 104016640
+  "combinations": 119508480
  }
 }

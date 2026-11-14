@@ -554,7 +554,11 @@ function normTags(list){
   // 池上下文：触手/机械/事后/日常池自带动作，硬插 sex/missionary 会在无男池里凭空画出男人
   const __pool = (typeof POOL_RULE !== 'undefined' && S.scenePool && POOL_RULE[S.scenePool]) || {};
   const poolKind = __pool.k || '';
-  const noActPool = ['tentacle','machine','after','daily'].indexOf(poolKind) >= 0;
+  /* 玩法池自带具体动作词（fellatio / footjob / paizuri…），再随机注入 sex / all_fours
+     会把玩法盖回通用体位 —— core 里没有 SEX_ACT 时尤其明显。 */
+  const PLAY_POOLS = ['foreplay_flirt','foreplay_sex','oral_sex','footjob_sex','paizuri_sex','handjob_sex'];
+  const noActPool = ['tentacle','machine','after','daily'].indexOf(poolKind) >= 0
+    || PLAY_POOLS.indexOf(S.scenePool) >= 0;
   const yuriCtx = !noActPool && poolKind !== 'group' && (isYuri || (S.chars||[]).length >= 2);
   if(lv === 'r18'){
     if(!a.some(t=>SEX_ACT.includes(keyOf(t))) && !noActPool){
@@ -1471,8 +1475,17 @@ function poolItems(name){
   const src = POOL_INHERIT[name];
   if(!src) return own;
   const extra = (A[src] || []).filter(x => x.shared);
-  return extra.length ? own.concat(extra) : own;
+  if(!extra.length) return own;
+  // 去重：将来把 shared 条目补回 own 就成了双计（去重键与 composeShot 的 key 一致）
+  const seen = new Set(own.map(x => String(x.zh || "").trim()));
+  return own.concat(extra.filter(x => !seen.has(String(x.zh || "").trim())));
 }
+// 玩法池只在"她 + 画面外的他"语境下成立；集中一处，加第 5 种玩法只改这里
+const PLAY_EXTRA = ['foreplay_sex','oral_sex','paizuri_sex','handjob_sex','footjob_sex'];
+/* 辅池权重表（模块级，测试也要读）：不是所有辅池该一样重。口交/前戏是主菜给 4，
+   乳交 3，足交/手交 2（异质玩法太多会喧宾夺主），事后 3；3P 类压到 1（会多一个人）。 */
+const POOL_W = {oral_sex:4, foreplay_sex:4, paizuri_sex:3, handjob_sex:2, footjob_sex:2,
+  after:3, triple_daily:1, triple_flirt:1, triple_sex:1, group3p:1};
 function poolPlan(tier, nChar){
   // 锁定了场景类型就只从该类池抽（用户 2026-11-09 决定：类型交给下拉手动选）
   const sc = sceneType();
@@ -1488,7 +1501,7 @@ function poolPlan(tier, nChar){
     // 复算权重后 duo_male 只占 37%、solo_sex 占 27% —— 锁双人却拿到单人自慰图。
     // 玩法池进辅池：主池权重 5×辅池数，duo_male 50 条仍占 ~79%
     if(sc === 'duo') extra = (tier === 'r18')
-      ? ['foreplay_sex','oral_sex','paizuri_sex','handjob_sex','footjob_sex','after']
+      ? PLAY_EXTRA.concat(['after'])
       : (tier === 'suggestive' ? ['foreplay_flirt'] : []);
     else if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
     // 单人擦边不掺 duo_flirt：那 65 条是女女动作，池规则 g:2 会把单人画面变成两个女孩
@@ -1496,7 +1509,8 @@ function poolPlan(tier, nChar){
     // 女同就是女同：triple_sex / group3p 的规则是 g:2,m:1，掺进来每 5 张就有一个无脸男
     // （注释一直写着"3P 要显式选场景"，代码却只是降权没剔除）。3P 走 qScene=triple。
     else if(sc === 'yuri' && tier === 'r18') extra = ['machine_sex','tentacle_sex'];
-    else if(sc === 'yuri' && tier === 'suggestive') extra = [];
+    // duo_flirt 65 条双女文本之前没有任何出口（注释说擦边用，实现没接）= 死池
+    else if(sc === 'yuri' && tier === 'suggestive') extra = ['duo_flirt'];
     else if(sc === 'triple') extra = [];
     else if(sc === 'hypno') extra = [];
     return {main:main, extra:extra};
@@ -1510,8 +1524,8 @@ function poolPlan(tier, nChar){
     // 拆出来变成双人池固定是男女互动" —— 之前 main 是 solo_sex，单人跑 R18
     // 五分之四都是自我演出，看着就像"批量丢了一个人"。
     // 要纯自慰：场景类型下拉选「单人/自我」，走上面 sc==='solo' 分支。
-    return {main:['duo_male'], extra:['foreplay_sex','oral_sex','paizuri_sex','handjob_sex',
-      'footjob_sex','solo_sex','tentacle_sex','machine_sex','after']};
+    return {main:['duo_male'],
+      extra:PLAY_EXTRA.concat(['solo_sex','tentacle_sex','machine_sex','after'])};
   }
   if(tier === 'sfw') return {main:['yuri_daily'], extra:[]};
   if(tier === 'suggestive') return {main:['yuri_flirt'], extra:[]};
@@ -1564,16 +1578,18 @@ function composeShot(step, total){
   }
   // 3P 辅池降权：双女 R18 抽到 3P 会多一个人，用户要的是"女同就是女同"，
   // 3P 要显式选场景；这里把 triple/group3p 压到其它辅池的一半
-  const EX_LOW = {triple_daily:1, triple_flirt:1, triple_sex:1, group3p:1};
   for(let i=0;i<plan.extra.length;i++){
     const arr = poolItems(plan.extra[i]);
-    const ew = EX_LOW[plan.extra[i]] ? 1 : 3;
+    const ew = POOL_W[plan.extra[i]] || 3;
     for(let w=0;w<ew;w++){
       for(let j=0;j<arr.length;j++) bag.push({a:arr[j],p:plan.extra[i]});
     }
   }
   // 双女场景：触手/机械只有"两人一起"的条目才成立，单人触手会把第二个人挤出画面
-  const duoScene = (S.chars||[]).length >= 2 || ['yuri','triple'].indexOf(sceneType()) >= 0;
+  /* 锁「双人·男女」时画面里的"男"是无脸男、不是第二张卡：duoOK 会把带 penis 的条目
+     整池剔掉（oral_sex 首条就带 penis），静默退化成 duo_male 100%。 */
+  const duoScene = sceneType() !== 'duo'
+    && ((S.chars||[]).length >= 2 || ['yuri','triple'].indexOf(sceneType()) >= 0);
   const duoOK = x => {
     if(!duoScene) return true;
     const pn = String(x.p || '');
@@ -1789,12 +1805,12 @@ const POOL_RULE = {
   // 玩法池（2026-11-14）：以前前戏/口交/足交/乳交/手交全散在 duo_male 的 42 条里，
   // PF_KIND_ZH 的 oral 永远命中 0。拆成独立池后按辅池挂，主池仍是 duo_male。
   // 一律 m:1 —— 这些动作必须有男人在画面里（m:0 会把 penis/fellatio 全删）。
-  foreplay_flirt:{g:1, m:1, k:'flirt'},
-  foreplay_sex:{g:1, m:1, k:'sex'},
-  oral_sex:{g:1, m:1, k:'sex'},
-  footjob_sex:{g:1, m:1, k:'sex'},
-  paizuri_sex:{g:1, m:1, k:'sex'},
-  handjob_sex:{g:1, m:1, k:'sex'}
+  foreplay_flirt:{g:1, m:1, k:'flirt', play:'foreplay'},
+  foreplay_sex:{g:1, m:1, k:'sex', play:'foreplay'},
+  oral_sex:{g:1, m:1, k:'sex', play:'oral'},
+  footjob_sex:{g:1, m:1, k:'sex', play:'footjob'},
+  paizuri_sex:{g:1, m:1, k:'sex', play:'paizuri'},
+  handjob_sex:{g:1, m:1, k:'sex', play:'handjob'}
 };
 /* 男位/插入/体液词：无男池必须一起剔，否则"画面里没男人却有精液/骑乘位" */
 /* 只放"必须有男人"的词：插入体位、精液、阴茎。
@@ -2159,10 +2175,14 @@ function preflight(tags, opt){
                   'bare_back','bare_legs','clothes_removed','bottomless','topless',
                   'wardrobe_malfunction','strap_slip','clothes_in_mouth',
                   'nude','completely_nude','naked','clothed_sex','through_clothes',
-                  'wet_clothes','wet_shirt','torn_shirt','lingerie','underwear_only'];
+                  'wet_clothes','wet_shirt','torn_shirt','lingerie','underwear_only',
+                  // 袜子也是"衣物状态"：足交条目带 pantyhose/soles 时不该再被塞 open_clothes，
+                  // 否则紧接着 FULLGARB 会把 shirt/skirt/dress 删掉 —— 用户选的衣服和袜子一起没
+                  'pantyhose','thighhighs','stockings','socks','garter_belt'];
   // 隔衣做/湿衣这类条目，卖点就是"衣服还在"，补 open_clothes 等于把设定拆了
   const CLOTHED_KEEP = ['masturbation_through_clothes','clothed_sex','dry_humping','wet_shirt',
-                        'wet_clothes','through_clothes','lingerie','swimsuit','bikini','leotard'];
+                        'wet_clothes','through_clothes','lingerie','swimsuit','bikini','leotard',
+                        'pantyhose','thighhighs','stockings'];
   /* R18 插入场景（含女女/多人/触手/机械）都要有衣物状态；只认 k==='sex' 会让
      yuri_sex 25/59、triple_sex 40/52、group3p 29/34、tentacle_sex 13/57
      这些"有插入却整整齐齐穿着"的条目漏过去。 */
@@ -2361,9 +2381,12 @@ const SFW_CATS = ["style","artist","composition","camera","lighting","base","bod
 function rollLibrary(){
   const sc = composeShot(0,1);
   if(!sc){ toast("抽取失败：池为空"); return; }
-  setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
+  /* 顺序要紧：normTags 内部读 S.scenePool 决定 noActPool / yuriCtx。
+     写在 setTags 之后的话，第一张读到空串会走随机注入，其余张读到上一张的池 —— 
+     批量里已修，随机一套这里之前漏了。 */
+  S.sceneKind = sc.kind || ''; S.scenePool = sc.pool || ''; S.sceneZh = sc.zh || '';
   S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
-  S.sceneKind = sc.kind || ''; S.scenePool = sc.pool || '';
+  setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
   cleanTags(); refreshNeg(true);
   const pf = preflight(S.tags, {kind:S.sceneKind, pool:S.scenePool, zh:S.sceneZh});
   S.tags = pf.tags; syncText(); pfShow(pf.rep, S.tags.length);

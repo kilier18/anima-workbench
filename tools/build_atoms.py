@@ -270,6 +270,10 @@ def clean_meta(pool, label):
 
 def main():
     actions, banned = build()
+    # 增量池（duo_sfw / 玩法池 / after 扩库 / duo_daily shared）不在 atoms_*.py 里，
+    # 由 atoms_extra 补回 —— 否则重跑本脚本会把它们整池抹掉。
+    from atoms_extra import merge_extra
+    merge_extra(actions)
     data = {"actions": actions,
             "intensity": INTENSITY,
             "places": clean_meta(PLACES, "地点"),
