@@ -274,6 +274,8 @@ def main():
     # 由 atoms_extra 补回 —— 否则重跑本脚本会把它们整池抹掉。
     from atoms_extra import merge_extra
     merge_extra(actions)
+    from atoms_extra2 import merge_extra2
+    merge_extra2(actions)
     data = {"actions": actions,
             "intensity": INTENSITY,
             "places": clean_meta(PLACES, "地点"),

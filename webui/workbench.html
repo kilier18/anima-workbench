@@ -239,6 +239,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
         <option value="tentacle">触手</option>
         <option value="triple">3P</option>
         <option value="hypno">催眠</option>
+        <option value="exhibition">露出·偷窥</option>
       </select>
       <select id="qMale" title="需要男性时的处理：无脸男 / 隐形男(只剩压痕与动作) / 只有阴茎">
         <option value="invisible" selected>隐形男</option>
@@ -334,7 +335,7 @@ const EXPLICIT_HARD = ["sex", "vaginal", "anal", "sex_from_behind", "missionary"
 const PROP_WORDS = ['tentacles','tentacle_grab','tentacles_under_clothes','mechanical_tentacles',
   'bondage','shibari','bound_arms','bound_legs','bound_wrists','bound_ankles','restrained',
   'collar','leash','blindfold','rope'];
-const EXPLICIT_SOFT = ["underwear", "panties", "bra", "lingerie", "garter_belt", "garter_straps", "pantyhose", "thighhighs", "kneehighs", "socks", "black_thighhighs", "white_thighhighs", "leggings", "swimsuit", "bikini", "one-piece_swimsuit", "sling_bikini", "leotard", "spats", "bloomers", "cleavage", "underboob", "sideboob", "downblouse", "areola_slip", "wardrobe_malfunction", "bare_shoulders", "bare_back", "midriff", "navel", "see-through", "wet_clothes", "wet_shirt", "wet_skin", "transparent_clothing", "skirt_lift", "shirt_lift", "clothes_lift", "bra_lift", "dress_lift", "crotch", "cameltoe", "panty_pull", "panties_around_one_leg", "kneeling", "spread_legs", "legs_up", "leg_lift", "leg_lock", "arched_back", "bent_over", "against_wall", "sitting_on_lap", "straddling", "girl_on_top", "undressing", "clothes_removed", "changing_room", "locker_room", "lactation", "breast_milk", "milking", "breast_expansion", "inflation", "kiss", "french_kiss", "tongue_out", "open_mouth", "parted_lips", "saliva", "saliva_trail", "heavy_breathing", "sweat", "trembling", "massage_given_or_received", "kanojo", "hug_from_behind", "kiss_on_neck", "kiss_on_shoulder", "biting_ear", "nipple_stimulation", "breast_sucking", "nipple_pull", "nipple_clamps", "clothed_sex", "grinding", "dry_humping", "pussy_juice", "wet", "clothing_aside", "breast_slip", "nude", "completely_nude", "bottomless", "topless", "no_bra", "no_panties", "panties_aside", "naked_apron", "naked_towel", ];
+const EXPLICIT_SOFT = ["underwear", "panties", "bra", "lingerie", "swimsuit", "bikini", "one-piece_swimsuit", "sling_bikini", "leotard", "spats", "bloomers", "cleavage", "underboob", "sideboob", "downblouse", "areola_slip", "wardrobe_malfunction", "see-through", "wet_clothes", "wet_shirt", "transparent_clothing", "skirt_lift", "shirt_lift", "clothes_lift", "bra_lift", "dress_lift", "crotch", "cameltoe", "panty_pull", "panties_around_one_leg", "kneeling", "spread_legs", "legs_up", "leg_lift", "leg_lock", "arched_back", "bent_over", "against_wall", "sitting_on_lap", "straddling", "girl_on_top", "undressing", "clothes_removed", "changing_room", "locker_room", "lactation", "breast_milk", "milking", "breast_expansion", "inflation", "kiss", "french_kiss", "tongue_out", "open_mouth", "parted_lips", "saliva", "saliva_trail", "heavy_breathing", "trembling", "massage_given_or_received", "kanojo", "hug_from_behind", "kiss_on_neck", "kiss_on_shoulder", "biting_ear", "nipple_stimulation", "breast_sucking", "nipple_pull", "nipple_clamps", "clothed_sex", "grinding", "dry_humping", "pussy_juice", "wet", "clothing_aside", "breast_slip", "nude", "completely_nude", "bottomless", "topless", "no_bra", "no_panties", "panties_aside", "naked_apron", "naked_towel", ];
 
 function stripBy(arr, set){
   return arr.filter(t=>!set.includes(String(t).toLowerCase()));
@@ -1512,6 +1513,9 @@ function poolPlan(tier, nChar){
     // duo_flirt 65 条双女文本之前没有任何出口（注释说擦边用，实现没接）= 死池
     else if(sc === 'yuri' && tier === 'suggestive') extra = ['duo_flirt'];
     else if(sc === 'triple') extra = [];
+    // 露出/偷窥：主池 exhibition_daily/flirt/sex；健全与擦边都掺 voyeur_flirt（偷窥视角）
+    // 单人自露 m:0 不能有男；野外留 voyeur_flirt 会让'被看'的人变第二个 → 只在非 R18 掺
+    else if(sc === 'exhibition') extra = (tier === 'suggestive') ? ['voyeur_flirt'] : [];
     else if(sc === 'hypno') extra = [];
     return {main:main, extra:extra};
   }
@@ -1802,6 +1806,9 @@ const POOL_RULE = {
   group3p:{g:2, m:1, k:'group'},
   // 事后：g:0 跟随 —— 单人独处和双人温存都成立，不能强制成单人（31 条里一半是两人搂着）
   after:{g:0, m:1, k:'after'},
+  // 露出/偷窥（2026-11-14）：单人自露不能有男；野外要男；偷窥是视角问题，人数跟随
+  exhibition_daily:{g:1, m:0, k:'daily'}, exhibition_flirt:{g:1, m:0, k:'flirt'},
+  exhibition_sex:{g:1, m:1, k:'sex'}, voyeur_flirt:{g:0, m:3, k:'flirt'},
   // 玩法池（2026-11-14）：以前前戏/口交/足交/乳交/手交全散在 duo_male 的 42 条里，
   // PF_KIND_ZH 的 oral 永远命中 0。拆成独立池后按辅池挂，主池仍是 duo_male。
   // 一律 m:1 —— 这些动作必须有男人在画面里（m:0 会把 penis/fellatio 全删）。
@@ -1841,7 +1848,8 @@ const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_
   duo_daily:'双人日常', duo_flirt:'双人暧昧', duo_male:'双人·男女R18', duo_solo:'单人+无脸男',
   duo_sfw:'双人·男女(健全)',
   group3p:'双女+无脸男 3P', after:'事后',
-  foreplay_flirt:'前戏·擦边', foreplay_sex:'前戏·赤裸', oral_sex:'口交', footjob_sex:'足交', paizuri_sex:'乳交', handjob_sex:'手交'};
+  foreplay_flirt:'前戏·擦边', foreplay_sex:'前戏·赤裸', oral_sex:'口交', footjob_sex:'足交', paizuri_sex:'乳交', handjob_sex:'手交',
+  exhibition_daily:'露出·健全', exhibition_flirt:'露出·擦边', exhibition_sex:'露出·野外', voyeur_flirt:'偷窥'};
 function preflight(tags, opt){
   const o = opt || {};
   let a = uniq((tags || []).map(t=>String(t).trim()).filter(Boolean));
