@@ -26,7 +26,8 @@ def main():
     if "--seed" in sys.argv:
         seed = int(sys.argv[sys.argv.index("--seed") + 1])
     if "--lora" in sys.argv:
-        extra = sys.argv[sys.argv.index("--lora") + 1].split("|")
+        # 支持多 LoRA："A.safetensors|0.6;B.safetensors|0.6"（分号分隔，链式挂）
+        extra = [s for s in sys.argv[sys.argv.index("--lora") + 1].split(";") if s.strip()]
     wf = {
         "1": {"class_type": "UNETLoader", "inputs": {"unet_name": UNET, "weight_dtype": "default"}},
         "2": {"class_type": "CLIPLoader", "inputs": {"clip_name": CLIP, "type": "stable_diffusion", "device": "default"}},
@@ -41,11 +42,18 @@ def main():
         "15": {"class_type": "SaveImage", "inputs": {"images": ["14", 0], "filename_prefix": (batch + "/" + slug)[:72]}},
         "20": {"class_type": "LoraLoaderModelOnly", "inputs": {"model": ["1", 0], "lora_name": TURBO, "strength_model": 0.7}},
     }
-    if extra:
-        wf["21"] = {"class_type": "LoraLoaderModelOnly",
-                    "inputs": {"model": ["20", 0], "lora_name": extra[0],
-                               "strength_model": float(extra[1]) if len(extra) > 1 and extra[1] else 1.0}}
-        wf["13"]["inputs"]["model"] = ["21", 0]
+    prev = "20"
+    for i, spec in enumerate(extra or []):
+        pr = spec.split("|")
+        if not pr[0].strip():
+            continue
+        nid = str(21 + i)
+        wf[nid] = {"class_type": "LoraLoaderModelOnly",
+                   "inputs": {"model": [prev, 0], "lora_name": pr[0].strip(),
+                              "strength_model": float(pr[1]) if len(pr) > 1 and pr[1].strip() else 1.0}}
+        prev = nid
+    if prev != "20":
+        wf["13"]["inputs"]["model"] = [prev, 0]
     pid = post("/prompt", {"prompt": wf, "client_id": "runchar"})["prompt_id"]
     t0 = time.time()
     while time.time() - t0 < 600:

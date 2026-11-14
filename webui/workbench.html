@@ -793,8 +793,8 @@ function renderChars(b){
                     '<div class="tw">'+esc(c.w||"")+'</div>';
       d.onclick=()=>{ pickChar(c); };
       grid.appendChild(d);
-      if(c.th){ const ph=d.querySelector(".ph"); const im=new Image();
-        const src='/anima-wardrobe-v5/thumb/'+encodeURIComponent(c.t)+'?v=3';
+      if(c.thumb || c.th){ const ph=d.querySelector(".ph"); const im=new Image();
+        const src='/anima-wardrobe-v5/thumb/'+encodeURIComponent(c.thumb||c.t)+'?v=4';
         im.onload=()=>{ ph.style.backgroundImage='url("'+src+'")'; ph.textContent=""; };
         im.onerror=()=>{ ph.textContent=String(c.t||'?').slice(0,2).toUpperCase(); };
         im.src=src; }
@@ -843,7 +843,9 @@ function pickChar(c){
   addTag([c.t].concat(c.g||[]));
   if(c.lora) setCharLora(c.t);
   const n = recount();
-  toast("角色 +1（共 " + n + " 个）：" + (c.zh||c.t) + (c.lora ? "（已挂 LoRA）" : ""));
+  let note = (c.lora ? "（已挂 LoRA）" : "");
+  if(n > 1) note = "（多人：角色 LoRA 不生效，只靠 tag）";
+  toast("角色 +1（共 " + n + " 个）：" + (c.zh||c.t) + note);
 }
 
 function renderScenes(b){

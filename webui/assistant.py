@@ -1774,12 +1774,26 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
     return g, sd
 
 
+def _anima_multi(text):
+    """多人场景判定：角色 LoRA 是全局染色（不按人物分区），双人必串（脸/衣服/尾巴互换），
+    因此多人时一律不挂角色包，只靠 tag。"""
+    t = (text or "").lower()
+    for k in ("2girls", "2boys", "3girls", "3boys", "multiple_girls", "multiple_boys",
+              "1girl, 1boy", "1boy, 1girl"):
+        if k in t:
+            return True
+    return False
+
+
 def gen_submit(positive, negative="", **kw):
     # 选中画风包时，把它的触发词补到最前面（一次只挂一个画风，不加权不稀释）
     # 角色包触发词放最前，画风包触发词随后（Anima 官方顺序：角色 → 作品 → 画师）
     cid = kw.get("char_id")
     if cid is None:
         cid = anima_char_get()
+    if cid and _anima_multi(positive):
+        kw["char_id"] = ""      # 多人 → 强制不挂角色 LoRA
+        cid = ""
     ctrig = anima_char_trig(cid)
     if ctrig:
         _ch = ctrig.split(",")[0].strip().lower()
@@ -3559,11 +3573,15 @@ class H(BaseHTTPRequestHandler):
                 return self._send(500, {"ok": False, "error": str(e)})
         if p == "/api/anima/handfix":
             try:
-                r = anima_handfix(body.get("filename"), body.get("positive") or "",
+                _hf_pos = body.get("positive") or ""
+                _hf_cid = body.get("char_id")
+                if _hf_cid and _anima_multi(_hf_pos):
+                    _hf_cid = ""      # 多人手修同样不挂角色 LoRA
+                r = anima_handfix(body.get("filename"), _hf_pos,
                                   body.get("negative") or "",
                                   body.get("steps") or 8, body.get("denoise") or 0.45,
                                   body.get("seed"), body.get("style_id"),
-                                  body.get("char_id"))
+                                  _hf_cid)
                 return self._send(200, r)
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})
