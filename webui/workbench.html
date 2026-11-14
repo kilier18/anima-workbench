@@ -324,9 +324,17 @@ function hypnoFix(list){
 }
 
 /* 三级分级（由 _setup/tier_sets.py 生成，勿手改） */
-const EXPLICIT_HARD = ["sex", "vaginal", "anal", "sex_from_behind", "missionary", "cowgirl_position", "reverse_cowgirl_position", "all_fours", "doggystyle", "upright_straddle", "amazon_position", "mating_press", "piledriver", "spooning", "suspended_congress", "full_nelson", "prone_bone", "squatting_cowgirl_position", "standing_sex", "paizuri", "fellatio", "oral", "cunnilingus", "deepthroat", "thigh_sex", "handjob", "footjob", "tribadism", "69", "double_penetration", "triple_penetration", "penis", "testicles", "cum", "cum_in_pussy", "cum_on_body", "cum_on_breasts", "cum_in_mouth", "cum_on_tongue", "cum_on_penis", "cum_on_fingers", "cum_in_ass", "cum_in_navel", "cum_swap", "cumdrip", "cum_overflow", "cum_on_hair", "cum_on_stomach", "cum_on_feet", "excessive_cum", "facial", "bukkake", "spilling", "gokkun", "pussy", "anus", "spread_pussy", "pubic_hair", "clitoris", "urethra", "gaping", "ass_eaten", "nipples", "areolae", "erect_nipples", "milking_machine", "masturbation", "fingering", "dildo", "vibrator", "sex_toy", "butt_plug", "anal_beads", "sex_machine", "mechanical_tentacles", "tentacles", "tentacle_sex", "tentaclejob", "tentacle_in_mouth", "tentacle_grab", "tentacles_under_clothes", "stomach_bulge", "slime_(substance)", "egg_laying", "bondage", "shibari", "bound_arms", "bound_legs", "bound_wrists", "bound_ankles", "restrained", "ring_gag", "ball_gag", "cleave_gag", "wax_play", "whip", "riding_crop", "spanking", "welts", "humiliation", "futanari", "futanari_with_female", "futa_with_female", "orgasm", "female_ejaculation", "squirt", "forced_orgasm", "after_sex", "after_vaginal", "after_anal", "afterglow", "used_condom", "condom", "ahegao", "torogao", "rolling_eyes", "drooling", "empty_eyes", "heart-shaped_pupils", "mind_control", "hypnosis", "urination", "enema", "scat", "public_use", "glory_hole"];
+const EXPLICIT_HARD = ["sex", "vaginal", "anal", "sex_from_behind", "missionary", "cowgirl_position", "reverse_cowgirl_position", "all_fours", "doggystyle", "upright_straddle", "amazon_position", "mating_press", "piledriver", "spooning", "suspended_congress", "full_nelson", "prone_bone", "squatting_cowgirl_position", "standing_sex", "paizuri", "fellatio", "oral", "cunnilingus", "deepthroat", "thigh_sex", "handjob", "footjob", "tribadism", "69", "double_penetration", "triple_penetration", "penis", "testicles", "cum", "cum_in_pussy", "cum_on_body", "cum_on_breasts", "cum_in_mouth", "cum_on_tongue", "cum_on_penis", "cum_on_fingers", "cum_in_ass", "cum_in_navel", "cum_swap", "cumdrip", "cum_overflow", "cum_on_hair", "cum_on_stomach", "cum_on_feet", "excessive_cum", "facial", "bukkake", "spilling", "gokkun", "pussy", "anus", "spread_pussy", "pubic_hair", "clitoris", "urethra", "gaping", "ass_eaten", "nipples", "areolae", "erect_nipples", "milking_machine", "masturbation", "fingering", "dildo", "vibrator", "sex_toy", "butt_plug", "anal_beads", "sex_machine", "tentacle_sex", "tentaclejob", "tentacle_in_mouth", "stomach_bulge", "slime_(substance)", "egg_laying", "ring_gag", "ball_gag", "cleave_gag", "wax_play", "whip", "riding_crop", "spanking", "welts", "humiliation", "futanari", "futanari_with_female", "futa_with_female", "orgasm", "female_ejaculation", "squirt", "forced_orgasm", "after_sex", "after_vaginal", "after_anal", "afterglow", "used_condom", "condom", "ahegao", "torogao", "rolling_eyes", "drooling", "empty_eyes", "heart-shaped_pupils", "mind_control", "hypnosis", "urination", "enema", "scat", "public_use", "glory_hole"];
 
-const EXPLICIT_SOFT = ["1boy", "2boys", "3boys", "multiple_boys", "faceless_male", "hetero", "male_focus", "male_on_top", "underwear", "panties", "bra", "lingerie", "garter_belt", "garter_straps", "pantyhose", "thighhighs", "kneehighs", "socks", "black_thighhighs", "white_thighhighs", "leggings", "swimsuit", "bikini", "one-piece_swimsuit", "sling_bikini", "leotard", "spats", "bloomers", "cleavage", "underboob", "sideboob", "downblouse", "areola_slip", "wardrobe_malfunction", "bare_shoulders", "bare_back", "midriff", "navel", "see-through", "wet_clothes", "wet_shirt", "wet_skin", "transparent_clothing", "skirt_lift", "shirt_lift", "clothes_lift", "bra_lift", "dress_lift", "crotch", "cameltoe", "panty_pull", "panties_around_one_leg", "kneeling", "spread_legs", "legs_up", "leg_lift", "leg_lock", "arched_back", "bent_over", "against_wall", "sitting_on_lap", "straddling", "girl_on_top", "collar", "leash", "undressing", "clothes_removed", "changing_room", "locker_room", "lactation", "breast_milk", "milking", "breast_expansion", "inflation", "kiss", "french_kiss", "tongue_out", "open_mouth", "parted_lips", "saliva", "saliva_trail", "heavy_breathing", "sweat", "trembling", "massage_given_or_received", "kanojo", "hug_from_behind", "kiss_on_neck", "kiss_on_shoulder", "biting_ear", "nipple_stimulation", "breast_sucking", "nipple_pull", "nipple_clamps", "clothed_sex", "grinding", "dry_humping", "pussy_juice", "wet", "clothing_aside", "breast_slip", "nude", "completely_nude", "bottomless", "topless", "no_bra", "no_panties", "panties_aside", "naked_apron", "naked_towel", ];
+/* 男体词（1boy/faceless_male/hetero）不在这里：它们是"画面结构"不是"露骨度"，
+   放在 SOFT 会被 sfw/suggestive 档整条剔掉，调教/双人池的中文写着"被他绑住"却画不出人。
+   现在由 preflight 的 POOL_RULE.m 统一裁决（m:0 一律删，m:1/m:3 按条目自带）。 */
+/* 道具词：档位门不删它们（健全档的"触手只是搭在手背上""自己把项圈扣上"要靠这些词成立），
+   只在需要时用来识别条目属于哪一类。 */
+const PROP_WORDS = ['tentacles','tentacle_grab','tentacles_under_clothes','mechanical_tentacles',
+  'bondage','shibari','bound_arms','bound_legs','bound_wrists','bound_ankles','restrained',
+  'collar','leash','blindfold','rope'];
+const EXPLICIT_SOFT = ["underwear", "panties", "bra", "lingerie", "garter_belt", "garter_straps", "pantyhose", "thighhighs", "kneehighs", "socks", "black_thighhighs", "white_thighhighs", "leggings", "swimsuit", "bikini", "one-piece_swimsuit", "sling_bikini", "leotard", "spats", "bloomers", "cleavage", "underboob", "sideboob", "downblouse", "areola_slip", "wardrobe_malfunction", "bare_shoulders", "bare_back", "midriff", "navel", "see-through", "wet_clothes", "wet_shirt", "wet_skin", "transparent_clothing", "skirt_lift", "shirt_lift", "clothes_lift", "bra_lift", "dress_lift", "crotch", "cameltoe", "panty_pull", "panties_around_one_leg", "kneeling", "spread_legs", "legs_up", "leg_lift", "leg_lock", "arched_back", "bent_over", "against_wall", "sitting_on_lap", "straddling", "girl_on_top", "undressing", "clothes_removed", "changing_room", "locker_room", "lactation", "breast_milk", "milking", "breast_expansion", "inflation", "kiss", "french_kiss", "tongue_out", "open_mouth", "parted_lips", "saliva", "saliva_trail", "heavy_breathing", "sweat", "trembling", "massage_given_or_received", "kanojo", "hug_from_behind", "kiss_on_neck", "kiss_on_shoulder", "biting_ear", "nipple_stimulation", "breast_sucking", "nipple_pull", "nipple_clamps", "clothed_sex", "grinding", "dry_humping", "pussy_juice", "wet", "clothing_aside", "breast_slip", "nude", "completely_nude", "bottomless", "topless", "no_bra", "no_panties", "panties_aside", "naked_apron", "naked_towel", ];
 
 function stripBy(arr, set){
   return arr.filter(t=>!set.includes(String(t).toLowerCase()));
@@ -1400,9 +1408,12 @@ async function batchRun(){
     if(useCompose){
       sc = composeShot(i, n);
       if(sc){
+        /* 顺序要紧：normTags 内部读 S.scenePool 决定 noActPool / yuriCtx，
+           原来先 setTags 后写 scenePool，等于拿上一张的池规则洗这一张的词
+           （批量第一张读空串 → 走随机注入，后面的张用前一张的 k 判断）。 */
+        S.sceneKind = sc.kind || ''; S.sceneZh = sc.zh || ''; S.scenePool = sc.pool || '';
         setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
         S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
-        S.sceneKind = sc.kind || ''; S.sceneZh = sc.zh || ''; S.scenePool = sc.pool || '';
         cleanTags(); refreshNeg(true);
       } else {
         // 抽空时清池，否则下一张会拿上一张的池规则去收束性别
@@ -1459,22 +1470,27 @@ function poolPlan(tier, nChar){
     let main = [sc + '_' + T];
     // 双人·男女：没有 duo_sex 池，R18 档用 duo_male（"她 + 无脸男"）；
     // 健全档用 duo_sfw（一男一女通用互动，56 条），擦边档用 duo_flirt。
-    if(sc === 'duo') main = [(tier === 'r18') ? 'duo_male'
-                             : (tier === 'sfw' ? 'duo_sfw' : 'duo_flirt')];
+    if(sc === 'duo') main = [(tier === 'r18') ? 'duo_male' : 'duo_sfw'];
     let extra = [];
-    if(sc === 'duo') extra = (tier === 'r18') ? ['duo_flirt','solo_sex','after'] : [];
+    // 锁「双人·男女」时辅池只能放"也要两个人"的池：
+    // 之前 r18 的 extra 带 solo_sex（自慰）和 duo_flirt（女女文本），
+    // 复算权重后 duo_male 只占 37%、solo_sex 占 27% —— 锁双人却拿到单人自慰图。
+    if(sc === 'duo') extra = (tier === 'r18') ? ['after'] : [];
     else if(sc === 'solo' && tier === 'r18') extra = ['tentacle_sex','machine_sex','after'];
-    else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_flirt','duo_daily','tentacle_flirt'];
-    else if(sc === 'yuri' && tier === 'r18') extra = ['triple_sex','group3p','machine_sex','tentacle_sex'];
+    // 单人擦边不掺 duo_flirt：那 65 条是女女动作，池规则 g:2 会把单人画面变成两个女孩
+    else if(sc === 'solo' && tier === 'suggestive') extra = ['duo_daily','tentacle_flirt'];
+    // 女同就是女同：triple_sex / group3p 的规则是 g:2,m:1，掺进来每 5 张就有一个无脸男
+    // （注释一直写着"3P 要显式选场景"，代码却只是降权没剔除）。3P 走 qScene=triple。
+    else if(sc === 'yuri' && tier === 'r18') extra = ['machine_sex','tentacle_sex'];
     else if(sc === 'yuri' && tier === 'suggestive') extra = [];
     else if(sc === 'triple') extra = [];
-    else if(sc === 'hypno') extra = (tier === 'r18') ? ['tentacle_sex'] : [];
+    else if(sc === 'hypno') extra = [];
     return {main:main, extra:extra};
   }
   const two = nChar >= 2;
   if(!two){
     if(tier === 'sfw') return {main:['solo_daily'], extra:[]};
-    if(tier === 'suggestive') return {main:['solo_flirt'], extra:['duo_flirt','duo_daily','tentacle_flirt']};
+    if(tier === 'suggestive') return {main:['solo_flirt'], extra:['duo_daily','tentacle_flirt']};
     // 单人 + R18：默认给"她 + 无脸男"（duo_male 42 条全是男女互动），
     // 自慰（solo_sex 55 条）降到辅池。2026-11-14 用户原话："单人里的双人行为
     // 拆出来变成双人池固定是男女互动" —— 之前 main 是 solo_sex，单人跑 R18
@@ -1519,7 +1535,10 @@ function composeShot(step, total){
     for(let j=0;j<arr.length;j++){
       // 第二档专属池里，"真擦边"条目加权：调情池混了太多纯可爱小动作
       // （撩头发/托腮/顶手指），等权抽出来就像日常片场，用户原话"完全不擦边"。
-      let wmax = 5;
+      // 主池权重按辅池数量放大：单人 R18 有 4 个辅池时，固定 5 票会让主池只占 31%
+      // （duo_male 250 : solo_sex 180 : tentacle 171 : machine 156 : after 39）。
+      // 乘上辅池数量后主池回到 58% 以上，"单人 R18 默认是男女互动"才成立。
+      let wmax = 5 * Math.max(1, plan.extra.length);
       if(S.tier === 'suggestive' && (plan.main[i] === 'solo_flirt' || plan.main[i] === 'duo_flirt')){
         // 强擦边 9 : 纯可爱 2 —— 第二档就是来看衣料和姿势的，
         // 托腮/顶手指这类日常小动作留一点做缓冲即可
@@ -1577,7 +1596,7 @@ function composeShot(step, total){
   const act = hit.a;
   let poolName = hit.p;
   // 单人档抽到"双人日常/暧昧"：第二个人按无脸男补全构图（用户规则），池名改判
-  if(nChar0 <= 1 && (poolName === 'duo_daily' || poolName === 'duo_flirt')) poolName = 'duo_solo';
+  if(nChar0 <= 1 && poolName === 'duo_daily') poolName = 'duo_solo';
   used.push(key(act)); saveUsedActs(used);
   const kind = (POOL_RULE[poolName] || {}).k || act.kind || '';
 
@@ -1737,7 +1756,10 @@ const POOL_RULE = {
   solo_daily:{g:1, m:0, k:'daily'},  solo_flirt:{g:1, m:0, k:'flirt'},  solo_sex:{g:1, m:2, k:'sex'},
   yuri_daily:{g:2, m:0, k:'daily'},  yuri_flirt:{g:2, m:0, k:'flirt'},  yuri_sex:{g:2, m:0, k:'yuri'},
   machine_daily:{g:1, m:0, k:'machine'}, machine_flirt:{g:1, m:0, k:'machine'}, machine_sex:{g:1, m:0, k:'machine'},
-  bdsm_daily:{g:1, m:0, k:'daily'},  bdsm_flirt:{g:1, m:0, k:'flirt'},  bdsm_sex:{g:1, m:2, k:'sex'},
+  // 调教三档都可能是"他/她牵着项圈"：bdsm_daily 40 条里 27 条自带 faceless_male，
+  // bdsm_flirt 50 条里 33 条自带。m:0 会把这些词全删掉，中文还写着"被他从背后绑住"，
+  // 出图变成女生自己举手。改 m:3：只有条目自带男体词才落地，自缚条目自动保持单人。
+  bdsm_daily:{g:1, m:3, k:'daily'},  bdsm_flirt:{g:1, m:3, k:'flirt'},  bdsm_sex:{g:1, m:2, k:'sex'},
   tentacle_daily:{g:1, m:0, k:'tentacle'}, tentacle_flirt:{g:1, m:0, k:'tentacle'}, tentacle_sex:{g:1, m:0, k:'tentacle'},
   triple_daily:{g:2, m:1, k:'daily'}, triple_flirt:{g:2, m:1, k:'flirt'}, triple_sex:{g:2, m:1, k:'group'},
   // 普通双人互动 / 单人补人 / 事后
@@ -1749,9 +1771,13 @@ const POOL_RULE = {
   group3p:{g:2, m:1, k:'group'},     after:{g:1, m:1, k:'after'}
 };
 /* 男位/插入/体液词：无男池必须一起剔，否则"画面里没男人却有精液/骑乘位" */
-const MALE_POS = ['sex','missionary','all_fours','doggystyle','sex_from_behind','on_side',
-  'straddling','suspended_congress','mating_press','spooning','upright_straddle','piledriver',
-  'prone_bone','full_nelson','amazon_position','deep_penetration','squatting_cowgirl_position',
+/* 只放"必须有男人"的词：插入体位、精液、阴茎。
+   通用姿势（on_side / all_fours / straddling / spooning / piledriver…）不放进来 ——
+   它们对女女、触手、机械、侧躺单人同样成立，放进 m:0 的剔除表会各池误删 42+ 条
+   条目的姿势词（实测 yuri_sex 8 条、tentacle_sex 12 条、machine_sex 6 条）。 */
+const MALE_POS = ['sex','missionary','doggystyle','sex_from_behind',
+  'suspended_congress','mating_press','upright_straddle',
+  'full_nelson','amazon_position','deep_penetration','squatting_cowgirl_position',
   'cowgirl_position','reverse_cowgirl_position','vaginal','penis','penis_grab',
   'licking_penis','deepthroat','irrumatio','paizuri','handjob','spitroast','double_penetration',
   'double_fellatio','fellatio','thigh_sex','footjob','cum_in_pussy','cumdrip','cum_overflow',
@@ -1863,8 +1889,15 @@ function preflight(tags, opt){
         // 中文词面里带"被/让人/按住/抱着/两人…"就是有第二个人在动手，
         // 光看英文 tags 会漏（「被人掀起裙角」只有 skirt_lift）
         const passive = /被|让人|命令|按住|按在|抱着|抱住|牵着|拉着|捏着|贴着|引到|对着|一左一右|两人|一起/.test(String(o.zh||''));
-        const needBody = sexish || passive || o.pool === 'duo_solo' || o.pool === 'group3p'
-                         || o.pool === 'duo_male' || (R.k === 'sex' && !selfOnly);
+        /* 补不补第二个人，先看池规则（R.m），再看词面：
+           m:1/m:3 的池（duo_sfw / duo_male / duo_solo / group3p / triple_* / bdsm_* / after）
+           一律要人 —— 之前白名单只写死三个池名，duo_sfw 的「壁咚，手撑在墙上」
+           「替对方系领带」「膝枕」共 37/56 条拿不到男性，等于对着空气壁咚。
+           after 例外：单人事后不该凭空多一个人，双人场景才补。 */
+        const needBody = (R.m === 1 && R.k !== 'after') || R.m === 3
+                         || sexish || passive
+                         || (R.k === 'after' && nChar >= 2)
+                         || (R.k === 'sex' && !selfOnly);
         if(needBody){
           /* 三人构型（池要求 2 女 + 1 男：triple_daily/flirt/sex、group3p）：
              第三个人必须画得出来。隐形男塞进 2girls 画面，底模会把它画成
@@ -2074,23 +2107,47 @@ function preflight(tags, opt){
   // R18 性交场景不能"整整齐齐穿着"：池里 90% 的条目只有体位没有衣物状态，
   // 模型就把衣服画得板板正正，身体曲线和半遮半掩全没了。
   // 用户 2026-11-14 原话："像是搁这衣服进去的，没有身体曲线，也没有半遮半掩的诱惑"。
+  /* 衣物状态词：这些词本身就说明"衣服被动过了"，不能再被下面的 FULLGARB 当整件衣服删掉。
+     补了 nude / naked / clothed_sex / wet_clothes —— 原来只认"半脱"，全裸和隔衣真做
+     都被当成"没有衣物状态"，会被强行塞 open_clothes（隔衣磨蹭的卖点直接没了）。 */
   const USTATE = ['open_clothes','undressing','clothes_lift','clothes_pull','skirt_lift',
                   'panty_pull','panties_aside','panties_around_one_leg','bra_lift','shirt_lift',
                   'dress_lift','torn_clothes','breasts_out','nipple_slip','bare_shoulders',
                   'bare_back','bare_legs','clothes_removed','bottomless','topless',
-                  'wardrobe_malfunction','strap_slip','clothes_in_mouth'];
-  if(k === 'sex' && a.some(t=>PF_SEXISH.includes(low(t))) && !a.some(t=>USTATE.includes(low(t)))){
+                  'wardrobe_malfunction','strap_slip','clothes_in_mouth',
+                  'nude','completely_nude','naked','clothed_sex','through_clothes',
+                  'wet_clothes','wet_shirt','torn_shirt','lingerie','underwear_only'];
+  // 隔衣做/湿衣这类条目，卖点就是"衣服还在"，补 open_clothes 等于把设定拆了
+  const CLOTHED_KEEP = ['masturbation_through_clothes','clothed_sex','dry_humping','wet_shirt',
+                        'wet_clothes','through_clothes','lingerie','swimsuit','bikini','leotard'];
+  /* R18 插入场景（含女女/多人/触手/机械）都要有衣物状态；只认 k==='sex' 会让
+     yuri_sex 25/59、triple_sex 40/52、group3p 29/34、tentacle_sex 13/57
+     这些"有插入却整整齐齐穿着"的条目漏过去。 */
+  const SEXK = ['sex','yuri','group','tentacle','machine'];
+  if(SEXK.indexOf(k) >= 0 && a.some(t=>PF_SEXISH.includes(low(t)))
+     && !a.some(t=>USTATE.includes(low(t)))
+     && !a.some(t=>CLOTHED_KEEP.includes(low(t)))){
     a.push('open_clothes');
     rep.fixes.push('性交场景补衣物敞开');
   }
   if(hasU(a)){
     // 子串匹配：新角色卡里的服装是词组（gothic maid outfit / black red short dress /
     // white frilled dress），只按单词比会把它们全漏掉，结果"动作写了脱衣、衣服纹丝不动"。
+    // 但子串匹配会反噬：'skirt' 命中 skirt_lift、'shirt' 命中 open_shirt / shirt_lift、
+    // 'dress' 命中 dress_lift —— 这些是衣物**状态**词，删掉就等于把脱衣动作自己抹了。
+    // 所以先过 USTATE，状态词一律豁免。
+    /* 子串匹配的误伤清单（实测 wb_outfits 130 条里有 5 条）：
+       maid_headdress 含 dress、swimsuit / track_suit 含 suit、wet_shirt / torn_shirt
+       是衣物状态不是整件衣服。这些一律豁免，否则"抽到脱衣 + 角色穿泳装"会直接变全裸。 */
+    const GARB_KEEP = ['maid_headdress','headdress','swimsuit','one-piece_swimsuit','bikini',
+                       'leotard','track_suit','wet_shirt','torn_shirt','swim_briefs'];
     const keep = [];
     let n3 = 0;
     for(const t of a){
-      const k = low(t);
-      if(FULLGARB.some(w => k === w || k.indexOf(w) >= 0)){ n3++; continue; }
+      const kk = low(t);
+      const isState = USTATE.some(u => kk === u || kk.indexOf(u) >= 0)
+                      || GARB_KEEP.some(g => kk === g || kk.indexOf(g) >= 0);
+      if(!isState && FULLGARB.some(w => kk === w || kk.indexOf(w) >= 0)){ n3++; continue; }
       keep.push(t);
     }
     if(n3){

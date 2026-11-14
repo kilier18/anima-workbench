@@ -138,10 +138,12 @@
     "navy mary janes"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "deepseek-tan, deepseek_whale_girl_zipzippipe, deepseek_maid_outfit_zipzippipe",
    "lora": "Anima\\packs\\musume-deepseek-whale.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_whale_normal"
+   "thumb": "musume_whale_normal",
+   "trig_core": "deepseek-tan, deepseek_whale_girl_zipzippipe, deepseek_maid_outfit_zipzippipe",
+   "trig_outfit": ""
   },
   {
    "t": "deepseek-tan-chibi",
@@ -165,10 +167,12 @@
     "frills"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, ds_whalemaid",
    "lora": "Anima\\packs\\deepseek-whalemaid-chibi.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_whale_chibi"
+   "thumb": "musume_whale_chibi",
+   "trig_core": "chibi, ds_whalemaid",
+   "trig_outfit": ""
   },
   {
    "t": "chatgpt-tan",
@@ -196,10 +200,12 @@
     "translucent over-skirt"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chatgpt-tan, Chatgpt_dragon_girl",
    "lora": "Anima\\packs\\chatgpt-dragon-alt.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_dragon_normal"
+   "thumb": "musume_dragon_normal",
+   "trig_core": "chatgpt-tan, Chatgpt_dragon_girl",
+   "trig_outfit": ""
   },
   {
    "t": "admiral_(kancolle)",
@@ -235,10 +241,12 @@
     "dragon tail"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 白龙娘",
    "lora": "Anima\\packs\\musume-gpt-white-dragon.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_dragon_chibi"
+   "thumb": "musume_dragon_chibi",
+   "trig_core": "chibi, 白龙娘",
+   "trig_outfit": ""
   },
   {
    "t": "artoria_pendragon_(fate)",
@@ -280,10 +288,12 @@
     "yellow eye"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "gemini_ai, heterochromia, red eye, yellow eye",
    "lora": "Anima\\packs\\gemini-chan-anima.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_gemini_normal"
+   "thumb": "musume_gemini_normal",
+   "trig_core": "gemini_ai, heterochromia, red eye, yellow eye",
+   "trig_outfit": ""
   },
   {
    "t": "gemini-ai-chibi",
@@ -310,10 +320,12 @@
     "yellow eye"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 2head, gemini_ai, heterochromia, red eye, yellow eye",
    "lora": "Anima\\packs\\gemini-chan-anima.safetensors",
    "lora_w": 0.85,
-   "thumb": "musume_gemini_chibi"
+   "thumb": "musume_gemini_chibi",
+   "trig_core": "chibi, 2head, gemini_ai, heterochromia, red eye, yellow eye",
+   "trig_outfit": ""
   },
   {
    "t": "gemini-carborn",
@@ -334,10 +346,12 @@
     "midriff"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "Gemini_(Carborn), rainbow hair, multicolored hair, heterochromia",
    "lora": "Anima\\packs\\gemini-carborn.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_gemini_rainbow"
+   "thumb": "musume_gemini_rainbow",
+   "trig_core": "Gemini_(Carborn), rainbow hair, multicolored hair, heterochromia",
+   "trig_outfit": ""
   },
   {
    "t": "gemini-carborn-chibi",
@@ -360,10 +374,12 @@
     "midriff"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 2head, Gemini_(Carborn), rainbow hair, heterochromia",
    "lora": "Anima\\packs\\gemini-carborn.safetensors",
    "lora_w": 0.9,
-   "thumb": "musume_gemini_rainbow_chibi"
+   "thumb": "musume_gemini_rainbow_chibi",
+   "trig_core": "chibi, 2head, Gemini_(Carborn), rainbow hair, heterochromia",
+   "trig_outfit": ""
   },
   {
    "t": "kochiya_sanae",
@@ -410,10 +426,12 @@
     "holding a dark brown hardcover book with an orange flower emblem"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "claude_girl, orange hair, white dress, hair flower",
    "lora": "Anima\\packs\\claude-girl.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_claude_normal"
+   "thumb": "musume_claude_normal",
+   "trig_core": "claude_girl, orange hair, hair flower",
+   "trig_outfit": "white dress"
   },
   {
    "t": "konpaku_youmu",
@@ -472,10 +490,12 @@
     "book"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 2head, claude_girl, orange hair, white dress, hair flower",
    "lora": "Anima\\packs\\claude-girl.safetensors",
    "lora_w": 0.75,
-   "thumb": "musume_claude_chibi"
+   "thumb": "musume_claude_chibi",
+   "trig_core": "chibi, 2head, claude_girl, orange hair, hair flower",
+   "trig_outfit": "white dress"
   },
   {
    "t": "komeiji_koishi",
@@ -546,10 +566,12 @@
     "black boots"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "aigirls, grok, two bat wing hair ornaments, one on each side of head, gold crown, black red short dress, black pantyhose, blue eyes, blonde twintails",
    "lora": "Anima\\packs\\ai-girls-pack.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_grok_normal"
+   "thumb": "musume_grok_normal",
+   "trig_core": "aigirls, grok, two bat wing hair ornaments, one on each side of head, gold crown, blue eyes, blonde twintails",
+   "trig_outfit": "black red short dress, black pantyhose"
   },
   {
    "t": "patchouli_knowledge",
@@ -595,10 +617,12 @@
     "black boots"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 2head, aigirls, grok, two bat wing hair ornaments, one on each side of head, gold crown, black red short dress, black pantyhose, blue eyes, blonde twintails",
    "lora": "Anima\\packs\\ai-girls-pack.safetensors",
    "lora_w": 0.85,
-   "thumb": "musume_grok_chibi"
+   "thumb": "musume_grok_chibi",
+   "trig_core": "chibi, 2head, aigirls, grok, two bat wing hair ornaments, one on each side of head, gold crown, blue eyes, blonde twintails",
+   "trig_outfit": "black red short dress, black pantyhose"
   },
   {
    "t": "kimi-chan",
@@ -669,10 +693,12 @@
     "black bow"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "glm_fox_girl",
    "lora": "Anima\\packs\\glm-zhipu.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_glm_zhipu"
+   "thumb": "musume_glm_zhipu",
+   "trig_core": "glm_fox_girl",
+   "trig_outfit": ""
   },
   {
    "t": "glm-zhipu-chibi",
@@ -690,10 +716,12 @@
     "black bow"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 2head, glm_fox_girl",
    "lora": "Anima\\packs\\glm-zhipu.safetensors",
    "lora_w": 0.85,
-   "thumb": "musume_glm_zhipu_chibi"
+   "thumb": "musume_glm_zhipu_chibi",
+   "trig_core": "chibi, 2head, glm_fox_girl",
+   "trig_outfit": ""
   },
   {
    "t": "qwen-chan",
@@ -706,10 +734,12 @@
     "solo"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "qwen \\(girl\\)",
    "lora": "Anima\\packs\\qwen-chan.safetensors",
    "lora_w": 1.0,
-   "thumb": "musume_qwen_chan"
+   "thumb": "musume_qwen_chan",
+   "trig_core": "qwen \\(girl\\)",
+   "trig_outfit": ""
   },
   {
    "t": "qwen-chan-chibi",
@@ -722,10 +752,12 @@
     "solo"
    ],
    "th": 1,
-   "src": "lora",
+   "src": "chibi, 2head, qwen \\(girl\\)",
    "lora": "Anima\\packs\\qwen-chan.safetensors",
    "lora_w": 0.85,
-   "thumb": "musume_qwen_chan_chibi"
+   "thumb": "musume_qwen_chan_chibi",
+   "trig_core": "chibi, 2head, qwen \\(girl\\)",
+   "trig_outfit": ""
   },
   {
    "t": "shameimaru_aya",

@@ -1661,6 +1661,10 @@ def load_anima_chars():
                 "lora": c.get("lora"),
                 "w": c.get("lora_w") or 1.0,
                 "trig": c.get("trigger") or "",
+                # 词条分层：trig_core 只有身份词（发色/瞳色/发饰/体型/LoRA 训练 tag），
+                # trig_outfit 是整件衣物。性场景只前置 core，否则衣服词会压住"脱衣"。
+                "trig_core": c.get("trig_core") or "",
+                "trig_outfit": c.get("trig_outfit") or "",
                 "thumb": c.get("thumb") or "",
             })
         _ANIMA_CHAR_CACHE.update({"mtime": mt, "rows": rows})
@@ -1677,13 +1681,21 @@ def anima_char_set(cid):
     return _ANIMA_CHAR["id"]
 
 
-def anima_char_trig(char_id=None):
+def anima_char_trig(char_id=None, drop_outfit=False):
+    """角色触发词。drop_outfit=True（性场景）时只给身份词，让人物能脱。
+
+    注意：LoRA 训练 tag（ds_whalemaid / deepseek_maid_outfit_zipzippipe 这类
+    单 token 下划线标识符）永远留在 trig_core 里，不会被当服装剥掉。
+    """
     cid = _ANIMA_CHAR["id"] if char_id is None else str(char_id)
     if not cid:
         return ""
     for r in load_anima_chars():
-        if r["id"] == cid:
-            return r["trig"] or ""
+        if r["id"] != cid:
+            continue
+        if drop_outfit and r.get("trig_core"):
+            return r["trig_core"]
+        return r["trig"] or r.get("trig_core") or ""
     return ""
 
 
@@ -1775,14 +1787,32 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
 
 
 def _anima_multi(text):
-    """多人场景判定：角色 LoRA 是全局染色（不按人物分区），双人必串（脸/衣服/尾巴互换），
-    因此多人时一律不挂角色包，只靠 tag。"""
+    """多人场景判定：角色 LoRA 是全局染色（不按人物分区），两个命名角色必串（脸/衣服/尾巴互换），
+    因此多人时一律不挂角色包，只靠 tag。
+
+    注意：无脸男 / 隐形男 / 只有阴茎（faceless_male / invisible_man / disembodied_penis）
+    不是"第二张角色卡"，单角色 + 无脸男的 R18 场景必须保留角色 LoRA，否则形象会崩。
+    所以只认真正的多人数词，不认 1boy 组合。"""
     t = (text or "").lower()
     for k in ("2girls", "2boys", "3girls", "3boys", "multiple_girls", "multiple_boys",
-              "1girl, 1boy", "1boy, 1girl"):
+              "2others", "multiple_others"):
         if k in t:
             return True
     return False
+
+
+_ANIMA_SEXISH = (
+    "sex", "penetration", "penis", "vaginal", "anal", "cum", "cum_in", "creampie",
+    "nipples", "nipple", "nude", "naked", "topless", "bottomless", "undressing",
+    "open_clothes", "clothes_removed", "paizuri", "fellatio", "cunnilingus",
+    "masturbation", "orgasm", "ahegao", "panties", "bra", "breasts_out",
+)
+
+
+def _anima_sexish(text):
+    """性场景判定：命中即认为人物该是"能脱"的状态，角色词条只给身份层。"""
+    t = (text or "").lower()
+    return any(k in t for k in _ANIMA_SEXISH)
 
 
 def gen_submit(positive, negative="", **kw):
@@ -1794,7 +1824,8 @@ def gen_submit(positive, negative="", **kw):
     if cid and _anima_multi(positive):
         kw["char_id"] = ""      # 多人 → 强制不挂角色 LoRA
         cid = ""
-    ctrig = anima_char_trig(cid)
+    # 性场景只前置身份词，把"整件衣物"留在外面，否则 LoRA 会把衣服死死按住
+    ctrig = anima_char_trig(cid, drop_outfit=_anima_sexish(positive))
     if ctrig:
         _ch = ctrig.split(",")[0].strip().lower()
         if not _ch or _ch not in (positive or "").lower():
