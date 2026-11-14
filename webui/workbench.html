@@ -1029,7 +1029,7 @@ function renderArtists(b){
   b.appendChild(q);
   const cnt=document.createElement("div"); cnt.className="small"; cnt.style.marginBottom="6px"; b.appendChild(cnt);
   const grid=document.createElement("div");
-  grid.style.cssText="display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:8px";
+  grid.style.cssText="display:block";
   b.appendChild(grid);
   let all = S.lib.styles || [];
   function mark(){
@@ -1039,20 +1039,36 @@ function renderArtists(b){
       el.style.background = on ? "#1b2733" : "#141720";
     });
   }
+  const GORDER=["东方画师","画师·东方","画师","桶外-知名画师","风格","IP风格","光影"];
+  function grank(g){ const i=GORDER.indexOf(g); return i<0? 99 : i; }
+  function isKanpa(t){ return /kanpa/i.test((t.zh||"")+(t.name||"")+(t.id||"")); }
   function draw(){
     const k=(q.value||"").trim().toLowerCase();
     grid.innerHTML="";
     const hit=all.filter(t=>!k||(t.zh||"").toLowerCase().includes(k)||String(t.trig||"").toLowerCase().includes(k));
     const cur = all.find(x=>x.id===S.styleId);
     cnt.textContent = "画风包 "+hit.length+" / "+all.length + (cur? " · 当前："+cur.zh : " · 未选（只挂 turbo）");
-    hit.forEach(t=>{
-      const d=document.createElement("div"); d.className="scard"; d.dataset.id=t.id;
-      d.style.cssText="border-radius:8px;overflow:hidden;cursor:pointer;background:#141720;border:1px solid #2a2f3a";
-      d.innerHTML='<img src="'+t.thumb+'" style="width:100%;display:block;background:#0d0f14" loading="lazy">'
-        +'<div style="padding:5px 6px 2px;font-size:11px;line-height:1.3;color:#dfe5ee">'+esc(t.zh||t.id)+'</div>'
-        +'<div style="padding:0 6px 6px;font-size:10px;color:#7d8899">'+(t.touhou?'东方 · ':'')+(t.trig?esc(t.trig):'无触发词')+'</div>';
-      d.onclick=()=>pickStyle(t);
-      grid.appendChild(d);
+    const groups={};
+    hit.forEach(t=>{ const g=t.group||"其他"; (groups[g]=groups[g]||[]).push(t); });
+    Object.keys(groups).sort((a,b)=>grank(a)-grank(b)||String(a).localeCompare(String(b),"zh")).forEach(g=>{
+      const list=groups[g].slice().sort((a,b)=>(isKanpa(a)?0:1)-(isKanpa(b)?0:1));
+      const head=document.createElement("div");
+      head.className="small";
+      head.style.cssText="margin:10px 0 6px;font-weight:600;color:#9fb4d0;letter-spacing:.5px";
+      head.textContent=g+"（"+list.length+"）";
+      grid.appendChild(head);
+      const row=document.createElement("div");
+      row.style.cssText="display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:8px";
+      list.forEach(t=>{
+        const d=document.createElement("div"); d.className="scard"; d.dataset.id=t.id;
+        d.style.cssText="border-radius:8px;overflow:hidden;cursor:pointer;background:#141720;border:1px solid #2a2f3a";
+        d.innerHTML='<img src="'+t.thumb+'" style="width:100%;display:block;background:#0d0f14" loading="lazy">'
+          +'<div style="padding:5px 6px 2px;font-size:11px;line-height:1.3;color:#dfe5ee">'+esc(t.zh||t.id)+'</div>'
+          +'<div style="padding:0 6px 6px;font-size:10px;color:#7d8899">'+(t.touhou?'东方 · ':'')+(t.trig?esc(t.trig):'无触发词')+'</div>';
+        d.onclick=()=>pickStyle(t);
+        row.appendChild(d);
+      });
+      grid.appendChild(row);
     });
     mark();
   }

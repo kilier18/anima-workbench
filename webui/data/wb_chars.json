@@ -107,92 +107,6 @@
    "src": "local"
   },
   {
-   "t": "deepseek-tan",
-   "zh": "鲸鱼娘（正常版）",
-   "w": "ai_gijinka",
-   "p": 42400,
-   "g": [
-    "deepseek-tan",
-    "1girl",
-    "solo",
-    "blue hair",
-    "very long wavy hair",
-    "curled ahoge",
-    "blue eyes",
-    "whale ear fins",
-    "head fins",
-    "cetacean tail",
-    "big thick dark navy whale tail",
-    "fish tail",
-    "maid",
-    "large white frilly maid headdress",
-    "white frilly apron",
-    "navy blue maid dress",
-    "frilled white blouse",
-    "navy bowtie",
-    "blue diamond brooch",
-    "navy skirt with gold vine embroidery",
-    "puffy sleeves",
-    "juliet sleeves",
-    "white thighhighs",
-    "navy mary janes"
-   ],
-   "th": "",
-   "src": "anima"
-  },
-  {
-   "t": "deepseek-tan-chibi",
-   "zh": "鲸鱼娘（Q版）",
-   "w": "ai_gijinka",
-   "p": 41900,
-   "g": [
-    "chibi",
-    "(chibi:1.3)",
-    "super deformed",
-    "ds_whalemaid",
-    "1girl",
-    "solo",
-    "maid outfit",
-    "large white frilly maid headdress",
-    "white frilled apron",
-    "blue hair",
-    "short hair",
-    "blue eyes",
-    "whale tail",
-    "frills"
-   ],
-   "th": "",
-   "src": "anima"
-  },
-  {
-   "t": "chatgpt-tan",
-   "zh": "白龙娘（正常版）",
-   "w": "ai_gijinka",
-   "p": 38200,
-   "g": [
-    "chatgpt-tan",
-    "1girl",
-    "solo",
-    "white hair",
-    "very long wavy hair",
-    "curled ahoge",
-    "pointed ears",
-    "two large white ridged dragon horns",
-    "pale lavender-grey eyes",
-    "white interlaced-knot hair ornament",
-    "long white tassel earring",
-    "small white bat-like dragon wings",
-    "long thick white scaled dragon tail",
-    "white sleeveless china dress",
-    "qipao collar",
-    "crystal diamond ornaments",
-    "long translucent flowing sleeves",
-    "translucent over-skirt"
-   ],
-   "th": "",
-   "src": "anima"
-  },
-  {
    "t": "admiral_(kancolle)",
    "zh": "提督LOVE",
    "w": "kantai collection",
@@ -204,30 +118,6 @@
    ],
    "th": 1,
    "src": "local"
-  },
-  {
-   "t": "chatgpt-tan-chibi",
-   "zh": "白龙娘（Q版）",
-   "w": "ai_gijinka",
-   "p": 37700,
-   "g": [
-    "chibi",
-    "(chibi:1.2)",
-    "超级变形",
-    "白龙娘",
-    "1girl",
-    "solo",
-    "white hair",
-    "long hair",
-    "white horns",
-    "dragon horns",
-    "pointy ears",
-    "purple eyes",
-    "small dragon wings",
-    "dragon tail"
-   ],
-   "th": "",
-   "src": "anima"
   },
   {
    "t": "artoria_pendragon_(fate)",
@@ -267,59 +157,6 @@
    "src": "local"
   },
   {
-   "t": "claude_girl",
-   "zh": "Claude娘（正常版）",
-   "w": "ai_gijinka",
-   "p": 35200,
-   "g": [
-    "claude_girl",
-    "1girl",
-    "solo",
-    "long wavy copper-orange hair",
-    "loose side-swept bangs",
-    "warm amber eyes",
-    "orange daisy-shaped hair flower",
-    "black striped ribbon bow",
-    "white tassel",
-    "cream-white dress",
-    "short cape collar",
-    "orange flower embroidery",
-    "orange and black front panels",
-    "black waist sash",
-    "orange flower brooch",
-    "dark brown boots",
-    "holding a dark brown hardcover book with an orange flower emblem"
-   ],
-   "th": "",
-   "src": "anima"
-  },
-  {
-   "t": "claude_(chatbot)",
-   "zh": "Claude 娘",
-   "w": "ai_gijinka",
-   "p": 35000,
-   "th": 1,
-   "src": "desc",
-   "g": [
-    "1girl",
-    "claude_(chatbot)",
-    "long straight orange hair",
-    "very long hair",
-    "orange eyes",
-    "radial flower hair ornament",
-    "flower hair ornament",
-    "calm expression",
-    "cool beauty",
-    "layered dress",
-    "black bodice",
-    "beige long skirt",
-    "gold trim",
-    "puff sleeves",
-    "white collar",
-    "holding book"
-   ]
-  },
-  {
    "t": "konpaku_youmu",
    "zh": "魂魄妖梦",
    "w": "touhou",
@@ -351,29 +188,6 @@
    ],
    "th": 1,
    "src": "local"
-  },
-  {
-   "t": "claude_girl-chibi",
-   "zh": "Claude娘（Q版）",
-   "w": "ai_gijinka",
-   "p": 34700,
-   "g": [
-    "chibi",
-    "(chibi:1.3)",
-    "super deformed",
-    "claude_girl",
-    "1girl",
-    "solo",
-    "orange hair",
-    "long hair",
-    "amber eyes",
-    "orange daisy hair flower",
-    "white dress",
-    "black striped ribbon",
-    "book"
-   ],
-   "th": "",
-   "src": "anima"
   },
   {
    "t": "komeiji_koishi",
@@ -45308,10 +45122,6 @@
   }
  ],
  "works": [
-  [
-   "ai_gijinka",
-   3
-  ],
   [
    "kantai collection",
    240

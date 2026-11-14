@@ -1,0 +1,3383 @@
+{
+ "version": 16,
+ "base": "Anima\\miaomiaoHarem_anima12.safetensors",
+ "turbo": "Anima\\anima-turbo-lora-v0.2.safetensors",
+ "note": "verdict=keep 才进工作台下拉；touhou_artist=true 的是已核实的东方画师",
+ "styles": [
+  {
+   "id": "p5_1",
+   "wall_no": 1,
+   "batch": "p5",
+   "name": "Pako (PakoSun) - Artist Style",
+   "zh": "Pako (PakoSun) - Artist Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2735185_anima_v2.safetensors",
+   "mb": 175.3,
+   "trig": [
+    "@pako_(pakosun)"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2735185"
+  },
+  {
+   "id": "p5_2",
+   "wall_no": 2,
+   "batch": "p5",
+   "name": "[Style] Incase [Anima]",
+   "zh": "[Style] Incase [Anima]",
+   "group": "画师",
+   "lora": "Anima\\packs\\2631223_v1_0.safetensors",
+   "mb": 175.1,
+   "trig": [
+    "@1NC4SENK"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2631223"
+  },
+  {
+   "id": "p5_3",
+   "wall_no": 3,
+   "batch": "p5",
+   "name": "ArtistStyleMixLora 3 混合画风3 Artist: sho_sho_lwlw, kabu usagi, rhasta, t",
+   "zh": "ArtistStyleMixLora 3 混合画风3 Artist: sho_s",
+   "group": "画师",
+   "lora": "Anima\\packs\\2768845_v1_0_anima.safetensors",
+   "mb": 132.3,
+   "trig": [
+    "AASML3"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2768845"
+  },
+  {
+   "id": "p5_4",
+   "wall_no": 4,
+   "batch": "p5",
+   "name": "Happoubi Jin style",
+   "zh": "Happoubi Jin style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2983682_v1.safetensors",
+   "mb": 132.2,
+   "trig": [
+    "@happoubi-jin"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2983682"
+  },
+  {
+   "id": "p5_5",
+   "wall_no": 5,
+   "batch": "p5",
+   "name": "modare/モ誰 画风/Style anima",
+   "zh": "modare/モ誰 画风/Style anima",
+   "group": "画师",
+   "lora": "Anima\\packs\\2647563_v1_0.safetensors",
+   "mb": 132.2,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2647563"
+  },
+  {
+   "id": "p5_6",
+   "wall_no": 6,
+   "batch": "p5",
+   "name": "[Anima] Ogipote Style",
+   "zh": "[Anima] Ogipote Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2701134_v1a.safetensors",
+   "mb": 131.4,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2701134"
+  },
+  {
+   "id": "p5_7",
+   "wall_no": 7,
+   "batch": "p5",
+   "name": "画风 mignon style 【anima】",
+   "zh": "画风 mignon style 【anima】",
+   "group": "画师",
+   "lora": "Anima\\packs\\2970319_v1_0.safetensors",
+   "mb": 104.0,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2970319"
+  },
+  {
+   "id": "p5_8",
+   "wall_no": 8,
+   "batch": "p5",
+   "name": "Wada Arco - Artist Style",
+   "zh": "Wada Arco - Artist Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2759648_anima.safetensors",
+   "mb": 87.7,
+   "trig": [
+    "@wada_arco",
+    "@wadaarco"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2759648"
+  },
+  {
+   "id": "p5_9",
+   "wall_no": 9,
+   "batch": "p5",
+   "name": "Nixeu - Artist Style",
+   "zh": "Nixeu - Artist Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2737482_anima_v1_0.safetensors",
+   "mb": 87.7,
+   "trig": [
+    "@nixeu"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2737482"
+  },
+  {
+   "id": "p5_10",
+   "wall_no": 10,
+   "batch": "p5",
+   "name": "Afrobull style, LoRA, Anima",
+   "zh": "Afrobull style, LoRA, Anima",
+   "group": "画师",
+   "lora": "Anima\\packs\\2909209_v1_0_anima.safetensors",
+   "mb": 87.7,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2909209"
+  },
+  {
+   "id": "p5_11",
+   "wall_no": 11,
+   "batch": "p5",
+   "name": "ASK - Artist Style",
+   "zh": "ASK - Artist Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2742720_anima.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@ask"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2742720"
+  },
+  {
+   "id": "p5_12",
+   "wall_no": 12,
+   "batch": "p5",
+   "name": "sakimichan Style",
+   "zh": "sakimichan Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2240934_animav2_0.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "sakimichanFG"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2240934"
+  },
+  {
+   "id": "p5_13",
+   "wall_no": 13,
+   "batch": "p5",
+   "name": "wlop Anima/krea2/moss",
+   "zh": "wlop Anima/krea2/moss",
+   "group": "画师",
+   "lora": "Anima\\packs\\2637182_v3_0_lora.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@w10p"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2637182"
+  },
+  {
+   "id": "p5_14",
+   "wall_no": 14,
+   "batch": "p5",
+   "name": "FKEY Style Anima/Krea 2",
+   "zh": "FKEY Style Anima/Krea 2",
+   "group": "画师",
+   "lora": "Anima\\packs\\2724437_anima.safetensors",
+   "mb": 87.6,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2724437"
+  },
+  {
+   "id": "p5_15",
+   "wall_no": 15,
+   "batch": "p5",
+   "name": "画风 kantoku カントク　监督 style 【anima/krea2】",
+   "zh": "画风 kantoku カントク　监督 style 【anima/krea2】",
+   "group": "画师",
+   "lora": "Anima\\packs\\2770454_anima_v1_0.safetensors",
+   "mb": 87.6,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2770454"
+  },
+  {
+   "id": "p5_16",
+   "wall_no": 16,
+   "batch": "p5",
+   "name": "Harada Takehito Style",
+   "zh": "Harada Takehito Style",
+   "group": "画师",
+   "lora": "Anima\\packs\\16244_anima_v1_0.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "harada takehito"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:16244"
+  },
+  {
+   "id": "p5_17",
+   "wall_no": 17,
+   "batch": "p5",
+   "name": "Shindou Mitsuko/進藤美津子[ANIMA]",
+   "zh": "Shindou Mitsuko/進藤美津子[ANIMA]",
+   "group": "画师",
+   "lora": "Anima\\packs\\2777283_v1_2.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "chirimamitsuko",
+    "shindou mitsuko",
+    "chirimamitsuko,1girl,brown eyes,single hair bun"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2777283"
+  },
+  {
+   "id": "p5_18",
+   "wall_no": 18,
+   "batch": "p5",
+   "name": "CAT SS - Citron Secret Styles [ANIMAv1 | IL | Pony]",
+   "zh": "CAT SS - Citron Secret Styles [ANIMAv1 |",
+   "group": "画师",
+   "lora": "Anima\\packs\\362766_animav1.safetensors",
+   "mb": 82.2,
+   "trig": [
+    "c1tr0n,"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:362766"
+  },
+  {
+   "id": "p5_19",
+   "wall_no": 19,
+   "batch": "p5",
+   "name": "Yuzu Soft SD",
+   "zh": "Yuzu Soft SD",
+   "group": "画师",
+   "lora": "Anima\\packs\\2662404_base.safetensors",
+   "mb": 66.3,
+   "trig": [
+    "Yuzu SD"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2662404",
+   "dup_of": "柚子社(角色包)"
+  },
+  {
+   "id": "p5_20",
+   "wall_no": 20,
+   "batch": "p5",
+   "name": "Yuzu Soft CG",
+   "zh": "Yuzu Soft CG",
+   "group": "画师",
+   "lora": "Anima\\packs\\2662235_base.safetensors",
+   "mb": 66.3,
+   "trig": [
+    "Yuzu CG"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2662235",
+   "dup_of": "柚子社(角色包)"
+  },
+  {
+   "id": "p5_21",
+   "wall_no": 21,
+   "batch": "p5",
+   "name": "[Anima] Rurudo | Style Lora",
+   "zh": "[Anima] Rurudo | Style Lora",
+   "group": "画师",
+   "lora": "Anima\\packs\\2725640_v1_0.safetensors",
+   "mb": 43.9,
+   "trig": [
+    "@rurusty"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2725640"
+  },
+  {
+   "id": "p5_22",
+   "wall_no": 22,
+   "batch": "p5",
+   "name": "Touhou Alice PC-98",
+   "zh": "Touhou Alice PC-98",
+   "group": "画师",
+   "lora": "Anima\\packs\\586367_anima.safetensors",
+   "mb": 43.9,
+   "trig": [
+    "alice def,short hair,alice margatroid (pc-98),blonde hair,yellow eyes,blue hairband,bow hairband,flat chest,",
+    "alice98 cos,white shirt,collared shirt,puffy short sleeves,suspenders skirt,blue skirt,friils,frilled skirt,neck ribbon,big back bow,white socks,bobby socks,mary janes,black footwear"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:586367"
+  },
+  {
+   "id": "p5_23",
+   "wall_no": 23,
+   "batch": "p5",
+   "name": "artist style -yuzusoft/柚子社",
+   "zh": "柚子社 画风 artist style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2967583_v2.safetensors",
+   "mb": 43.8,
+   "trig": [
+    "@yuzusoftstyle,"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2967583"
+  },
+  {
+   "id": "p5_24",
+   "wall_no": 24,
+   "batch": "p5",
+   "name": "CutifiedAnimeCharacterDesign Variant - Type D",
+   "zh": "Cutified 变体 D",
+   "group": "画师",
+   "lora": "Anima\\packs\\457382_v3_0_anima.safetensors",
+   "mb": 43.8,
+   "trig": [
+    "type-d"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:457382"
+  },
+  {
+   "id": "p5_25",
+   "wall_no": 25,
+   "batch": "p5",
+   "name": "CutifiedAnimeCharacterDesign Variant - Type F",
+   "zh": "Cutified 变体 F",
+   "group": "画师",
+   "lora": "Anima\\packs\\461280_v3_0_anima.safetensors",
+   "mb": 43.8,
+   "trig": [
+    "type-f"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:461280"
+  },
+  {
+   "id": "p5_26",
+   "wall_no": 26,
+   "batch": "p5",
+   "name": "[Anima & IL] 7 in 1，Moonlight Lady/ 顔のない月-待宵の双椿-/《无颜之月》，CARNELIAN - Ar",
+   "zh": "[Anima & IL] 7 in 1，Moonlight Lady/ 顔のない",
+   "group": "画师",
+   "lora": "Anima\\packs\\2010995_anima_v1_0.safetensors",
+   "mb": 42.9,
+   "trig": [
+    "Kuraki Suzuna",
+    "Kuraki Mizuna",
+    "Harukawa Tomomi"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2010995"
+  },
+  {
+   "id": "p5_27",
+   "wall_no": 27,
+   "batch": "p5",
+   "name": "[Anima] 16 in 1，《Bishoujo Mangekyou 1-6》/《美少女万华镜1-6》，Happoubi Jin/八宝备仁",
+   "zh": "[Anima] 16 in 1，《Bishoujo Mangekyou 1-6》",
+   "group": "画师",
+   "lora": "Anima\\packs\\2651927_anima_v1_0.safetensors",
+   "mb": 33.2,
+   "trig": [
+    "Kagarino Kirie",
+    "Sawatari Shizuku",
+    "Hanasato Megumi"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2651927"
+  },
+  {
+   "id": "p5_28",
+   "wall_no": 28,
+   "batch": "p5",
+   "name": "[Anima] 5 in 1，Tony Taka 《Genmukan》/《真章 幻梦馆》- Artist Style",
+   "zh": "[Anima] 5 in 1，Tony Taka 《Genmukan》/《真章 ",
+   "group": "画师",
+   "lora": "Anima\\packs\\2594289_anima_v1_0.safetensors",
+   "mb": 33.2,
+   "trig": [
+    "Nakanokouji Ayano",
+    "Watase Nozomi",
+    "Kaoru Tanimura"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2594289"
+  },
+  {
+   "id": "p5_29",
+   "wall_no": 29,
+   "batch": "p5",
+   "name": "[MOSS & Krea2 & Anima] Yoneyama Mai/米山舞 - Artist Style",
+   "zh": "[MOSS & Krea2 & Anima] Yoneyama Mai/米山舞 ",
+   "group": "画师",
+   "lora": "Anima\\packs\\2629905_anima_v1_0.safetensors",
+   "mb": 33.2,
+   "trig": [
+    "Yoneyama Mai Style"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2629905"
+  },
+  {
+   "id": "p5_30",
+   "wall_no": 30,
+   "batch": "p5",
+   "name": "Yoneyama Mai Style | lighting",
+   "zh": "Yoneyama Mai Style | lighting",
+   "group": "画师",
+   "lora": "Anima\\packs\\1778443_anima_v1_0.safetensors",
+   "mb": 22.0,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1778443",
+   "dup_of": "米山舞"
+  },
+  {
+   "id": "p5_31",
+   "wall_no": 31,
+   "batch": "p5",
+   "name": "[Anima & IL] 5 in 1，《Kanojo x Kanojo x Kanojo》/《彼女×彼女×彼女》，Happoubi Jin",
+   "zh": "[Anima & IL] 5 in 1，《Kanojo x Kanojo x K",
+   "group": "画师",
+   "lora": "Anima\\packs\\2237877_anima_v1_0.safetensors",
+   "mb": 15.9,
+   "trig": [
+    "Orifushi Natsumi",
+    "Orifushi Akina",
+    "Orifushi Mafuyu"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2237877"
+  },
+  {
+   "id": "p5_32",
+   "wall_no": 32,
+   "batch": "p5",
+   "name": "pottsness style",
+   "zh": "pottsness style",
+   "group": "画师",
+   "lora": "Anima\\packs\\2632034_v1_0.safetensors",
+   "mb": 11.1,
+   "trig": [
+    "@p0ttxngxx"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2632034"
+  },
+  {
+   "id": "p6_hyperrealistic",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Hyperrealistic [Pony | Illustrious | Anima]",
+   "zh": "Hyperrealistic 超写实",
+   "group": "风格",
+   "lora": "Anima\\packs\\hyperrealistic.safetensors",
+   "mb": 264.4,
+   "trig": [
+    "@Hype4realistic"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:626603"
+  },
+  {
+   "id": "p6_granblue-fantasy",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Granblue Fantasy Style | Anima/SDXL",
+   "zh": "碧蓝幻想 v4",
+   "group": "IP风格",
+   "lora": "Anima\\packs\\granblue-fantasy.safetensors",
+   "mb": 264.4,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:323575"
+  },
+  {
+   "id": "p6_anime-artistic",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Anime artistic",
+   "zh": "Anime Artistic",
+   "group": "风格",
+   "lora": "Anima\\packs\\anime-artistic.safetensors",
+   "mb": 264.4,
+   "trig": [
+    "@Art8st",
+    "@Semi2realisti"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1586542"
+  },
+  {
+   "id": "p6_niji-oil-painting",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Niji oil painting drawing",
+   "zh": "Niji 油画",
+   "group": "风格",
+   "lora": "Anima\\packs\\niji-oil-painting.safetensors",
+   "mb": 264.4,
+   "trig": [
+    "@EOP4niji"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1188058"
+  },
+  {
+   "id": "p6_memaani-flat-anime",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "MeMaAni Flat Anime Style - Anima",
+   "zh": "MeMaAni 平涂",
+   "group": "风格",
+   "lora": "Anima\\packs\\memaani-flat-anime.safetensors",
+   "mb": 264.4,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2483826"
+  },
+  {
+   "id": "p6_cartoon-styles",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Cartoon styles",
+   "zh": "Cartoon Styles",
+   "group": "风格",
+   "lora": "Anima\\packs\\cartoon-styles.safetensors",
+   "mb": 264.4,
+   "trig": [
+    "@G-cartoon",
+    "@S-cartoon"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1745229"
+  },
+  {
+   "id": "p6_meion-style",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "铭音 meion style 【krea2&MOSS&anima&il】",
+   "zh": "meion",
+   "group": "画师",
+   "lora": "Anima\\packs\\meion-style.safetensors",
+   "mb": 239.7,
+   "trig": [
+    "@meionANIMAstyle"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2533943"
+  },
+  {
+   "id": "p6_niji-sweet-spot",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Niji Sweet Spot",
+   "zh": "Niji Sweet Spot",
+   "group": "风格",
+   "lora": "Anima\\packs\\niji-sweet-spot.safetensors",
+   "mb": 175.2,
+   "trig": [
+    "@NJSW33T"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2554999"
+  },
+  {
+   "id": "p6_rei17-sanbonzakura",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Artist Style: Rei_17/老累/sanbonzakura",
+   "zh": "Rei_17 / 三本樱",
+   "group": "画师",
+   "lora": "Anima\\packs\\rei17-sanbonzakura.safetensors",
+   "mb": 175.1,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:538535"
+  },
+  {
+   "id": "p6_impasto-painterly",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Impasto, Impressionism, Chiaroscuro - Painterly Styles",
+   "zh": "厚涂 / 印象派",
+   "group": "风格",
+   "lora": "Anima\\packs\\impasto-painterly.safetensors",
+   "mb": 142.0,
+   "trig": [
+    "painterly",
+    "brushstroke",
+    "impasto"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1478417"
+  },
+  {
+   "id": "p6_dark-art-style",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Dark Art Style Krea2/Anima/illustriousXL/ZImageTurbo/Flux/Chroma",
+   "zh": "Dark Art",
+   "group": "风格",
+   "lora": "Anima\\packs\\dark-art-style.safetensors",
+   "mb": 132.3,
+   "trig": [
+    "dark_art_style"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1380736"
+  },
+  {
+   "id": "p6_velvet-mythic-fantasy",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Velvet's Mythic Fantasy Styles | Flux + Pony + illustrious + ZiT + Ani",
+   "zh": "Velvet 神话奇幻",
+   "group": "风格",
+   "lora": "Anima\\packs\\velvet-mythic-fantasy.safetensors",
+   "mb": 132.2,
+   "trig": [
+    "Smo0thL1nes"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:599757"
+  },
+  {
+   "id": "p6_748cm-shiiro",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "748cm | Shiiro's Styles | Niji",
+   "zh": "748cm / Shiiro",
+   "group": "画师",
+   "lora": "Anima\\packs\\748cm-shiiro.safetensors",
+   "mb": 132.2,
+   "trig": [
+    "748cm_Paint"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1221007"
+  },
+  {
+   "id": "p6_rucarachi",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "[anima正式] rucarachi-styles",
+   "zh": "rucarachi",
+   "group": "画师",
+   "lora": "Anima\\packs\\rucarachi.safetensors",
+   "mb": 132.2,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2472006"
+  },
+  {
+   "id": "p6_andava",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Andava (Style) [ANIMA/IL/Pony]",
+   "zh": "Andava",
+   "group": "画师",
+   "lora": "Anima\\packs\\andava.safetensors",
+   "mb": 132.2,
+   "trig": [
+    "avdanf"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1225090"
+  },
+  {
+   "id": "p6_blue-archive-style",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Anima B1 Blue Archive Style Lora",
+   "zh": "蔚蓝档案",
+   "group": "IP风格",
+   "lora": "Anima\\packs\\blue-archive-style.safetensors",
+   "mb": 131.4,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2530730"
+  },
+  {
+   "id": "p6_theobrobine",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Theobrobine [Illustrious/Anima] Style LoRA",
+   "zh": "Theobrobine",
+   "group": "画师",
+   "lora": "Anima\\packs\\theobrobine.safetensors",
+   "mb": 126.2,
+   "trig": [
+    "theine"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:897828"
+  },
+  {
+   "id": "p6_blue-archive-nai5",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "蔚蓝档案风格（blue archive style) style 【anima/ill/krea2】",
+   "zh": "蔚蓝档案 nai5",
+   "group": "IP风格",
+   "lora": "Anima\\packs\\blue-archive-nai5.safetensors",
+   "mb": 104.0,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2284180"
+  },
+  {
+   "id": "p6_takorin",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Takorin Style | ILXL & Anima & Moss",
+   "zh": "Takorin たこりん",
+   "group": "画师·东方",
+   "lora": "Anima\\packs\\takorin.safetensors",
+   "mb": 95.8,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:878386"
+  },
+  {
+   "id": "p6_possummachine",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "PossumMachine Style",
+   "zh": "PossumMachine",
+   "group": "画师",
+   "lora": "Anima\\packs\\possummachine.safetensors",
+   "mb": 87.7,
+   "trig": [
+    "@possummachine"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:113004"
+  },
+  {
+   "id": "p6_sky02-light-shadow",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "sky02 Light and shadow Style [Anima/MOSS]",
+   "zh": "sky02 光影",
+   "group": "光影",
+   "lora": "Anima\\packs\\sky02-light-shadow.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@wm2"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2652568"
+  },
+  {
+   "id": "p6_dragon-ball",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Dragon Ball Style",
+   "zh": "龙珠",
+   "group": "IP风格",
+   "lora": "Anima\\packs\\dragon-ball.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@dragonball",
+    "retro artstyle",
+    "1980s \\(style\\)"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:474074"
+  },
+  {
+   "id": "p6_valbun",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Valbun Style",
+   "zh": "Valbun",
+   "group": "画师",
+   "lora": "Anima\\packs\\valbun.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@valbun"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:173001"
+  },
+  {
+   "id": "p6_mixplin",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Mixplin Style [Anima/Illustrious]",
+   "zh": "Mixplin",
+   "group": "画师",
+   "lora": "Anima\\packs\\mixplin.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@mxpln"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1746460"
+  },
+  {
+   "id": "p6_cherry-gig-western",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Cherry-gig Western Style [Anima/Illustrious]",
+   "zh": "Cherry-gig 西部",
+   "group": "风格",
+   "lora": "Anima\\packs\\cherry-gig-western.safetensors",
+   "mb": 87.6,
+   "trig": [
+    "@chxrrygxg"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1949537"
+  },
+  {
+   "id": "p6_zaush",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Zaush_-_Art_Style [Pony/Illustrious]",
+   "zh": "Zaush",
+   "group": "画师",
+   "lora": "Anima\\packs\\zaush.safetensors",
+   "mb": 67.8,
+   "trig": [
+    "@zaush"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1076338"
+  },
+  {
+   "id": "p6_mare-style",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "MARE Style",
+   "zh": "MARE",
+   "group": "画师",
+   "lora": "Anima\\packs\\mare-style.safetensors",
+   "mb": 63.4,
+   "trig": [],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:56515"
+  },
+  {
+   "id": "p6_nijimecha",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "NijiMecha - Niji Journey - Artstyle  - SD1.5 LORA",
+   "zh": "Niji 机甲",
+   "group": "风格",
+   "lora": "Anima\\packs\\nijimecha.safetensors",
+   "mb": 49.3,
+   "trig": [
+    "mecha, robot, armor, bodysuit, mechanical arms, science fiction"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:65423"
+  },
+  {
+   "id": "p6_ghibli-style",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Ghibli style (Kiki's Delivery Service)",
+   "zh": "吉卜力",
+   "group": "风格",
+   "lora": "Anima\\packs\\ghibli-style.safetensors",
+   "mb": 43.9,
+   "trig": [
+    "ghibli style"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:523485"
+  },
+  {
+   "id": "p6_vixon-gothic-neon",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Vixon's Anima/Pony Styles - Gothic Neon",
+   "zh": "Vixon 哥特霓虹",
+   "group": "风格",
+   "lora": "Anima\\packs\\vixon-gothic-neon.safetensors",
+   "mb": 31.7,
+   "trig": [
+    "g0thic n30n, neon lights, glowing"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:888231"
+  },
+  {
+   "id": "p6_flatline",
+   "wall_no": null,
+   "batch": "p6",
+   "name": "Flatline - Anima/Illus x Niji [BETA]",
+   "zh": "Flatline 平涂",
+   "group": "风格",
+   "lora": "Anima\\packs\\flatline.safetensors",
+   "mb": 22.0,
+   "trig": [
+    "@flatline"
+   ],
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1233370"
+  },
+  {
+   "id": "2745948",
+   "wall_no": 1,
+   "batch": "p7_artists",
+   "name": "Fuzichoco - Artist Style",
+   "zh": "Fuzichoco",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\fuzichoco.safetensors",
+   "mb": 175.2,
+   "trig": "@fuz1choco / @fuzichoco",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2745948"
+  },
+  {
+   "id": "2715280",
+   "wall_no": 2,
+   "batch": "p7_artists",
+   "name": "Nunyu31 Style (Anima)",
+   "zh": "Nunyu31",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\nunyu31.safetensors",
+   "mb": 54.8,
+   "trig": "@nunyu",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2715280"
+  },
+  {
+   "id": "2317290",
+   "wall_no": 3,
+   "batch": "p7_artists",
+   "name": "Style - Onineko/おにねこ [NoobAI & Newbie & Anima & Krea2]",
+   "zh": "Onineko",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\onineko.safetensors",
+   "mb": 23.5,
+   "trig": "@4x0style",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2317290",
+   "dup_of": "Onineko"
+  },
+  {
+   "id": "2655807",
+   "wall_no": 4,
+   "batch": "p7_artists",
+   "name": "Onineko 2021+ Style - Anima v1",
+   "zh": "Onineko 2021+",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\onineko-2021.safetensors",
+   "mb": 132.3,
+   "trig": "@0n1k0",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2655807"
+  },
+  {
+   "id": "2716979",
+   "wall_no": 5,
+   "batch": "p7_artists",
+   "name": "Potemki11 Style | IL & Anima",
+   "zh": "Potemki11 像素",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\potemki11.safetensors",
+   "mb": 87.6,
+   "trig": "P0t3mki11, pixel art,",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2716979"
+  },
+  {
+   "id": "2842118",
+   "wall_no": 6,
+   "batch": "p7_artists",
+   "name": "Takamichi Style Alternative ANIMA",
+   "zh": "Takamichi Alternative",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\takamichi-alt.safetensors",
+   "mb": 87.6,
+   "trig": "TakamichiStyle",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2842118"
+  },
+  {
+   "id": "1423180",
+   "wall_no": 7,
+   "batch": "p7_artists",
+   "name": "Takamichi (たかみち)",
+   "zh": "Takamichi たかみち",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\takamichi.safetensors",
+   "mb": 132.2,
+   "trig": "@tkmc",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1423180",
+   "dup_of": "Takamichi"
+  },
+  {
+   "id": "2698254",
+   "wall_no": 8,
+   "batch": "p7_artists",
+   "name": "画风 kanpa_(campagne_9) style 【anima】",
+   "zh": "kanpa (campagne 9) ★用户最爱",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\kanpa-campagne9.safetensors",
+   "mb": 87.6,
+   "trig": "kanpa (campagne 9)",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2698254"
+  },
+  {
+   "id": "2852885",
+   "wall_no": 9,
+   "batch": "p7_artists",
+   "name": "画风 ke-ta style 【anima】",
+   "zh": "ke-ta 画风",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\ke-ta.safetensors",
+   "mb": 104.0,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2852885"
+  },
+  {
+   "id": "2470371",
+   "wall_no": 10,
+   "batch": "p7_artists",
+   "name": "mikkoani Style",
+   "zh": "mikkoani",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\mikkoani.safetensors",
+   "mb": 87.6,
+   "trig": "@mikkoani",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2470371"
+  },
+  {
+   "id": "1685523",
+   "wall_no": 11,
+   "batch": "p7_artists",
+   "name": "[Style]│[Anima│Illustrious] Artist: @nunyu3 [Chibi]",
+   "zh": "nunyu3 chibi",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\nunyu3.safetensors",
+   "mb": 87.6,
+   "trig": "chibi, no lineart",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1685523"
+  },
+  {
+   "id": "2694902",
+   "wall_no": 12,
+   "batch": "p7_artists",
+   "name": "画风 shigure-s style 【anima】",
+   "zh": "shigure-s 画风",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\shigure-s.safetensors",
+   "mb": 104.0,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2694902"
+  },
+  {
+   "id": "2646944",
+   "wall_no": 13,
+   "batch": "p7_artists",
+   "name": "大嘘  oouso  style",
+   "zh": "大嘘 oouso",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\oouso.safetensors",
+   "mb": 12.5,
+   "trig": "@g10",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2646944"
+  },
+  {
+   "id": "2624534",
+   "wall_no": 14,
+   "batch": "p7_artists",
+   "name": "Anima kedama milk style",
+   "zh": "毛玉牛乳 · kedama milk style",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\kedama-milk.safetensors",
+   "mb": 175.1,
+   "trig": "@mi1k",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2624534",
+   "dup_of": "毛玉牛乳"
+  },
+  {
+   "id": "2648265",
+   "wall_no": 15,
+   "batch": "p7_artists",
+   "name": "Kedama / 玉之けだま Style LoRA for Anima",
+   "zh": "毛玉牛乳 · 玉之けだま",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\kedama-tamano.safetensors",
+   "mb": 132.3,
+   "trig": "@kd4m / @kedama milk",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2648265"
+  },
+  {
+   "id": "2878007",
+   "wall_no": 33,
+   "batch": "p8_artists",
+   "name": "40原 Kinako",
+   "zh": "40原 Kinako",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\40hara-kinako.safetensors",
+   "mb": 66.2,
+   "trig": "k1n4k0",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2878007"
+  },
+  {
+   "id": "349063",
+   "wall_no": 34,
+   "batch": "p8_artists",
+   "name": "Akabur",
+   "zh": "Akabur",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\akabur.safetensors",
+   "mb": 132.2,
+   "trig": "@AkaburStyle",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "drop",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:349063"
+  },
+  {
+   "id": "18324",
+   "wall_no": 35,
+   "batch": "p8_artists",
+   "name": "Fellatrix",
+   "zh": "Fellatrix",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\fellatrix.safetensors",
+   "mb": 43.8,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:18324"
+  },
+  {
+   "id": "1200733",
+   "wall_no": 36,
+   "batch": "p8_artists",
+   "name": "Iwao178 いわお",
+   "zh": "Iwao178 いわお",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\iwao178.safetensors",
+   "mb": 132.2,
+   "trig": "@byiwao",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:1200733"
+  },
+  {
+   "id": "311073",
+   "wall_no": 37,
+   "batch": "p8_artists",
+   "name": "Krekkov",
+   "zh": "Krekkov",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\krekkov.safetensors",
+   "mb": 66.2,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:311073"
+  },
+  {
+   "id": "2533030",
+   "wall_no": 38,
+   "batch": "p8_artists",
+   "name": "Mika Pikazo",
+   "zh": "Mika Pikazo",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\mika-pikazo.safetensors",
+   "mb": 68.9,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2533030"
+  },
+  {
+   "id": "2790739",
+   "wall_no": 39,
+   "batch": "p8_artists",
+   "name": "Nishieda 西枝",
+   "zh": "Nishieda 西枝",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\nishieda.safetensors",
+   "mb": 54.8,
+   "trig": "nstyle",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2790739"
+  },
+  {
+   "id": "618752",
+   "wall_no": 40,
+   "batch": "p8_artists",
+   "name": "Shiny Nai",
+   "zh": "Shiny Nai",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\shiny-nai.safetensors",
+   "mb": 87.6,
+   "trig": "shiny skin, wet",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:618752"
+  },
+  {
+   "id": "2765340",
+   "wall_no": 41,
+   "batch": "p8_artists",
+   "name": "hiten",
+   "zh": "hiten",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\hiten.safetensors",
+   "mb": 43.8,
+   "trig": "@sakosty",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2765340"
+  },
+  {
+   "id": "2735333",
+   "wall_no": 42,
+   "batch": "p8_artists",
+   "name": "lack",
+   "zh": "lack",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\lack.safetensors",
+   "mb": 175.2,
+   "trig": "@lack",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2735333"
+  },
+  {
+   "id": "2768504",
+   "wall_no": 43,
+   "batch": "p8_artists",
+   "name": "redjuice",
+   "zh": "redjuice",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\redjuice.safetensors",
+   "mb": 175.2,
+   "trig": "@redjuice",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2768504"
+  },
+  {
+   "id": "987795",
+   "wall_no": 44,
+   "batch": "p8_artists",
+   "name": "大暮維人",
+   "zh": "大暮維人",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\oh-great.safetensors",
+   "mb": 132.3,
+   "trig": "oh_great_style",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:987795"
+  },
+  {
+   "id": "2053496",
+   "wall_no": 45,
+   "batch": "p8_artists",
+   "name": "桂正和",
+   "zh": "桂正和",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\katsura-masakazu.safetensors",
+   "mb": 42.9,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:2053496"
+  },
+  {
+   "id": "2678534",
+   "wall_no": 46,
+   "batch": "p8_artists",
+   "name": "犬神凶",
+   "zh": "犬神凶",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\inugami-kira.safetensors",
+   "mb": 43.9,
+   "trig": "inugami kira",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2678534"
+  },
+  {
+   "id": "574793",
+   "wall_no": 47,
+   "batch": "p8_artists",
+   "name": "矢吹健太朗",
+   "zh": "矢吹健太朗",
+   "group": "桶外-知名画师",
+   "lora": "Anima\\packs\\yabuki-kentarou.safetensors",
+   "mb": 66.2,
+   "trig": "",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai:574793"
+  },
+  {
+   "id": "2877381",
+   "wall_no": 48,
+   "batch": "p9_touhou",
+   "name": "Daroon5",
+   "zh": "Daroon5",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\daroon5.safetensors",
+   "mb": 132.2,
+   "trig": "@daroon5",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2877381"
+  },
+  {
+   "id": "2808730",
+   "wall_no": 49,
+   "batch": "p9_touhou",
+   "name": "GTNS",
+   "zh": "GTNS",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\gtns.safetensors",
+   "mb": 132.2,
+   "trig": "@gtns unk",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2808730"
+  },
+  {
+   "id": "2699112",
+   "wall_no": 50,
+   "batch": "p9_touhou",
+   "name": "Gero Zoukin",
+   "zh": "Gero Zoukin",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\gero-zoukin.safetensors",
+   "mb": 87.6,
+   "trig": "@g3r0zouk1n",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2699112"
+  },
+  {
+   "id": "2718555",
+   "wall_no": 51,
+   "batch": "p9_touhou",
+   "name": "GeulimYKUN",
+   "zh": "GeulimYKUN",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\geulimykun.safetensors",
+   "mb": 132.2,
+   "trig": "@geulimykun \\(skbyunea413\\)",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2718555"
+  },
+  {
+   "id": "1883971",
+   "wall_no": 52,
+   "batch": "p9_touhou",
+   "name": "Kamepan",
+   "zh": "Kamepan",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\kamepan.safetensors",
+   "mb": 132.2,
+   "trig": "@kmpnanima",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:1883971"
+  },
+  {
+   "id": "2646831",
+   "wall_no": 53,
+   "batch": "p9_touhou",
+   "name": "Kureha Mitsushige",
+   "zh": "Kureha Mitsushige",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\kureha-mitsushige.safetensors",
+   "mb": 87.6,
+   "trig": "@m1tu_kur3",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2646831"
+  },
+  {
+   "id": "2681559",
+   "wall_no": 54,
+   "batch": "p9_touhou",
+   "name": "Lunamoon 幻想万華鏡",
+   "zh": "Lunamoon 幻想万華鏡",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\lunamoon.safetensors",
+   "mb": 132.2,
+   "trig": "@lunamoon, the_memories_of_phantasm, anime coloring",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2681559"
+  },
+  {
+   "id": "2882406",
+   "wall_no": 55,
+   "batch": "p9_touhou",
+   "name": "TOKIAME",
+   "zh": "TOKIAME",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\tokiame.safetensors",
+   "mb": 11.0,
+   "trig": "@t0k1am3",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2882406"
+  },
+  {
+   "id": "2699083",
+   "wall_no": 56,
+   "batch": "p9_touhou",
+   "name": "Takeez3",
+   "zh": "Takeez3",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\takeez3.safetensors",
+   "mb": 87.6,
+   "trig": "@tak33z3",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2699083"
+  },
+  {
+   "id": "2903604",
+   "wall_no": 57,
+   "batch": "p9_touhou",
+   "name": "Yuuki Hana",
+   "zh": "Yuuki Hana",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\yuuki-hana.safetensors",
+   "mb": 132.2,
+   "trig": "@yuukihana_style",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2903604"
+  },
+  {
+   "id": "2891429",
+   "wall_no": 58,
+   "batch": "p9_touhou",
+   "name": "からたけわり",
+   "zh": "からたけわり",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\karatakewari.safetensors",
+   "mb": 132.2,
+   "trig": "@karatakewari",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2891429"
+  },
+  {
+   "id": "2896529",
+   "wall_no": 59,
+   "batch": "p9_touhou",
+   "name": "さなつき",
+   "zh": "さなつき",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\sanatsuki.safetensors",
+   "mb": 132.2,
+   "trig": "@sanatsuki",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2896529"
+  },
+  {
+   "id": "1585753",
+   "wall_no": 60,
+   "batch": "p9_touhou",
+   "name": "しぐれうい",
+   "zh": "しぐれうい",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\shigure-ui.safetensors",
+   "mb": 87.6,
+   "trig": "ANMShigUi_F4H",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:1585753"
+  },
+  {
+   "id": "2879723",
+   "wall_no": 61,
+   "batch": "p9_touhou",
+   "name": "はぐれけだま",
+   "zh": "はぐれけだま",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\hagure-kedama.safetensors",
+   "mb": 132.2,
+   "trig": "@hagure kedama",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2879723"
+  },
+  {
+   "id": "2760898",
+   "wall_no": 62,
+   "batch": "p9_touhou",
+   "name": "まー九郎 / エロマズン",
+   "zh": "まー九郎 / エロマズン",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\fyama.safetensors",
+   "mb": 66.2,
+   "trig": "@fyama",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2760898"
+  },
+  {
+   "id": "2850765",
+   "wall_no": 63,
+   "batch": "p9_touhou",
+   "name": "彷徨う",
+   "zh": "彷徨う",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\samayou.safetensors",
+   "mb": 132.2,
+   "trig": "@samayouyoro14",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2850765"
+  },
+  {
+   "id": "2875040",
+   "wall_no": 64,
+   "batch": "p9_touhou",
+   "name": "悔王 / Katou Kaiou",
+   "zh": "悔王 / Katou Kaiou",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\katou-kaiou.safetensors",
+   "mb": 132.2,
+   "trig": "@kaiou-new",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2875040"
+  },
+  {
+   "id": "2776037",
+   "wall_no": 65,
+   "batch": "p9_touhou",
+   "name": "水甘堂",
+   "zh": "水甘堂",
+   "group": "东方画师",
+   "lora": "Anima\\packs\\suamado.safetensors",
+   "mb": 132.2,
+   "trig": "@suamado",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": true,
+   "on_disk": true,
+   "src": "civitai:2776037"
+  },
+  {
+   "id": "musume_whale_normal",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "whale_normal",
+   "zh": "鲸鱼娘（正常版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\musume-deepseek-whale.safetensors",
+   "mb": 175.1,
+   "trig": "deepseek_whale_girl_zipzippipe, deepseek_maid_outfit_zipzippipe",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_whale_normal.jpg"
+  },
+  {
+   "id": "musume_whale_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "whale_chibi",
+   "zh": "鲸鱼娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\deepseek-whalemaid-chibi.safetensors",
+   "mb": 175.1,
+   "trig": "ds_whalemaid",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_whale_chibi.jpg"
+  },
+  {
+   "id": "musume_dragon_normal",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "dragon_normal",
+   "zh": "白龙娘（正常版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\chatgpt-dragon-alt.safetensors",
+   "mb": 132.3,
+   "trig": "Chatgpt_dragon_girl",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_dragon_normal.jpg"
+  },
+  {
+   "id": "musume_dragon_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "dragon_chibi",
+   "zh": "白龙娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\musume-gpt-white-dragon.safetensors",
+   "mb": 132.2,
+   "trig": "白龙娘",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_dragon_chibi.jpg"
+  },
+  {
+   "id": "musume_claude_normal",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "claude_normal",
+   "zh": "Claude娘（正常版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\claude-girl.safetensors",
+   "mb": 43.9,
+   "trig": "claude_girl",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_claude_normal.jpg"
+  },
+  {
+   "id": "musume_claude_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "claude_chibi",
+   "zh": "Claude娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\claude-girl.safetensors",
+   "mb": 43.9,
+   "trig": "claude_girl, chibi, 2head, orange hair, white dress, hair flower",
+   "strength": 0.75,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_claude_chibi.jpg"
+  },
+  {
+   "id": "musume_gemini_normal",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "gemini",
+   "zh": "Gemini娘（紫猫娘）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\gemini-chan-anima.safetensors",
+   "mb": 87.6,
+   "trig": "gemini_ai, heterochromia, red eye, yellow eye",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_gemini_normal.jpg"
+  },
+  {
+   "id": "musume_gemini_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "gemini chibi",
+   "zh": "Gemini娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\gemini-chan-anima.safetensors",
+   "mb": 87.6,
+   "trig": "gemini_ai, chibi, 2head, heterochromia, red eye, yellow eye",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_gemini_chibi.jpg"
+  },
+  {
+   "id": "musume_gemini_rainbow",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "musume_gemini_rainbow",
+   "zh": "Gemini娘（彩虹版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\gemini-carborn.safetensors",
+   "mb": 43.9,
+   "trig": "Gemini_(Carborn), rainbow hair, multicolored hair, heterochromia",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_gemini_rainbow.jpg"
+  },
+  {
+   "id": "musume_gemini_rainbow_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "musume_gemini_rainbow_chibi",
+   "zh": "Gemini娘（彩虹Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\gemini-carborn.safetensors",
+   "mb": 43.9,
+   "trig": "Gemini_(Carborn), chibi, 2head, rainbow hair, heterochromia",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_gemini_rainbow_chibi.jpg"
+  },
+  {
+   "id": "musume_kimi_chan",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "kimi-chan",
+   "zh": "Kimi娘（正常版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\kimi-chan.safetensors",
+   "mb": 132.2,
+   "trig": "kimi chan",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_kimi_chan.jpg"
+  },
+  {
+   "id": "musume_kimi_chan_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "kimi-chan",
+   "zh": "Kimi娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\kimi-chan.safetensors",
+   "mb": 132.2,
+   "trig": "chibi, 2head, kimi chan",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_kimi_chan_chibi.jpg"
+  },
+  {
+   "id": "musume_glm_zhipu",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "glm-zhipu",
+   "zh": "智谱GLM娘（正常版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\glm-zhipu.safetensors",
+   "mb": 175.1,
+   "trig": "glm_fox_girl",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_glm_zhipu.jpg"
+  },
+  {
+   "id": "musume_glm_zhipu_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "glm-zhipu",
+   "zh": "智谱GLM娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\glm-zhipu.safetensors",
+   "mb": 175.1,
+   "trig": "chibi, 2head, glm_fox_girl",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_glm_zhipu_chibi.jpg"
+  },
+  {
+   "id": "musume_qwen_chan",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "qwen-chan",
+   "zh": "千问娘（正常版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\qwen-chan.safetensors",
+   "mb": 104.0,
+   "trig": "qwen \\(girl\\)",
+   "strength": 0.9,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_qwen_chan.jpg"
+  },
+  {
+   "id": "musume_qwen_chan_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "qwen-chan",
+   "zh": "千问娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\qwen-chan.safetensors",
+   "mb": 104.0,
+   "trig": "chibi, 2head, qwen \\(girl\\)",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_qwen_chan_chibi.jpg"
+  },
+  {
+   "id": "musume_grok_normal",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "grok",
+   "zh": "Grok娘（ZipZipPipe版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\ai-girls-pack.safetensors",
+   "mb": 132.3,
+   "trig": "aigirls, grok, two bat wing hair ornaments, one on each side of head, gold crown, black red short dress, black pantyhose, smirk, blue eyes, blonde twintails",
+   "strength": 1.0,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_grok_normal.jpg",
+   "name_zh": "Grok娘（ZipZipPipe版）"
+  },
+  {
+   "id": "musume_grok_chibi",
+   "wall_no": null,
+   "batch": "musume",
+   "name": "grok",
+   "zh": "Grok娘（Q版）",
+   "group": "AI 拟人（大模型娘）",
+   "lora": "Anima\\packs\\ai-girls-pack.safetensors",
+   "mb": 132.3,
+   "trig": "chibi, 2head, aigirls, grok, two bat wing hair ornaments, one on each side of head, gold crown, black red short dress, black pantyhose, smirk, blue eyes, blonde twintails",
+   "strength": 0.85,
+   "turbo": 0.7,
+   "verdict": "keep",
+   "touhou_artist": false,
+   "on_disk": true,
+   "src": "civitai",
+   "thumb": "/style_thumbs/musume_grok_chibi.jpg",
+   "name_zh": "Grok娘（Q版）"
+  }
+ ],
+ "buckets": [
+  {
+   "idx": 11,
+   "tag": "@xi410_type1",
+   "count": 300,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@xi410_type1"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 12,
+   "tag": "@nyalia_2025",
+   "count": 287,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@nyalia_2025"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 13,
+   "tag": "@galawave",
+   "count": 280,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@galawave"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 14,
+   "tag": "@sabotenman",
+   "count": 271,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@sabotenman"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 15,
+   "tag": "@tencarcyan_old_type1",
+   "count": 257,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@tencarcyan_old_type1"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 16,
+   "tag": "@aruhshura",
+   "count": 255,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@aruhshura"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 17,
+   "tag": "@half-ai_creator",
+   "count": 238,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@half-ai_creator"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 18,
+   "tag": "@yukihotaru_type2",
+   "count": 234,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@yukihotaru_type2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 19,
+   "tag": "@kyomu",
+   "count": 231,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@kyomu"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 20,
+   "tag": "@yukihotaru_type1",
+   "count": 227,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@yukihotaru_type1"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 2,
+   "tag": "@lucifel99_type1",
+   "count": 732,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@lucifel99_type1"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 3,
+   "tag": "@shutenanon",
+   "count": 600,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@shutenanon"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 4,
+   "tag": "@xi410_type2",
+   "count": 511,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@xi410_type2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 5,
+   "tag": "@lativi",
+   "count": 483,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@lativi"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 6,
+   "tag": "@shimamuraa11451",
+   "count": 390,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@shimamuraa11451"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 8,
+   "tag": "@bigrbear",
+   "count": 326,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@bigrbear"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 9,
+   "tag": "@amindarano",
+   "count": 316,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@amindarano"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 10,
+   "tag": "@afezeria",
+   "count": 309,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@afezeria"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 21,
+   "tag": "@alphonse (white datura)",
+   "count": 226,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@alphonse (white datura)"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 22,
+   "tag": "@youmuanon_v2",
+   "count": 210,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@youmuanon_v2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 23,
+   "tag": "@shiroski",
+   "count": 203,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@shiroski"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 24,
+   "tag": "@alens",
+   "count": 201,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@alens"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 25,
+   "tag": "@nyaqiq",
+   "count": 191,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@nyaqiq"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 26,
+   "tag": "@bb_ta",
+   "count": 188,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@bb_ta"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 27,
+   "tag": "@sbmssvmt_v2",
+   "count": 184,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@sbmssvmt_v2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 28,
+   "tag": "@shutenanon_v2",
+   "count": 171,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@shutenanon_v2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 29,
+   "tag": "@cleandongye",
+   "count": 168,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@cleandongye"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 30,
+   "tag": "@rikku-143",
+   "count": 162,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@rikku-143"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 31,
+   "tag": "@sakurakono",
+   "count": 162,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@sakurakono"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 32,
+   "tag": "@orenji (orenjipiiru)",
+   "count": 157,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@orenji (orenjipiiru)"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 33,
+   "tag": "@betabeet",
+   "count": 157,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@betabeet"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 34,
+   "tag": "@e_0x0194_type3_whatevertowrite",
+   "count": 155,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@e_0x0194_type3_whatevertowrite"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 35,
+   "tag": "@fltccktl",
+   "count": 153,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@fltccktl"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 36,
+   "tag": "@trauter",
+   "count": 153,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@trauter"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 37,
+   "tag": "@ramwam",
+   "count": 152,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@ramwam"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 38,
+   "tag": "@chlenix",
+   "count": 151,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@chlenix"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 39,
+   "tag": "@notamamizore",
+   "count": 150,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@notamamizore"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 40,
+   "tag": "@sweetonedollar",
+   "count": 146,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@sweetonedollar"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 41,
+   "tag": "@buruaka",
+   "count": 145,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@buruaka"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 42,
+   "tag": "@merratatustle",
+   "count": 145,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@merratatustle"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 43,
+   "tag": "@namako daibakuhatsu",
+   "count": 142,
+   "zh": "东方画师",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@namako daibakuhatsu"
+   ],
+   "strength": 1.0,
+   "touhou_artist": true
+  },
+  {
+   "idx": 44,
+   "tag": "@anonnoodles",
+   "count": 139,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@anonnoodles"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 45,
+   "tag": "@ugaaaa1",
+   "count": 137,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@ugaaaa1"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 46,
+   "tag": "@merrytail_old",
+   "count": 133,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@merrytail_old"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 47,
+   "tag": "@honkail",
+   "count": 132,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@honkail"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 48,
+   "tag": "@butterchalk",
+   "count": 131,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@butterchalk"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 49,
+   "tag": "@youlichu",
+   "count": 130,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@youlichu"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 50,
+   "tag": "@localame",
+   "count": 129,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@localame"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 51,
+   "tag": "@localnoodles",
+   "count": 129,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@localnoodles"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 52,
+   "tag": "@firedotalt",
+   "count": 128,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@firedotalt"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 53,
+   "tag": "@yafkyu",
+   "count": 126,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@yafkyu"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 54,
+   "tag": "@t2_bb",
+   "count": 125,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@t2_bb"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 55,
+   "tag": "@e_0x0194_type4_dontask",
+   "count": 119,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@e_0x0194_type4_dontask"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 56,
+   "tag": "@merrytail_new",
+   "count": 119,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@merrytail_new"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 57,
+   "tag": "@rano_u_rabe",
+   "count": 119,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@rano_u_rabe"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 58,
+   "tag": "@lattekoi5252",
+   "count": 118,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@lattekoi5252"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 59,
+   "tag": "@firedotinc",
+   "count": 117,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@firedotinc"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 60,
+   "tag": "@kumarang",
+   "count": 115,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@kumarang"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 61,
+   "tag": "@uniunimikan",
+   "count": 115,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@uniunimikan"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 62,
+   "tag": "@channel (caststation)",
+   "count": 111,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@channel (caststation)"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 63,
+   "tag": "@deadpurity",
+   "count": 106,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@deadpurity"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 64,
+   "tag": "@e_0x0194_type2_uniquestring",
+   "count": 105,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@e_0x0194_type2_uniquestring"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 65,
+   "tag": "@lucifel99_type2",
+   "count": 103,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@lucifel99_type2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 67,
+   "tag": "@qua_sho_dea",
+   "count": 102,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@qua_sho_dea"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 68,
+   "tag": "@brittle",
+   "count": 101,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@brittle"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 69,
+   "tag": "@doribae",
+   "count": 97,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@doribae"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 70,
+   "tag": "@xerbattquasar",
+   "count": 97,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@xerbattquasar"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 71,
+   "tag": "@tencarcyan_old_type2",
+   "count": 85,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@tencarcyan_old_type2"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 72,
+   "tag": "@eqota",
+   "count": 78,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@eqota"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 73,
+   "tag": "@tianliang duohe fangdongye",
+   "count": 77,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@tianliang duohe fangdongye"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 74,
+   "tag": "@nyalens",
+   "count": 71,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@nyalens"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 75,
+   "tag": "@sho_sho_tidufa",
+   "count": 69,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@sho_sho_tidufa"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 76,
+   "tag": "@memento_mori",
+   "count": 67,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@memento_mori"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 77,
+   "tag": "@bakariso",
+   "count": 63,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@bakariso"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 78,
+   "tag": "@nikukyu",
+   "count": 62,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@nikukyu"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 79,
+   "tag": "@8chan",
+   "count": 50,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@8chan"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 80,
+   "tag": "@pnya",
+   "count": 47,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@pnya"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 81,
+   "tag": "@_@",
+   "count": 26,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@_@"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 82,
+   "tag": "@gopro",
+   "count": 26,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@gopro"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  },
+  {
+   "idx": 83,
+   "tag": "@_@",
+   "count": 5,
+   "zh": "",
+   "group": "桶",
+   "lora": "Anima\\ai-styles-dump-anima-v5.safetensors",
+   "trig": [
+    "@_@"
+   ],
+   "strength": 1.0,
+   "touhou_artist": false
+  }
+ ]
+}
