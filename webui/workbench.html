@@ -460,6 +460,7 @@ function cleanTags(){
     a = a.filter(t=>!SHOT.includes(low(t)) || low(t)===low(keep));
   }
   // 构图必有一个：双人剔掉 close-up 后没人补，底模会自由裁切出半身/切头
+  // 只做兜底——构图由场景池的 composition/camera 段决定，这里不按角色强塞
   if(!a.some(t=>SHOT.includes(low(t)))) a.push(duo ? "full_body" : "upper_body");
   // 站/走 与 床/地 互斥：同时出现会画出"站着躺在床上"
   const UP = ["standing","walking","standing_sex","tiptoes","leaning_forward"];
@@ -815,6 +816,15 @@ function recount(){
   else addTag(['multiple_girls']);
   return n;
 }
+function setCharLora(id){
+  S.charId = id || null;
+  fetch('/api/anima/char/select',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({id:id||''})})
+    .then(r=>r.json()).then(j=>{
+      if(j.ok) logline("charLora", (j.id||"无") + " → " + ((j.loras||[]).join(" | ")||"-"));
+    }).catch(e=>logline("charLora","ERR "+e));
+}
+
 function pickChar(c){
   // 累加：点第二个角色不顶掉第一个；再点同一个角色 = 移出
   S.chars = S.chars || [];
@@ -823,6 +833,7 @@ function pickChar(c){
     S.tags = S.tags.filter(x=>x.toLowerCase()!==c.t.toLowerCase());
     S.chars = S.chars.filter(x=>x!==c.t);
     S.charTag = S.chars[S.chars.length-1] || null;
+    if(S.charId === c.t) setCharLora(null);
     const n = recount(); syncText();
     toast("移出角色：" + (c.zh||c.t) + "（剩 " + n + " 个）");
     return;
@@ -830,8 +841,9 @@ function pickChar(c){
   S.chars.push(c.t); S.charTag = c.t; S.owner[K(c.t)] = 'char';
   logline("pickChar", c.t + " chars=" + S.chars.length);
   addTag([c.t].concat(c.g||[]));
+  if(c.lora) setCharLora(c.t);
   const n = recount();
-  toast("角色 +1（共 " + n + " 个）：" + (c.zh||c.t));
+  toast("角色 +1（共 " + n + " 个）：" + (c.zh||c.t) + (c.lora ? "（已挂 LoRA）" : ""));
 }
 
 function renderScenes(b){
@@ -897,6 +909,20 @@ function renderScenes(b){
 
 const KEEP_ACT = /^(sex|vaginal|anal|oral|fellatio|cunnilingus|paizuri|handjob|footjob|thigh_sex|pussyjob|tribadism|masturbation|fingering|69|missionary|all_fours|doggystyle|sex_from_behind|cowgirl_position|reverse_cowgirl_position|girl_on_top|on_side|standing_sex|mating_press|upright_straddle|amazon_position|piledriver|spooning|straddling|sitting_on_lap|suspended_congress|prone_bone|leg_lift|legs_up|spread_legs|bent_over|against_wall|penis|1boy|2boys|faceless_male|hetero|nude|completely_nude|cum_in_pussy|cumdrip|cum_overflow|excessive_cum|cum_on_body|creampie|uncensored)$/;
 
+// 当前选中的角色包 / 画风包的触发词（换场景时要一起保留，否则框里看不见但后端会补）
+function styleTrigTags(){
+  const out = [];
+  if(S.styleId){
+    const st = (S.lib.styles||[]).find(x=>x.id===S.styleId);
+    if(st && st.trig) out.push.apply(out, parseTags(escArtist(st.trig)));
+  }
+  if(S.charId){
+    const cc = (S.lib.charsLora||[]).find(x=>x.id===S.charId);
+    if(cc && cc.trig) out.push.apply(out, parseTags(cc.trig));
+  }
+  return out;
+}
+
 function applyScene(s, src){
   // 纯场景（s.pure，无动作）：只补地点/光线/天气，不覆盖已有动作与体位
   if(s.pure){
@@ -904,7 +930,7 @@ function applyScene(s, src){
     const keep = (S.sceneTags||[]).filter(t=>KEEP_ACT.test(String(t)));
     S.sceneTags = uniq(keep.concat(PLACE));
     S.sceneName = (s.zh || s.name_zh || "");
-    const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]));
+    const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags()));
     setTags(normTags(base.concat(S.sceneTags)));
     refreshNeg(true);
     toast("已补场景：" + (s.zh||s.id) + " · 动作保留");
@@ -1156,6 +1182,15 @@ async function generate(){
       if(miss.length){ S.tags = miss.concat(S.tags); syncText(); logline("style", "补回触发词 " + miss.join("|")); }
     }
   }
+  // ★ 角色包触发词再补到最前（Anima 官方顺序：角色 → 作品 → 画师）
+  if(S.charId){
+    const cc = (S.lib.charsLora||[]).find(x=>x.id===S.charId);
+    if(cc && cc.trig){
+      const want2 = parseTags(cc.trig);
+      const miss2 = want2.filter(x=>!S.tags.some(y=>K(y)===K(x)));
+      if(miss2.length){ S.tags = miss2.concat(S.tags); syncText(); logline("char", "补回触发词 " + miss2.join("|")); }
+    }
+  }
   S.busy=true; S.busyAt=Date.now();
   $("btnGen").disabled=true; $("btnGen").textContent="⏳ 生成中";
   $("stat").textContent="审查"+(PF_KIND_ZH[pf.rep.kind]?"·"+PF_KIND_ZH[pf.rep.kind]:"")+" · 已提交…";
@@ -1167,7 +1202,7 @@ async function generate(){
     const r=await fetch('/api/gen',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({positive:posStr, negative:negStr, mode:S.model, steps:p.steps, cfg:p.cfg,
         sampler:p.sampler, scheduler:p.scheduler, width:p.width, height:p.height, seed:p.seed,
-        style_id:S.styleId||''})});
+        style_id:S.styleId||'', char_id:S.charId||''})});
     const j=await r.json();
     if(!j.ok){ toast(j.error||"提交失败"); pgDone(false, j.error||""); throw new Error(j.error||"fail"); }
     $("qSeed").value = j.seed;
@@ -1346,7 +1381,7 @@ async function batchRun(){
     if(useCompose){
       sc = composeShot(i, n);
       if(sc){
-        setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[])).concat(sc.tags)));
+        setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
         S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
         S.sceneKind = sc.kind || ''; S.sceneZh = sc.zh || ''; S.scenePool = sc.pool || '';
         cleanTags(); refreshNeg(true);
@@ -2151,7 +2186,7 @@ const SFW_CATS = ["style","artist","composition","camera","lighting","base","bod
 function rollLibrary(){
   const sc = composeShot(0,1);
   if(!sc){ toast("抽取失败：池为空"); return; }
-  setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[])).concat(sc.tags)));
+  setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
   S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
   S.sceneKind = sc.kind || ''; S.scenePool = sc.pool || '';
   cleanTags(); refreshNeg(true);
@@ -2166,6 +2201,9 @@ function rollLibrary(){
   try{ const r = await fetch('/api/styles'); const j = await r.json();
     if(j.ok){ S.lib.styles = j.styles || []; S.styleId = j.current || null; }
   }catch(e){ console.error("boot/styles", e); }
+  try{ const r2 = await fetch('/api/anima/chars'); const j2 = await r2.json();
+    if(j2.ok){ S.lib.charsLora = j2.chars || []; S.charId = j2.current || null; }
+  }catch(e){ console.error("boot/charLora", e); }
   renderLib(); renderStudio(); syncText();
   $("neg").value = defaultNeg();
   $("stat").textContent += " · 就绪";

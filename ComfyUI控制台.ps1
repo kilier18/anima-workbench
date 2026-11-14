@@ -1,4 +1,4 @@
-param(
+﻿param(
   [switch]$TestUi,
   [switch]$SelfTest,
   [switch]$TestStart,

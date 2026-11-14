@@ -1614,9 +1614,88 @@ def anima_style_set(sid):
     return _ANIMA_STYLE["id"]
 
 
-def anima_loras(style_id=None):
-    """turbo 0.7 + 选中的画风包。style_id 传 "" 表示明确不带画风。"""
+# ---------------- 角色库（带 LoRA 的角色卡） ----------------
+# 角色卡的 lora 字段指向 Anima\packs\ 下的包；选角色 = 挂角色 LoRA + 写触发词，
+# 和画风包可叠加（顺序：turbo → 角色 → 画风），两边都改 cross_attn/mlp，权重需让。
+_ANIMA_CHAR = {"id": None}
+_ANIMA_CHAR_CACHE = {"mtime": -1.0, "rows": []}
+
+
+def _anima_char_file():
+    cands = [
+        os.path.join(os.path.dirname(HERE), "ComfyUI_windows_portable", "ComfyUI",
+                     "custom_nodes", "Comfyui-Anima-Wardrobe-V5", "presets",
+                     "anima_v4_characters.json"),
+        os.path.join(r"D:\ComfyUI", "ComfyUI_windows_portable", "ComfyUI",
+                     "custom_nodes", "Comfyui-Anima-Wardrobe-V5", "presets",
+                     "anima_v4_characters.json"),
+    ]
+    for c in cands:
+        if os.path.isfile(c):
+            return c
+    return cands[0]
+
+
+def load_anima_chars():
+    """只返回带 lora 字段的角色卡：[{id,name,zh,work,lora,w,trig,thumb}]。"""
+    path = _anima_char_file()
+    try:
+        mt = os.path.getmtime(path)
+    except Exception:
+        return []
+    if _ANIMA_CHAR_CACHE["mtime"] != mt:
+        try:
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            data = {}
+        rows = []
+        for c in data.get("characters", []):
+            if not c.get("lora"):
+                continue
+            rows.append({
+                "id": c.get("tag") or "",
+                "name": c.get("name") or c.get("tag") or "",
+                "zh": c.get("zh") or "",
+                "work": c.get("work") or "",
+                "lora": c.get("lora"),
+                "w": c.get("lora_w") or 1.0,
+                "trig": c.get("trigger") or "",
+                "thumb": c.get("thumb") or "",
+            })
+        _ANIMA_CHAR_CACHE.update({"mtime": mt, "rows": rows})
+    return _ANIMA_CHAR_CACHE["rows"]
+
+
+def anima_char_get():
+    return _ANIMA_CHAR["id"]
+
+
+def anima_char_set(cid):
+    ids = {r["id"] for r in load_anima_chars()}
+    _ANIMA_CHAR["id"] = str(cid) if str(cid) in ids else None
+    return _ANIMA_CHAR["id"]
+
+
+def anima_char_trig(char_id=None):
+    cid = _ANIMA_CHAR["id"] if char_id is None else str(char_id)
+    if not cid:
+        return ""
+    for r in load_anima_chars():
+        if r["id"] == cid:
+            return r["trig"] or ""
+    return ""
+
+
+def anima_loras(style_id=None, char_id=None):
+    """turbo 0.7 + 角色包 + 画风包。传 "" 表示明确不带该层。"""
     out = list(ANIMA_BASE_LORAS)
+    cid = _ANIMA_CHAR["id"] if char_id is None else str(char_id)
+    if cid:
+        for r in load_anima_chars():
+            if r["id"] == cid:
+                out.append((r["lora"], float(r.get("w") or 1.0)))
+                break
     sid = _ANIMA_STYLE["id"] if style_id is None else str(style_id)
     if sid:
         for r in load_anima_styles():
@@ -1653,8 +1732,10 @@ OUT_DIR = os.environ.get("COMFY_OUTPUT", r"D:\ComfyUI\output")  # 兼容旧引�
 
 def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
               sampler=None, scheduler=None, width=1024, height=1536, seed=None,
-              style_id=None):
-    """构 Anima 出图图（核心节点，无第三方依赖）。mode 保留兼容，WAI 已于 3.1 移除。"""
+              style_id=None, char_id=None):
+    """构 Anima 出图图（核心节点，无第三方依赖）。mode 保留兼容，WAI 已于 3.1 移除。
+
+    LoRA 三层串链：turbo 0.7 → 角色包（char_id）→ 画风包（style_id），三者可同时挂。"""
     import time as _t
     try:
         _s = int(seed) if seed is not None else -1
@@ -1672,7 +1753,7 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
                "inputs": {"clip_name": ANIMA_CLIP, "type": "stable_diffusion"}}
     g["13"] = {"class_type": "VAELoader", "inputs": {"vae_name": ANIMA_VAE}}
     ref = ["1", 0]
-    for i, (name, w) in enumerate(anima_loras(style_id)):
+    for i, (name, w) in enumerate(anima_loras(style_id, char_id)):
         nid = str(50 + i)
         g[nid] = {"class_type": "LoraLoaderModelOnly",
                   "inputs": {"model": ref, "lora_name": name, "strength_model": w}}
@@ -1695,6 +1776,15 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
 
 def gen_submit(positive, negative="", **kw):
     # 选中画风包时，把它的触发词补到最前面（一次只挂一个画风，不加权不稀释）
+    # 角色包触发词放最前，画风包触发词随后（Anima 官方顺序：角色 → 作品 → 画师）
+    cid = kw.get("char_id")
+    if cid is None:
+        cid = anima_char_get()
+    ctrig = anima_char_trig(cid)
+    if ctrig:
+        _ch = ctrig.split(",")[0].strip().lower()
+        if not _ch or _ch not in (positive or "").lower():
+            positive = ctrig + ", " + (positive or "")
     sid = kw.get("style_id")
     if sid is None:
         sid = anima_style_get()
@@ -1804,7 +1894,7 @@ def restart_comfy(out_dir=None, wait=120):
 
 
 def anima_handfix(filename, positive="", negative="", steps=8, denoise=0.45, seed=None,
-                  style_id=None):
+                  style_id=None, char_id=None):
     """把已出的一张图送进 FaceDetailer（只检测手），回写一张修好的图。"""
     import shutil, time as _t
     fn = os.path.basename(str(filename or "").strip())
@@ -1840,7 +1930,7 @@ def anima_handfix(filename, positive="", negative="", steps=8, denoise=0.45, see
                "inputs": {"model_name": "bbox/hand_yolov8s.pt"}},
     }
     ref = ["1", 0]
-    for i, (name, w) in enumerate(anima_loras(style_id)):
+    for i, (name, w) in enumerate(anima_loras(style_id, char_id)):
         nid = str(50 + i)
         g[nid] = {"class_type": "LoraLoaderModelOnly",
                   "inputs": {"model": ref, "lora_name": name, "strength_model": w}}
@@ -3258,6 +3348,13 @@ class H(BaseHTTPRequestHandler):
                 return self._send(200, {"ok": True, "count": len(rows), "chars": rows[:lim]})
             except Exception as e:
                 return self._send(200, {"ok": False, "error": str(e), "chars": []})
+        if p == "/api/anima/chars":
+            try:
+                rows = load_anima_chars()
+                return self._send(200, {"ok": True, "count": len(rows),
+                                        "chars": rows, "current": anima_char_get()})
+            except Exception as e:
+                return self._send(200, {"ok": False, "error": str(e), "chars": []})
         if p == "/api/wb/scenes":
             import urllib.parse as _upw2
             qs2 = _upw2.parse_qs(self.path.split("?", 1)[1]) if "?" in self.path else {}
@@ -3433,6 +3530,15 @@ class H(BaseHTTPRequestHandler):
                                         "loras": [n.split("\\")[-1] for n, _w in anima_loras(sid)]})
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})
+        if p == "/api/anima/char/select":
+            try:
+                q4 = body if isinstance(body, dict) else (json.loads(body.decode("utf-8")) if body else {})
+                cid = anima_char_set(q4.get("id") or "")
+                return self._send(200, {"ok": True, "id": cid,
+                                        "trig": anima_char_trig(cid),
+                                        "loras": [n.split("\\")[-1] for n, _w in anima_loras("", cid)]})
+            except Exception as e:
+                return self._send(500, {"ok": False, "error": str(e)})
         if p == "/api/gen":
             try:
                 q2 = body if isinstance(body, dict) else (json.loads(body.decode("utf-8")) if body else {})
@@ -3446,7 +3552,8 @@ class H(BaseHTTPRequestHandler):
                     sampler=q2.get("sampler"), scheduler=q2.get("scheduler"),
                     width=q2.get("width") or 1024, height=q2.get("height") or 1536,
                     seed=q2.get("seed") or None,
-                    style_id=q2.get("style_id"))
+                    style_id=q2.get("style_id"),
+                    char_id=q2.get("char_id"))
                 return self._send(200, {"ok": True, "id": pid, "seed": sd})
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})
@@ -3455,7 +3562,8 @@ class H(BaseHTTPRequestHandler):
                 r = anima_handfix(body.get("filename"), body.get("positive") or "",
                                   body.get("negative") or "",
                                   body.get("steps") or 8, body.get("denoise") or 0.45,
-                                  body.get("seed"), body.get("style_id"))
+                                  body.get("seed"), body.get("style_id"),
+                                  body.get("char_id"))
                 return self._send(200, r)
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})
