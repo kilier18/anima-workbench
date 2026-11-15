@@ -246,7 +246,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
   <option value="medium">普通</option><option value="large">大胸</option></select>
 <label class="small" title="一批图当一场戏：准备→前戏→玩法→正戏→事后；角色/地点/光照本批锁定，只脱不穿（强制项）。衣服不会自动换：角色卡自带的 + 你在服饰面板手选的，两者之外的具体衣物词一律剔掉"><input type="checkbox" id="qStory"> 连续剧情</label>
       <label class="small" title="加 speech_bubble：画面出现漫画式对话框"><input id="qBubble" type="checkbox"> 对话框</label>
-      <label class="small" title="参考图锁定：连续剧情第 2 张起，把上一张拿去做 AnimaRefAdapter 的参考图。单人（比如博丽灵梦这种原作 tag）长相本来就稳，不用开；两个以上不同角色卡同框才会串脸——勾了自动在多角色时开（每张多约 10 秒）"><input type="checkbox" id="qRef"> 参考图锁定
+      <label class="small" title="参考图锁定：连续剧情第 2 张起，把上一张拿去做 AnimaRefAdapter 的参考图。单人（比如博丽灵梦这种原作 tag）长相本来就稳，不用开；两个以上不同角色卡同框才会串脸——勾了自动在多角色时开（每张多约 10 秒）"><input type="checkbox" id="qRef"> 参考图锁定</label>
       <label class="small" title="cfg=1 时负向完全不参与，开这个才压得住多余的手/文字/男性身体；约 +4 秒一张"><input type="checkbox" id="qNag" checked> 负面生效</label>
 <select id="qRefAnchor" title="锚点：锚本块第一张 = 每个块的第一张不挂参考图，块内差分都锚它（推荐，块与块之间不会串；上一张 = 逐张接力，会把上一张的崩坏一路放大）">
 <option value="block" selected>锚本块第一张</option>
@@ -257,7 +257,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
         <option value="1.5">参考 1.5</option>
         <option value="2.5">参考 2.5</option>
       </select>
-      <span class="small" title="需要男性时的处理：无脸男 / 隐形男(只剩压痕与动作) / 只有阴茎">男体</span>
+      <label class="small" for="qMale" title="需要男性时的处理">男体</label>
       <select id="qScene" title="场景类型：自动=按角色数推断；锁定后只从该类三档池抽动作">
         <option value="auto" selected>自动</option>
         <option value="solo">单人</option>
@@ -276,8 +276,8 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
         <option value="penis">只有阴茎</option>
       </select>
       <select id="qSock" title="丝袜只认你选的这一种（足交也照样只画这种）；不穿=腿脚动作也不加袜子">
-        <option value="" selected>丝袜·不穿（默认）</option>
-        <option value="none">不要丝袜</option>
+        <option value="" selected>丝袜·自动（默认）</option>
+        <option value="none">丝袜·不要</option>
         <option value="pantyhose">连裤袜</option>
         <option value="black_pantyhose">黑色连裤袜</option>
         <option value="white_pantyhose">白色连裤袜</option>
@@ -305,6 +305,7 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
       <span class="small">批量</span><input id="batchN" type="number" value="8" min="1" max="60" style="width:64px">
       <button id="btnBatch" class="pri" style="background:#2f6f4f">🎬 批量出图</button>
       <button id="btnPause" disabled>⏸ 暂停</button>
+      <button id="btnStop" disabled>⏹ 停止</button>
       <button id="btnHand">🔧 修手</button>
       <button id="btnCopy">复制提示词</button>
       <button id="btnLog">📋 日志</button>
@@ -348,6 +349,7 @@ const S = {bubble:false,
   // 参考图锁定（2026-11-14）：story 第 2 张起把上一张当 AnimaRefAdapter 的参考图，
   // 治"第 6–8 张换人"。storyRef=当前参考图文件名；refGuid=强度；refOn=开关
   refOn: true, storyRef: '', refGuid: 1.0, refAnchor: 'block',
+  nagOn: true, compose: true, refTouched: false, storySrc: 'presets',
 };
 /* 支持 #artists / #chars 之类直达链接（图标预览、外部跳转用） */
 try { const _h = (location.hash || '').slice(1);
@@ -721,7 +723,7 @@ async function doExpand(){
   try{
     const r = await fetch('/api/expand',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:txt, dialect:(S.model==='anima'?'anima':'danbooru'), level:S.tier})});
     const j = await r.json();
-    if(j.positive){ setTags(normTags(parseTags(j.positive))); if(j.negative) $("neg").value=j.negative; else refreshNeg(true); toast((j.why ? j.why + " · " : "") + "扩写完成（" + (j.dialect==="anima" ? "Anima 短语" : "danbooru 标签") + "）"); }
+    if(j.positive){ setTags(normTags(parseTags(j.positive))); if(j.negative) $("neg").value=j.negative; else refreshNeg(false); toast((j.why ? j.why + " · " : "") + "扩写完成（" + (j.dialect==="anima" ? "Anima 短语" : "danbooru 标签") + "）"); }
     else toast(j.error||"扩写失败");
   }catch(e){ toast("扩写失败 "+e); }
   $("stat").textContent = "就绪";
@@ -1133,7 +1135,7 @@ function applyScene(s, src){
     S.sceneName = (s.zh || s.name_zh || "");
     const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags()));
     setTags(normTags(base.concat(S.sceneTags)));
-    refreshNeg(true);
+    refreshNeg(false);
     toast("已补场景：" + (s.zh||s.id) + " · 动作保留");
     return;
   }
@@ -1144,7 +1146,7 @@ function applyScene(s, src){
   S.scenes = [s.id];
   const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]));
   setTags(normTags(base.concat(add)));
-  refreshNeg(true);
+  refreshNeg(false);
   toast("已换场景：" + (s.zh||s.id) + " · " + add.length + " 词");
 }
 
@@ -1338,7 +1340,7 @@ function applyField(f, idx){
   // 角色字段（key=role）替换旧角色
   if(f.k==='role'){ (S.sel._roleTags||[]).forEach(t=>delTag(t)); S.sel._roleTags=tags; }
   addTag(tags, {noUser:true, owner:'field'});
-  refreshNeg(true);
+  refreshNeg(false);
 }
 function rollSection(sec){
   sec.fields.forEach(f=>{
@@ -1386,7 +1388,7 @@ async function generate(){
   if(S.busy){ toast("上一张还在跑（"+((Date.now()-(S.busyAt||Date.now()))/1000).toFixed(0)+"s）"); return; }
   // ★ 出图前审查：随机 / 组合之后、真正提交之前，人数与性别必过一次
   const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh,
-    forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(S.sceneType||''), quietUndress: !!S.quietUndress,
+    forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(sceneType() || ''), quietUndress: !!S.quietUndress,
     mod: String(S.curMod||''), block: String(S.curBlockKey||'').split('@')[0], niche: !!S.curBlockNiche, forceStory: !!S.story, keepCloth: (S.outfit||[]).concat(S.userTags||[])});
   S.tags = pf.tags;
   syncText();
@@ -1436,7 +1438,7 @@ async function generate(){
     if(S.story && S.refOn && j.ref) logline("ref", "参考图已挂 "+j.ref+" ← "+S.storyRef);
     $("qSeed").value = j.seed;
     let finished=false;
-    for(let i=0;i<300;i++){
+    for(let i=0;i<300;i++){ if(S.stopAsk){ S.stopAsk=false; throw new Error('已停止'); }
       await new Promise(z=>setTimeout(z,1200));
       let jj=null;
       try{ const rr=await fetch('/api/gen/job?id='+encodeURIComponent(j.id)); jj=await rr.json(); }
@@ -1618,44 +1620,8 @@ async function batchRun(){
           : "连续剧情：关（回到逐张独立抽词）");
       }; }
   }
-  /* 参考图锁定：第 2 张起接力上一张，第 6–8 张不再换人 */
-  if($("qBust")){
-    S.bust = String($("qBust").value || '');
-    if(!S.bustBound){ S.bustBound = true;
-      $("qBust").onchange = e=>{
-        S.bust = String(e.target.value || ''); S.bustTouched = true;
-        refreshNeg(true);
-        toast(S.bust ? ('体型：'+BUST_ZH[S.bust]+'（整批统一，负向已同步）') : '体型：自动（只按角色卡/条目里出现的那个）');
-      }; }
-  }
-  if($("qRef")){
-    S.refOn = !!$("qRef").checked;
-    S.nagOn = $("qNag") ? $("qNag").checked : (S.nagOn !== false);
-    if($("qNag")) $("qNag").onchange = e => { S.nagOn = !!e.target.checked;
-      toast(S.nagOn ? "负面生效（NAG 温和档，约 +4 秒一张）" : "负面关闭（cfg=1 时不压任何东西）"); };
-    if($("qRefGuid")) S.refGuid = parseFloat($("qRefGuid").value || "1") || 1;
-    if($("qRefAnchor")) S.refAnchor = String($("qRefAnchor").value || 'block');
-    if(!S.refBound){ S.refBound = true;
-      $("qRef").onchange = e=>{ S.refOn = !!e.target.checked; S.refTouched = true;
-        if(!S.refOn) S.storyRef = '';
-        toast(S.refOn ? "参考图锁定：开（第 2 张起用上一张锁长相）" : "参考图锁定：关（每张独立抽；单人角色 tag 本来就稳）"); };
-      if($("qRefGuid")) $("qRefGuid").onchange = e=>{
-        S.refGuid = parseFloat(e.target.value || "1") || 1;
-        toast("参考图强度：" + S.refGuid + (S.refGuid > 1 ? "（每步多算一次模型，慢约一倍）" : "（不加算力）"));
-      }; }
-  }
-  /* 丝袜下拉：类型由人指定，改了就清掉本批的自动锁，下一张立刻生效 */
-  if($("qSock")){
-    S.sockPick = String($("qSock").value || '');
-    if(!S.sockBound){ S.sockBound = true;
-      $("qSock").onchange = e=>{
-        S.sockPick = String(e.target.value || '');
-        S.sockLock = '';
-        toast(S.sockPick === 'none' ? "丝袜：不要（腿脚动作也光腿）"
-          : (S.sockPick ? "丝袜：" + (SOCK_ZH[S.sockPick] || S.sockPick) + "（整批统一）"
-                        : "丝袜：自动（沿用本批第一张抽到的类型）"));
-      }; }
-  }
+  /* 下拉同步 + 绑定统一在这里（bind() 开机调一次；batchRun 每次再调一次重读 DOM） */
+  syncRunOpts();
   if(S.batch){ toast("批量已在跑"); return; }
   if(!S.chars || !S.chars.length){ toast("先选至少一个角色"); return; }
   const n = Math.max(1, Math.min(60, parseInt(($("batchN").value||"8"),10)));
@@ -1700,7 +1666,7 @@ async function batchRun(){
     S.curBlockKey = ''; S.sceneBeat = 0; S.curBlockCount = 0; S.curBlockAct = null; S.curBlockActs = []; S.curBlockPreset = null; S.presetUsed = []; S.curBlockPose = null; S.curBlockSub = null; S.curBlockNoClose = false; S.blockAng = null; S.quietUndress = false; S.maleAuto = ''; S.blockExprUsed = []; S.curBlockShot = null; S.curBlockShots = null; S.blockSubUsed = []; S.curMod = ''; S.curBlockFinale = false;
     S.storyCarry = {cum:false, sex:false}; S.storyOutfit = []; S.storyUndressed = false; S.scenePhase = '';
   }
-  S.batch = true; S.pauseAsk = false;
+  S.batch = true; S.pauseAsk = false; S.stopAsk = false;
   // 丝袜：用户指定就整批照办；自动模式每批重新锁第一种抽到的袜子
   try{ const _g = stripStaleTriggers(); if(_g) logline("batchStart", "清掉上次残留的包触发词 " + _g); }catch(e){}
   S.sockPick = sockPickOf();
@@ -1724,6 +1690,7 @@ async function batchRun(){
   let fatal = '';
   try{
   for(let i=0;i<n;i++){ S.__batchIdx = i;
+    if(S.stopAsk){ toast("已停止：完成 "+done+" / "+n); break; }
     if(S.pauseAsk){ toast("已暂停：完成 "+done+" / "+n); break; }
     const row = S.story ? (planRows[i] || null) : null;
     /* 复合层：这一行挂的是催眠还是调教（没有就是空，整行走普通基础块） */
@@ -1811,7 +1778,7 @@ async function batchRun(){
         setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
         if(S.story && S.sceneGarb === 'none') S.storyUndressed = true;
         S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
-        cleanTags(); refreshNeg(true);
+        cleanTags(); refreshNeg(false);
       } else {
         // 抽空：清池 + 跳过本张（不清词就出图 = 把上一张的提示词再画一遍）
         S.sceneKind = ''; S.scenePool = '';
@@ -1825,7 +1792,7 @@ async function batchRun(){
       S.sceneKind = ''; S.scenePool = '';
       if(sc) applyScene(sc, "batch");
       setExpr(plan.expr);
-      refreshNeg(true);
+      refreshNeg(false);
     }
     $("stat").textContent = "批量 "+(i+1)+"/"+n
       + (S.story ? " · "+storyPhaseZh(ph)+"·"+(GARB_ZH[S.sceneGarb]||"") : '')
@@ -1858,6 +1825,7 @@ async function batchRun(){
       S.busy = false;
       try{ $("btnGen").disabled = false; $("btnGen").textContent = "▶ 生成"; }catch(_){}
     }
+    if(S.stopAsk){ toast("已停止：完成 "+done+" / "+n); break; }
     if(S.pauseAsk){ toast("已暂停：完成 "+done+" / "+n); break; }
   }
   }catch(err){
@@ -1866,8 +1834,15 @@ async function batchRun(){
     toast("批处理中断：" + fatal);
   }finally{
   S.batch = false;
-  // 收工清掉衣物强制项：留着的话下一次单张生成会被上一段戏的"全裸/半脱"绑住
+  // 收工清掉剧情态：留着的话下一次单张生成会被上一批绑住
+  // （参考图接力最后一张、maleAuto 盖掉手选、陈旧 curBlockKey 判成 3P）
   S.sceneGarb = ''; S.scenePhase = '';
+  S.maleAuto = ''; S.curBlockKey = ''; S.curBlockFinale = false;
+  S.quietUndress = false; S.storyRef = '';
+  S.blockCamUsed = []; S.curMod = ''; S.curBlockShot = null; S.curBlockShots = null;
+  S.blockSubUsed = []; S.blockExprUsed = []; S.curBlockSub = null; S.curBlockPose = null;
+  S.presetUsed = []; S.curBlockPreset = null; S.curBlockNiche = false; S.storyOutfit = '';
+  S.storyUndressed = false; S.sockLock = ''; S.lastShot = ''; S.lastAng = '';
   if(S.story && S.storyRec.length){
     try{
       const js = JSON.stringify({tier:S.tier, chars:S.chars||[], sock:(S.sockPick||S.sockLock||''),
@@ -1876,7 +1851,11 @@ async function batchRun(){
       logline("batchJson", "本批可回放 "+S.storyRec.length+" 张 → localStorage wb_story_last_v1（"+js.length+" 字符，控制台 wbStoryDump() 取 JSON）");
     }catch(e){}
   }
-  $("btnBatch").disabled = false; $("btnPause").disabled = true;
+  // story 必须最后复位：上面写 localStorage 还要用它判"这批是不是剧情"
+  S.story = false; S.storyPlan = []; S.storyLock = null;
+  $("btnBatch").disabled = false; $("btnPause").disabled = true; $("btnStop").disabled = true;
+  try{ $("btnPause").textContent = "⏸ 暂停"; $("btnStop").textContent = "⏹ 停止"; }catch(_){}
+  S.stopAsk = false;
   S.busy = false;
   try{ if($("btnGen")){ $("btnGen").disabled = false; $("btnGen").textContent = "▶ 生成"; } }catch(_){}
   if(!S.pauseAsk){
@@ -3299,7 +3278,7 @@ function composeShot(step, total, phase, beatIdx, lockAct){
      原来是每条动作自带自己的袜子词，一批图里黑丝/白丝/渔网来回换。 */
   {
     const lowAll = tags.map(t=>String(t).toLowerCase());
-    const pick = String((S.sockPick !== undefined && S.sockPick !== null) ? S.sockPick : sockPickOf() || '');
+    const pick = String(sockPickOf() || S.sockPick || '');   // 活读 DOM：单张生成也认得下拉
     const hasSock = lowAll.some(t=>SOCK_SET.has(sockKey(t)));
     if(pick === 'none'){
       if(hasSock) tags = tags.filter(t=>!SOCK_SET.has(sockKey(t)));
@@ -4908,13 +4887,74 @@ function pfShow(rep, tagN){
 function pfDryRun(){
   try{
     const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh,
-      forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(S.sceneType||''), quietUndress: !!S.quietUndress,
+      forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(sceneType() || ''), quietUndress: !!S.quietUndress,
     mod: String(S.curMod||''), block: String(S.curBlockKey||'').split('@')[0], niche: !!S.curBlockNiche, forceStory: !!S.story, keepCloth: (S.outfit||[]).concat(S.userTags||[])});
     pfShow(pf.rep, pf.tags.length);
   }catch(e){ logline("pfDryRun", "ERR " + e); }
 }
 
 /* ============ 绑定 ============ */
+/* 出图参数下拉的「读值 + 绑事件」。原先整块写在 batchRun 里，
+   导致首屏选了丝袜/改了负面开关，单张生成读不到（onchange 还没绑上）。
+   现在 bind() 开机调一次绑好事件，batchRun 每次再调一次只重读值。 */
+function syncRunOpts(){
+  try{
+    if($("qBust")){
+      S.bust = String($("qBust").value || '');
+      if(!S.bustBound){ S.bustBound = true;
+        $("qBust").onchange = e=>{
+          S.bust = String(e.target.value || ''); S.bustTouched = true;
+          refreshNeg(false);
+          toast(S.bust ? ('体型：'+BUST_ZH[S.bust]+'（整批统一，负向已同步）') : '体型：自动（只按角色卡/条目里出现的那个）');
+        }; }
+    }
+    if($("qNag")){
+      S.nagOn = !!$("qNag").checked;
+      if(!S.nagBound){ S.nagBound = true;
+        $("qNag").onchange = e => { S.nagOn = !!e.target.checked;
+          toast(S.nagOn ? "负面生效（NAG 温和档，约 +4 秒一张）" : "负面关闭（cfg=1 时不压任何东西）"); };
+      }
+    }
+    if($("qRef")){
+      S.refOn = !!$("qRef").checked;
+      if($("qRefGuid")) S.refGuid = parseFloat($("qRefGuid").value || "1") || 1;
+      if($("qRefAnchor")) S.refAnchor = String($("qRefAnchor").value || 'block');
+      if(!S.refBound){ S.refBound = true;
+        $("qRef").onchange = e=>{ S.refOn = !!e.target.checked; S.refTouched = true;
+          if(!S.refOn) S.storyRef = '';
+          toast(S.refOn ? "参考图锁定：开（第 2 张起用上一张锁长相）" : "参考图锁定：关（每张独立抽；单人角色 tag 本来就稳）"); };
+        if($("qRefGuid")) $("qRefGuid").onchange = e=>{
+          S.refGuid = parseFloat(e.target.value || "1") || 1;
+          toast("参考图强度：" + S.refGuid + (S.refGuid > 1 ? "（每步多算一次模型，慢约一倍）" : "（不加算力）"));
+        };
+        if($("qRefAnchor")) $("qRefAnchor").onchange = e=>{
+          S.refAnchor = String(e.target.value || 'block');
+          toast(S.refAnchor === 'block' ? "参考图：锚本块第一张（推荐）" : "参考图：锚上一张（链式，会把崩坏放大）");
+        };
+      }
+    }
+    /* 丝袜下拉：类型由人指定，改了就清掉本批的自动锁，下一张立刻生效 */
+    if($("qSock")){
+      S.sockPick = String($("qSock").value || '');
+      if(!S.sockBound){ S.sockBound = true;
+        $("qSock").onchange = e=>{
+          S.sockPick = String(e.target.value || '');
+          S.sockLock = '';
+          toast(S.sockPick === 'none' ? "丝袜：不要（腿脚动作也光腿）"
+            : (S.sockPick ? "丝袜：" + (SOCK_ZH[S.sockPick] || S.sockPick) + "（整批统一）"
+                          : "丝袜：自动（沿用本批第一张抽到的类型）"));
+        }; }
+    }
+    /* 男体：手选即清掉剧情自动档，一切听手选 */
+    if($("qMale")){
+      if(!S.maleBound){ S.maleBound = true;
+        $("qMale").onchange = () => { S.maleAuto = '';
+          toast("男体：手选生效（剧情自动档已清）"); };
+      }
+    }
+  }catch(e){ try{ logline("uiErr", "syncRunOpts " + e); }catch(_){} }
+}
+
 function bind(){
   $("pos").addEventListener("blur",()=>{
     // 手动改过提示词就不再按上次的池管（否则审查会删掉用户自己写的词）
@@ -4923,13 +4963,13 @@ function bind(){
   });
   $("pos").addEventListener("input",()=>{ $("posCount").textContent=parseTags($("pos").value).length+" 词"; });
   $("btnExpand").onclick=doExpand;
-  $("btnNorm").onclick=()=>{ setTags(normTags(parseTags($("pos").value))); refreshNeg(true); toast("已按规则整理"); };
+  $("btnNorm").onclick=()=>{ setTags(normTags(parseTags($("pos").value))); refreshNeg(false); toast("已按规则整理"); };
   $("btnClear").onclick=()=>{
     // 清空必须把“归属表”一起清掉：历史角色/服饰都存在 userTags/owner 里，
     // 只清 tags/chars 会让上一次的角色在批量时被 base 重新拼回来（两个角色 tag 的根因）
     S.tags=[]; S.chars=[]; S.charTag=null; S.scenes=[]; S.sel={}; S.outfit=[];
     S.userTags=[]; S.owner={}; S.sceneTags=[]; S.sceneName="";
-    setTags([]); recount(); syncText(); $("neg").value=""; refreshNeg(true);
+    setTags([]); recount(); syncText(); $("neg").value=""; refreshNeg(false);
     logline("clear");
     toast("已清空（角色/服饰/人数词全部归零）");
   };
@@ -4941,11 +4981,16 @@ function bind(){
   $("cfgMask").onclick=(e)=>{ if(e.target===$("cfgMask")) closeCfg(); };
   $("libRoll").onclick=()=>rollLibrary();
   $("studioRoll").onclick=rollAll;
-  $("btnGen").onclick=generate;
+  $("btnGen").onclick=()=>generate().catch(e=>{ try{ toast("出错："+(e&&e.message||e)); }catch(_){} });
   $("btnBatch").onclick=batchRun;
   // 上次跑批中途崩了会把 btnBatch 留在 disabled；刷新后必须复位，否则按钮永远"按不了"
   try{ $("btnBatch").disabled = false; $("btnPause").disabled = true; S.batch = false; }catch(e){}
   $("btnLog").onclick=showLog;
+  $("btnStop").onclick=()=>{
+    S.stopAsk = true; S.pauseAsk = true;
+    $("btnStop").textContent = "⏹ 正在停…";
+    toast("已请求停止：当前这张跑完就收工");
+  };
   $("btnPause").onclick=()=>{
     if(!S.batch){ toast("没有在跑的批量"); return; }
     S.pauseAsk = true;
@@ -4961,7 +5006,7 @@ function bind(){
   document.querySelectorAll("#tierSeg button").forEach(b=>b.onclick=()=>{
     S.tier=b.dataset.v; document.querySelectorAll("#tierSeg button").forEach(x=>x.classList.toggle("on",x===b));
     S.presetGrp = (S.tier==='r18') ? 'r18' : 'sfw';
-    refreshNeg(true); renderLib();
+    refreshNeg(false); renderLib();
     toast(S.tier==='r18'
       ? "R18 档：放开 🔞 类目 / r18 场景 / r18 预设"
       : (S.tier==='suggestive' ? "Suggestive 档：只留非 R18 类目，负面加强" : "SFW 档：隐藏 r18 场景与预设，负面加防护词"));
@@ -4977,6 +5022,7 @@ function bind(){
     if(!pane) return;
     ev.preventDefault(); pane.scrollTop += ev.deltaY;
   }, {passive:false});
+  syncRunOpts();   // 开机绑好出图参数下拉（原先只在 batchRun 里绑，单张读不到）
 }
 
 /* 随机一套 = 与批量完全同一套组合逻辑（composeShot 抽池 → 合并角色/服装 → 审查），
@@ -5015,9 +5061,9 @@ function rollLibrary(){
   S.sceneKind = sc.kind || ''; S.scenePool = sc.pool || ''; S.sceneZh = sc.zh || '';
   S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
   setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
-  cleanTags(); refreshNeg(true);
+  cleanTags(); refreshNeg(false);
   const pf = preflight(S.tags, {kind:S.sceneKind, pool:S.scenePool, zh:S.sceneZh,
-    forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(S.sceneType||''), quietUndress: !!S.quietUndress,
+    forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(sceneType() || ''), quietUndress: !!S.quietUndress,
     mod: String(S.curMod||''), block: String(S.curBlockKey||'').split('@')[0], niche: !!S.curBlockNiche, forceStory: !!S.story, keepCloth: (S.outfit||[]).concat(S.userTags||[])});
   S.tags = pf.tags; syncText(); pfShow(pf.rep, S.tags.length);
   toast("随机：" + (sc.zh||"组合") + (pf.rep.fixes.length? " · 审查修 "+pf.rep.fixes.length : ""));
