@@ -19,6 +19,14 @@
 
 把整个仓库下载到本地（`git clone https://github.com/kilier18/anima-workbench.git D:\ComfyUI`），然后双击仓库根目录的 **`install.cmd`**，或者在命令行里：
 
+> **用 release 里的 zip 装的话注意目录层级**：`anima-workbench-v5.0.zip` 解压出来是
+> 一个 `anima-workbench/` 文件夹（不是直接铺开）。把它里面的**内容**（`install.cmd`、
+> `webui\`、`tools\`、`_setup\`、`docs\` 等）全部挪到 `D:\ComfyUI\` 根下，再双击
+> `install.cmd`。直接把 `anima-workbench\` 整个文件夹丢进 `D:\ComfyUI` 会让所有
+> 相对路径多一层，`install.ps1` 找不到 `ComfyUI_windows_portable`。
+>
+> 用 `git clone` 装没有这个问题，克隆下来就是 `D:\ComfyUI` 本身。
+
 ```bat
 install.cmd            :: 全部 7 步
 install.cmd 1          :: 只跑第 1 步（环境自检）

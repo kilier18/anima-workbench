@@ -139,6 +139,9 @@ QUALITY_SET = {"masterpiece", "best quality", "very aesthetic", "absurdres", "hi
 ANIMA_DIALECT_NEG = ("worst quality, low quality, score_1, score_2, score_3, blurry, "
                      "jpeg artifacts, bad hands, extra fingers, missing fingers, "
                      "watermark, signature, text, censored")
+# 审计 1afc7066 P0-1：L457 的 else 分支引用了全文件都没定义的名字 →
+# dialect != "anima" 时 /api/expand 直接 NameError 500。
+DEF_NEG_TEXT = ANIMA_DIALECT_NEG
 _ANIMA_DROP = {"hetero", "uncensored", "censored", "very aesthetic", "absurdres", "highres",
                "newest", "1other", "faceless_female"}
 
@@ -1620,9 +1623,13 @@ def ref_stage(filename):
         raise ValueError("参考图文件名不合法：%r" % (raw[:120],))
     src = os.path.join(outdir(), fn)
     if not os.path.isfile(src):
-        alt = os.path.join(DEFAULT_OUTDIR, fn)
-        if os.path.isfile(alt):
-            src = alt
+        # 审计 1afc7066 P1-2：同 P1-1，便携版 output 也要找，否则
+        # 「参考图锁定」整段静默失效（gen_submit 把异常吞成 ref_image=None）。
+        for _d in comfy_out_candidates():
+            _p = os.path.join(_d, fn)
+            if os.path.isfile(_p):
+                src = _p
+                break
     if not os.path.isfile(src):
         raise ValueError("找不到参考图：%s" % fn)
     _sz = os.path.getsize(src)
@@ -2223,8 +2230,14 @@ def anima_handfix(filename, positive="", negative="", steps=8, denoise=0.45, see
         raise ValueError("文件名不对")
     src = os.path.join(outdir(), fn)
     if not os.path.exists(src):
-        alt = os.path.join(DEFAULT_OUTDIR, fn)
-        src = alt if os.path.exists(alt) else src
+        # 审计 1afc7066 P1-1：原来只找 outdir()/DEFAULT_OUTDIR。用户手点
+        # run_nvidia_gpu.bat 起 ComfyUI 时图在便携版 output 里 → 修手必报
+        # 找不到。这里和 save_out 用同一套候选目录。
+        for _d in comfy_out_candidates():
+            _p = os.path.join(_d, fn)
+            if os.path.exists(_p):
+                src = _p
+                break
     if not os.path.exists(src):
         raise ValueError("找不到这张图：%s" % fn)
     up = "hf_" + fn

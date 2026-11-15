@@ -750,12 +750,17 @@ async function loadData(){
     try{ const r = await fetch('/data/'+f); out[k] = await r.json(); }
     catch(e){ logline("loadData", "缺 "+f+" ("+e+")"); }
   }));
-  S.lib.tags = out.tags; S.lib.chars = out.chars; S.lib.scenes = out.scenes;
+  S.lib.tags = out.tags || {}; S.lib.chars = out.chars || {}; S.lib.scenes = out.scenes || {};
+  // 审计 1afc7066 P0-2：8 个 fetch 各自 try/catch（允许单文件失败），但下面几行
+  // 直接裸取 out.tags.cats / out.chars.chars → 任一 json 缺失或坏掉就 TypeError，
+  // boot 的 catch 把整页写成"数据加载失败"只剩骨架。统一走兜底。
+  const _cats = (out.tags && out.tags.cats) || [];
+  const _charsArr = (out.chars && out.chars.chars) || [];
   S.lib.presets = out.presets; S.zh = out.zh; S.pools = out.pools; S.lib.outfits = out.outfits; S.atoms = out.atoms;
-  const nTags = out.tags.cats.reduce((a,c)=>a+c.tags.length,0);
+  const nTags = _cats.reduce((a,c)=>a+(c.tags||[]).length,0);
   // 3.1 起场景只剩 anima 一套；这里必须容错，任何 .length 打空都会让 boot 整段中断（首屏空白）
   const nSc = Object.keys(out.scenes||{}).reduce((a,k)=>a+((out.scenes[k]||[]).length),0);
-  $("stat").textContent = "标签 "+nTags+" · 角色 "+out.chars.chars.length+" · 场景 "+nSc;
+  $("stat").textContent = "标签 "+nTags+" · 角色 "+_charsArr.length+" · 场景 "+nSc;
     // 池化后 actions 是 11 个池的 dict，没有 L1/L2/L3；旧写法 .L1.length 会抛错，
     // 把整个 boot 打断 → 首屏资料库空白（切一次标签才恢复，因为 click 里直接 renderLib）
     try{
@@ -763,7 +768,7 @@ async function loadData(){
       const tn = Object.keys(ac).reduce((a,k)=>a+((ac[k]||[]).length),0);
       window.__atomN = tn + "条/" + (((out.atoms||{}).meta||{}).combinations||0) + "组合";
     }catch(e){ window.__atomN = "err:" + e.message; }
-  $("libCount").textContent = "标签 "+nTags+" / 角色 "+out.chars.chars.length+" / 服饰 "+((out.outfits&&out.outfits.items||[]).length)+" / 场景 "+nSc;
+  $("libCount").textContent = "标签 "+nTags+" / 角色 "+_charsArr.length+" / 服饰 "+((out.outfits&&out.outfits.items||[]).length)+" / 场景 "+nSc;
 }
 
 
@@ -1457,7 +1462,11 @@ async function handfix(){
     const r=await fetch('/api/anima/handfix',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({filename:S.last, positive:S.tags.join(", "),
         negative:(/(uncensored)/.test(S.tags.join(", ")) ? stripCensorNeg($("neg").value) + ", " + CENSOR_HARD : $("neg").value),
-        steps:8, denoise:0.45})});
+        steps:8, denoise:0.45,
+        // 审计 1afc7066 P1-3：后端 3791/3797 支持 char_id/style_id，且 3792 有
+        // _anima_multi(positive) 保护（多人图不挂单人 LoRA）；前端不传的话这个
+        // 保护永远进不去，手修一律按后端全局角色挂 LoRA → 多人图修手串角色。
+        char_id: S.charId || '', style_id: S.styleId || ''})});
     const j=await r.json();
     if(j.ok){ addImg(j.filename); toast("修手完成"); } else toast(j.error||"修手失败");
   }catch(e){ toast("修手出错 "+e); }
