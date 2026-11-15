@@ -381,3 +381,93 @@ node _style_test/audit_dump.js <seed> <N> <family> empty|3p|all [duo]   # 单例
 `audit_multi.js` 检查 12 项：块末收尾、过程行带结算词、无机位、无景别、同张多景别、pov 与背后/内视同框、
 3P 机位未锁死、场景锁定、衣物回退、玩法段出现人形男、正戏段无性行为词、块+机位重复率。
 **总问题数必须是 0** 才算这一轮过。
+
+---
+
+## 20. 已知未解决（v5.0 定版交接）
+
+这一版**定版**，下面四条是明知道没解决、且**不在本版修**的。下一轮接手先看这节，
+别当成新发现的 bug 重新查一遍。
+
+### 20.1 LoRA 把服装焊进权重，提示词层面拿不掉
+
+**现象**：`grok-tan` 只给触发词（`grok-tan, aigirls, grok`）+ 全裸动作，一个外观
+词都不给，画面照样是那身黑红短裙。
+
+**已排除的三个来源**（都已经修掉，但拿不掉第四层）：
+1. `trig_outfit` 这一列原来**从来没被读过**（`anima_char_trig` 只读 `trig`/`trig_core`）
+   —— 已修，现在带走/留；
+2. 角色卡 `g` 数组里的服装部件词（`maid` / `apron` / `navy mary janes` …）原来全漏
+   网 —— 已修，全裸段现在只留配饰（头饰/帽子/皇冠/发饰/耳环/颈饰），衣物全剔；
+3. `FULLGARB` 缺鞋类（`mary_janes`/`pumps`/`flats`/`slippers`/`thighhigh_boots`）
+   —— 已补。
+
+**拿不掉的那层是 LoRA 权重本身**。9 张 ai 拟人卡实测（只给 `char_id`、不传 `g 数组`，
+测的就是纯权重，全裸动作）：
+
+| 能脱 | 脱不掉 | 待判 |
+|---|---|---|
+| `gemini-ai`(68.4% 肤色) / `gemini-carborn`(61.7%) / `claude_girl`(95.8%) | `deepseek-tan`(11.1%) / `chatgpt-tan`(23.4%，白旗袍) / `grok-tan`(39.3% 但暗部 49.7%) / `kimi-chan`(1.5%) / `glm-zhipu`(30%，暗部 63.3%) | `qwen-chan`(31.4%) |
+
+**合成词拆不开**：`deepseek-tan-chibi` 的 `ds_whalemaid`、`chatgpt-tan` 的
+`Chatgpt_dragon_girl` 都是「角色+服装」单个 token，没法只留角色。
+
+**出路**（都没做）：换无服装的 LoRA 底权重；或训练时把 outfit 和 core 分开；或在
+inpaint 阶段用 mask 重绘下半身。**不要再用加负向词的办法试**，已经试到底了。
+
+### 20.2 `from_side` 占 57%，不是 bug
+
+190 张实测机位分布：`from_side 109` / `from_behind 23` / `from_above 20` /
+`foreshortening 16` / `from_below 13` / `dutch_angle 10` / `pov 5` / `internal_cumshot 4`。
+
+**成因是块名准确性换来的**：
+- `doggy`（后入）只有 `from_behind` 合法 —— 画成侧入/仰拍就是你之前否掉的那个问题，
+  25 张里 19 张必须背后；
+- `missionary` 的合法机位里 `from_side` 每次都算 —— 25 张里 16 张落到侧面。
+
+**试过并失败的方案**：块内机位配额（`capA = ceil(块张数 / 机位数) + 1`，超出就换）。
+两次实验都**更糟**（from_side 91→98、重复率 48%→51%），根因是 `S.curBlockCount` 在
+多层调用里取不到真值 → capA 过小 → 全部被限死 → 掉进 `if(!cand.length) cand = aSrc`
+无条件回退。**这条别再试**。
+
+**真出路**（都没做）：给别的块补更多合法机位；或按块偏好加权（不是硬配额）；或接受
+它——翻图时同机位不同动作，人眼能分辨。
+
+### 20.3 `generate` / `batchRun` 的 try 起点偏晚，轮询没有 abort
+
+- `S.batch = true` 写在 `try` **之前**，`try` 里第一句抛异常时 `finally` 能兜住按钮，
+  但 `S.batch` 那个窗口期很短，理论上有一次「按钮灰了但不复位」的可能。
+- `gen_poll` 的轮询循环没有 `AbortController`：点「⏹ 停止」只是设 `S.stopAsk`，正在
+  飞的那个 fetch 会跑完才退出（最多一张的时间，10–17 秒）。
+- 断网时轮询靠 `lost`/`timeout` 分支收尾，不会永远转圈；但「ComfyUI 刚好在轮询中途
+  重启」会出现一次最长 20 秒的等待。
+
+**影响**：不致命，最坏是等一张图的时间。**没修**是因为改轮询要重测整条批量链路
+（11 条端到端断言），收尾阶段风险大于收益。
+
+### 20.4 `preflight` 还有 1175 行
+
+审计给了拆成 16 个纯函数的方案：`pfCtx(tags, opt)` 返回
+`{o, rep, a, low, has, cut, push, nChar, pov, povSolo, k, R}`，后面每步吃 ctx、改 ctx。
+按 ⓪①②②b③④⑤…⑧ 的现行顺序拆。
+
+**没做的理由**：`preflight` 是**非纯函数**（共享 `a` 数组累积改写、还有七处写
+`S.sceneKind`/`S.sceneType` 这类副作用），拆的过程里任何一处 `cut`/`push` 顺序变了
+都会静默改变出图，而现有 12 组测试只覆盖了已知的坑，覆盖不到「顺序微调」这种变化。
+**要做的话**：先落金标（`golden_check.js`），每拆一步跑一次比对，`prompts50` 一变就
+知道是不是拆错了。
+
+---
+
+### 交接时要动的三把锁
+
+改任何东西之前先确认这三样在：
+
+1. `node _style_test/run_all.js` → 12 组全绿
+2. `node _style_test/golden_check.js` → 四项 SAME
+   `structure50 1813159947111acf` / `structure190 bf41cb6258913ad6` /
+   `prompts50 6ae776fc91ec31c7` / `prompts12 95437f6166958c5e`
+3. `node _style_test/audit_multi.js` → 44 轮总问题数 0
+
+改完代码必须**两步**：`python tools\gen_workbench.py` → `python _style_test\extract_wb.py`。
+只做第一步的话，`dry_story.js` 和测试读的还是旧 JS（这个坑踩过两次）。
