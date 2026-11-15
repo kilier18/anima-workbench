@@ -3,7 +3,7 @@
 
 一页四块：
   ① 提示词      写中文 / 扩写 / 规则整理 / 负面
-  ② 资料库      标签 19 类 · 角色 2390 · 场景 963（Anima）· 预设（Forge 26 + Anima 20）· 画师
+  ② 资料库      标签 19 类 · 角色 2408 · 场景 963（Anima）· 预设（Forge 26 + Anima 20）· 画师
   ③ Studio      15 段 57 字段 1134 选项，逐段选择 / 随机
   ④ 预览与出图   最终提示词 chips、步数等参数、生成 / 修手、成图网格
 
@@ -132,8 +132,6 @@ main{flex:1 1 auto;min-height:0;display:grid;min-width:1180px;
 .pv-tags .t{color:#9fc0ff;border-color:#2e3a52}
 .pv-tags .t .z{color:#7e8798;margin-left:4px}
 .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.fieldline{display:flex;gap:6px;align-items:center}
-.fieldline select{flex:1}
 .hint{font-size:11px;color:#6f7788;margin:4px 0 8px}
 #prog{position:relative;margin:6px 0 0;height:22px;border:1px solid var(--line);
   border-radius:11px;background:#151a22;overflow:hidden}
@@ -243,7 +241,22 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
       <select id="qSched"><option>beta</option><option>normal</option><option>karras</option></select>
       <span class="small">种子</span><input id="qSeed" type="number" value="-1" style="width:96px">
       <label class="small" title="动作×地点×光线×强度×构图×机位 随机组合，动作本批不重复"><input type="checkbox" id="qCompose" checked> 组合抽词</label>
+      <select id="qBust" title="体型由你定：贫乳/小胸时压住大胸先验，并去掉乳交类接触（paizuri/breast_press）—— 词库里没有胸围词，胸是动作语义带来的">
+  <option value="">体型·自动</option><option value="flat">贫乳</option><option value="small">小胸</option>
+  <option value="medium">普通</option><option value="large">大胸</option></select>
+<label class="small" title="一批图当一场戏：准备→前戏→玩法→正戏→事后；角色/地点/光照本批锁定，只脱不穿（强制项）。衣服不会自动换：角色卡自带的 + 你在服饰面板手选的，两者之外的具体衣物词一律剔掉"><input type="checkbox" id="qStory"> 连续剧情</label>
       <label class="small" title="加 speech_bubble：画面出现漫画式对话框"><input id="qBubble" type="checkbox"> 对话框</label>
+      <label class="small" title="参考图锁定：连续剧情第 2 张起，把上一张拿去做 AnimaRefAdapter 的参考图。单人（比如博丽灵梦这种原作 tag）长相本来就稳，不用开；两个以上不同角色卡同框才会串脸——勾了自动在多角色时开（每张多约 10 秒）"><input type="checkbox" id="qRef"> 参考图锁定
+      <label class="small" title="cfg=1 时负向完全不参与，开这个才压得住多余的手/文字/男性身体；约 +4 秒一张"><input type="checkbox" id="qNag" checked> 负面生效</label>
+<select id="qRefAnchor" title="锚点：锚本块第一张 = 每个块的第一张不挂参考图，块内差分都锚它（推荐，块与块之间不会串；上一张 = 逐张接力，会把上一张的崩坏一路放大）">
+<option value="block" selected>锚本块第一张</option>
+<option value="shot">锚上一张（链式）</option>
+</select>
+      <select id="qRefGuid" title="参考图强度：1=参考走两条 CFG 分支，不额外多算模型（默认，最省）；2.5=更贴参考但每步多一次模型调用，慢一倍">
+        <option value="1" selected>参考 1</option>
+        <option value="1.5">参考 1.5</option>
+        <option value="2.5">参考 2.5</option>
+      </select>
       <span class="small" title="需要男性时的处理：无脸男 / 隐形男(只剩压痕与动作) / 只有阴茎">男体</span>
       <select id="qScene" title="场景类型：自动=按角色数推断；锁定后只从该类三档池抽动作">
         <option value="auto" selected>自动</option>
@@ -261,6 +274,32 @@ button.mini:hover{color:#e6ecf5;border-color:#5b7fc7}
         <option value="invisible" selected>隐形男</option>
         <option value="faceless">无脸男</option>
         <option value="penis">只有阴茎</option>
+      </select>
+      <select id="qSock" title="丝袜只认你选的这一种（足交也照样只画这种）；不穿=腿脚动作也不加袜子">
+        <option value="" selected>丝袜·不穿（默认）</option>
+        <option value="none">不要丝袜</option>
+        <option value="pantyhose">连裤袜</option>
+        <option value="black_pantyhose">黑色连裤袜</option>
+        <option value="white_pantyhose">白色连裤袜</option>
+        <option value="fishnet_pantyhose">渔网连裤袜</option>
+        <option value="thighhighs">过膝袜</option>
+        <option value="black_thighhighs">黑色过膝袜</option>
+        <option value="white_thighhighs">白色过膝袜</option>
+        <option value="fishnet_thighhighs">渔网过膝袜</option>
+        <option value="stockings">长袜</option>
+        <option value="black_stockings">黑色长袜</option>
+        <option value="white_stockings">白色长袜</option>
+        <option value="lace_stockings">蕾丝长袜</option>
+        <option value="sheer_stockings">透明长袜</option>
+        <option value="torn_pantyhose">破洞连裤袜</option>
+        <option value="striped_socks">条纹袜</option>
+        <option value="frilled_socks">蕾丝边袜</option>
+        <option value="socks">短袜</option>
+        <option value="black_socks">黑袜</option>
+        <option value="white_socks">白短袜</option>
+        <option value="ankle_socks">脚踝袜</option>
+        <option value="kneehighs">及膝袜</option>
+        <option value="garter_belt">吊袜带</option>
       </select>
       <button id="btnGen" class="pri">🎨 生成</button>
       <span class="small">批量</span><input id="batchN" type="number" value="8" min="1" max="60" style="width:64px">
@@ -300,19 +339,39 @@ const S = {bubble:false,
   lib: {tags:null, chars:null, scenes:null, presets:null, artists:null, outfits:null, styles:null},
   tab: 'tags', cat: null, charLimit: 160, charWork: '', charQ: '',
   zh: {}, pools: null, sel: {}, sectionOpen: {}, owner: {}, userTags: [],
+  // 连续剧情（2026-11-14）：story=本批按五阶段推进；sceneGarb=本张的衣物状态（强制项，
+  // 传给 preflight.forceGarb）；storyLock=本批锁定的角色地点光照机位
+  story: false, storyMode: 'strict', storyPlan: [], storyLock: null, storyBaseSeed: 0, sceneGarb: '', scenePhase: '',
+  // 丝袜（2026-11-14）：sockPick=用户在下拉里指定的类型（''=自动/'none'=不要）；
+  // sockLock=自动模式下本批第一次抽到的类型，后面整批统一成它
+  sockPick: '', sockLock: '', bust: '', bustTouched: false,
+  // 参考图锁定（2026-11-14）：story 第 2 张起把上一张当 AnimaRefAdapter 的参考图，
+  // 治"第 6–8 张换人"。storyRef=当前参考图文件名；refGuid=强度；refOn=开关
+  refOn: true, storyRef: '', refGuid: 1.0, refAnchor: 'block',
 };
 /* 支持 #artists / #chars 之类直达链接（图标预览、外部跳转用） */
 try { const _h = (location.hash || '').slice(1);
   if (['tags','chars','scenes','presets','artists','outfits'].includes(_h)) S.tab = _h; } catch(e) {}
 const $ = id => document.getElementById(id);
-const K = t => String(t).toLowerCase().replace(/[\s-]+/g,'_');
+/* 全局唯一归一化口径（2026-11-15 P1 收敛）：
+   小写 → 去撇号 → 空白/连字符/点 一律折成下划线。
+   为什么去撇号：danbooru 有 grabbing_another's_hair 这类词，
+   不去撇号会出现 two keys（带撇号 / 不带撇号各存一份），匹配不上。 */
+const K = t => String(t).toLowerCase().replace(/'/g,'').replace(/[\s\-.]+/g,'_');
 // 马赛克/打码抑制块（带权重，Illustrious/Anima 系认括号权重）
 const CENSOR_HARD = "(mosaic censoring:1.45), (bar censor:1.4), (censored:1.35), (pixelated:1.3), " +
   "mosaic, square mosaic, blur censor, light censor, steam censor, hair censor, heart censor, " +
   "convenient censoring, transparent censoring, out-of-frame censoring, censored genitals";
-const DEF_NEG = "bad quality, worst quality, worst detail, bad anatomy, bad hands, muscular_male, muscular, abs, bare_pectorals, back_muscles, " + CENSOR_HARD;
-const CUM = ["cum","cum_in_pussy","cum_on_body","cum_on_breasts","cum_overflow","cumdrip","cum_in_mouth","cum_on_tongue","facial","bukkake","cum_in_ass","excessive_cum","cum_on_hair","cum_on_face","cum_on_stomach"];
-const ANGLES = ["from_above","from_below","from_behind","from_side","from_front","pov"];
+const DEF_NEG = "bad quality, worst quality, worst detail, bad anatomy, bad hands, "
+  + "extra hands, fused fingers, extra fingers, missing fingers, malformed limbs, extra limbs, "
+  + "muscular_male, muscular, abs, bare_pectorals, back_muscles, "
+  + "male face, male body, visible male, male torso, male head, male eyes, "
+  + "multiple heads, two heads, hat on male, extra hat, duplicate accessory, "
+
+  + "duplicate, extra clothing, out of place clothing, "
+  + "text, speech bubble, japanese text, watermark, signature, " + CENSOR_HARD;
+const CUM = ["cum","cum_in_pussy","cum_on_body","cum_on_breasts","cum_overflow","cumdrip","cum_in_mouth","cum_on_tongue","facial","bukkake","cum_in_ass","excessive_cum","cum_on_hair","cum_on_stomach"];
+const ANGLES = ["from_above","from_below","from_behind","from_side","pov","foreshortening","internal_cumshot"];
 const SOLO_BAN = ["1boy","2boys","faceless_male","2girls","yuri","penis","hetero","group_sex","multiple_boys"];
 const POSES = ["missionary","cowgirl_position","reverse_cowgirl_position","all_fours","sex_from_behind",
   "on_side","standing_sex","mating_press","upright_straddle","amazon_position","piledriver","spooning",
@@ -326,7 +385,7 @@ const ACT_R18 = ["sex,all_fours","sex,missionary","sex,straddling","sex,sex_from
 const ACT_SFW = ["standing","sitting","walking","lying_on_bed","reading_a_book","drinking_tea","arms_crossed","stretching"];
 const GEAR_TRIG = ["shibari","bondage","rope","clamp","harness","collar","leash","绳","缚","夹","项圈","牵引","捆"];
 
-const keyOf = t => t.toLowerCase().replace(/ /g,'_');
+const keyOf = K;   /* 别名：历史原因保留名字，口径统一走 K */
 function hypnoFix(list){
   const low = list.map(keyOf);
   const isHyp = low.includes("heart-shaped_pupils") || low.includes("symbol-shaped_pupils");
@@ -344,13 +403,7 @@ function hypnoFix(list){
 const EXPLICIT_HARD = ["sex", "vaginal", "anal", "sex_from_behind", "missionary", "cowgirl_position", "reverse_cowgirl_position", "all_fours", "doggystyle", "upright_straddle", "amazon_position", "mating_press", "piledriver", "spooning", "suspended_congress", "full_nelson", "prone_bone", "squatting_cowgirl_position", "standing_sex", "paizuri", "fellatio", "oral", "cunnilingus", "deepthroat", "thigh_sex", "handjob", "footjob", "tribadism", "69", "double_penetration", "triple_penetration", "penis", "testicles", "cum", "cum_in_pussy", "cum_on_body", "cum_on_breasts", "cum_in_mouth", "cum_on_tongue", "cum_on_penis", "cum_on_fingers", "cum_in_ass", "cum_in_navel", "cum_swap", "cumdrip", "cum_overflow", "cum_on_hair", "cum_on_stomach", "cum_on_feet", "excessive_cum", "facial", "bukkake", "spilling", "gokkun", "pussy", "anus", "spread_pussy", "pubic_hair", "clitoris", "urethra", "gaping", "ass_eaten", "nipples", "areolae", "erect_nipples", "milking_machine", "masturbation", "fingering", "dildo", "vibrator", "sex_toy", "butt_plug", "anal_beads", "sex_machine", "tentacle_sex", "tentaclejob", "tentacle_in_mouth", "stomach_bulge", "slime_(substance)", "egg_laying", "ring_gag", "ball_gag", "cleave_gag", "wax_play", "whip", "riding_crop", "spanking", "welts", "humiliation", "futanari", "futanari_with_female", "futa_with_female", "orgasm", "female_ejaculation", "squirt", "forced_orgasm", "after_sex", "after_vaginal", "after_anal", "afterglow", "used_condom", "condom", "ahegao", "torogao", "rolling_eyes", "drooling", "empty_eyes", "heart-shaped_pupils", "mind_control", "hypnosis", "urination", "enema", "scat", "public_use", "glory_hole"];
 
 /* 男体词（1boy/faceless_male/hetero）不在这里：它们是"画面结构"不是"露骨度"，
-   放在 SOFT 会被 sfw/suggestive 档整条剔掉，调教/双人池的中文写着"被他绑住"却画不出人。
-   现在由 preflight 的 POOL_RULE.m 统一裁决（m:0 一律删，m:1/m:3 按条目自带）。 */
-/* 道具词：档位门不删它们（健全档的"触手只是搭在手背上""自己把项圈扣上"要靠这些词成立），
-   只在需要时用来识别条目属于哪一类。 */
-const PROP_WORDS = ['tentacles','tentacle_grab','tentacles_under_clothes','mechanical_tentacles',
-  'bondage','shibari','bound_arms','bound_legs','bound_wrists','bound_ankles','restrained',
-  'collar','leash','blindfold','rope'];
+   放在 SOFT 会被 sfw/suggestive 档整条剔掉，调教/双人池的中文写着"被他绑住"却画不出人。 */
 const EXPLICIT_SOFT = ["underwear", "panties", "bra", "lingerie", "swimsuit", "bikini", "one-piece_swimsuit", "sling_bikini", "leotard", "spats", "bloomers", "cleavage", "underboob", "sideboob", "downblouse", "areola_slip", "wardrobe_malfunction", "see-through", "wet_clothes", "wet_shirt", "transparent_clothing", "skirt_lift", "shirt_lift", "clothes_lift", "bra_lift", "dress_lift", "crotch", "cameltoe", "panty_pull", "panties_around_one_leg", "kneeling", "spread_legs", "legs_up", "leg_lift", "leg_lock", "arched_back", "bent_over", "against_wall", "sitting_on_lap", "straddling", "girl_on_top", "undressing", "clothes_removed", "changing_room", "locker_room", "lactation", "breast_milk", "milking", "breast_expansion", "inflation", "kiss", "french_kiss", "tongue_out", "open_mouth", "parted_lips", "saliva", "saliva_trail", "heavy_breathing", "trembling", "massage_given_or_received", "kanojo", "hug_from_behind", "kiss_on_neck", "kiss_on_shoulder", "biting_ear", "nipple_stimulation", "breast_sucking", "nipple_pull", "nipple_clamps", "clothed_sex", "grinding", "dry_humping", "pussy_juice", "wet", "clothing_aside", "breast_slip", "nude", "completely_nude", "bottomless", "topless", "no_bra", "no_panties", "panties_aside", "naked_apron", "naked_towel", ];
 
 function stripBy(arr, set){
@@ -439,7 +492,7 @@ async function saveCfg(){
   }catch(e){ toast("失败："+e); b.disabled=false; b.textContent="保存并重启"; }
 }
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-function zhOf(t){ return S.zh[String(t).toLowerCase()] || S.zh[t] || ""; }
+function zhOf(t){ const z=S.zh||{}; return z[String(t).toLowerCase()] || z[t] || ""; }
 function uniq(a){ const seen=new Set(), out=[]; for(const x of a){ const k=String(x).trim(); if(!k) continue; const lk=k.toLowerCase(); if(seen.has(lk)) continue; seen.add(lk); out.push(k);} return out; }
 
 
@@ -449,8 +502,9 @@ function logline(msg, extra){
   const line = new Date().toTimeString().slice(0,8) + "  " + msg + (extra? "  "+extra : "");
   S.log.push(line);
   if(S.log.length > 300) S.log.shift();
-  try{ fetch('/api/log',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({msg:line})}); }catch(e){}
+  try{ var _lg = fetch('/api/log',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({msg:line})});
+    if(_lg && _lg.catch) _lg.catch(()=>{}); }catch(e){}   // 同步 try 抓不到 fetch 的 rejection，必须 .catch
 }
 function showLog(){
   const txt = (S.log||[]).slice(-60).join(String.fromCharCode(10)) || "（还没有日志）";
@@ -463,7 +517,7 @@ function showLog(){
 /* ============ 提示词 ============ */
 function parseTags(s){ return uniq(String(s||"").split(/[,\n]/).map(x=>x.trim()).filter(Boolean)); }
 function cleanTags(){
-  const low = t => String(t).toLowerCase();
+  const low = t => String(t).toLowerCase();   /* 仅用于 Set 去重键，故意不折连字符 */
   let a = [];
   const seen = new Set();
   S.tags.forEach(t=>{ const k=low(t).replace(/_/g," "); if(!seen.has(k)){ seen.add(k); a.push(t); } });
@@ -503,16 +557,36 @@ function cleanTags(){
 }
 
 function syncText(){ $("pos").value = S.tags.join(", "); $("posCount").textContent = S.tags.length + " 词"; renderPreview(); renderZh(); }
-function setTags(list){ S.tags = uniq(list); syncText(); }
-function addTag(t){ if(!t) return; const add = parseTags(t);
+function setTags(list){
+  /* 按 K() 归一化去重：deepseek_whale_girl_zipzippipe 与
+     "@deepseek whale girl zipzippipe" 是同一个训练词的两种写法，
+     用 lowerCase 去重认不出，批量跑几轮就会堆出好几份。 */
+  const seen = new Set(), out = [];
+  (list || []).forEach(x => {
+    const v = String(x).trim();
+    if(!v) return;
+    const k = K(v).replace(/^@+/, '');
+    if(seen.has(k)) return;
+    seen.add(k); out.push(v);
+  });
+  S.tags = out; syncText();
+}
+function addTag(t, opts){
+  /* opts.noUser：程序内部补的结构词（人数词/校验词）不进 userTags，
+     否则清空正文后这些词会被"重建库"逻辑又拼回提示词（2026-11-14 修）。 */
+  if(!t) return; const add = parseTags(t);
+  if(!add.length) return;
+  const own = (opts && opts.owner) || 'user';
   S.tags = uniq(S.tags.concat(add));
-  S.userTags = uniq((S.userTags||[]).concat(add));
-  add.forEach(x=>{ S.owner[K(x)] = 'user'; });
-  syncText(); }
+  if(!(opts && opts.noUser)) S.userTags = uniq((S.userTags||[]).concat(add));
+  add.forEach(x=>{ S.owner[K(x)] = own; });
+  syncText();
+}
 function delTag(t){ const k=K(t);
   S.tags = S.tags.filter(x=>K(x)!==k);
   S.userTags = (S.userTags||[]).filter(x=>K(x)!==k);
   S.sceneTags = (S.sceneTags||[]).filter(x=>K(x)!==k);
+  try{ delete S.owner[k]; }catch(e){}
   syncText(); }
 
 const SEX_ACT = ['sex','vaginal','anal','sex_from_behind','missionary','cowgirl_position',
@@ -524,7 +598,7 @@ const NO_MALE = ['tentacle','tentacles','tentacle_sex','tentacle_grab','tentacle
   'dildo','dildo_riding','vibrator','sex_toy','sex_toys','egg_vibrator','butt_plug','anal_beads',
   'futanari','slime','slime_(substance)','girls_only','tribadism'];
 function needMale(list){
-  const low = list.map(t=>t.toLowerCase().replace(/ /g,'_'));
+  const low = list.map(K);
   const hasSex = low.some(t=>SEX_ACT.includes(t));
   const yuri = low.some(t=>YURI.includes(t));
   const noMale = low.some(t=>NO_MALE.includes(t));
@@ -537,6 +611,9 @@ function needMale(list){
   return list.filter(t=>!drop.includes(t.toLowerCase())).concat(add);
 }
 function normTags(list){
+  /* apostrophe-strip: 撇号词在 CLIP 里会被切成 "'s" 碎片（hand_on_another's_waist 丢一半动作）。
+     danbooru 规范写法本来就是 hand_on_anothers_waist，统一去掉撇号。 */
+  list = (list || []).map(x => String(x).replace(/'/g, ''));
   // 统一走一遍冲突梳理
   
   let a = uniq(list);
@@ -574,8 +651,18 @@ function normTags(list){
   /* 玩法池自带具体动作词（fellatio / footjob / paizuri…），再随机注入 sex / all_fours
      会把玩法盖回通用体位 —— core 里没有 SEX_ACT 时尤其明显。 */
   const PLAY_POOLS = ['foreplay_flirt','foreplay_sex','oral_sex','footjob_sex','paizuri_sex','handjob_sex'];
-  const noActPool = ['tentacle','machine','after','daily'].indexOf(poolKind) >= 0
-    || PLAY_POOLS.indexOf(S.scenePool) >= 0;
+  /* 单人/机械/触手/女女/偷窥：这些池的条目本身就是全部动作（自慰、机械臂、触手缠绕、磨蹭），
+     硬插 ACT_R18 会把 'sex,1boy,faceless_male,hetero' 整串塞进来 —— 单人分区凭空长出一个男人。 */
+  const FEM_FAM = /^(solo|machine|tentacle|yuri|voyeur)$/;
+  const femPool = /^(solo|machine|tentacle|yuri|voyeur)_/.test(String(S.scenePool||''))
+    || FEM_FAM.test(String(S.sceneType||''))
+    || FEM_FAM.test(String(sceneType()||''));
+  const noActPool = femPool
+    || ['tentacle','machine','after','daily'].indexOf(poolKind) >= 0
+    || PLAY_POOLS.indexOf(S.scenePool) >= 0
+    /* 连续剧情的准备/前戏段（衣物 full/open）也不许硬插正戏动作：
+       否则第 1 张"穿得整整齐齐"就已经 sex/on_back，戏提前演完，动作没有先后。 */
+    || (!!S.sceneGarb && (S.sceneGarb === 'full' || S.sceneGarb === 'open'));
   const yuriCtx = !noActPool && poolKind !== 'group' && (isYuri || (S.chars||[]).length >= 2);
   if(lv === 'r18'){
     if(!a.some(t=>SEX_ACT.includes(keyOf(t))) && !noActPool){
@@ -597,7 +684,10 @@ function normTags(list){
   if(a.map(t=>K(t)).some(t=>NO_MALE.includes(t))){
     a = a.filter(t=>!['1boy','2boys','3boys','faceless_male','hetero','male','penis'].includes(K(t)));
   }
-  a = needMale(a);
+  if(femPool){
+    a = a.filter(t=>['1boy','2boys','3boys','faceless_male','hetero','male','penis','invisible_man'].indexOf(K(t)) < 0);
+  }
+  if(!femPool) a = needMale(a);
   a = cleanConflicts(a);
   // 有男性就不该 solo
   if (lower().some(t=>["1boy","2boys","faceless_male","hetero"].includes(t))) drop("solo");
@@ -608,6 +698,9 @@ function normTags(list){
 
 function defaultNeg(){
   let n = DEF_NEG.split(", ");
+  /* 体型是用户定的就压住反方向：贫乳/小胸必须把大胸按下去，否则乳交类动作一句就长胸 */
+  const bneg = BUST_NEG[S.bust];
+  if(bneg) n = n.concat(bneg.split(", "));
   const solo = S.tags.some(t=>t.toLowerCase()==="solo");
   if (solo) n = n.concat(["2girls","multiple_girls","duplicate","clone","extra girls"]);
   if (S.tier !== 'r18') n = n.concat(["nude","nipples","pussy","penis","areolae","topless","bottomless","exposed breasts","exposed pussy","spread legs","cameltoe","cum","mosaic censoring","bar censor","censor bar","white bar","pixelated","mosaic"]);
@@ -665,8 +758,11 @@ function renderPreview(){
 async function loadData(){
   const files = {tags:'wb_tags.json', chars:'wb_chars.json', scenes:'wb_scenes.json', presets:'wb_presets.json', zh:'wb_zh.json', pools:'wb_pools.json', outfits:'wb_outfits.json', atoms:'wb_atoms.json'};
   const out = {};
+  // 每个文件独立 try：8 个 fetch 里死一个，Promise.all 会立刻 reject，
+  // 剩下 7 个的 rejection 没人接 → 页面/测试进程直接以 unhandled rejection 收场（2026-11-14 修）
   await Promise.all(Object.entries(files).map(async ([k,f])=>{
-    const r = await fetch('/data/'+f); out[k] = await r.json();
+    try{ const r = await fetch('/data/'+f); out[k] = await r.json(); }
+    catch(e){ logline("loadData", "缺 "+f+" ("+e+")"); }
   }));
   S.lib.tags = out.tags; S.lib.chars = out.chars; S.lib.scenes = out.scenes;
   S.lib.presets = out.presets; S.zh = out.zh; S.pools = out.pools; S.lib.outfits = out.outfits; S.atoms = out.atoms;
@@ -686,7 +782,6 @@ async function loadData(){
 
 
 /* ============ 服饰道具（与角色同逻辑：只手动清，不被场景覆盖） ============ */
-function outfitTags(){ return S.outfit || []; }
 function renderOutfits(b){
   b.innerHTML="";
   const tip=document.createElement("div"); tip.className="small";
@@ -709,7 +804,8 @@ function renderOutfits(b){
   const row=document.createElement("div"); row.className="row"; row.style.marginBottom="8px";
   const cnt=document.createElement("span"); cnt.className="small";
   const clr=document.createElement("button"); clr.textContent="清空服饰"; clr.style.fontSize="12px";
-  clr.onclick=()=>{ S.outfit=[]; (S.outfit||[]).forEach(t=>delTag(t)); syncText(); renderLib(); toast("已清空服饰道具"); };
+  clr.onclick=()=>{ const old=(S.outfit||[]).slice(); S.outfit=[]; old.forEach(t=>delTag(t));
+    syncText(); renderLib(); toast("已清空服饰道具 " + old.length + " 件"); };
   row.appendChild(cnt); row.appendChild(clr); b.appendChild(row);
   const grid=document.createElement("div"); grid.className="grid"; b.appendChild(grid);
   const all=(S.lib.outfits&&S.lib.outfits.items)||[];
@@ -734,8 +830,8 @@ function pickOutfit(t){
   S.outfit = S.outfit || [];
   const has = S.tags.some(x=>x.toLowerCase()===t.en.toLowerCase());
   if(has){
-    S.tags = S.tags.filter(x=>x.toLowerCase()!==t.en.toLowerCase());
-    S.outfit = S.outfit.filter(x=>x.toLowerCase()!==t.en.toLowerCase());
+    delTag(t.en);
+    S.outfit = (S.outfit||[]).filter(x=>x.toLowerCase()!==t.en.toLowerCase());
     toast("移出服饰："+(t.zh||t.en));
   }else{
     S.outfit.push(t.en); S.owner[K(t.en)]='outfit';
@@ -841,9 +937,9 @@ function recount(){
   const n = S.chars.length;
   COUNT_TAGS.forEach(t => delTag(t));
   if(n === 0) return 0;                       // 没有角色就不塞人数词（清空/空稿）
-  if(n === 1) addTag(['1girl','solo']);
-  else if(n === 2) addTag(['2girls']);
-  else addTag(['multiple_girls']);
+  if(n === 1) addTag(['1girl','solo'], {noUser:true, owner:'sys'});
+  else if(n === 2) addTag(['2girls'], {noUser:true, owner:'sys'});
+  else addTag(['multiple_girls'], {noUser:true, owner:'sys'});
   return n;
 }
 function setCharLora(id){
@@ -860,7 +956,8 @@ function pickChar(c){
   S.chars = S.chars || [];
   const has = S.tags.some(x=>x.toLowerCase()===c.t.toLowerCase());
   if(has){
-    S.tags = S.tags.filter(x=>x.toLowerCase()!==c.t.toLowerCase());
+    delTag(c.t);                                   // 连带 userTags/owner 一起清，否则下一批又被拼回来
+    (c.g||[]).forEach(g=>{ if(S.owner[K(g)] === 'char') delTag(g); });
     S.chars = S.chars.filter(x=>x!==c.t);
     S.charTag = S.chars[S.chars.length-1] || null;
     if(S.charId === c.t) setCharLora(null);
@@ -871,7 +968,16 @@ function pickChar(c){
   S.chars.push(c.t); S.charTag = c.t; S.owner[K(c.t)] = 'char';
   logline("pickChar", c.t + " chars=" + S.chars.length);
   addTag([c.t].concat(c.g||[]));
-  if(c.lora) setCharLora(c.t);
+  if(c.lora){
+    setCharLora(c.t);
+  } else if(S.charId){
+    /* 选的是"原版角色 tag"（不带 LoRA 的卡），而当前还挂着另一张角色 LoRA ——
+       两张会一起进提示词（实测 `kochiya_sanae, deepseek-tan, deepseek_whale_girl_zipzippipe`），
+       出来就是身体畸形、男体残缺、衣服乱变。这里直接摘掉 LoRA。 */
+    setCharLora(null);
+    const gone2 = stripStaleTriggers();
+    toast("用原版角色 tag：已摘掉角色 LoRA" + (gone2 ? " · 清触发词 " + gone2 : ""));
+  }
   const n = recount();
   let note = (c.lora ? "（已挂 LoRA）" : "");
   if(n > 1) note = "（多人：角色 LoRA 不生效，只靠 tag）";
@@ -949,11 +1055,74 @@ function styleTrigTags(){
     if(st && st.trig) out.push.apply(out, parseTags(escArtist(st.trig)));
   }
   if(S.charId){
-    const cc = (S.lib.charsLora||[]).find(x=>x.id===S.charId);
-    if(cc && cc.trig) out.push.apply(out, parseTags(cc.trig));
+  /* 角色触发词分层：全裸段只拼 trig_core（身份词），否则衣服词压在前面会让模型
+     把衣服画回去 —— 日志实证 23:28 那批的最终提示词里 deepseek_maid_outfit_zipzippipe
+     仍然在（页面这条路无条件拼 trig），所以这里要按当前衣物段分。 */
+  const cc = (S.lib.charsLora||[]).find(x=>x.id===S.charId);
+  const nudeNow = (S.sceneGarb === 'none')
+    || (S.tags||[]).some(t=>['completely_nude','nude','naked'].indexOf(K(t)) >= 0);
+  if(cc && cc.trig) out.push.apply(out, parseTags(cc.trig));
+  if(cc && cc.trig_outfit && !nudeNow) out.push.apply(out, parseTags(cc.trig_outfit));
   }
   return out;
 }
+
+/* 换画风/换角色后，上一个包的触发词会留在正文和 userTags 里（addTag 加进去的），
+   结果"选回原版角色 tag"也照样带着 deepseek_whale_girl_zipzippipe 跑。这里统一清。 */
+function stripStaleTriggers(){
+  const keep = [K(String(S.styleId||'')), K(String(S.charId||''))];
+  const dead = [];
+  const add = (arr)=>{ (arr||[]).forEach(x=>{ if(!x || !x.trig) return;
+    if(keep.indexOf(K(String(x.id||''))) >= 0) return;
+    parseTags(escArtist(x.trig)).forEach(t=>dead.push(K(t))); }); };
+  add(S.lib.styles); add(S.lib.charsLora);
+  if(!dead.length) return 0;
+  const n0 = (S.tags||[]).length;
+  S.tags = (S.tags||[]).filter(t=>dead.indexOf(K(t)) < 0);
+  S.userTags = (S.userTags||[]).filter(t=>dead.indexOf(K(t)) < 0);
+  dead.forEach(k=>{ delete S.owner[k]; });
+  return n0 - S.tags.length;
+}
+
+const SHOT_ZH_MAP = {'full_body':'全身', 'cowboy_shot':'七分身', 'upper_body':'上半身', 'close-up':'特写'};
+function shotZhFromTags(tags){
+  const t = (tags||[]).map(x=>String(x).toLowerCase());
+  let out = '';
+  for(const k of Object.keys(SHOT_ZH_MAP)){ if(t.indexOf(k) >= 0) out = SHOT_ZH_MAP[k]; }
+  return out;
+}
+/* 机位中文：出图落盘时的文件名用它，跟页面日志里的 piece= 一致 */
+const ANG_ZH_MAP = {'from_side':'侧面','from_behind':'背后','from_above':'俯拍','from_below':'仰拍',
+  'dutch_angle':'斜角','pov':'第一视角','pov_hands':'第一视角','foreshortening':'透视压缩',
+  'internal_cumshot':'插入内视'};
+function angZhFromTags(tags){
+  const list = tags || S.tags || [];
+  let hit = '';
+  for(let k=0;k<list.length;k++){ const z = ANG_ZH_MAP[String(list[k]).toLowerCase()]; if(z) hit = z; }
+  return hit;
+}
+/* 出图后另存一份到「⚙ 目录」设的目录：只复制图片，ComfyUI 的缓存/temp 不碰。
+   名字 = 序号_块_衣物_机位_原名，例如 034_骑乘_hypno_插入内视_anima_pg_00034_.png */
+async function saveToOut(im){
+  try{
+    if(!im || !im.filename) return;
+    // 块名：批量走 S.curBlockKey；单张没有块，退回场景名/池名，免得文件名只剩「侧面」
+    const bid = String(S.curBlockKey||'').split('@')[0];
+    let blk = ''; try{ blk = (BLOCK_BY_ID[bid] && BLOCK_BY_ID[bid].zh) || ''; }catch(e){}
+    if(!blk) blk = String(S.sceneZh || S.scenePool || '').split(' · ')[0].slice(0, 12);
+    const gh = GARB_ZH[S.sceneGarb] || '';
+    const az = angZhFromTags(S.tags);
+    const idx = (typeof S.__batchIdx === 'number') ? String(S.__batchIdx + 1).padStart(3,'0') : '';
+    const parts = [idx, blk, gh, az].filter(Boolean);
+    const name = parts.length ? (parts.join('_') + '_' + im.filename) : im.filename;
+    const r = await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({file:im.filename, subfolder:im.subfolder||'', name:name})});
+    const j = await r.json();
+    if(j && j.ok) logline("save", "已存 " + j.saved);
+    else logline("save", "另存失败 " + im.filename);
+  }catch(e){ logline("save", "ERR " + e); }
+}
+
 
 function applyScene(s, src){
   // 纯场景（s.pure，无动作）：只补地点/光线/天气，不覆盖已有动作与体位
@@ -1119,7 +1288,11 @@ function renderArtists(b){
           ks.forEach(k=>{ delete S.owner[k]; }); }
         toast("已取消画风");
       }
-      else { if(j.trig) addTag(escArtist(j.trig)); toast("画风："+t.zh+" · 挂 "+((j.loras||[]).slice(-1)[0]||'')); }
+      else {
+        const gone = stripStaleTriggers();
+        if(j.trig) addTag(escArtist(j.trig));
+        toast("画风："+t.zh+" · 挂 "+((j.loras||[]).slice(-1)[0]||'') + (gone ? " · 清旧触发词 "+gone : ""));
+      }
       if(typeof syncText==='function') syncText();
       draw();
     }catch(e){ toast("切换失败 "+e); }
@@ -1163,8 +1336,8 @@ function applyField(f, idx){
   const o=(f.opts||[])[i]; if(!o) return;
   const tags=parseTags(o[1]); if(!tags.length) return;
   // 角色字段（key=role）替换旧角色
-  if(f.k==='role'){ const prev=S.sel._roleTags||[]; S.tags=S.tags.filter(x=>!prev.map(y=>y.toLowerCase()).includes(x.toLowerCase())); S.sel._roleTags=tags; }
-  addTag(tags);
+  if(f.k==='role'){ (S.sel._roleTags||[]).forEach(t=>delTag(t)); S.sel._roleTags=tags; }
+  addTag(tags, {noUser:true, owner:'field'});
   refreshNeg(true);
 }
 function rollSection(sec){
@@ -1206,14 +1379,15 @@ function pgDone(ok, msg){
   const sec=((Date.now()-PG.t0)/1000).toFixed(1);
   box.className = ok ? 'done' : 'err';
   txt.textContent = (ok?'完成':'失败')+' · '+sec+'s'+(msg?' · '+msg:'');
-  S.lastSec = sec;
 }
 async function generate(){
   if($("qBubble") && $("qBubble").checked && S.tags.indexOf("speech_bubble")<0) S.tags.push("speech_bubble");
   if(!S.tags.length){ toast("提示词是空的"); return; }
   if(S.busy){ toast("上一张还在跑（"+((Date.now()-(S.busyAt||Date.now()))/1000).toFixed(0)+"s）"); return; }
   // ★ 出图前审查：随机 / 组合之后、真正提交之前，人数与性别必过一次
-  const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh});
+  const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh,
+    forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(S.sceneType||''), quietUndress: !!S.quietUndress,
+    mod: String(S.curMod||''), block: String(S.curBlockKey||'').split('@')[0], niche: !!S.curBlockNiche, forceStory: !!S.story, keepCloth: (S.outfit||[]).concat(S.userTags||[])});
   S.tags = pf.tags;
   syncText();
   pfShow(pf.rep, S.tags.length);
@@ -1250,16 +1424,32 @@ async function generate(){
     const r=await fetch('/api/gen',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({positive:posStr, negative:negStr, mode:S.model, steps:p.steps, cfg:p.cfg,
         sampler:p.sampler, scheduler:p.scheduler, width:p.width, height:p.height, seed:p.seed,
-        style_id:S.styleId||'', char_id:S.charId||''})});
+        style_id:S.styleId||'', char_id:S.charId||'',
+        // 参考图：只在连续剧情 + 开关打开 + 已经有上一张时挂；单张生成不碰这条
+        ref_image:(S.story && S.refOn && S.storyRef)?S.storyRef:'',
+        ref_guidance:(S.refOn?S.refGuid:null),
+        /* cfg=1 下负向不进 attention，靠 NAG 接回。温和档只在前 40% 步生效，
+           约 +4s/张；不用官方默认 scale2.0/tau2.5（会把主体整个压没）。 */
+        nag:(S.nagOn === false ? null : {scale:1.0, tau:1.2, alpha:0.5, end:0.4})})});
     const j=await r.json();
     if(!j.ok){ toast(j.error||"提交失败"); pgDone(false, j.error||""); throw new Error(j.error||"fail"); }
+    if(S.story && S.refOn && j.ref) logline("ref", "参考图已挂 "+j.ref+" ← "+S.storyRef);
     $("qSeed").value = j.seed;
     let finished=false;
     for(let i=0;i<300;i++){
       await new Promise(z=>setTimeout(z,1200));
-      const rr=await fetch('/api/gen/job?id='+encodeURIComponent(j.id)); const jj=await rr.json();
-      if(jj.state==='done'){ finished=true; (jj.images||[]).forEach(im=>addImg(im.filename)); toast("出图完成"); pgDone(true, (jj.images||[]).length+' 张'); S.busy=false; break; }
-      if(jj.state==='error'||jj.state==='timeout'){ finished=true; toast("任务失败："+jj.state); pgDone(false, jj.state); S.busy=false; break; }
+      let jj=null;
+      try{ const rr=await fetch('/api/gen/job?id='+encodeURIComponent(j.id)); jj=await rr.json(); }
+      catch(e){ continue; }                    // 单次查询失败不该把整张图判死
+      if(!jj) continue;
+      if(jj.state==='done'){ finished=true; (jj.images||[]).forEach(im=>{ addImg(im.filename); saveToOut(im); });
+        // 下一张的参考图 = 这一张的结果（只在剧情模式下接力，否则单张生成会被上一批的图锁住）
+        if(S.story && S.refOn && (jj.images||[]).length) S.storyRef = jj.images[0].filename;
+        toast("出图完成"); pgDone(true, (jj.images||[]).length+' 张'); S.busy=false; break; }
+      if(jj.state==='error'||jj.state==='timeout'||jj.state==='lost'||jj.state==='canceled'){
+        finished=true;
+        toast(jj.state==='lost' ? "任务在 ComfyUI 里丢了（大概刚重启过）" : ("任务失败："+jj.state));
+        pgDone(false, jj.state); S.busy=false; break; }
       if(jj.state==='running'){ $("progTxt").textContent='采样中 · '+((Date.now()-PG.t0)/1000).toFixed(1)+'s'; }
     }
     if(!finished && S.busy){ pgDone(false, '超时未返回'); S.busy=false; }
@@ -1316,7 +1506,7 @@ function setExpr(tier){
       'breast_slip','panties_aside','panty_pull','cameltoe'].includes(String(t).toLowerCase()));
   }
   const grp = EXPR_T[tier]||EXPR_T.T2;
-  S.tags = S.tags.filter(t=>!EXPR_ALL.includes(String(t).toLowerCase()));
+  S.tags = S.tags.filter(t=>!EXPR_ALL.some(k=>K(k)===K(t)));
   grp.forEach(t=>S.tags.push(t));
   cleanTags();
   syncText();
@@ -1405,40 +1595,228 @@ function pickForStage(st){
   const soft = base.filter(s=>Math.abs(Number(s.stage===undefined?2:s.stage)-st)<=1);
   return take(near) || take(soft) || take(base);
 }
-function batchStop(){ S.pauseAsk = false; S.batch = false; }
 async function batchRun(){
   if($("qCompose")){ S.compose = $("qCompose").checked;
     if(!S.composeBound){ S.composeBound=true; $("qCompose").onchange = e=>{ S.compose=e.target.checked;
       toast(S.compose?"组合抽词：开（动作不重复）":"组合抽词：关（走场景库）"); }; } }
+  /* 连续剧情开关：错开就没法单独关掉，所以在这里读、在 bind 里不重复绑 onchange */
+  if($("qStory")){
+    S.story = $("qStory").checked;
+    /* 连续剧情只做 R18：非 R18 档的"五阶段"没有意义（前戏/正戏都放不出来），直接劝回 */
+    if(S.story && S.tier !== 'r18'){
+      S.story = false;
+      try{ $("qStory").checked = false; }catch(e){}
+      toast("连续剧情只做 R18 档：先把档位切到 🔞 再点批量（散图抽卡不受影响）");
+    }
+  S.storyMode = 'strict';  /* 松散档已删：块制下 lockAct 恒有值，order 阶梯走不到 */
+    if(!S.storyBound){ S.storyBound = true;
+      $("qStory").onchange = e=>{
+        S.story = e.target.checked;
+        if(!S.story){ S.storyLock = null; S.storyPlan = []; S.sceneGarb = ''; }
+        toast(S.story
+          ? "连续剧情：开 · 五阶段 + 只脱不穿 + 锁定地点/光照。衣服不自动换 —— 要换先在服饰面板手选，再点批量"
+          : "连续剧情：关（回到逐张独立抽词）");
+      }; }
+  }
+  /* 参考图锁定：第 2 张起接力上一张，第 6–8 张不再换人 */
+  if($("qBust")){
+    S.bust = String($("qBust").value || '');
+    if(!S.bustBound){ S.bustBound = true;
+      $("qBust").onchange = e=>{
+        S.bust = String(e.target.value || ''); S.bustTouched = true;
+        refreshNeg(true);
+        toast(S.bust ? ('体型：'+BUST_ZH[S.bust]+'（整批统一，负向已同步）') : '体型：自动（只按角色卡/条目里出现的那个）');
+      }; }
+  }
+  if($("qRef")){
+    S.refOn = !!$("qRef").checked;
+    S.nagOn = $("qNag") ? $("qNag").checked : (S.nagOn !== false);
+    if($("qNag")) $("qNag").onchange = e => { S.nagOn = !!e.target.checked;
+      toast(S.nagOn ? "负面生效（NAG 温和档，约 +4 秒一张）" : "负面关闭（cfg=1 时不压任何东西）"); };
+    if($("qRefGuid")) S.refGuid = parseFloat($("qRefGuid").value || "1") || 1;
+    if($("qRefAnchor")) S.refAnchor = String($("qRefAnchor").value || 'block');
+    if(!S.refBound){ S.refBound = true;
+      $("qRef").onchange = e=>{ S.refOn = !!e.target.checked; S.refTouched = true;
+        if(!S.refOn) S.storyRef = '';
+        toast(S.refOn ? "参考图锁定：开（第 2 张起用上一张锁长相）" : "参考图锁定：关（每张独立抽；单人角色 tag 本来就稳）"); };
+      if($("qRefGuid")) $("qRefGuid").onchange = e=>{
+        S.refGuid = parseFloat(e.target.value || "1") || 1;
+        toast("参考图强度：" + S.refGuid + (S.refGuid > 1 ? "（每步多算一次模型，慢约一倍）" : "（不加算力）"));
+      }; }
+  }
+  /* 丝袜下拉：类型由人指定，改了就清掉本批的自动锁，下一张立刻生效 */
+  if($("qSock")){
+    S.sockPick = String($("qSock").value || '');
+    if(!S.sockBound){ S.sockBound = true;
+      $("qSock").onchange = e=>{
+        S.sockPick = String(e.target.value || '');
+        S.sockLock = '';
+        toast(S.sockPick === 'none' ? "丝袜：不要（腿脚动作也光腿）"
+          : (S.sockPick ? "丝袜：" + (SOCK_ZH[S.sockPick] || S.sockPick) + "（整批统一）"
+                        : "丝袜：自动（沿用本批第一张抽到的类型）"));
+      }; }
+  }
   if(S.batch){ toast("批量已在跑"); return; }
   if(!S.chars || !S.chars.length){ toast("先选至少一个角色"); return; }
   const n = Math.max(1, Math.min(60, parseInt(($("batchN").value||"8"),10)));
+  /* 段位序列：一次算好整批，逐张取 —— 每张现算会出现 setup→play→foreplay 这种回跳 */
+  let phases = [];
+  const phaseLeft = {};   // 每段还剩几张（guided_penetration 只落在玩法段最后一张）
+  let planRows = [];
+  if(S.story){
+    planRows = blockPlanOf(n);
+    /* 贫乳角色不排乳交：paizuri 语义自带大胸先验，提示词压不住 → 整块换成手交 */
+    if(String(S.bust || '') === 'flat'){
+      planRows = planRows.map(r => (r.block === 'paizuri'
+        ? Object.assign({}, r, {block:'handjob', blockZh:'手交'}) : r));
+    }
+    phases = planRows.map(x=>x.phase);
+    phases.forEach(x=>{ phaseLeft[x] = (phaseLeft[x]||0) + 1; });
+    S.storyPlan = phases.slice();
+    S.curBlockKey = ''; S.sceneBeat = 0; S.curBlockCount = 0; S.curBlockAct = null; S.curBlockActs = []; S.curBlockPreset = null; S.presetUsed = []; S.curBlockPose = null; S.curBlockSub = null; S.curBlockNoClose = false; S.blockAng = null; S.quietUndress = false; S.maleAuto = ''; S.blockExprUsed = []; S.curBlockShot = null; S.curBlockShots = null; S.blockSubUsed = []; S.curMod = ''; S.curBlockFinale = false;
+    S.storyUsedPlaces = [];
+    S.storyLock = null;                       // 新一批重新锁地点/光照（角色本来就是锁的）
+    S.storyRef = '';                          // 第一张没有参考图，生成完自动接力
+    S.storyCarry = {cum:false, sex:false};     // 跨张残留：前面发生过的，后面要看得见
+    // 衣服：不自动挑、不自动换（用户自己在服饰面板选了才穿）；脱到底之后不再穿回去
+    S.storyOutfit = [];
+    S.storyUndressed = false;
+    // 单人原作 tag（1girl 那套）长相稳定，不开参考更省；两个以上不同角色卡同框才需要咬住
+    if(!S.refTouched){
+      S.refOn = (S.chars || []).length >= 2;
+      if($("qRef")) $("qRef").checked = S.refOn;
+    }
+    // seed 派生：baseSeed + i*1000。基准只在批前读一次，之后每张自己写回 qSeed
+    const raw = parseInt(($("qSeed").value || "-1"), 10);
+    S.storyBaseSeed = (isNaN(raw) || raw < 0) ? Math.floor(Math.random()*2000000000) : raw;
+    /* 玩法阶梯按本批种子洗牌：同一批顺序固定（日志/回放可复现），换批就换一条顺序，
+       不至于每批都"足→手→乳→口"。走向仍是越来越贴近插入。 */
+    try{
+      const _playOrder = (PHASE_PLAN.find(p=>p.id==='play')||{}).order || null;
+      S.storyOrder = _playOrder ? storyShuffle(_playOrder, (S.storyBaseSeed||1)) : null;
+    }catch(e){ S.storyOrder = null; }
+  } else {
+    S.storyPlan = []; S.storyLock = null; S.sceneGarb = ''; S.storyRef = '';
+    S.curBlockKey = ''; S.sceneBeat = 0; S.curBlockCount = 0; S.curBlockAct = null; S.curBlockActs = []; S.curBlockPreset = null; S.presetUsed = []; S.curBlockPose = null; S.curBlockSub = null; S.curBlockNoClose = false; S.blockAng = null; S.quietUndress = false; S.maleAuto = ''; S.blockExprUsed = []; S.curBlockShot = null; S.curBlockShots = null; S.blockSubUsed = []; S.curMod = ''; S.curBlockFinale = false;
+    S.storyCarry = {cum:false, sex:false}; S.storyOutfit = []; S.storyUndressed = false; S.scenePhase = '';
+  }
   S.batch = true; S.pauseAsk = false;
+  // 丝袜：用户指定就整批照办；自动模式每批重新锁第一种抽到的袜子
+  try{ const _g = stripStaleTriggers(); if(_g) logline("batchStart", "清掉上次残留的包触发词 " + _g); }catch(e){}
+  S.sockPick = sockPickOf();
+  S.sockLock = '';   // 每批重新锁第一张抽到的袜子
+  S.bust = bustPickOf();
   $("btnBatch").disabled = true; $("btnPause").disabled = false;
   $("btnPause").textContent = "⏸ 暂停";
   let done = 0;
   S.poolUse = {};
   S.__exBatch = {};   // 每批重置表情额度（翻白眼/失神脸最多 2 张）
-  logline("batchStart", "tier="+S.tier+" n="+n+" chars="+(S.chars||[]).join("/")+" outfit="+(S.outfit||[]).join("/"));
-  toast("批量开始：档位 "+S.tier+" · "+n+" 张");
-  for(let i=0;i<n;i++){
+  S.lastShot = '';    // 景别节拍从第一批重新起算
+  S.storyRec = [];    // 本批回放记录（存 localStorage，可整批重放/对比）
+  logline("batchStart", "tier="+S.tier+" n="+n+" chars="+(S.chars||[]).join("/")+" outfit="+(S.outfit||[]).join("/")
+    + (S.sockPick ? " sock="+S.sockPick : "")
+    + (S.refOn && S.story ? " ref=on("+S.refGuid+")" : "")
+    + (S.story ? " story="+phases.join(">")+" mode="+(S.storyMode||'strict')+" baseSeed="+S.storyBaseSeed
+        + (S.storyOrder ? " ladder="+S.storyOrder.join(">") : "") : ""));
+  toast(S.story
+    ? "连续剧情开始："+n+" 张 · "+storyPhaseZh(phases[0])+"→"+storyPhaseZh(phases[phases.length-1])+" · baseSeed "+S.storyBaseSeed
+    : "批量开始：档位 "+S.tier+" · "+n+" 张");
+  let fatal = '';
+  try{
+  for(let i=0;i<n;i++){ S.__batchIdx = i;
     if(S.pauseAsk){ toast("已暂停：完成 "+done+" / "+n); break; }
+    const row = S.story ? (planRows[i] || null) : null;
+    /* 复合层：这一行挂的是催眠还是调教（没有就是空，整行走普通基础块） */
+    S.curMod = (row && row.mod) || ''; S.curBlockFinale = !!(row && row.finale);
+    /* 换场：地点/光照/机位重新抽，跨张残留清零（残留会把"出汗/体液"带进新场的准备段） */
+    if(row && (!S.storyLock || S.storyLock.scene !== row.scene)){
+      S.storyLock = { scene: row.scene };
+      S.storyCarry = {cum:false, sex:false};
+      S.storyUndressed = false;
+      S.lastShot = ''; S.lastAng = '';
+      logline("scene", "第 "+(row.scene+1)+" 场开始（第 "+(i+1)+" 张）");
+    }
+    const ph = row ? row.phase : '';
+    /* 区块制：一块锁一条动作，只换机位/表情（差分连排） */
+    let lockAct = null;
+    if(row && row.block){
+      const bkey = row.block + '@' + row.scene;
+      if(S.curBlockKey !== bkey){
+        S.curBlockKey = bkey;
+        const blk = BLOCK_BY_ID[row.block];
+        const cnt = planRows.filter(x=>x.block===row.block && x.scene===row.scene).length;
+        S.curBlockCount = cnt;
+        S.curBlockActs = pickBlockActs(blk, row.scene, cnt);
+        S.blockCamUsed = [];
+        S.curBlockNiche = false; S.curBlockShot = null; S.curBlockShots = null; S.blockSubUsed = []; S.curMod = ''; S.curBlockFinale = false;
+        /* 预设优先：他库里跑过验证的整条 prompt，比我们从 atoms 拼的准 */
+        S.curBlockPreset = (S.story && S.storySrc !== 'atoms') ? pickBlockPreset(blk, row.scene) : null;
+      // 锚本块第一张：换块就断开参考图链，块内差分再锚这张，块与块之间不串坏
+      if(S.story && S.refOn && S.refAnchor === 'block') S.storyRef = '';
+        if(S.curBlockPreset){
+          const pt = stripSceneTags(S.curBlockPreset.tags || []);
+          const ptLow = pt.map(x => String(x).toLowerCase().replace(/[\s-]+/g,'_'));
+          const ptNiche = ptLow.some(x => x.indexOf('tentacle') >= 0
+            || ['mind_control','hypnosis','hypnotized','obedience','empty_eyes','spiral_background'].indexOf(x) >= 0);
+          S.curBlockActs = [{a:{tags:pt.slice(), zh:S.curBlockPreset.zh || blk.zh, who:'', core:[]},
+                             p:'preset', add:(ptNiche ? [] : (blk.add || []).slice()), preset:true, niche:ptNiche}];
+          /* 触手/催眠预设是"整条戏"：不能被本块的体位锁、补动作规则当冲突剔掉 */
+          S.curBlockNiche = !!ptNiche;
+          if(ptNiche){ S.curBlockPose = []; S.curBlockSub = null; }
+        }
+        S.curBlockPose = (blk.pose || []).slice();
+        S.curBlockSub = (blk.sub || []).map(x => x.slice());
+        S.curBlockNoClose = !!blk.noClose;
+        S.blockExprUsed = [];   // 换块重置：表情差分必须三张不同
+        S.blockAng = null; S.blockAngKey = '';   // 机位每 3 张换一次，同 3 张里锁死
+        S.curBlockAct = S.curBlockActs[0] || null;
+        logline("block", "块 " + (row.blockZh||row.block) + " 开始（第 " + (i+1) + " 张）："
+          + cnt + " 张 / 机位锁定 / 体位 " + (S.curBlockPose.join('+') || '-')
+          + " / 动作 " + (S.curBlockAct && S.curBlockAct.a && S.curBlockAct.a.zh || '-'));
+      }
+      lockAct = S.curBlockActs[Math.min(row.beat||0, (S.curBlockActs||[]).length-1)] || S.curBlockAct;
+    }
+    if(S.story){
+      S.sceneGarb = (row && row.block && BLOCK_BY_ID[row.block]) ? BLOCK_BY_ID[row.block].garb : storyGarbOf(ph, S.tier);
+      S.sceneBeat = (row && typeof row.beat === 'number') ? row.beat : 0;
+      S.scenePhase = ph;
+      /* 男体按段自动：口/手/足/乳 只留一根，正戏/事后 用无脸男（有身体才看得出体位） */
+      S.maleAuto = (ph === 'foreplay' || ph === 'play') ? 'penis' : 'faceless';
+      /* 同一块里只有第一张在"脱"，其余静态半脱 */
+      S.quietUndress = !!(row && row.beat > 0);
+      $("qSeed").value = String(S.storyBaseSeed + i*1000);
+    }
     const useCompose = (S.compose !== false);
     let plan = {tag:"组合", expr:"T2"};
     let sc = null;
     if(useCompose){
-      sc = composeShot(i, n);
+      const beatIdx = row ? (row.beat || 0) : 0;
+      try{ sc = composeShot(i, n, ph, beatIdx, lockAct); }
+      catch(e){ sc = null; logline("batchErr", "composeShot 失败（第 "+(i+1)+" 张）："+(e && e.message ? e.message : e)); }
+      if(sc && sc.carry){
+        S.storyCarry = {cum: !!(S.storyCarry && S.storyCarry.cum) || !!sc.carry.cum,
+                        sex: !!(S.storyCarry && S.storyCarry.sex) || !!sc.carry.sex};
+      }
       if(sc){
         /* 顺序要紧：normTags 内部读 S.scenePool 决定 noActPool / yuriCtx，
            原来先 setTags 后写 scenePool，等于拿上一张的池规则洗这一张的词
            （批量第一张读空串 → 走随机注入，后面的张用前一张的 k 判断）。 */
         S.sceneKind = sc.kind || ''; S.sceneZh = sc.zh || ''; S.scenePool = sc.pool || '';
+        if(sc.garb) S.sceneGarb = sc.garb;
+        // 本批锁的那身衣服：脱到底之后不再补回来（否则事后段又"穿好了"，等于衣服长回去）
+        /* 全裸段不能再挂那身衣服：swimsuit/leotard 在 GARB_KEEP 里，
+     preflight 不会剔它们（泳装场景要用），结果正戏段同时出现
+     one-piece_swimsuit 和 completely_nude，模型二选一 —— 衣物锁白锁。 */
+        // 衣服不进这一层：用户手选的（S.outfit / S.userTags）本来就在下面这串里
         setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
+        if(S.story && S.sceneGarb === 'none') S.storyUndressed = true;
         S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
         cleanTags(); refreshNeg(true);
       } else {
-        // 抽空时清池，否则下一张会拿上一张的池规则去收束性别
+        // 抽空：清池 + 跳过本张（不清词就出图 = 把上一张的提示词再画一遍）
         S.sceneKind = ''; S.scenePool = '';
+        logline("batchSkip", "第 " + (i+1) + " 张抽取为空，跳过");
+        continue;
       }
     } else {
       const plans = stagesForTier();
@@ -1449,15 +1827,64 @@ async function batchRun(){
       setExpr(plan.expr);
       refreshNeg(true);
     }
-    $("stat").textContent = "批量 "+(i+1)+"/"+n+" · "+(sc?(sc.zh||sc.name_zh||sc.id):"无场景");
-    logline("batchShot", (i+1)+"/"+n+" "+(S.compose!==false?"compose":plan.tag)+" kind="+(S.sceneKind||"-")+" scene="+(sc?sc.id:"none")+" chars="+(S.chars||[]).join("/")+" pos="+S.tags.slice(0,8).join(","));
-    await generate();
-    done++;
+    $("stat").textContent = "批量 "+(i+1)+"/"+n
+      + (S.story ? " · "+storyPhaseZh(ph)+"·"+(GARB_ZH[S.sceneGarb]||"") : '')
+      + " · "+(sc?(sc.zh||sc.name_zh||sc.id):"无场景");
+    logline("batchShot", (i+1)+"/"+n+" "+(S.compose!==false?"compose":plan.tag)+" kind="+(S.sceneKind||"-")
+      + " scene="+(sc?sc.id:"none")
+      + (S.story ? " phase="+ph+" garb="+S.sceneGarb
+          + " place="+((S.storyLock&&S.storyLock.place&&S.storyLock.place.zh)||"-")
+          + " light="+((S.storyLock&&S.storyLock.light&&S.storyLock.light.zh)||"-")
+          + " piece="+((S.storyLock&&S.storyLock.ang&&S.storyLock.ang[ph]&&S.storyLock.ang[ph].zh)||"-")
+          + " seed="+$("qSeed").value
+          + " shot="+(shotZhFromTags(S.tags)||(sc&&sc.shotZh)||"-")
+          + (S.refOn && S.storyRef ? " ref←"+S.storyRef : "") : '')
+      + " chars="+(S.chars||[]).join("/")
+      + (S.sockPick ? " sock="+S.sockPick+(SOCK_ZH[S.sockPick]?("("+SOCK_ZH[S.sockPick]+")"):"") : (S.sockLock?" sock~"+S.sockLock:""))
+      + " pos="+S.tags.slice(0,8).join(","));
+    if(S.story){
+      S.storyRec.push({ i:i, phase:ph, garb:S.sceneGarb,
+        block:(row&&row.block)||'', blockZh:(row&&row.blockZh)||'', beat:(row&&row.beat)||0,
+        scene:(row&&row.scene)||0,
+        place:(S.storyLock&&S.storyLock.place&&S.storyLock.place.zh)||'', 
+        light:(S.storyLock&&S.storyLock.light&&S.storyLock.light.zh)||'',
+        piece:(S.storyLock&&S.storyLock.ang&&S.storyLock.ang[ph]&&S.storyLock.ang[ph].zh)||'',
+        shot:(shotZhFromTags(S.tags)||(sc&&sc.shotZh)||''), seed:$("qSeed").value, tags:S.tags.slice() });
+    }
+    try{ await generate(); done++; }
+    catch(e){
+      logline("batchErr", "出图失败（第 "+(i+1)+" 张）："+(e && e.message ? e.message : e));
+      toast("第 "+(i+1)+" 张失败："+((e && e.message) ? e.message : "未知错误")+"（继续下一张）");
+      S.busy = false;
+      try{ $("btnGen").disabled = false; $("btnGen").textContent = "▶ 生成"; }catch(_){}
+    }
     if(S.pauseAsk){ toast("已暂停：完成 "+done+" / "+n); break; }
   }
+  }catch(err){
+    fatal = (err && err.message) ? err.message : String(err);
+    logline("batchErr", "批处理中断：" + fatal);
+    toast("批处理中断：" + fatal);
+  }finally{
   S.batch = false;
+  // 收工清掉衣物强制项：留着的话下一次单张生成会被上一段戏的"全裸/半脱"绑住
+  S.sceneGarb = ''; S.scenePhase = '';
+  if(S.story && S.storyRec.length){
+    try{
+      const js = JSON.stringify({tier:S.tier, chars:S.chars||[], sock:(S.sockPick||S.sockLock||''),
+        baseSeed:S.storyBaseSeed, shots:S.storyRec});
+      localStorage.setItem('wb_story_last_v1', js);
+      logline("batchJson", "本批可回放 "+S.storyRec.length+" 张 → localStorage wb_story_last_v1（"+js.length+" 字符，控制台 wbStoryDump() 取 JSON）");
+    }catch(e){}
+  }
   $("btnBatch").disabled = false; $("btnPause").disabled = true;
-  if(!S.pauseAsk) toast("批量完成：" + done + " 张");
+  S.busy = false;
+  try{ if($("btnGen")){ $("btnGen").disabled = false; $("btnGen").textContent = "▶ 生成"; } }catch(_){}
+  if(!S.pauseAsk){
+    if(fatal) toast("批处理出错（已完成 "+done+"/"+n+"）："+fatal);
+    else toast(S.story ? "连续剧情完成：" + done + " 张（地点/光照未跳，衣物只减不增）"
+      : "批量完成：" + done + " 张");
+  }
+  }
 }
 
 
@@ -1481,7 +1908,8 @@ function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
    双女暧昧 → 只抽双人暧昧专属池
    双女 R18 → 女女为主，掺 3P（两女+无脸男）/ 机械 / 触手 / 事后 */
 function sceneType(){
-  try{ const el = $("qScene"); return (el && el.value) || 'auto'; }catch(e){ return 'auto'; }
+  try{ const el = $("qScene"); const v = el ? String(el.value || '') : ''; if(v) return v; }catch(e){}
+  return S.sceneType || 'auto';
 }
 // 池引用：duo_sfw 只存"男女特有"的条目，通用条目留在 duo_daily 里打 shared 标记，
 // 抽池时按需并进来 —— 避免 41 条数据写两份（改一处忘另一处的老坑）。
@@ -1503,7 +1931,817 @@ const PLAY_EXTRA = ['foreplay_sex','oral_sex','paizuri_sex','handjob_sex','footj
    乳交 3，足交/手交 2（异质玩法太多会喧宾夺主），事后 3；3P 类压到 1（会多一个人）。 */
 const POOL_W = {oral_sex:4, foreplay_sex:4, paizuri_sex:3, handjob_sex:2, footjob_sex:2,
   after:3, triple_daily:1, triple_flirt:1, triple_sex:1, group3p:1};
-function poolPlan(tier, nChar){
+/* ===== 连续剧情 story mode（2026-11-14）=====
+   一批图 = 一场戏的 N 个镜头。设计稿：docs/multi-turn-连续动作-方案.md §3（轻量版）
+   三条硬约束，缺一条"戏感"就散：
+     ① 阶段有序：setup→foreplay→play→sex→after，不回跳
+     ② 衣物只减不增：garb 是强制项（preflight 的 opt.forceGarb），不是建议 ——
+        不强制的话第 4 张抽到"穿好衣服"的动作，模型就把前 3 张脱掉的画回去
+     ③ 角色/地点/光照本批只抽一次（S.storyLock），后面每张只换动作不换景
+   数据零新增：全部复用现有池。完整版"序列池"（wb_sequences.json）先不做。 */
+const PHASE_PLAN = [
+  /* beat = 段内景别节拍（按"段内第几张"取，不随机）：十张全 full_body 像证件照，
+     景别有呼吸才有戏。beat 用完从头循环；和上一张撞了就顺延一格 */
+  {id:'setup',    zh:'准备', garb:'full',    share:2, pools:['duo_sfw','duo_daily'],
+   shot:['full_body','upper_body'], beat:['full_body','cowboy_shot','upper_body']},
+  {id:'foreplay', zh:'前戏', garb:'open',    share:2, pools:['foreplay_flirt','foreplay_sex'],
+   shot:['full_body','cowboy_shot'], beat:['cowboy_shot','full_body','upper_body']},
+  {id:'play',     zh:'玩法', garb:'partial', share:3,
+   pools:['oral_sex','paizuri_sex','handjob_sex','footjob_sex'],
+   order:['footjob_sex','handjob_sex','paizuri_sex','oral_sex'],
+   shot:['full_body','cowboy_shot'], beat:['cowboy_shot','upper_body','full_body']},
+  {id:'sex',      zh:'正戏', garb:'none',    share:2, pools:['duo_male'],
+   shot:['full_body','cowboy_shot'], beat:['full_body','cowboy_shot','upper_body']},
+  {id:'after',    zh:'事后', garb:'partial', share:1, pools:['after'],
+   shot:['full_body','cowboy_shot'], beat:['cowboy_shot','full_body','upper_body']}
+];
+/* 双女：没有"女女玩法"专属池，play/sex 都收敛到 yuri_sex（g:2,m:0）——
+   给两个女孩塞无脸男是硬伤，宁可玩法段少一点变化 */
+const PHASE_YURI = {setup:['yuri_daily','duo_daily'], foreplay:['yuri_flirt','duo_flirt'],
+  play:['yuri_sex'], sex:['yuri_sex'], after:['after']};
+/* 非 R18 档：露骨池整段不可用，降级到"同一阶段语义"的软池。
+   story 在健全/擦边档也成立，只是脱不到底（garb 同步封顶，见 GARB_CAP） */
+const PHASE_SOFT = {
+  sfw: {setup:['duo_sfw'], foreplay:['duo_sfw'], play:['duo_sfw'], sex:['duo_sfw'], after:['after']},
+  suggestive: {setup:['duo_sfw','duo_flirt'], foreplay:['foreplay_flirt'], play:['foreplay_flirt'],
+               sex:['duo_sfw'], after:['after']}
+};
+/* 档位封顶：擦边档不许全裸，全裸降成半脱；健全档连半脱都不给 */
+const GARB_CAP = {sfw:{full:'full', open:'open', partial:'open', none:'open'},
+  suggestive:{full:'full', open:'open', partial:'open', none:'partial'}};
+const GARB_ZH = {full:'穿好', open:'敞开', partial:'半脱', none:'全裸'};
+/* 丝袜家族：足交 / 长袜 / 过膝 都有一个"袜子是哪一种"的变量。
+   同一批图里黑丝→白丝→渔网来回换很跳（用户 2026-11-14 要求：类型由人指定），
+   所以这里给出全集，用来"整批统一成一种"。 */
+const SOCK_SET = new Set(['pantyhose','black_pantyhose','white_pantyhose','fishnet_pantyhose',
+  'pantyhose_pull','torn_pantyhose','thighhighs','black_thighhighs','white_thighhighs',
+  'fishnet_thighhighs','stockings','black_stockings','white_stockings','lace_stockings',
+  'sheer_stockings','fishnet','socks','black_socks','white_socks','ankle_socks',
+  'striped_socks','frilled_socks','kneehighs','leggings','garter_belt','garter_straps',
+
+  'lace_trimmed_legwear','legwear','leg_warmers','bandage_legwear']);
+/* 比对集合时要吃掉连字符/空格：标签里写成 lace-trimmed_legwear，直接比会漏 */
+const sockKey = K;   /* 别名：袜类曾用更宽的 [^a-z0-9]+，实测两种口径对本表无差 */
+const SOCK_ZH = {pantyhose:'连裤袜', black_pantyhose:'黑色连裤袜', white_pantyhose:'白色连裤袜',
+  fishnet_pantyhose:'渔网连裤袜', pantyhose_pull:'半脱连裤袜', torn_pantyhose:'破洞连裤袜',
+  thighhighs:'过膝袜', black_thighhighs:'黑色过膝袜', white_thighhighs:'白色过膝袜',
+  fishnet_thighhighs:'渔网过膝袜', stockings:'长袜', black_stockings:'黑色长袜',
+  white_stockings:'白色长袜', lace_stockings:'蕾丝长袜', sheer_stockings:'透明长袜',
+  lace_trimmed_legwear:'蕾丝饰边袜', legwear:'袜类', leg_warmers:'护腿', bandage_legwear:'缠带腿饰',
+  fishnet:'网袜', socks:'短袜', black_socks:'黑袜', white_socks:'白短袜',
+  ankle_socks:'脚踝袜', striped_socks:'条纹袜', frilled_socks:'蕾丝边袜',
+  kneehighs:'及膝袜', leggings:'紧身裤', garter_belt:'吊袜带', garter_straps:'吊袜夹'};
+/* 腿/脚相关动作：这类条目天生要袜子，用户指定了类型就该给它穿上，而不是"本来没袜子就不加" */
+const FOOT_ACT = ['footjob','toes','soles','foot_play','thigh_sex','legs_up','leg_lift','pantyhose','thighhighs'];
+function sockPickOf(){
+  try{ const el = $("qSock"); return el ? String(el.value || '') : ''; }catch(e){ return ''; }
+}
+/* 胸围（2026-11-14 YG）：贫乳角色一进乳交类动作，模型必给她"临时长胸" ——
+   词库里根本没有一个胸围词（查过：1529 条里 0 条），是 paizuri / breast_press 这类
+   语义本身在小模型上就是大胸先验。解法同衣服：体型由用户定，词只留一种。 */
+const BUST_W = ['flat_chest','small_breasts','medium_breasts','large_breasts','huge_breasts',
+  'gigantic_breasts','breast_expansion','breast_enlargement','oppai'];
+const BUST_TAG = {flat:'flat_chest', small:'small_breasts', medium:'medium_breasts', large:'large_breasts'};
+const BUST_ZH = {flat:'贫乳', small:'小胸', medium:'普通', large:'大胸'};
+const BUST_NEG = {flat:'large_breasts, huge_breasts, gigantic_breasts, breast_expansion, cleavage',
+                  small:'huge_breasts, gigantic_breasts, breast_expansion'};
+/* 贫乳不该出现的接触方式（不是禁动作，是这条动作在模型里必然画成大胸） */
+const FLAT_FORBID = ['paizuri','breast_press','breast_squeeze','breast_sucking','grabbing_breasts'];
+function bustPickOf(){
+  try{ const el = $("qBust"); return el ? String(el.value || '') : ''; }catch(e){ return ''; }
+}
+function storyPhaseIds(){ return PHASE_PLAN.map(p=>p.id); }
+function storyPhaseZh(phase){
+  const P = PHASE_PLAN.find(p=>p.id===phase);
+  return P ? P.zh : '';
+}
+/* 2026-11-14 YG 定规矩：**不许再自动给人挑衣服**。
+   实测 hakurei_reimu（巫女服烘进 LoRA）被自动塞了 hoodie → 出来"上半身巫女服、
+   下半身 JK 裙"，十张里衣服还在比基尼/水手服/内衣之间跳。
+   衣服只有两个来源：①角色卡自己烘的；②用户手选的（服饰面板 / 自己打字 / 指定丝袜）。
+   动作条目自带的具体衣物词由 preflight 的 ⑤g 剔掉。 */
+function storyGarbOf(phase, tier){
+  const P = PHASE_PLAN.find(p=>p.id===phase) || PHASE_PLAN[0];
+  const cap = GARB_CAP[tier];
+  return cap ? (cap[P.garb] || P.garb) : P.garb;
+}
+/* 玩法阶梯默认是固定的"足→手→乳→口"，如果每批都这条顺序，跑到第五批就开始腻。
+   用它按 baseSeed 洗一次牌：同一批内顺序固定（可复现），换批则换顺序，走向仍是"由远到近"。 */
+function storyShuffle(arr, seed){
+  const out = (arr||[]).slice();
+  let s = (seed >>> 0) || 1;
+  const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+  for(let i = out.length - 1; i > 0; i--){
+    const j = Math.floor(rnd() * (i + 1));
+    const t = out[i]; out[i] = out[j]; out[j] = t;
+  }
+  return out;
+}
+/* 场景类型（qScene）与五阶段的交叉表：锁了触手/机械/单人/调教…就只从这一族抽。
+   原来剧情模式的 phase 分支直接 return，把 qScene 整个跳过了 ——
+   用户选"触手"跑出来没有触手、还带男人，根因就在这。 */
+const FAMILY_AFTER_SEX = ['tentacle','machine','solo','exhibition','voyeur'];
+function familyPoolsOf(phase, tier, fam){
+  const A = (S.atoms && S.atoms.actions) || {};
+  const has = p => !!(A[p] && A[p].length);
+  const T = (tier === 'sfw') ? 'daily' : (tier === 'suggestive' ? 'flirt' : 'sex');
+  if(fam === 'duo'){
+    if(phase === 'after') return has('after') ? ['after'] : [];
+    const p = (phase === 'setup') ? 'duo_daily' : (phase === 'foreplay' ? 'duo_flirt' : 'duo_male');
+    return has(p) ? [p] : [];
+  }
+  if(phase === 'after' && FAMILY_AFTER_SEX.indexOf(fam) < 0 && has('after')) return ['after'];
+  const want = (phase === 'setup') ? 'daily' : (phase === 'foreplay' ? 'flirt' : 'sex');
+  const cands = [fam + '_' + want, fam + '_' + T, fam + '_sex', fam + '_flirt', fam + '_daily'];
+  for(const c of cands){ if(has(c)) return [c]; }
+  return [];
+}
+function storyPoolsOf(phase, tier, beatIdx){
+  const t = tier || S.tier;
+  const nCh = (S.chars||[]).length;
+  const fam = sceneType();
+  if(fam && fam !== 'auto'){
+    const fp = familyPoolsOf(phase, t, fam);
+    if(fp.length) return fp;
+  }
+  if(t !== 'r18'){
+    const m = PHASE_SOFT[t] || PHASE_SOFT.sfw;
+    const soft = m[phase] || ['duo_sfw'];
+    return nCh >= 2 ? (PHASE_YURI[phase] || ['yuri_daily']).slice() : soft.slice();
+  }
+  if(nCh >= 2) return (PHASE_YURI[phase] || ['yuri_sex']).slice();
+  const P = PHASE_PLAN.find(p=>p.id===phase) || PHASE_PLAN[0];
+  /* order = 段内动作阶梯（不是随机）：玩法段从"脚/手"一路走到"口"，再接正戏插入，
+     否则随机抽出来会是 足交→足交→乳交→手交，读起来像四条互不相干的短视频 */
+  if(P.order && P.order.length && beatIdx !== undefined && beatIdx !== null && S.storyMode !== 'loose'){
+    const ord = (S.storyOrder && S.storyOrder.length) ? S.storyOrder : P.order;
+    const k = Math.max(0, parseInt(beatIdx, 10) || 0) % ord.length;
+    return [ord[k]];
+  }
+  return P.pools.slice();
+}
+/* 一场 = 一段完整小戏（准备→前戏→玩法→正戏→事后），6–10 张。
+   n 越大场越多：50 张 → 5 场，190 张 → 19–21 场。
+   每场重抽地点/光照/机位、清掉残留状态 —— 否则 50 张全在同一间电梯里。 */
+/* ---- 区块制排片（2026-11-14 用户定案）：
+   一批图 = 若干"块"，一块 = 一个动作连排 N 张（只换机位/表情，动作词不动），
+   块与块之间按 前戏→口→乳→手→足→插入体位→事后 走。
+   用户原话："每个动作x张连在一起观感会好很多"；算力有限时优先插入体位，
+   前戏只在张数大（>=100）或体位填不满时按比例给。 ---- */
+/* 块末射精收尾：每个动作块的最后一张给"射了"的结算词，接下一个块。
+   频次依据 danbooru：cum_in_mouth 42086 / facial 63047 / cum_on_breasts 6 条池样本 /
+   cum_on_hands / cum_on_feet / creampie / cum_in_pussy 148634 / cum_in_ass 22017 /
+   cum_on_body 132361 / cum_overflow 42674 / cum 354215。
+   前戏是引子、事后本身即收尾，两张都不进这张表。 */
+const FINALE_W = {
+  oral:       ['cum_in_mouth', 'facial'],
+  paizuri:    ['cum_on_breasts'],
+  handjob:    ['cum_on_hands'],
+  footjob:    ['cum_on_feet'],
+  missionary: ['creampie', 'cum_in_pussy'],
+  doggy:      ['cum_in_pussy', 'cum_in_ass'],
+  ride:       ['creampie', 'cum_in_pussy'],
+  stand:      ['cum_on_body'],
+  side:       ['creampie', 'cum_in_pussy'],
+  threesome:  ['cum_on_body', 'facial'],
+  tentacle:   ['cum_overflow', 'cum'],
+  machine:    ['cum_on_body']
+};
+const BLOCK_DEFS = [
+  {id:'foreplay',  zh:'前戏',     phase:'foreplay', garb:'open',    w:6,
+   pools:['foreplay_flirt','foreplay_sex'], noKiss:true,
+   /* 前戏原来直接用池原型（45 条），机位换不出差别；压成 5 条固定组合后每张能靠机位区分 */
+   sub:[['kiss','french_kiss','standing'],
+        ['hug_from_behind','breast_grab','standing'],
+        ['breast_sucking','nipple_stimulation','sitting'],
+        ['hand_under_skirt','clothed_sex','kneeling'],
+        ['groin','trembling','standing','against_wall']]},
+  {id:'oral',      zh:'口交',     phase:'play',     garb:'partial', w:6, pools:['oral_sex'],
+   core:['fellatio','licking_penis','blowjob','deepthroat','cum_in_mouth'],
+   /* 子动作：舔 ↔ 含 交替（用户口径：喜欢舌头吐出来舔），每张都要阴茎在场 */
+   sub:[['licking_penis','tongue_out','penis','kneeling'],
+        ['fellatio','penis','sitting'],
+        ['licking_penis','saliva','tongue_out','penis','sitting'],
+        ['fellatio','looking_up','penis','kneeling']]},
+  {id:'paizuri',   zh:'乳交',     phase:'play',     garb:'partial', w:9,  pools:['paizuri_sex'],
+   core:['paizuri','breast_press','titjob'], add:['penis'],
+   sub:[['paizuri','breasts','penis','sitting'],
+        ['paizuri','breast_press','penis','kneeling'],
+        ['paizuri','licking_penis','penis','sitting'],
+        ['paizuri','nipples','penis','lying_on_side']]},
+  {id:'handjob',   zh:'手交',     phase:'play',     garb:'partial', w:9,  pools:['handjob_sex'],
+   core:['handjob'], add:['penis'],
+   sub:[['handjob','penis','sitting'], ['handjob','testicles','penis','kneeling'],
+        ['handjob','precum','penis','lying_on_side']]},
+  {id:'footjob',   zh:'足交',     phase:'play',     garb:'partial', w:8,  pools:['footjob_sex'],
+   core:['footjob','toes','soles'], add:['footjob','soles','penis'],
+   sub:[['footjob','soles','penis','sitting'], ['footjob','toes','penis','lying_on_back'],
+        ['footjob','soles','two-footed_footjob','penis','lying_on_side']]},
+  {id:'missionary',zh:'正面位',   phase:'sex',      garb:'none',    w:13,
+   pools:['duo_male','foreplay_sex','solo_sex'],
+   t:['missionary','mating_press','legs_up','on_back','spread_legs'],
+   core:['missionary','mating_press','sex','vaginal'],
+   add:['missionary','sex','vaginal'],
+   /* 块内动作差分：5 张 5 个变体，别整块一个动作（用户 2026-11-15）*/
+   sub:[['missionary','on_back','sex','vaginal'],
+        ['missionary','legs_up','sex','vaginal'],
+        ['missionary','legs_together','sex','vaginal'],
+        ['missionary','spread_legs','leg_lift','sex','vaginal'],
+        ['missionary','on_back','spread_legs','sex','vaginal']],
+   x:['cunnilingus','fellatio','licking_penis','paizuri','handjob','footjob','masturbation']},
+  {id:'doggy',     zh:'后入',     phase:'sex',      garb:'none',    w:13,
+   pools:['duo_male','solo_sex','triple_sex'],
+   t:['sex_from_behind','all_fours','doggy_style','doggystyle','on_stomach','bent_over','top_down_bottom_up'],
+   core:['sex_from_behind','doggystyle','doggy_style','sex','vaginal'],
+   add:['sex_from_behind','sex','vaginal','all_fours'],
+   sub:[['sex_from_behind','all_fours','sex','vaginal'],
+        ['sex_from_behind','bent_over','sex','vaginal'],
+        ['sex_from_behind','on_stomach','sex','vaginal'],
+        ['sex_from_behind','leg_lift','sex','vaginal'],
+        ['sex_from_behind','top_down_bottom_up','sex','vaginal']],
+   x:['cunnilingus','fellatio','licking_penis','paizuri','handjob','footjob','masturbation']},
+  {id:'ride',      zh:'骑乘',     phase:'sex',      garb:'none',    w:9,
+   pools:['yuri_sex','triple_sex','duo_male'],
+   t:['girl_on_top','straddling','cowgirl_position','reverse_cowgirl_position','mounting'],
+   core:['cowgirl_position','reverse_cowgirl_position','girl_on_top','straddling'],
+   add:['cowgirl_position','girl_on_top','sex','vaginal'],
+   sub:[['cowgirl_position','girl_on_top','sex','vaginal'],
+        ['girl_on_top','straddling','facing_away','sex','vaginal'],
+        ['squatting_cowgirl_position','girl_on_top','sex','vaginal'],
+        ['cowgirl_position','straddling','sex','vaginal'],
+        ['girl_on_top','leg_lift','sex','vaginal']],
+   x:['cunnilingus','fellatio','licking_penis','paizuri','handjob','footjob','masturbation']},
+  {id:'stand',     zh:'站立抱起', phase:'sex',      garb:'none',    w:9,
+   pools:['duo_male','exhibition_sex','solo_sex'],
+   t:['standing_sex','carrying','against_wall','leg_lift','legs_up'],
+   core:['standing_sex','carrying'],
+   add:['standing_sex','sex','vaginal','carrying'],
+   sub:[['standing_sex','carrying'],
+        ['standing_sex','carrying','legs_up'],
+        ['standing_sex','carrying','against_wall'],
+        ['standing_sex','carrying','leg_lift'],
+        ['standing_sex','carrying','legs_up','leg_lift']],
+   x:['cunnilingus','fellatio','licking_penis','paizuri','handjob','footjob','masturbation']},
+  /* ---- 四个"非人/支配"块：不写进块表就只能靠 nicheSlot 随机混进 doggy/ride，
+     用户 m04558 要求正式立块，190 张才有足够密度。---- */
+  /* 触手：这一整类在大词阈值下几乎全军覆没 ——
+       tentacles 62515（唯一的"可用"档） / stomach_bulge 17722 / tentacle_sex 15298 /
+       slime_(substance) 10524 / tentacle_in_mouth 2378
+       禁用 tentaclejob 0 / tentacles_under_clothes 2175（且会把衣服变成触手层）/
+            tentacle_hair 42572（把头发换掉，绝不能用于场景）
+       tentacle_sex 是这个词域里唯一表示"在插入"的实词，必须每次都在。 */
+  /* 侧入：danbooru on_side 128092，是"躺着"里唯一不靠 on_back 表达的插入体位 */
+  {id:'side', zh:'侧入', phase:'sex', garb:'none', w:9,
+   pools:['duo_male'],
+   t:['on_side','sex','vaginal','leg_lift','legs_together','spread_legs','legs_up'],
+   /* 词越少越稳：on_side + sex 已经定了体位，腿的细节只留一个 */
+   sub:[['on_side','sex','vaginal'],
+        ['on_side','sex','leg_lift'],
+        ['on_side','sex','legs_together'],
+        ['on_side','sex','spread_legs'],
+        ['on_side','sex','legs_up']],
+   add:['sex','vaginal']},
+  /* 3P = 一女 + 两男（mmf），男角色要用 2boys 不是 3boys（3boys 是三个男人）。
+     threesome 46049 / group_sex 85905 / 2boys / mmf_threesome 18999。
+     单角色模式也允许（同一个女角色 + 两个无脸男）。 */
+  {id:'threesome', zh:'3P', phase:'sex', garb:'none', w:6,
+   pools:['triple_sex','group3p'],
+   t:['threesome','group_sex','2boys','sex','vaginal','double_penetration'],
+   /* 三人构图最脆：动作只留 3 个词够表达，机位钉死一种（用户口径：3P 别换机位，
+      换来换去人物会叠成一团）。差分交给表情。 */
+   fixedAng:'from_side', noPreset:true,
+   sub:[['threesome','group_sex','2boys','sex'],
+        ['mmf_threesome','2boys','sex','vaginal'],
+        ['threesome','2boys','double_penetration']],
+   add:['threesome','sex','2boys']},
+  {id:'tentacle',  zh:'触手',     phase:'sex',      garb:'none',    w:6,
+   pools:['tentacle_sex'],
+   t:['tentacle_sex','tentacles','stomach_bulge','tentacle_in_mouth','slime_(substance)'],
+   core:['tentacle_sex','tentacles'],
+   add:['tentacle_sex','tentacles'],
+   sub:[['tentacle_sex','tentacles','all_fours'],
+        ['tentacle_sex','tentacles','on_back','stomach_bulge'],
+        ['tentacle_sex','tentacles','tentacle_in_mouth','sitting'],
+        ['tentacle_sex','tentacles','spread_legs','slime_(substance)'],
+        ['tentacle_sex','tentacles','on_back','stomach_bulge','slime_(substance)']],
+   x:['cunnilingus','fellatio','licking_penis','paizuri','handjob','footjob','masturbation']},
+  /* 机械：这个类根本没有"高频道具词"——
+       object_insertion 38708 / dildo 32966 / vibrator 33118 / sex_toy 77543 /
+       mechanical_arms 26108（但 wiki 明说它"替代人臂"，是人体改造标，会抢掉手部姿势）/
+       sex_machine 3527（唯一"机器性爱"实词，量小，但当块签名用够）/ dildo_riding 2668
+       禁用 machine_sex 0 / dildo_machine 0 / fucking_machine 0 / penetration_machine 不存在 /
+            mechanical_tentacles 474（太低）
+       结论：机械感只能靠"器具 + object_insertion"拼，不能指望 _machine 后缀。 */
+  {id:'machine',   zh:'机械',     phase:'sex',      garb:'none',    w:4,
+   pools:['machine_sex'],
+   t:['sex_machine','object_insertion','vibrator','dildo','sex_toy','dildo_riding','mechanical_arms'],
+   core:['sex_machine','object_insertion','vibrator'],
+   add:['sex_machine','object_insertion'],
+   sub:[['sex_machine','on_back'],
+        ['object_insertion','all_fours','vibrator'],
+        ['dildo_riding','sitting'],
+        ['sex_machine','vibrator','legs_up'],
+        ['mechanical_arms','on_back','object_insertion']],
+   x:['cunnilingus','fellatio','licking_penis','paizuri','handjob','footjob','masturbation']},
+  {id:'after',     zh:'事后',     phase:'after',    garb:'partial', w:6,  pools:['after']}
+];
+/* ================= 复合层（mod）=================
+   催眠 / 调教 不单独成块，而是"叠"在任意基础块上加气氛与装备：
+     催眠 × 口交 = 失神口交    催眠 × 后入 = 催眠插入
+     调教 × 后入 = 捆住手腕后入  调教 × 正面位 = 绑在床上
+   这样 12 个基础块 × 2 个层 × 机位 8 × 子动作 5，190 张才撑得住密度。
+
+   每个层的词分三类（这个分法来自实测：混在一起的词会互相打架）：
+     tone  身份词（至少进一个，缺了这层就白挂）
+     look  外观/装备词（进 1–2 个，不许堆）
+     deny  该层必须剔除的男体词（hypno_sex 池 52 条里 17 条自带 faceless_male，
+           bdsm_sex 59 条里 37 条自带 —— 不剔就整块变无脸男）
+   banPose 与该层物理冲突的姿势（绑住手腕还要"抱起"= 画不出来）
+================================================ */
+/* 块签名姿势：块名承诺的支撑面（stand=carrying / ride=cowgirl_position …）。
+   凡是"剔姿势"的规则都必须跳过它 —— 否则块名叫站立抱起、画面是被绑在墙上。
+   MOD_DEFS 的 banPose、NO_POSE、POSE_GRP 三处都走这张表。 */
+function blockSignedPose(bid){
+  const out = {};
+  const sg = (typeof BLOCK_SIG !== 'undefined' && BLOCK_SIG[String(bid || '')]) || [];
+  sg.forEach(w => { out[K(w)] = 1; });
+  (S.curBlockSub || []).forEach(one => (one || []).forEach(w => { out[K(w)] = 1; }));
+  return out;
+}
+
+const MOD_DEFS = [
+  /* 词频实测（danbooru 2026-11-15）：
+       可用 empty_eyes 52094 / ringed_eyes 42517 / blank_eyes 19573 / mind_control 15608 / hypnosis 10608
+       禁用 hypnotized 0 / trance 0 / brainwashed 0 / obedient 0 / swirl_eyes 0 / spiral_eyes 0
+            —— 六个最自然的英文催眠词一个都不存在，写进去只是白占 token
+       dazed 只有 460，已剔除
+     ringed_eyes 是"ぐるぐる目"同心圆瞳孔，交代库认的催眠眼；empty_eyes 是失神死鱼眼。
+     两个一起写会抢同一块面部区域，只用其中一个。 */
+  {id:'hypno', zh:'催眠', rate:0.06,
+   tone:['hypnosis','mind_control'],
+   look:['ringed_eyes','empty_eyes','blank_eyes'],
+   deny:['faceless_male','invisible_man','1boy','2boys','3boys','male','hetero','penis','disembodied_penis'],
+   banPose:[],
+   allow:['oral','paizuri','handjob','footjob','missionary','doggy','ride','stand','tentacle','machine']},
+  /* 词频实测：
+       可用 bound 115993 / bdsm 90970 / bondage 76784 / rope 73542 / restrained 73269 /
+            bound_wrists 31184 / blindfold 31191 / leash 40332 / shibari 25702 / bound_arms 23934
+       陷阱 collar 287725 —— 那是时装颈圈，不是束缚项圈，已剔除
+       陷阱 suspension 6160 —— 是"吊起来"的姿势不是催眠，且低频，只在 pose 里留
+       陷阱 restrained 语义是"无法自由活动"，含大量"被人按住"，当备选不当主力
+       禁用 blindfolded 0 / on_leash 0 / chains 0 / domination 0（废弃）/ presenting 0（废弃） */
+  {id:'bdsm', zh:'调教', rate:0.06,
+   tone:['bound_wrists','shibari','bound_arms','restrained'],
+   look:['blindfold','leash','gag','rope'],
+   deny:['invisible_man','disembodied_penis'],
+   banPose:['straddling','sitting_on_lap','carrying','legs_around_waist','girl_on_top',
+               'cowgirl_position','reverse_cowgirl_position','mounting','legs_up','mating_press'],
+   allow:['oral','paizuri','handjob','missionary','doggy','ride','stand','tentacle','machine']}
+];
+/* 块 ↔ 场景库 stage（他的库里 stage 0..5 = 前戏/暧昧/插入/激烈/高潮/事后） */
+const BLOCK_STAGE = {foreplay:1, oral:2, paizuri:2, handjob:2, footjob:2,
+                     missionary:2, doggy:2, ride:2, stand:2,
+                      tentacle:2, machine:2, after:5};
+/* 块的动作签名：预设里必须出现这些动词之一，才敢当这一块的动作 */
+const BLOCK_SIG = {
+  foreplay:  ['groping','kiss','hug','undressing','breast_sucking','dry_humping','straddling','sitting_on_lap','mutual_masturbation','cunnilingus'],
+  oral:      ['fellatio','licking_penis','blowjob','deepthroat','irrumatio'],
+  paizuri:   ['paizuri','breast_press','titjob'],
+  handjob:   ['handjob','fingering'],
+  footjob:   ['footjob','thigh_sex'],
+  missionary:['missionary','mating_press'],
+  doggy:     ['sex_from_behind','doggy_style','doggystyle','all_fours','bent_over'],
+  ride:      ['cowgirl_position','girl_on_top','reverse_cowgirl_position','squatting_cowgirl_position','straddling'],
+  stand:     ['standing_sex','carrying'],
+  /* 四个"非人/支配"块：没有签名时 pickBlockPreset 会从全库随便挑预设，
+     抽到普通正戏整条 prompt，块特征在源头就没了（实测调教块零约束词）*/
+  tentacle:  ['tentacle_sex','tentacles','stomach_bulge'],
+  machine:   ['sex_machine','object_insertion','vibrator','dildo_riding'],
+  hypno:     ['hypnosis','mind_control','hypnotized','trance','dazed','blank_eyes','empty_eyes'],
+  bdsm:      ['bound_wrists','bound_legs','blindfold','leash','suspension','restrained','forced_orgasm'],
+  after:     ['after_sex','afterglow','cum_overflow','cum_in_pussy']
+};
+const BLOCK_BY_ID = {};
+BLOCK_DEFS.forEach(b => { BLOCK_BY_ID[b.id] = b; });
+/* 差分口径（用户 2026-11-14）：同一块 N 张只换表情/景别/细节，
+   机位与体位必须一致，否则"一组差分"看起来就是 N 个不相干的镜头。
+   口交块不给特写：特写+口交是崩脸重灾区。 */
+const BLOCK_POSE = {
+  foreplay:  ['lying','on_back'],
+  oral:      ['kneeling'],
+  paizuri:   ['lying_on_back','on_back'],
+  handjob:   ['sitting'],
+  footjob:   ['sitting'],
+  missionary:['missionary','on_back','mating_press'],
+  doggy:     ['sex_from_behind','all_fours','doggystyle'],
+  ride:      ['cowgirl_position','girl_on_top','straddling'],
+  stand:     ['standing_sex','carrying'],
+  /* 四个"非人/支配"块：只锁约束类词，体位交给 sub 差分。
+     POZ 剔表里含 bound_wrists/restrained/suspension/leash/blindfold，
+     不在这里列出来就会被当"冲突体位"删掉（实测调教块抽到 bdsm_sex 却零约束词）。 */
+  tentacle:  ['tentacle_sex','tentacles'],
+  machine:   ['sex_machine','object_insertion','dildo_riding','vibrator','mechanical_arms'],
+  /* 催眠/调教已改为复合层（MOD_DEFS），不再有独立块，
+     但保留这两个 key 是为了让 presetPool 的 pose 兜底仍能认出这些词 */
+  hypno:     ['hypnosis','mind_control','ringed_eyes','empty_eyes'],
+  bdsm:      ['bound_wrists','bound_arms','shibari','blindfold','leash','gag'],
+  after:     ['sitting']
+};
+BLOCK_DEFS.forEach(b => {
+  b.pose = (BLOCK_POSE[b.id] || []).slice();
+  if(b.id === 'oral') b.noClose = true;
+});
+const KISS_W = ['kiss','french_kiss','kissing_neck','kiss_on_cheek','tongue_kiss'];
+
+/* 块内动作：一整个块只锁一条动作，只换机位/表情 —— 这就是"差分"。
+   同一块在不同场（换地点）里可以换一条，避免连续两场同一个动作。 */
+function pickBlockActs(b, scene, count){
+  if(!b) return [];
+  const pkB = K;
+  let cand = [];
+  /* 单角色不许碰女女/三人池：yuri_sex 的条目是 tribadism 这类"要求两个女人"的动作，
+     只给 1girl 时要么模型复制出第二个角色（m05074 #36 实测：两个古明地恋磨豆腐），
+     要么被"单人剔多人"删空动作、再被"无男池去男性词"带走 sex/vaginal，
+     最后一张图一个动作都不剩（#33 实测）。这一步在选题阶段就拦住，比事后补词干净。 */
+  const soloOnly = ((S.chars || []).length < 2);
+  const SOLO_BAN = /^yuri/;
+  (b.pools || []).forEach(p => {
+    if(soloOnly && SOLO_BAN.test(String(p))) return;
+    const arr = ((S.atoms && S.atoms.actions) || {})[p] || [];
+    arr.forEach(a => cand.push({a:a, p:p}));
+  });
+  if(!cand.length) return null;
+  if(b.t && b.t.length){
+    const hit = cand.filter(x => (x.a.tags||[]).some(t => b.t.indexOf(pkB(t)) >= 0));
+    if(hit.length) cand = hit;
+  }
+  if(b.noKiss){
+    const nk = cand.filter(x => !(x.a.tags||[]).some(t => KISS_W.indexOf(pkB(t)) >= 0));
+    if(nk.length) cand = nk;
+  }
+  /* 插入体位块必须"真的在插入"：只带姿势词的条目会在正戏段画成口交/舔 */
+  if(b.x && b.x.length){
+    const nx = cand.filter(x => !(x.a.tags||[]).some(t => b.x.indexOf(pkB(t)) >= 0));
+    if(nx.length) cand = nx;
+  }
+  if(b.need && b.need.length){
+    const nn = cand.filter(x => (x.a.tags||[]).some(t => b.need.indexOf(pkB(t)) >= 0));
+    if(nn.length) cand = nn;
+  }
+  /* core：这一块的定义性动词必须在条目里。只命中半个姿势（orgasm / 打屁股 / 坐腿上）的条目
+     会被挑出来，画面上就没有"在插入"这件事 —— 用户 2026-11-14 报的
+     "正面位是抱起坐姿后入""骑乘背对趴着"都是这条。 */
+  /* 单角色模式：剔除女女条目（骑乘/后入池里有 yuri_sex，抽到就是两个女生） */
+  if(!((S.chars||[]).length >= 2)){
+    const YURI_W = ['2girls','3girls','yuri','lesbian','female_focus'];
+    const ny = cand.filter(x => !(x.a.tags||[]).some(t => YURI_W.indexOf(pkB(t)) >= 0));
+    if(ny.length) cand = ny;
+  }
+  /* 贫乳：乳交块的 core 词会被 FLAT_FORBID 剔掉，抽出来也是空镜 */
+  if(S.bust === 'flat'){
+    const nf2 = cand.filter(x => !(x.a.tags||[]).some(t => FLAT_FORBID.indexOf(pkB(t)) >= 0));
+    if(nf2.length) cand = nf2;
+  }
+  if(b.core && b.core.length){
+    const nc = cand.filter(x => (x.a.tags||[]).some(t => b.core.indexOf(pkB(t)) >= 0));
+    if(nc.length) cand = nc;
+  }
+  try{
+    const seed = ((S.storyBaseSeed||1) + (scene||0)*7919 + b.id.length*131) >>> 0;
+    const arr = storyShuffle(cand, seed);
+    const n2 = Math.max(1, count|0);
+    const out = [];
+    for(let i2=0;i2<n2;i2++){
+      const one = arr[i2 % arr.length];
+      if(one) out.push({a:one.a, p:one.p, add:(b.add||[]).slice()});
+    }
+    return out;
+  }catch(e){
+    const one = cand[0];
+    return one ? [{a:one.a, p:one.p, add:(b.add||[]).slice()}] : [];
+  }
+}
+
+
+/* 用户的场景库（wb_scenes.json / anima，963 条）就是"现成提示词 + 现成调度"：
+   每条都带 stage(0..5) / cat / group 和一份跑过验证的 tags。剧情模式优先用它，
+   取代"从 atoms 拼一条"。同块 N 张共用同一条预设 —— 这就是差分。 */
+/* 预设自带的地点/光照/裸露词：地点光照交给本场锁定，裸露交给衣物链，都不许从预设带进来 */
+function sceneWordSets(){
+  const A0 = S.atoms || {};
+  const n0 = ((A0.places || []).length + (A0.lights || []).length);
+  /* 2026-11-15 修：以前只看"表已存在"就 return，boot 阶段 atoms 还没加载时
+     会缓存一个空表，之后再也不会重建 —— preset 自带的地点/光照因此从未被剥掉，
+     表现为"锁了卧室却出 beach/sunset"。现在按 atoms 实际条数校验，变了就重建。 */
+  if(S.__PT && S.__LT && S.__PT_n === n0 && n0 > 0) return;
+  const PK = K;
+  S.__PT = new Set(); S.__LT = new Set();
+  ((S.atoms && S.atoms.places) || []).forEach(p => (p.tags || []).forEach(t => S.__PT.add(PK(t))));
+  ((S.atoms && S.atoms.lights) || []).forEach(p => (p.tags || []).forEach(t => S.__LT.add(PK(t))));
+  (S.__PT).add('bed'); (S.__LT).add('candlelight');
+  /* 2026-11-15：预设自带的封闭空间词会把本场地点顶掉（森林里的"公共厕所/电梯/窗帘"） */
+  ['indoors','public_toilet','elevator','curtains','curtain','headboard','bathroom','toilet',
+   'locker_room','shower_room','kitchen','living_room','bedroom','classroom','office',
+   'alley','street','convenience_store','park','forest','shrine','rooftop'].forEach(t => S.__PT.add(t));
+  S.__PT_n = n0;
+}
+function stripSceneTags(tags){
+  sceneWordSets();
+  const PK = K;
+  const DROP = ['nude','naked','topless','bottomless','completely_nude','partially_clothed','open_clothes',
+                'clothed','uncensored','1girl','solo','vanilla','1boy','hetero','faceless_male','invisible_man',
+                'large_breasts','huge_breasts','gigantic_breasts','medium_breasts','small_breasts','flat_chest',
+                'back','from_behind','from_side','from_above','from_below','pov','dutch_angle',
+                'full_body','cowboy_shot','upper_body','close-up','wide_shot'];
+  return (tags || []).filter(t => {
+    const k = PK(t);
+    if(S.__PT.has(k) || S.__LT.has(k)) return false;
+    if(DROP.indexOf(k) >= 0) return false;
+    return true;
+  });
+}
+function nicheSlot(b, scene){
+  const okBlocks = ['foreplay','doggy','ride','after'];
+  if(okBlocks.indexOf(b.id) < 0) return false;
+  /* 2026-11-15：5 块才 1 个 → 50 张里经常一个都碰不到。改 3 块 1 个，190 张能出 3–4 块 */
+  return ((((scene || 0) * 7) + (BLOCK_DEFS.indexOf(b) + 1)) % 3) === 2;
+}
+function presetPool(b, scene){
+  const all = ((S.lib && S.lib.scenes && S.lib.scenes.anima) || []);
+  if(!all.length) return [];
+  if((typeof sceneType === 'function' ? sceneType() : 'auto') === 'auto' && nicheSlot(b, scene)){
+    /* 催眠已改为复合层（MOD_DEFS），这里只留触手 —— 否则没挂 mod 的块也会自带 hypnosis */
+    const nz = all.filter(e => /\u89e6\u624b/.test(String(e.cat || '')));
+    if(nz.length) return nz;
+  }
+  const pkB = K;
+  const sig = BLOCK_SIG[b.id] || [];
+  const st = BLOCK_STAGE[b.id];
+  const nChar = (S.chars || []).length;
+  const MULTI = ['2girls','3girls','1boy','2boys','3boys','yuri','lesbian','tribadism','futanari',
+                 'spitroast','mmf_threesome','ffm_threesome','group_sex','threesome','multiple_girls'];
+  /* 催眠/调教已改为复合层：它们的词只能来自 MOD_DEFS。
+     留在 NICHE 里会让每一块的预设池都混进催眠/调教预设 —— 实测乳交都出现过 bound_wrists。
+     这里只保留两个独立块（触手/机械）的族词。 */
+  const NICHE = ['tentacles','tentacle_sex','stomach_bulge','sex_machine','object_insertion'];
+  const arr = all.filter(e => {
+    const t = (e.tags || []).map(pkB);
+    const nicheTag = t.some(x => NICHE.indexOf(x) >= 0) || /\u89e6\u624b/.test(String(e.cat || ''));
+    const catHit = b.zh && String(e.cat || '').indexOf(b.zh) >= 0;
+    if (!nicheTag && !catHit && !t.some(x => sig.indexOf(x) >= 0)) return false;
+    /* 插入类：光是"从背后"不够，必须有 sex / vaginal，否则底模画成素股 */
+    if (['missionary','doggy','ride','stand','bdsm','hypno','machine','tentacle'].indexOf(b.id) >= 0
+        && !t.some(x => ['sex','vaginal','penetration','deep_penetration','sex_from_behind',
+                         'cowgirl_position','reverse_cowgirl_position','missionary','mating_press',
+                         'standing_sex','all_fours'].indexOf(x) >= 0)) return false;
+    /* 手交只认 handjob（fingering/自摸是另一回事） */
+    if (b.id === 'handjob' && !t.some(x => x === 'handjob')) return false;
+    /* 调教只认约束词：库里没有捆绑类预设时宁可回落 atoms 池（bdsm_sex 里真有
+       bound_wrists/leash/suspension），也别被 nicheSlot/catHit 放行到机械或催眠预设
+       —— 实测调教块 4 张全变成"机械·戴上装置"，与块名不符。 */
+    if (b.id === 'bdsm') {
+      const BOND = ['bound_wrists','bound_arms','bound_ankles','armbinder','ring_gag','ball_gag','gag',
+        'leash','leash_pull','shibari','hogtie','frogtie','suspension','blindfold','collar',
+        'bondage','cross','cage','wooden_horse','crotch_rope','nipple_clamps','wax_play','candle_wax'];
+      if (!t.some(x => BOND.indexOf(x) >= 0)) return false;
+      /* 机械/催眠预设别混进调教块（a112「机械·性爱机器」带 bound_legs+restrained，乱入过） */
+      if (t.some(x => x.indexOf('machine') >= 0 || x.indexOf('mechanical') >= 0
+        || ['spiral_background','hypnosis','mind_control','dildo','lactation'].indexOf(x) >= 0)) return false;
+    }
+    /* 机械只认真机器：震动棒道具（vibrator/holding_sex_toy）不算机械块 */
+    if (b.id === 'machine' && !t.some(x => ['sex_machine','object_insertion','mechanical_arms',
+        'dildo_riding','vibrator'].indexOf(x) >= 0)) return false;
+    if (b.id === 'oral' && !t.some(x => ['fellatio','licking_penis','blowjob'].indexOf(x) >= 0)) return false;
+    const grp = String(e.group || '').toLowerCase();
+    if (S.tier === 'r18' && (grp === 'sfw' || grp === 'near')) return false;
+    if (nChar < 2 && t.some(x => MULTI.indexOf(x) >= 0)) return false;
+    /* ---- 复合层准入（P7-H）----
+       场景库里的预设是"整场打包"的：`#sc_ccc_paizuri 乳交` 自带 hypnosis、
+       `#a105 催眠·被摆成任何姿势` 自带 mind_control、`#sc_ccc_coerce_wall` 自带 restrained。
+       不在这里拦，没挂 mod 的块也会整场变催眠/调教，复合层就白做了。
+       只拦"层身份词"，不动 blank_eyes / tears 这类纯表情。 */
+    const LAYER_W = ['hypnosis','mind_control','hypnotized','ringed_eyes',
+                     'bound_wrists','bound_arms','bound_legs','shibari','restrained',
+                     'blindfold','leash','gag','bondage','bdsm','rope_marks'];
+    const hasLayer = t.some(x => LAYER_W.indexOf(x) >= 0);
+    if (!S.curMod && hasLayer) return false;
+
+    const fam = (typeof sceneType === 'function') ? sceneType() : 'auto';
+    const cat = String(e.cat || '');
+    /* 调教/催眠是复合层，不算"小众族"——它们不该让一个块被迫走 niche 路径 */
+    const isNiche = t.some(x => NICHE.indexOf(x) >= 0) || /触手/.test(cat);
+    /* 单人：女同/扶她 一律不要（女女条目在单人卡上会被画成两个女的或人妖） */
+    if (nChar < 2 && /女同|扶她/.test(cat)) return false;
+    if (fam && fam !== 'auto') {
+      if (fam === 'tentacle' && !t.some(x => x.indexOf('tentacle') >= 0)) return false;
+      if (fam === 'hypno' && !t.some(x => ['mind_control','hypnosis','hypnotized','obedience','empty_eyes'].indexOf(x) >= 0)) return false;
+    } else if (isNiche && ['handjob','footjob','paizuri','oral','missionary'].indexOf(b.id) >= 0) {
+      return false;   /* 互动类块不吃小众族（足交/手交要真的人） */
+    } else if (isNiche && ((((scene || 0) * 7) + (BLOCK_DEFS.indexOf(b) + 1)) % 5) !== 4) {
+      return false;
+    }
+    return true;
+  });
+  const near = arr.filter(e => Number(e.stage === undefined ? 2 : e.stage) === st);
+  const soft = arr.filter(e => Math.abs(Number(e.stage === undefined ? 2 : e.stage) - st) <= 1);
+  return near.length ? near : (soft.length ? soft : arr);
+}
+function pickBlockPreset(b, scene){
+  /* 有的块不适合用整条预设（调教/束缚：库里带束缚的预设主体都是机械或口交），
+     直接走 atoms 池更准 —— 见 P6-K */
+  if(b && b.noPreset) return null;
+  /* 复合层：挂催眠/调教的块不走"整场打包"的预设（预设自带层词，会盖掉行的粒度） */
+  if(b && b.hasMod) return null;
+  const pool = presetPool(b, scene);
+  if(!pool.length) return null;
+  const used = S.presetUsed || (S.presetUsed = []);
+  const left = pool.filter(e => used.indexOf(e.id) < 0);
+  const pickFrom = left.length ? left : pool;
+  const seed = ((S.storyBaseSeed || 1) + (scene || 0) * 7919 + b.id.length * 131) >>> 0;
+  const one = storyShuffle(pickFrom, seed)[0];
+  if(one && one.id !== undefined) used.push(one.id);
+  return one || null;
+}
+
+/* 区块排片：返回 n 行 {block, blockZh, phase, beat, scene} */
+function blockPlanOf(n){
+  /* hasMod 是排片期标记，不能跨调用残留（否则同 seed 两次结构不同） */
+  (BLOCK_DEFS || []).forEach(b => { b.hasMod = false; });
+  const defs = BLOCK_DEFS.slice();
+  /* 分区=无人形（solo/machine/tentacle/yuri/voyeur）时不排 3P：
+     这几个分区的整条 preflight 都在剔男体词，3P 块压进去的 2boys/threesome 会被清掉，
+     结果是一张裸体空镜（190 张抽卡 #154-#159 实测）。 */
+  const _femFam = /^(solo|machine|tentacle|yuri|voyeur)$/.test(String(S.sceneType || ''));
+  const w = defs.map(b => {
+    let x = b.w;
+    /* 前戏少给：小批量（<100 张）压到一半，省下来的额度全给插入体位 */
+    if(b.id === 'foreplay' && n < 100) x = Math.max(2, Math.round(b.w * 0.5));
+    if(_femFam && b.id === 'threesome') x = 0;
+    return x;
+  });
+  const tot = w.reduce((a,b)=>a+b, 0) || 1;
+  const exact = w.map(x => x / tot * n);
+  let cnt = exact.map(x => Math.floor(x));
+  let sum = cnt.reduce((a,b)=>a+b, 0);
+  const ord = exact.map((x,i) => ({i:i, frac:x - Math.floor(x)})).sort((a,b)=> b.frac - a.frac);
+  let k = 0;
+  while(sum < n){ cnt[ord[k % ord.length].i]++; sum++; k++; }
+  /* 削配额：从最大的块开始削，但收尾块（after）永远留 1 张 ——
+     否则 n<=9 按 defs 顺序截断，整批停在高潮帧、没有事后段。 */
+  const AFTER_I = defs.findIndex(b => b.id === 'after');
+  while(sum > n){
+    let bi = -1, bv = 1;
+    cnt.forEach((c,i) => { if(i !== AFTER_I && c > bv && (bi < 0 || c > bv)){ bi = i; bv = c; } });
+    if(bi < 0) break;
+    cnt[bi]--; sum--;
+  }
+  /* 还超（张数少于块数）：先砍前戏，再砍边缘玩法，插入体位留到最后 */
+  if(sum > n){
+    const dropOrder = ['foreplay','footjob','handjob','ride','stand','oral','paizuri','doggy','missionary'];
+    for(const id0 of dropOrder){
+      if(sum <= n) break;
+      const ii = defs.findIndex(b => b.id === id0);
+      if(ii >= 0 && cnt[ii] > 0){ sum -= cnt[ii]; cnt[ii] = 0; }
+    }
+  }
+  /* 场：一条"场"= 一个地点里连续几块戏。场界永远对齐块边界（切在块中间 = 同一动作中途换房间）；
+     每场目标 25 张左右，按块整块装，装不下就开新场 —— 所以场不会把同一块劈开，也不会一场里塞 40 张。 */
+  const span = Math.max(6, Math.ceil(n / Math.max(1, Math.ceil(n / 25))));
+  const rows = [];
+  let scene = 0, inScene = 0;
+  defs.forEach((b,i) => {
+    const c = cnt[i];
+    if(!c) return;
+    if(inScene > 0 && inScene + c > span){ scene++; inScene = 0; }
+    for(let j = 0; j < c; j++){
+      /* 块末射精收尾：每块最后一张给结算词，然后接下一块（前戏/事后不标） */
+      const isFinale = (c >= 1 && j === c - 1 && FINALE_W[b.id] && b.phase !== 'foreplay' && b.phase !== 'after');
+      rows.push({block:b.id, blockZh:b.zh, phase:b.phase, beat:j, scene:scene, finale:isFinale});
+    }
+    inScene += c;
+  });
+  /* 收尾小场（<6 张）并进上一场：190 张最后剩 3 张单独开一间房，观感上很碎 */
+  for(let guard = 0; guard < 12 && scene > 0; guard++){
+    const lastN = rows.filter(r => r.scene === scene).length;
+    if(lastN >= 6) break;
+    rows.forEach(r => { if(r.scene === scene) r.scene = scene - 1; });
+    scene--;
+  }
+  /* ---- 复合层排片：把催眠/调教按比例挂到已有的 play/sex 行上 ----
+     一条行最多挂一层（催眠×调教 同时上是另一件事，词会打架）；
+     同一个 base 块尽量只挂一次，否则整块全是调教，翻图又腻了。 */
+  (function assignMods(){
+    const cand = rows.filter(r => r.phase === 'play' || r.phase === 'sex');
+    if(!cand.length) return;
+    /* 确定性伪随机：同 baseSeed + 同 n → 分配一致（回放/金标才测得出来），换 seed 才变 */
+    let _rs = ((((S.storyBaseSeed || 1) >>> 0) * 2654435761) + (n * 40503)) >>> 0 || 1;
+    const rnd = () => { _rs = ((_rs * 1664525) + 1013904223) >>> 0; return _rs / 4294967296; };
+    const taken = [];
+    MOD_DEFS.forEach(m => {
+      const want = Math.max(1, Math.round(n * (m.rate || 0.06)));
+      let got = 0, guard = 0;
+      const seen = {};
+      while(got < want && guard++ < cand.length * 4){
+        /* 先挑"这个块还没挂过本层"的行；都挑过了才放宽 */
+        let pick = null;
+        const fresh = cand.filter(r => taken.indexOf(r) < 0 && m.allow.indexOf(r.block) >= 0 && !seen[r.block]);
+        if(fresh.length){
+          pick = fresh[Math.floor(rnd() * fresh.length)];
+          seen[pick.block] = 1;
+        } else {
+          const rest = cand.filter(r => taken.indexOf(r) < 0 && m.allow.indexOf(r.block) >= 0);
+          if(!rest.length) break;
+          pick = rest[Math.floor(rnd() * rest.length)];
+        }
+        pick.mod = m.id;
+        taken.push(pick);
+        got++;
+        /* 同块只要挂过一次，这块就不许用场景预设（见 pickBlockPreset） */
+        const bp = BLOCK_DEFS.filter(x => x.id === pick.block)[0];
+        if(bp) bp.hasMod = true;
+      }
+    });
+  })();
+  return rows;
+}
+
+/* 一场戏的段位配比：小场次查表（形状可控），大场次按份额 + 最大余数分配。
+   旧算法把"补足"全塞进份额最大的段 → 9 张里 5 张玩法、只有 1 张准备。 */
+const PHASE_SHAPE = {
+  1:[3], 2:[1,3], 3:[0,2,4], 4:[0,1,3,4], 5:[0,1,2,3,4],
+  6:[0,1,1,2,3,4], 7:[0,1,1,2,2,3,4], 8:[0,0,1,1,2,2,3,4],
+  9:[0,0,1,1,2,2,2,3,4], 10:[0,0,1,1,2,2,2,3,3,4],
+  11:[0,0,1,1,2,2,2,2,3,3,4], 12:[0,0,1,1,1,2,2,2,3,3,3,4]
+};
+function storyPhases(n){
+  const ids = storyPhaseIds();
+  const total = Math.max(1, Math.min(60, n|0));
+  if(PHASE_SHAPE[total]) return PHASE_SHAPE[total].map(i=>ids[i]);
+  const w = PHASE_PLAN.map(p=>p.share);
+  const sum = w.reduce((x,y)=>x+y, 0);
+  const exact = w.map(x=>total*x/sum);
+  const cnt = exact.map(x=>Math.max(1, Math.floor(x)));
+  let left = total - cnt.reduce((x,y)=>x+y, 0);
+  const order = exact.map((x,i)=>({ i, frac: x - Math.floor(x) })).sort((a,b)=>b.frac - a.frac);
+  let k = 0;
+  while(left > 0 && order.length){ cnt[order[k % order.length].i]++; left--; k++; }
+  while(left < 0){
+    let mi = -1;
+    for(let i=0;i<cnt.length;i++) if(cnt[i] > 1 && (mi < 0 || cnt[i] > cnt[mi])) mi = i;
+    if(mi < 0) break;
+    cnt[mi]--; left++;
+  }
+  const out = [];
+  cnt.forEach((c,i)=>{ for(let j=0;j<c;j++) out.push(ids[i]); });
+  return out;
+}
+
+const PLACE_GRP = [
+  ['bed','bedroom','on_bed','pillow','blanket','bedsheet'],
+  ['bathtub','bathroom','shower','showering','bath'],
+  ['car_interior','car','vehicle_interior'],
+  ['train_interior','train'],
+  ['kitchen','counter','dining_table'],
+  ['office','desk','office_chair'],
+  ['classroom','school_desk','blackboard'],
+  ['pool','poolside','swimming_pool'],
+  ['onsen','hot_spring','steam'],
+  ['mirror','bathroom_mirror'],
+  ['cafe','restaurant','table'],
+  ['shrine','torii','hallway'],
+  ['stairwell','stairs','staircase'],
+  ['couch','sofa','living_room'],
+  ['locker','changing_room','locker_room'],
+  ['forest','field','grass','outdoors'],
+  ['beach','ocean','sea'],
+  /* 露天/走廊一线：锁在阳台、天台、街上时，动作自带的 on_bed / bathtub 必须算串味。
+     没这两组，balcony 这类地点算出 group=-1，过滤直接跳过（实测"阳台的床上"） */
+  ['balcony','rooftop','street','park','window','windowsill','veranda','porch'],
+  ['alley','convenience_store','cityscape','sidewalk','crosswalk','bus_stop','shopping_street',
+   'road','bridge','parking_lot','vending_machine','storefront'],
+  ['library','bookshelf','reading_room']
+];
+function placeGroupOf(tags){
+  const L = [];
+  for(const x of (tags||[])){
+    const t = String(x).toLowerCase();
+    L.push(t);
+    /* 动作条目爱写介词短语：on_desk / in_bathtub / at_window。
+       原样比对匹配不到组，锁定地点就会被 on_desk 这种词串味，所以去掉介词前缀再比一次 */
+    const m = t.match(/^(on|in|at|under|from|against)_(.+)$/);
+    if(m) L.push(m[2]);
+  }
+  for(let i=0;i<PLACE_GRP.length;i++){
+    if(PLACE_GRP[i].some(t=>L.indexOf(t)>=0)) return i;
+  }
+  return -1;
+}
+function poolPlan(tier, nChar, phase, beatIdx){
+  // 连续剧情的阶段优先级最高：这一张该演什么阶段，池就锁死在该阶段的池里
+  if(phase){
+    const pools = storyPoolsOf(phase, tier, beatIdx);
+    if(pools.length) return {main:pools, extra:[]};
+  }
   // 锁定了场景类型就只从该类池抽（用户 2026-11-09 决定：类型交给下拉手动选）
   const sc = sceneType();
   const T = tier === 'sfw' ? 'daily' : (tier === 'suggestive' ? 'flirt' : 'sex');
@@ -1539,8 +2777,8 @@ function poolPlan(tier, nChar){
   if(!two){
     if(tier === 'sfw') return {main:['solo_daily'], extra:[]};
     if(tier === 'suggestive') return {main:['solo_flirt'], extra:['duo_daily','tentacle_flirt']};
-    // 单人 + R18：默认给"她 + 无脸男"（duo_male 42 条全是男女互动），
-    // 自慰（solo_sex 55 条）降到辅池。2026-11-14 用户原话："单人里的双人行为
+    // 单人 + R18：默认给"她 + 无脸男"（duo_male 50 条全是男女互动），
+    // 自慰（solo_sex 60 条）降到辅池。2026-11-14 用户原话："单人里的双人行为
     // 拆出来变成双人池固定是男女互动" —— 之前 main 是 solo_sex，单人跑 R18
     // 五分之四都是自我演出，看着就像"批量丢了一个人"。
     // 要纯自慰：场景类型下拉选「单人/自我」，走上面 sc==='solo' 分支。
@@ -1551,22 +2789,101 @@ function poolPlan(tier, nChar){
   if(tier === 'suggestive') return {main:['yuri_flirt'], extra:[]};
   return {main:['yuri_sex'], extra:['triple_sex','group3p','machine_sex','tentacle_sex']};
 }
-const SOFT_HOT = ['undressing','clothes_removed','panty_pull','panties_around_one_leg','panties_aside',
-  'skirt_lift','shirt_lift','clothes_lift','bra_lift','dress_lift','clothes_pull','open_clothes',
-  'wardrobe_malfunction','breast_slip','bra_slip','strap_slip','hand_under_skirt','hand_under_shirt',
-  'clothes_in_mouth','skirt_pull','shirt_pull','cleavage','underboob','sideboob','downblouse',
-  'against_wall','straddling','sitting_on_lap','grinding','dry_humping','wet_clothes','wet_shirt',
-  'arched_back','bent_over','lingerie','thighhighs','swimsuit','bikini','kiss','french_kiss',
-  'hug_from_behind','grabbing_own_breast','nipple_pull','breast_sucking','nipple_stimulation',
-  'spread_legs','legs_up','leg_lift','bare_back','midriff','bare_legs','bare_shoulders','bra',
-  'panties','underwear','garter_belt','leash','collar','breasts_out','nipple_slip','presenting',
-  'all_the_way_through','sitting_on_face','girl_on_top','exhibitionism','flashing','public_nudity',
-  'skirt_flip','panty_pull','leg_lock','crotch','cameltoe','lactation','breast_milk'];
+/* 半脱族的严格版：不含 open_clothes（敞开属于上一级，单独判）。
+   HALF_W = HALF_STRICT + open_clothes；UNDRESS 就是 SOFT_HOT 的前 21 项。 */
+const HALF_STRICT = ['undressing','clothes_lift','clothes_pull','skirt_lift','shirt_lift',
+  'dress_lift','bra_lift','panty_pull','panties_aside','panties_around_one_leg',
+  'clothes_in_mouth','skirt_pull','shirt_pull','hand_under_skirt','hand_under_shirt'];
+const SOFT_HOT = [
+  'undressing',
+  'clothes_removed',
+  'panty_pull',
+  'panties_around_one_leg',
+  'panties_aside',
+  'skirt_lift',
+  'shirt_lift',
+  'clothes_lift',
+  'bra_lift',
+  'dress_lift',
+  'clothes_pull',
+  'open_clothes',
+  'wardrobe_malfunction',
+  'breast_slip',
+  'bra_slip',
+  'strap_slip',
+  'hand_under_skirt',
+  'hand_under_shirt',
+  'clothes_in_mouth',
+  'skirt_pull',
+  'shirt_pull',
+  'cleavage',
+  'underboob',
+  'sideboob',
+  'downblouse',
+  'against_wall',
+  'straddling',
+  'sitting_on_lap',
+  'grinding',
+  'dry_humping',
+  'wet_clothes',
+  'wet_shirt',
+  'arched_back',
+  'bent_over',
+  'lingerie',
+  'thighhighs',
+  'swimsuit',
+  'bikini',
+  'kiss',
+  'french_kiss',
+  'hug_from_behind',
+  'grabbing_own_breast',
+  'nipple_pull',
+  'breast_sucking',
+  'nipple_stimulation',
+  'spread_legs',
+  'legs_up',
+  'leg_lift',
+  'bare_back',
+  'midriff',
+  'bare_legs',
+  'bare_shoulders',
+  'bra',
+  'panties',
+  'underwear',
+  'garter_belt',
+  'leash',
+  'collar',
+  'breasts_out',
+  'nipple_slip',
+  'presenting',
+  'all_the_way_through',
+  'sitting_on_face',
+  'girl_on_top',
+  'exhibitionism',
+  'flashing',
+  'public_nudity',
+  'skirt_flip',
+  'leg_lock',
+  'crotch',
+  'cameltoe',
+  'lactation',
+  'breast_milk',
+];
 
-function composeShot(step, total){
+function composeShot(step, total, phase, beatIdx, lockAct){
   if(!S.atoms || !S.atoms.actions) return null;
   const A = S.atoms.actions || {};
   const nChar0 = (S.chars||[]).length;
+  /* 连续剧情：phase 来自 storyPhases(n)。锁定对象 S.storyLock 在第一批第一张建立，
+     之后 place/light/weather 一律复用 —— 地点一跳，10 张就不是一场戏了。
+     机位按阶段各抽一次（PHASE_PLAN[x].shot），段内保持稳定。 */
+  const ph = phase || '';
+  /* 复合层（催眠/调教）：只加气氛与装备，动作/机位/景别仍由基础块决定 */
+  const MOD = (ph && S.curMod) ? (MOD_DEFS.filter(x => x.id === S.curMod)[0] || null) : null;
+  const PP = ph ? (PHASE_PLAN.find(x=>x.id===ph) || null) : null;
+  const LK = ph ? (S.storyLock || (S.storyLock = {})) : null;
+  // 段内第几张（0 起）：景别节拍按它取，保证同段十张不会一个景别到底
+  const beatIdx2 = Math.max(0, parseInt(beatIdx === undefined || beatIdx === null ? 0 : beatIdx, 10) || 0);
   const key = a => a.zh;
   let used = usedActs();
   // 核心动作词被档位剔光 = 这条动作在这个档位等于没有 → 换下一条，
@@ -1576,7 +2893,18 @@ function composeShot(step, total){
     if(!c.length) return true;
     return tierGate(c.slice()).length >= 1;
   };
-  const plan = poolPlan(S.tier, nChar0);
+  let plan = poolPlan(S.tier, nChar0, ph, beatIdx2);
+  /* 单角色不许抽女女/三人池：yuri_sex 里全是 tribadism 这类"要求两个女人"的动作，
+     只给 1girl 时模型要么复制角色、要么被"单人剔多人"删空 —— 后者更糟，
+     删完连 sex/vaginal 也被"无男池去男性词"带走，整张图一个动作都不剩
+     （m05074 #33 实测：hand_grab + 1boy + completely_nude，两人贴着什么都没干）。 */
+  if(nChar0 < 2){
+    const SOLO_BAN = /^yuri/;
+    const keepMain = plan.main.filter(x => !SOLO_BAN.test(String(x)));
+    if(keepMain.length !== plan.main.length){
+      plan = { main: keepMain.length ? keepMain : ['duo_male'], extra: plan.extra };
+    }
+  }
   // 主池权重 5、辅池 1：主池抽干不会掉到另一个"人数不对"的池子
   const bag = [];
   for(let i=0;i<plan.main.length;i++){
@@ -1641,20 +2969,41 @@ function composeShot(step, total){
     fresh = bag.filter(x=>coreAlive(x.a));
   }
   if(!fresh.length) fresh = bag;
+  /* 连续剧情：动作自带的容器/地点必须与锁定地点同组。
+     不这么做，锁在卧室的一批里抽到"车里/浴缸里"的动作，preflight 的场景互斥
+     会把车/浴缸剥掉、只剩卧室 —— 动作本身就废了（"在车里"变成了"在卧室里"）。
+     无地点组的动作一律放行（大多数条目只有身体姿势）。 */
+  if(LK && LK.place){
+    const lg = placeGroupOf(LK.place.tags || []);
+    if(lg >= 0){
+      const ok = fresh.filter(x=>{
+        const g = placeGroupOf(x.a.tags || []);
+        return g < 0 || g === lg;
+      });
+      if(ok.length) fresh = ok;
+    }
+  }
 
-  if(!fresh.length) return null;
-  const hit = pickOne(fresh);
+  if(!fresh.length && !(lockAct && lockAct.a)) return null;
+  /* 区块制：整块锁同一条动作，只换机位/表情 */
+  const hit = (lockAct && lockAct.a && lockAct.a.tags) ? lockAct : pickOne(fresh);
   const act = hit.a;
   let poolName = hit.p;
   // 单人档抽到"双人日常/暧昧"：第二个人按无脸男补全构图（用户规则），池名改判
   if(nChar0 <= 1 && poolName === 'duo_daily') poolName = 'duo_solo';
-  used.push(key(act)); saveUsedActs(used);
+  if(!(lockAct && lockAct.a)) { used.push(key(act)); saveUsedActs(used); }
   const kind = (POOL_RULE[poolName] || {}).k || act.kind || '';
 
   // 强度：动作自带强度 + 批量内递增，档位封顶
   const cap = (S.tier==='sfw') ? 1 : (S.tier==='suggestive') ? 3 : 4;
   const ramp = Math.floor((step/Math.max(1,total)) * 3);
-  const lv = Math.max(0, Math.min(cap, (act.lv||2) + (ramp>1?1:0)));
+  let lv = Math.max(0, Math.min(cap, (act.lv||2) + (ramp>1?1:0)));
+  /* 表情档跟段位走：准备段不该已经出汗喘气（首批 50 张干跑就是 setup 段满屏 sweat/heavy_breathing），
+     正戏段才允许把极端表情堆上去 */
+  const PHASE_LV = {setup:0, foreplay:2, play:3, sex:4, after:3};
+  if(ph && PHASE_LV[ph] !== undefined) lv = Math.min(lv, PHASE_LV[ph]);
+  /* 块内第三张起抬一档：复杂块机位调不动时，情绪往上走是唯一有效的差分。 */
+  if(ph && beatIdx2 >= 2) lv = Math.min(4, lv + 1);
   const IT = (S.atoms.intensity||[])[lv] || {tags:[]};
 
   // 地点 / 光线 / 天气 / 构图 / 机位
@@ -1664,24 +3013,30 @@ function composeShot(step, total){
     'beach','shrine','hallway','stairwell','rooftop','balcony','street'];
   const isPub = (act.tags||[]).some(t=>PUB_ACT.includes(String(t).toLowerCase()));
   const PLS = isPub ? (S.atoms.places||[]).filter(x=>(x.tags||[]).some(t=>PUBLIC_P.includes(String(t).toLowerCase()))) : (S.atoms.places||[]);
-  const place = pickOne(PLS.length ? PLS : (S.atoms.places||[]));
-  // 光线与地点互斥：沙滩/森林/神社挂霓虹灯、海边摆台灯都很出戏
-  const NATURE_P = ['beach','ocean','sea','forest','field','grass','shrine','park','pool','poolside',
-    'onsen','garden','outdoors','mountain','sky','river','lake','snow','cherry_blossoms'];
-  const placeLow = (place.tags||[]).map(x=>String(x).toLowerCase());
-  const naturey = placeLow.some(t=>NATURE_P.includes(t));
-  const lset = (S.atoms.lights||[]).filter(x=>{
-    const lt = (x.tags||[]).map(t=>String(t).toLowerCase());
-    if(naturey && lt.some(t=>['neon_lights','city_lights','neon','lamp','fluorescent_lamp'].includes(t))) return false;
-    return true;
-  });
-  const light = pickOne(lset.length ? lset : (S.atoms.lights||[]));
+  let place;
+  if(LK && LK.place){
+    place = LK.place;
+  } else {
+    let pp_ = PLS.length ? PLS : (S.atoms.places||[]);
+    /* 一场一个地点，且整批不重复：50 张里两场都在同一张床上，等于白发 8 张额度 */
+    const usedP = S.storyUsedPlaces || (S.storyUsedPlaces = []);
+    if(ph){
+      const freshP = pp_.filter(x=>usedP.indexOf(x.zh || (x.tags||[]).join(',')) < 0);
+      if(freshP.length) pp_ = freshP; else usedP.length = 0;
+    }
+    place = pickOne(pp_);
+    if(ph) usedP.push(place.zh || (place.tags||[]).join(','));
+  }
+  /* 光照不再从池里抽（用户 m04399：干脆删掉让底模按场景自己补，反而更自然）。
+     池里 sunbeam / backlighting / dappled_sunlight 配全裸必过曝，也是个别图过曝的来源。
+     lights 数据保留在 wb_atoms.json 没删，要回退把这行换回来即可。 */
+  const light = (LK && LK.light) ? LK.light : {zh:'', tags:[]};
   // 机位/构图先按动作排一遍，别等 preflight 事后修（双人挂 pov = 男性第一视角；
   // 跨坐 + from_behind/cowboy_shot = 腿被切或被身体挡住）
   const RIDE_T = ['straddling','sitting_on_lap','girl_on_top','cowgirl_position',
     'reverse_cowgirl_position','sitting_on_face'];
   const riding = (act.tags||[]).some(t=>RIDE_T.includes(String(t).toLowerCase()));
-  const tset = (S.atoms.shots||[]).filter(x=>{
+  let tset = (S.atoms.shots||[]).filter(x=>{
     const tt = x.tags||[];
     if(riding && tt.includes('cowboy_shot')) return false;
     // 牛仔镜头是 1/4 身高，双人必然把后面那个切掉
@@ -1697,18 +3052,151 @@ function composeShot(step, total){
     if((S.tier !== 'r18' || nChar0 >= 2) && tt.some(t=>String(t).toLowerCase().indexOf('pov')===0)) return false;
     if(riding && tt.includes('from_behind')) return false;
     if(nChar0 >= 2 && tt.includes('dutch_angle')) return false;
+    /* 选之前就按块剔掉 ANG_OK2 会判非法的机位：否则 composeShot 选、preflight 再剔再补，
+       去重表全白记，4 张侧入会全被补成 from_side（2026-11-15 实测）。 */
+    {
+      const _bA = String(S.curBlockKey || '').split('@')[0];
+      const BAD_FIRST = {side: ['from_behind','from_below','pov'],
+                         threesome: ['from_behind','from_below','pov','from_above']};
+      const bad0 = BAD_FIRST[_bA];
+      if(bad0 && tt.some(k0 => bad0.indexOf(String(k0).toLowerCase()) >= 0)) return false;
+    }
     return true;
   });
-  const shot = pickOne(tset.length ? tset : (S.atoms.shots||[]));
-  const ang  = pickOne(aset.length ? aset : (S.atoms.angles||[]));
+  if(S.curBlockNoClose){
+    const _nc = tset.filter(x=>!(x.tags||[]).map(t=>String(t).toLowerCase()).includes('close-up'));
+    if(_nc.length) tset = _nc;
+  }
+    /* 构图：连续剧情按阶段"节拍"取（段内第几张 → beat 里那一个），不再随机。
+     撞上上一张的景别就顺延一格（连出三张全身最伤节奏）；该景别被档位/动作过滤空了，
+     先退阶段偏好集，再退原集合，绝不硬塞 */
+  let shot;
+  if(PP){
+    /* 景别每张换是噪声（full_body/upper_body/cowboy_shot 都框腰部以上），
+       但块内恒死一个值又让大块只剩 2-3 种组合（190 张实测重复 46%）。
+       折中：块内洗牌后每 3 张换一次 —— 3 张之内同景别机位能拉开，跨组换一个景别。 */
+    if(!S.curBlockShots || !S.curBlockShots.length){
+      /* 景别只留能看全动作的两种：upper_body 会把下半身动作切掉，close-up 更是只剩脸。
+     PHASE_PLAN.beat 里仍可能出现它们，这里统一过滤掉。 */
+  const wideShots = (PP.beat || []).filter(w => w === 'full_body' || w === 'cowboy_shot');
+      const pool = uniq(wideShots.length ? wideShots : ['full_body']);
+      S.curBlockShots = [];
+      while(pool.length) S.curBlockShots.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+    }
+    const shotSlot = Math.floor(beatIdx2 / 3) % S.curBlockShots.length;
+    S.curBlockShot = S.curBlockShots[shotSlot] || 'full_body';
+    let wantTag = S.curBlockShot || '';
+    /* 口交这类块不给特写：阶段偏好里也有 close-up，这里必须一起挡掉 */
+    if(S.curBlockNoClose && wantTag === 'close-up') wantTag = '';
+    const wantSet = wantTag ? [wantTag] : (PP.shot || []).filter(w => !(S.curBlockNoClose && w === 'close-up'));
+    let pset = tset.filter(x=>(x.tags||[]).some(t=>wantSet.indexOf(String(t).toLowerCase()) >= 0));
+    if(!pset.length && PP.shot){
+      const pshot = PP.shot.filter(w => !(S.curBlockNoClose && w === 'close-up'));
+      pset = tset.filter(x=>(x.tags||[]).some(t=>pshot.indexOf(String(t).toLowerCase()) >= 0));
+    }
+    shot = pickOne(pset.length ? pset : (tset.length ? tset : (S.atoms.shots||[])));
+    S.lastShot = (shot.tags||[]).join(',');
+  } else {
+    shot = pickOne(tset.length ? tset : (S.atoms.shots||[]));
+  }
+/* 机位按阶段各抽一次后锁住：段内乱换机位＝同一段被子切成跨轴，读起来就是两个场景 */
+  /* 机位逐张轮换、必不与上一张重复：一张一个机位才有"差分"；
+     只用 aset（已按档位/动作/人数过滤过的安全机位），空了才退全集 */
+  let ang;
+  {
+    /* 空 tags 的「正面」条目 = 不写机位词。190 张抽卡里它吃掉 26% 名额，
+       却和 from_side / foreshortening 看不出区别；排除它，8 个机位全都有名字 */
+  const aRaw0 = aset.length ? aset : (S.atoms.angles||[]);
+    const aNamed = aRaw0.filter(x => (x.tags||[]).length);
+    let aSrc = aNamed.length ? aNamed : aRaw0;
+    const pkA = x => (x.tags||[]).join(',');
+    /* 倾斜机位配全身必糊（VFIX 事后会剔，但"选了再扔"等于白占一个槽位）。
+       选之前就按本张景别筛掉，让机位槽真的能轮转。 */
+    {
+      const shTags = (shot && shot.tags) ? shot.tags.map(K) : [];
+      const fullish = shTags.indexOf('full_body') >= 0;
+      const okCam = aSrc.filter(x => {
+        const ct = (x.tags || []).map(K);
+        if(fullish && ct.indexOf('dutch_angle') >= 0) return false;
+        return true;
+      });
+      if(okCam.length) aSrc = okCam;
+    }
+    // 机位节奏（用户 2026-11-14）：同一个姿势连拍 3 张后再换机位，一组差分共用一个机位
+    const angSlot = (S.curBlockKey || '') + '#' + beatIdx2;
+    /* 插入内视：插入类块每块给 1 张"小窗剖面"，用户实测这张最有效（m03983）。
+       放在块内第 2 张往后，一是不占开场、二是正好接在"已经进去了"之后。 */
+    const blkIdA = String(S.curBlockKey || '').split('@')[0];
+    const INSERT_BLK = ['missionary','doggy','ride','stand','tentacle','machine'];
+    const usedA0 = S.blockCamUsed || (S.blockCamUsed = []);
+    const internalDone = usedA0.some(z => String(z).indexOf('internal_cumshot') >= 0);
+    /* 内视是剖面小窗，主体只占画面一角。跟 facing_away（背对）或 dildo/sex_toy
+       同框时，模型只画得出小窗里的局部，人整体退化成"蹲着流爱液"（m05074 #34 实测）。 */
+    const subFlatA = [].concat.apply([], (S.curBlockSub || []).map(x => [String(x).toLowerCase()]));
+    const badForInternal = subFlatA.indexOf('facing_away') >= 0
+      || subFlatA.some(w => w.indexOf('dildo') >= 0 || w === 'sex_toy' || w === 'object_insertion');
+    const wantInternal = (ph === 'sex') && INSERT_BLK.indexOf(blkIdA) >= 0
+      && beatIdx2 >= 1 && !internalDone && !(S.curBlockNiche) && !badForInternal;
+    if(wantInternal){
+      ang = {zh:'插入内视', tags:['internal_cumshot']};
+      usedA0.push('internal_cumshot|' + ((shot && shot.tags) ? shot.tags.join(',') : ''));
+      S.lastAng = 'internal_cumshot';
+      /* 内视是"剖面小窗"，配全身/半身就成两张画拼一起了 */
+      const nc = (S.atoms.shots||[]).filter(x => (x.tags||[]).indexOf('close-up') >= 0);
+      if(nc.length) shot = nc[0];
+    } else if(S.blockAng && S.blockAngKey === angSlot){ ang = S.blockAng; }
+    else {
+      /* 块内「机位×景别」组合不重复：5 张的块以前机位只有 3 个值、必然两张一样，
+         现在优先挑本块还没用过的组合，用光了才回退到"别跟上一张相同" */
+      const used = S.blockCamUsed || (S.blockCamUsed = []);
+      /* 有效机位 = 机位 × 景别：同一个 from_behind 配 cowboy_shot / upper_body /
+       close-up 是三种画面，按组合去重才铺得开（用户 m05520「机位加一下」） */
+    const usedAng = used.map(z => String(z).split('|')[0]);
+      const shotKey = (shot && shot.tags ? shot.tags : []).join(',');
+      const ck = x => pkA(x) + '|' + shotKey;
+      /* 先按「机位本身」去重，机位用光了才退回「机位+景别」组合去重 ——
+         之前只按组合去重，换个景别就能复用同一机位，5 张块容易整块一个视角 */
+      let cand = aSrc.filter(x => usedAng.indexOf(pkA(x)) < 0 && pkA(x) !== (S.lastAng || ''));
+      if(!cand.length) cand = aSrc.filter(x => usedAng.indexOf(pkA(x)) < 0);
+      if(!cand.length) cand = aSrc.filter(x => used.indexOf(ck(x)) < 0);
+      if(!cand.length) cand = aSrc.filter(x => pkA(x) !== (S.lastAng || ''));
+      if(!cand.length) cand = aSrc;
+      ang = pickOne(cand);
+      used.push(ck(ang));
+      S.blockAng = ang;
+      S.blockAngKey = angSlot;
+      S.lastAng = pkA(ang);
+    }
+    /* 块级固定机位放在最后覆盖：3P 这种三人构图必须钉死，
+       否则 pickOne 会换视角、三个人叠成一团（用户口径：3P 别动机位，差分交给表情） */
+    const _fxId = String(S.curBlockKey || '').split('@')[0];
+    const _fxBlk = (typeof BLOCK_BY_ID !== 'undefined') ? BLOCK_BY_ID[_fxId] : null;
+    if(_fxBlk && _fxBlk.fixedAng){
+      const fx = (S.atoms.angles||[]).filter(x => (x.tags||[]).join(',').indexOf(_fxBlk.fixedAng) >= 0);
+      if(fx.length) ang = fx[0];
+    }
+    if(LK){ if(!LK.ang) LK.ang = {}; LK.ang[ph] = ang; }
+  }
+  // 地点/光照在第一次抽定后写入锁；weather 用 !== undefined 判断，允许"锁成无天气"
+  if(LK){
+    if(!LK.place) LK.place = place;
+    if(!LK.light) LK.light = light;
+    if(!LK.zh) LK.zh = '锁定：' + (place.zh||'') + ' · ' + (light.zh||'');
+  }
   const indoor = (place.tags||[]).some(t=>INDOOR.includes(t));
   // 天气与地点互斥：泳池/海滩不下雪，沙漠/室内不下雨
   const wset = (S.atoms.weather||[]).filter(x=>{
     const wt = (x.tags||[]).map(t=>String(t).toLowerCase());
-    if(naturey && wt.includes('snow') && (place.tags||[]).some(t=>['pool','poolside','beach','onsen'].includes(String(t).toLowerCase()))) return false;
+    if(wt.includes('snow') && (place.tags||[]).some(t=>['pool','poolside','beach','onsen'].includes(String(t).toLowerCase()))) return false;
     return true;
   });
-  const weather = (!indoor && Math.random()<0.6) ? pickOne(wset.length ? wset : (S.atoms.weather||[])) : null;
+  let weather;
+  if(LK && LK.weather !== undefined){
+    weather = LK.weather;
+  } else {
+    weather = (!indoor && Math.random()<0.6) ? pickOne(wset.length ? wset : (S.atoms.weather||[])) : null;
+    if(LK) LK.weather = weather;
+  }
 
   let tags = [];
   tags = tags.concat(act.tags||[]);
@@ -1717,22 +3205,31 @@ function composeShot(step, total){
   if(weather) tags = tags.concat(weather.tags||[]);
   // 表情/生理按档位封顶：词一多就盖过动作，画面变成"底模自己发挥"
   const EXPR_CAP = (S.tier==='sfw') ? 1 : (S.tier==='suggestive') ? 3 : 5;
-  const lowT = x => String(x).toLowerCase().replace(/ /g, '_');
+  const lowT = K;
   // 表情分型：同一强度有 3–4 组变体，且"翻白眼/失神脸"在整批里最多出现 2 次
   const EX_HOT = ['torogao','ahegao','rolling_eyes','drooling'];
   if(!S.__exBatch) S.__exBatch = {};
   const exLeft = k2 => 2 - (S.__exBatch[k2] || 0);
   const vs = (IT.variants && IT.variants.length) ? IT.variants : [IT.tags || []];
-  let vpick = vs[Math.floor(Math.random()*vs.length)] || [];
+  /* 块内不放回：同块三张要拿三组不同的表情。
+     原来 Math.random 有放回，三张撞同一组是常态 —— 126 张实测里
+     有 10 块出现"两张连表情都一模一样"。（2026-11-15） */
+  if(!S.blockExprUsed) S.blockExprUsed = [];
+  let candI = vs.map((v,i)=>i).filter(i=>S.blockExprUsed.indexOf(i) < 0);
+  if(!candI.length){ S.blockExprUsed = []; candI = vs.map((v,i)=>i); }
+  let pickI = candI[Math.floor(Math.random()*candI.length)];
+  let vpick = vs[pickI] || [];
   for(let t=0;t<6;t++){
     const hot = vpick.filter(x=>EX_HOT.includes(String(x).toLowerCase()));
     if(!hot.length || hot.every(x=>exLeft(String(x).toLowerCase()) > 0)) break;
-    const alt = vs.filter(v=>!v.some(x=>EX_HOT.includes(String(x).toLowerCase())));
-    if(!alt.length) break;
-    vpick = alt[Math.floor(Math.random()*alt.length)];
+    const altI = candI.filter(i=>!vs[i].some(x=>EX_HOT.includes(String(x).toLowerCase())));
+    if(!altI.length) break;
+    pickI = altI[Math.floor(Math.random()*altI.length)];
+    vpick = vs[pickI];
   }
+  S.blockExprUsed.push(pickI);
   vpick.forEach(x=>{ const k2 = String(x).toLowerCase(); if(EX_HOT.includes(k2)) S.__exBatch[k2] = (S.__exBatch[k2]||0) + 1; });
-  let mood = uniq(vpick.concat(IT.phys||[]));
+  let mood = uniq(vpick);
   // 高 lv 的表情词（tongue_out / ahegao / torogao）都在 HARD 里，低档位剔完会一个不剩，
   // 人物变成"没有表情的默认脸" —— 所以剔完空了要按档位补一个底线表情
   if(S.tier !== 'r18') mood = mood.filter(t=>!EXPLICIT_HARD.includes(lowT(t)));
@@ -1741,7 +3238,7 @@ function composeShot(step, total){
     // 往下降一级取表情，比硬编码一个 blush 自然（lv3 被剔空时用 lv2 的 half-closed_eyes/parted_lips/sweat）
     for(let q = lv - 1; q >= 0 && !mood.length; q--){
       const I2 = (S.atoms.intensity||[])[q] || {tags: []};
-      let m2 = uniq((I2.tags||[]).concat(I2.phys||[]));
+      let m2 = uniq(I2.tags||[]);
       if(S.tier !== 'r18') m2 = m2.filter(t=>!EXPLICIT_HARD.includes(lowT(t)));
       mood = m2.slice(0, EXPR_CAP);
     }
@@ -1749,23 +3246,257 @@ function composeShot(step, total){
   if(!mood.length) mood = [S.tier === 'sfw' ? 'light_smile' : (S.tier === 'suggestive' ? 'blush' : 'open_mouth')];
   tags = tags.concat(mood, shot.tags||[], ang.tags||[]);
   // 体液只给 R18；暧昧档挂体液会把动作淹掉
+  /* 连续剧情：体液还得看段位。phys.L2 是"湿润/爱液"这一档，无条件挂上去
+     会让准备段（衣物 full）也湿透 —— 首批实测 10 张全带 pussy_juice，
+     第 1 张穿着整齐却已经"湿了"，戏提前演完。 */
   const PH = (S.atoms.phys||{});
-  if(S.tier==='r18' && lv>=2) tags = tags.concat((PH.L2||[]).slice(0, 1));
-  if(S.tier==='r18' && lv>=4) tags = tags.concat((PH.L3||[]).slice(0, 2));
+  const physOK = !ph || ph === 'play' || ph === 'sex' || ph === 'after';
+  const physTail = !ph || ph === 'sex' || ph === 'after';
+  /* 2026-11-15 修：原来写 slice(0,1) / slice(0,2) 恒取表头，而 L3 的前两项就是
+     L2 本身（pussy_juice, wet），等于每张都只挂爱液，cum 系永远抽不到。
+     现在改成随机取一个；L3 只取「不在 L2 里」的那部分。 */
+  if(S.tier==='r18' && lv>=2 && physOK && (PH.L2||[]).length){
+    tags = tags.concat(pickOne(PH.L2));
+  }
+  if(S.tier==='r18' && lv>=4 && physTail){
+    const _l2 = (PH.L2||[]);
+    const _tail = (PH.L3||[]).filter(x=>_l2.indexOf(x) < 0);
+    if(_tail.length) tags = tags.concat(pickOne(_tail));
+  }
   // 双人场景自动 2girls
   const nChar = (S.chars||[]).length;
   if(nChar>=2){ tags = tags.filter(t=>!["1girl","solo"].includes(String(t).toLowerCase())); tags.push("2girls"); }
   else tags.push("1girl");
+  /* 连续剧情：锁了地点，就把动作自带的别组地点词剔掉。
+     候选过滤只看 entry.tags，动作把 on_bed 放在 core 里就漏网 ——
+     首批实测第 1 张锁在咖啡馆，画面里却是"咖啡馆的床上"。 */
+  if(ph && LK && LK.place){
+    const lg2 = placeGroupOf(LK.place.tags || []);
+    if(lg2 >= 0){
+      // 中性词不算串味：outdoors/indoors 这类伞词在哪都能出现
+      const NEUTRAL_P = ['outdoors','indoors','day','night','window_light'];
+      const bad = tags.filter(t=>{
+        if(NEUTRAL_P.includes(String(t).toLowerCase())) return false;
+        const g = placeGroupOf([t]);
+        return g >= 0 && g !== lg2;
+      });
+      if(bad.length) tags = tags.filter(t=>!bad.includes(t));
+      /* 家具类道具也要跟着地点走：锁在咖啡馆却因为动作条目带了 desk，画面会
+         在胸口下面凭空长出一张桌子（2026-11-14 真机 anima_pg_00090_）。
+         只保留"锁定地点自己带的"那些家具词，别处来的全剔。 */
+      const FURN = ['bed','on_bed','desk','on_desk','table','on_table','chair','on_chair',
+                'on_floor','floor','on_ground','ground','tatami','carpet',
+        'couch','on_couch','sofa','counter','kitchen_counter','bathtub','shower','locker'];
+      const owned = new Set((LK.place.tags || []).map(t=>String(t).toLowerCase()));
+      const badF = tags.filter(t=>{
+        const k = String(t).toLowerCase();
+        return FURN.includes(k) && !owned.has(k);
+      });
+      if(badF.length) tags = tags.filter(t=>!badF.includes(t));
+    }
+  }
+  /* 丝袜统一：类型由用户指定（qSock），没指定就沿用本批第一次抽到的那种。
+     原来是每条动作自带自己的袜子词，一批图里黑丝/白丝/渔网来回换。 */
+  {
+    const lowAll = tags.map(t=>String(t).toLowerCase());
+    const pick = String((S.sockPick !== undefined && S.sockPick !== null) ? S.sockPick : sockPickOf() || '');
+    const hasSock = lowAll.some(t=>SOCK_SET.has(sockKey(t)));
+    if(pick === 'none'){
+      if(hasSock) tags = tags.filter(t=>!SOCK_SET.has(sockKey(t)));
+    } else if(pick){
+      /* 指定了类型 = 用户挑的一件衣服：整批每张都穿着（不只足交那几张）。
+         原来只在"条目自带袜子/腿脚动作"时才补，结果用户选了黑丝、十张里只有一张有。 */
+      const kept = tags.filter(t=>!SOCK_SET.has(sockKey(t)));
+      if(kept.length !== tags.length || !tags.some(t=>sockKey(t) === sockKey(pick))){
+        tags = kept;
+        if(!tags.some(t=>sockKey(t) === sockKey(pick))) tags.push(pick);
+      }
+    } else {
+      /* 自动档 = 不穿（2026-11-14 YG：足交自己冒出丝袜不行，袜子只认用户指定）。
+         动作条目自带的 pantyhose / thighhighs / kneehighs 全在这里剔掉，
+         要穿就在"丝袜"下拉里选一种，整批统一。 */
+      if(hasSock) tags = tags.filter(t=>!SOCK_SET.has(sockKey(t)));
+      S.sockLock = '';
+    }
+  }
+  /* 胸围统一：体型只认用户（或角色卡自带的那一个），动作/表情带来的别的胸围词一律剔。 */
+  {
+    const bpick = String((S.bust !== undefined && S.bust !== null) ? S.bust : '') || bustPickOf();
+    const bustOn = tags.filter(t=>BUST_W.indexOf(sockKey(t)) >= 0);
+    if(bpick && BUST_TAG[bpick]){
+      const want = BUST_TAG[bpick];
+      const odd = bustOn.filter(t=>sockKey(t) !== want);
+      if(odd.length || !bustOn.some(t=>sockKey(t) === want)){
+        tags = tags.filter(t=>BUST_W.indexOf(sockKey(t)) < 0);
+        tags.push(want);
+      }
+      if(bpick === 'flat'){
+        const nf = tags.filter(t=>FLAT_FORBID.indexOf(sockKey(t)) >= 0);
+        if(nf.length) tags = tags.filter(t=>FLAT_FORBID.indexOf(sockKey(t)) < 0);
+      }
+    } else if(bustOn.length > 1){
+      // 自动档：角色卡/条目各说一句时，留最先出现的那个（角色卡永远在前面）
+      const first = sockKey(bustOn[0]);
+      tags = tags.filter(t=>BUST_W.indexOf(sockKey(t)) < 0 || sockKey(t) === first);
+    }
+  }
+  /* 跨张残留（carry）：上一张留下的状态得能读出来，否则"事后"看起来像"刚开场"。
+     只在连续剧情里生效，只做三件事：体液承接、出汗、事后余韵 */
+  if(ph && S.storyCarry){
+    const CY = S.storyCarry;
+    const lowC = tags.map(x=>String(x).toLowerCase());
+    const hasAny = arr => arr.some(t=>lowC.indexOf(t) >= 0);
+    if((ph === 'sex' || ph === 'after') && CY.cum && !hasAny(['cum_in_pussy','creampie','cum'])){
+      tags.push('cum_in_pussy');
+    }
+    if(ph === 'after' && !hasAny(['after_sex','tired','heavy_breathing'])) tags.push('after_sex');
+    if((ph === 'play' || ph === 'sex' || ph === 'after') && (CY.cum || CY.sex) && !hasAny(['sweat','sweaty'])){
+      tags.push('sweat');
+    }
+  }
+  /* 块核心动词兜底：条目只给了半套姿势（orgasm / 打屁股 / 坐腿上），
+     这里把"在插入"这个词补上，否则标签写正面位、画面是抱着坐着。 */
+  if(ph && lockAct && lockAct.add && lockAct.add.length){
+    const lows0 = tags.map(K);
+    lockAct.add.forEach(w=>{ if(lows0.indexOf(w) < 0) tags.push(w); });
+  }
+    /* 块内体位锁死（用户 2026-11-14：写差分时机位和体位应该统一，
+     哪怕跑出来和提示词不完全一样，至少还是一组差分）。条目自带的其它姿势词一律剔掉。 */
+  if(ph && S.curBlockPose && S.curBlockPose.length){
+    const POZ = ['hogtie','restrained','bound_wrists','bound_arms','bondage','shibari','submission',
+  'suspension','frogtie','missionary','mating_press','on_back','spread_legs','legs_up','leg_lock',
+                 'sex_from_behind','doggy_style','doggystyle','all_fours','on_all_fours','bent_over',
+                 'cowgirl_position','reverse_cowgirl_position','girl_on_top','straddling','mounting',
+                 'standing_sex','carrying','carried','piledriver','full_nelson',
+                 'sitting_on_lap','on_lap','kneeling','seiza','lying','lying_on_back','lying_on_stomach',
+                 'on_stomach','on_side','standing','standing_on_one_leg','against_wall','against_tree',
+                 'against_window','squatting','legs_folded','arched_back','top_down_bottom_up'];
+    const poseSet = {};
+    S.curBlockPose.forEach(w=>{ poseSet[String(w).toLowerCase().replace(/[\s-]+/g,'_')] = 1; });
+    tags = tags.filter(t=>{
+      const k = String(t).toLowerCase().replace(/[\s-]+/g,'_');
+      return POZ.indexOf(k) < 0 || !!poseSet[k];
+    });
+    const lowsP = tags.map(K);
+    S.curBlockPose.forEach(w=>{ if(lowsP.indexOf(w) < 0) tags.push(w); });
+  }
+  /* 块内子动作差分（2026-11-15 用户：口交 6 张一个动作=视角疲劳）：
+     同一块里每张换一个子动作（舔↔含、撸↔揉、单足↔双足），机位每 2 张换一次。
+     先把这一块所有变体的词一起剔掉，再压入本张那一条，避免"舔 + 含"同框互相打架。 */
+  if(ph && globalThis.__DBG) console.error('[DBG] ph=' + ph + ' key=' + S.curBlockKey
+    + ' add=' + JSON.stringify(lockAct && lockAct.add)
+    + ' sub=' + JSON.stringify(S.curBlockSub)
+    + ' pose=' + JSON.stringify(S.curBlockPose));
+  if(ph && S.curBlockSub && S.curBlockSub.length){
+    const SUBS = S.curBlockSub;
+    const normS = K;
+    const flatSub = SUBS.reduce((acc, one) => acc.concat(one.map(normS)), []);
+    /* 姿势也要跟着换：sub 里出现过的姿势词一概先剔，再用本张那条补回来。
+       否则 preset 带来的 kneeling 会跟 sub 的 sitting 同框，画面变成两个姿势。 */
+    const SUB_POSE = ['kneeling','sitting','lying','lying_on_back','lying_on_side','on_back',
+                      'on_side','on_stomach','standing','straddling','all_fours','squatting',
+                      'sitting_on_lap','girl_on_top','cowgirl_position'];
+    const flatPose = SUB_POSE.map(normS);
+    tags = tags.filter(t => flatSub.indexOf(normS(t)) < 0 && flatPose.indexOf(normS(t)) < 0);
+    /* 块内不放回：以前 SUBS[beatIdx2 % len] 在 5 张/3 条的块里给出 1,2,3,1,2，
+       第 1 张和第 4 张动作一模一样（用户 m04271「站立抱起 134 一个动作」）。 */
+    const chosen = (() => {
+      const n = SUBS.length;
+      if(!n) return SUBS[0] || [];
+      const usedS = S.blockSubUsed || (S.blockSubUsed = []);
+      for(let z = 0; z < n; z++){ if(usedS.indexOf(z) < 0){ usedS.push(z); return SUBS[z]; } }
+      S.blockSubUsed = [0];
+      return SUBS[0] || [];
+    })();
+    chosen.forEach(w => { if(tags.map(normS).indexOf(normS(w)) < 0) tags.push(w); });
+  }
+  /* 进程词（社区 tag 本体：imminent_ / guided_ / 无前缀 / after_ / afterglow）
+     三个词给出"还没进去 / 正要进去 / 已经结束"的时间轴，解决动作接不上的问题 */
+  if(ph){
+    const pk = K;
+    const PROC = ['imminent_penetration','guided_penetration','deep_penetration','afterglow','clothed_after_sex'];
+    const pOn = tags.filter(t=>PROC.indexOf(pk(t)) >= 0);
+    if(pOn.length > 1) tags = tags.filter(t=>PROC.indexOf(pk(t)) < 0 || pk(t) === pk(pOn[0]));
+    const hasPk = k => tags.some(t=>pk(t) === k);
+    const attached = hasPk('sex') || hasPk('vaginal') || hasPk('sex_from_behind') || hasPk('tentacle_sex');
+    /* 扶引导插入只属于插入体位块：足交/乳交/手交挂这个词就是"手空出来扶"，跟动作抢手。 */
+  const PEN_POSE = ['missionary','mating_press','sex_from_behind','doggystyle','doggy_style',
+                    'cowgirl_position','reverse_cowgirl_position','standing_sex','all_fours'];
+  const lowsG = tags.map(K);
+  const isPenBlock = PEN_POSE.some(w => lowsG.indexOf(w) >= 0) || lowsG.indexOf('sex') >= 0;
+  if(isPenBlock && beatIdx2 === 0 && !attached && !pOn.length
+     && !lowsG.some(t => t === 'sex' || t === 'vaginal' || t === 'sex_from_behind')) tags.push('guided_penetration');
+    if(ph === 'sex' && beatIdx2 === 0 && !pOn.length && !attached) tags.push('imminent_penetration');
+    if(ph === 'after' && !hasPk('after_sex') && !hasPk('afterglow')) tags.push('afterglow');
+  }
+  /* 机位/景别以「本张选定的」为准（2026-11-15 用户：口交 4 张全 from_side、
+     特写和七分身看不出区别）。预设 tags 里自带 from_side / cowboy_shot，
+     会先占住槽位，把 composeShot 选出来的机位在 preflight 里挤掉。 */
+  {
+    const CAM_ALL = (ANGLES || []).map(K);
+    const SHOT_ALL = (S.atoms.shots || []).reduce((acc, x) => acc.concat((x.tags || []).map(K)), []);
+    const camKeep = ((ang && ang.tags) || []).map(K);
+    const shotKeep = ((shot && shot.tags) || []).map(K);
+    tags = tags.filter(t => {
+      const k = K(t);
+      if(camKeep.indexOf(k) >= 0 || shotKeep.indexOf(k) >= 0) return true;
+      if(CAM_ALL.indexOf(k) >= 0) return false;
+      if(SHOT_ALL.indexOf(k) >= 0) return false;
+      return true;
+    });
+    camKeep.forEach(w => { if(tags.map(K).indexOf(w) < 0) tags.push(w); });
+    shotKeep.forEach(w => { if(tags.map(K).indexOf(w) < 0) tags.push(w); });
+    /* 真空兜底：一个机位词都没有时补最通用的 from_side（351860），
+       别让整行退化成"不写机位"（190 张抽卡里 14% 是这种裸奔行） */
+    if(!tags.some(t => CAM_ALL.indexOf(K(t)) >= 0)) tags.push('from_side');
+  }
+  /* ---- 复合层落地（催眠/调教）----
+     顺序要紧：先剔掉与该层物理冲突的姿势（绑住手腕 + 抱起 = 画不出来），
+     再剔该层点名要去掉的男体词，最后才压 tone/look —— 反了就白加。 */
+  /* ---- 层词入场清场（P7-J）----
+     `S.curBlockActs` 是块级缓存：同块第 1 张挂层时，层词会顺着缓存漏到后面没挂层的行，
+     变成"第 2 张也一脸催眠"。所以每张进场先无条件剥掉两层的全部 tone/look 词，
+     再按本行 S.curMod 决定压什么 —— 行的粒度才是真的。 */
+  {
+    const _LAYER_ALL = [];
+    (MOD_DEFS || []).forEach(m => { (_LAYER_ALL).push.apply(_LAYER_ALL, (m.tone||[]).concat(m.look||[])); });
+    const _ls = new Set(_LAYER_ALL.map(K));
+    tags = tags.filter(t => !_ls.has(K(t)));
+  }
+  if(MOD){
+    /* 一行只能挂一个层：先把别的层的 tone/look 剥干净，再压本层的 */
+    {
+      const _other = [];
+      (MOD_DEFS || []).forEach(m => { if(m.id !== MOD.id) _other.push.apply(_other, (m.tone||[]).concat(m.look||[])); });
+      const _os = new Set(_other.map(K));
+      tags = tags.filter(t => !_os.has(K(t)));
+    }
+    if(MOD.banPose && MOD.banPose.length){
+      /* 块签名姿势豁免：bdsm 的 banPose 里有 carrying，
+         但"站立抱起"这个块的支撑面就是 carrying，禁了就等于换了个块。 */
+      const signP = blockSignedPose(String(S.curBlockKey || '').split('@')[0]);
+      const bp = new Set(MOD.banPose.map(K).filter(k => !signP[k]));
+      tags = tags.filter(t => !bp.has(K(t)));
+    }
+    if(MOD.deny && MOD.deny.length){
+      const dn = new Set(MOD.deny.map(K));
+      tags = tags.filter(t => !dn.has(K(t)));
+    }
+    const tk = tags.map(K);
+    const t0 = (MOD.tone || []).filter(w => tk.indexOf(K(w)) < 0);
+    if(t0.length) tags.push(t0[Math.floor(Math.random() * t0.length)]);
+    const lk0 = (MOD.look || []).filter(w => tk.indexOf(K(w)) < 0);
+    if(lk0.length) tags.push(lk0[Math.floor(Math.random() * lk0.length)]);
+  }
   return {id:"compose_"+act.zh, zh:act.zh+" · "+(place.zh||"")+" · "+(light.zh||"")+" · "+IT.zh,
-          tags:uniq(tags), lv:lv, kind:kind, pool:poolName, who:(act.who||""), core:(act.core||[])};
-}
-function applyCompose(list, name){
-  S.sceneTags = list.slice();
-  S.sceneName = name;
-  const base = uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]));
-  setTags(normTags(base.concat(list)));
-  refreshNeg(true);
-  logline("compose", name+" n="+list.length+" lv="+S.lastLv);
+          tags:uniq(tags), lv:lv, kind:kind, pool:poolName, who:(act.who||""), core:(act.core||[]),
+          phase:ph, garb:(ph ? storyGarbOf(ph, S.tier) : ''),
+          shotZh:((shot && shot.zh) || (shot && (shot.tags||[])[0]) || ''),
+          ref:{a:act, p:poolName},
+          // 传给下一张的残留：这一张有没有"体液/正戏发生过"
+          carry:{ cum:(tags.join(',').toLowerCase().match(/cum|creampie|pussy_juice|ejaculation/) !== null),
+                  sex:(kind === 'sex' || (String(poolName||'').indexOf('sex') >= 0)) },
+          sock:(String((S.sockPick !== undefined && S.sockPick !== null) ? S.sockPick : '') || S.sockLock || '')};
 }
 
 /* ===== 出图前审查：人数 / 性别 / 道具一致性 =====
@@ -1776,17 +3507,34 @@ function applyCompose(list, name){
 const PF_MALE = ['1boy', '2boys', '3boys', 'multiple_boys', 'male', 'faceless_male', 'hetero',
   'invisible_man', 'disembodied_penis', 'invisible_penis',
   'penis', 'testicles', 'male_focus', 'male_on_top', 'male_on_bottom', 'cum_on_penis', '1other'];
-const PF_NO_MALE_KIND = ['yuri', 'tentacle', 'machine', 'solo', 'after'];
 // 男体三档：faceless 无脸男（占位最稳）/ invisible 隐形男（只剩压痕，不挤构图）/
 // penis 只有阴茎（disembodied_penis，画面上没有人形）
 function maleMode(){
+  /* 剧情模式下按段自动：玩法段只留一根、正戏段给完整男体。
+     用户在 #qMale 手选后 S.maleAuto 清空，一切听手选。 */
+  if(S.story && S.maleAuto) return S.maleAuto;
   try{ const el = $("qMale"); return (el && el.value) || 'faceless'; }catch(e){ return 'faceless'; }
 }
 function pushMale(push){
+  /* 2026-11-15 实测（用户 m04399，站立抱起 10 张同 seed 只改男体词）：
+     这类"必须有躯干"的动作上，invisible_man 完全无效、disembodied_penis 也会被模型
+     自动补成一个无脸男 —— 写了等于没写，模型自己补的那个反而最自然。
+     所以每个档只留"不给就画不出"的最少词，其余交给模型：
+       penis      仅阴茎：penis(617,516) + solo_focus(521,804)。
+                  disembodied_penis 只有 9,744，给子类等于没给；
+                  hand 也不用写（用户 m04387：特定动作下模型会自己补一只手）。
+       faceless   正戏：1boy + hetero。faceless_male 的 danbooru 语义是
+                  "脸被遮/在阴影里"，会把构图推向背面和遮挡，姿势被它带跑。
+       solo       无事：1girl + solo。
+  */
   const m = maleMode();
-  if(m === 'invisible'){ push('invisible_man', 'hetero'); }
-  else if(m === 'penis'){ push('disembodied_penis', 'hetero'); }
-  else { push('faceless_male', 'hetero'); }
+  /* 3P 块是"一女两男"：男角色必须 2boys（1boy 只画一个男人，画面就不是 3P 了）。
+     2026-11-15 修正：之前写 3boys 是错的 —— 3boys 在 danbooru 是三个男人。 */
+  const _bid = String((typeof S !== 'undefined' && S.curBlockKey) || '').split('@')[0];
+  if(_bid === 'threesome'){ push('2boys', 'hetero'); return; }
+  if(m === 'penis'){ push('penis', 'solo_focus'); }
+  else if(m === 'solo'){ push('1girl', 'solo'); }
+  else { push('1boy', 'hetero'); }
 }
 const PF_NEED_MALE_KIND = ['sex', 'oral', 'group'];
 const PF_SEXISH = ['sex', 'vaginal', 'anal', 'sex_from_behind', 'doggystyle', 'missionary',
@@ -1840,20 +3588,26 @@ const POOL_RULE = {
    通用姿势（on_side / all_fours / straddling / spooning / piledriver…）不放进来 ——
    它们对女女、触手、机械、侧躺单人同样成立，放进 m:0 的剔除表会各池误删 42+ 条
    条目的姿势词（实测 yuri_sex 8 条、tentacle_sex 12 条、machine_sex 6 条）。 */
-const MALE_POS = ['sex','missionary','doggystyle','sex_from_behind',
+/* 原来一张 36 词的 MALE_POS 混了两种东西，拆开（2026-11-15 P1）：
+   MALE_ACT  = 性行为本身（有它才算"这段在办事"）
+   MALE_BODY = 男性身体与体液痕迹（说明有男人，但不代表体位）
+   两者相并 = 旧 MALE_POS，筛选逻辑保持不变。 */
+const MALE_ACT = ['sex','missionary','doggystyle','sex_from_behind',
   'suspended_congress','mating_press','upright_straddle',
   'full_nelson','amazon_position','deep_penetration','squatting_cowgirl_position',
-  'cowgirl_position','reverse_cowgirl_position','vaginal','penis','penis_grab',
-  'licking_penis','deepthroat','irrumatio','paizuri','handjob','spitroast','double_penetration',
-  'double_fellatio','fellatio','thigh_sex','footjob','cum_in_pussy','cumdrip','cum_overflow',
+  'cowgirl_position','reverse_cowgirl_position','vaginal','spitroast','double_penetration',
+  'thigh_sex'];
+const MALE_BODY = ['penis','penis_grab','licking_penis','deepthroat','irrumatio','paizuri',
+  'handjob','double_fellatio','fellatio','footjob','cum_in_pussy','cumdrip','cum_overflow',
   'cum_on_body','cum_on_breasts','creampie','facial','cum_on_penis','cum'];
+const MALE_POS = MALE_ACT.concat(MALE_BODY);
 /* 构图黑名单（用户 2026-11-14 明确）：69 出图效果差，太复杂的构图也一样。
    池数据里不该出现，但手工输入 / 旧数据可能带进来，这里统一兜掉。 */
 const NO_POSE = ['69','sixty_nine','sixtynine','mutual_oral','simultaneous_oral',
   'suspended','suspension','inverted','inverted_nipple','headstand','handstand',
   'shoulder_stand','piledriver','full_nelson','suspended_congress','upright_straddle',
-  'mating_press','spitroast','double_penetration','triple_penetration','stacked','body_pile',
-  'carrying','princess_carry','standing_on_hands'];
+  'spitroast','double_penetration','triple_penetration','stacked','body_pile',
+  'standing_on_hands'];
 const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_sex:'单人·R18',
   yuri_daily:'女同·健全', yuri_flirt:'女同·擦边', yuri_sex:'女同·R18',
   machine_daily:'机械·健全', machine_flirt:'机械·擦边', machine_sex:'机械·R18',
@@ -1866,15 +3620,51 @@ const POOL_ZH = {solo_daily:'单人·健全', solo_flirt:'单人·擦边', solo_
   group3p:'双女+无脸男 3P', after:'事后',
   foreplay_flirt:'前戏·擦边', foreplay_sex:'前戏·赤裸', oral_sex:'口交', footjob_sex:'足交', paizuri_sex:'乳交', handjob_sex:'手交',
   exhibition_daily:'露出·健全', exhibition_flirt:'露出·擦边', exhibition_sex:'露出·野外', voyeur_flirt:'偷窥'};
+let ANG_OK2 = null;   /* 机位对位表：preflight 内赋值，崩脸规则在函数后段读它 */
+
+/* preflight 执行顺序（按代码实际顺序列，编号沿用历史标记，⑥a/b/c 是同一层三块）：
+ *   ⓪ · 剧情模式先禁第一视角
+ *   ① · 档位护栏
+ *   ①b · 构图黑名单
+ *   ② · 推断场景性质
+ *   ②b · 按池收束
+ *   ③ · 两个女角色
+ *   ④ · 按场景性质收束性别词
+ *   ⑤ · 人数词与实际角色数对齐
+ *   ⑤l · 正戏段必须真的在插入
+ *   ⑤n · 手/足/乳
+ *   ⑤m · 前戏段得有个前戏动作
+ *   ⑤j · 男体形态
+ *   ⑤k · 进程词互斥
+ *   ⑦ · 手写兜底
+ *   ⑥a · 视角 / 机位冲突
+ *   ⑤c · 衣物状态锚
+ *   ⑤d · 连续剧情
+ *   ⑤h · 胸围只留一种
+ *   ⑤g · 衣服只认"人定的"
+ *   ⑤i · 没穿裙子就别掀裙
+ *   ⑥b · 丝袜统一
+ *   ⑤e · 结算词门禁
+ *   ⑥c · 姿势物理互斥
+ */
 function preflight(tags, opt){
   const o = opt || {};
   let a = uniq((tags || []).map(t=>String(t).trim()).filter(Boolean));
-  const low = x => String(x).toLowerCase().replace(/ /g, '_');
-  const has = k => a.some(x=>low(x) === k);
-  const cut = ks => { const s = new Set(ks); const b = a.length;
+  const low = K;   /* 口径见模块级 K：连字符/点/撇号都折成下划线 */
+  const has = k => a.some(x=>low(x) === low(k));
+  const cut = ks => { const s = new Set(ks.map(low)); const b = a.length;   // 待删表也要归一化，否则 cut(['face-to-face']) 删不掉 face_to_face
     a = a.filter(x=>!s.has(low(x))); return b - a.length; };
   const push = function(){ for(let i=0;i<arguments.length;i++){ if(!has(arguments[i])) a.push(arguments[i]); } };
   const rep = {kind: '', fixes: [], n: 0};
+
+  /* ---- ⓪ 剧情模式先禁第一视角（必须最先做）----
+     下面的第一视角去自体动作会把 cowgirl_position / straddling 这些骑乘姿势一起剔掉，
+     等后面再禁 pov 就晚了 —— 实测块·骑乘 compose 有 cowgirl_position+sex，过完 preflight
+     只剩 dazed，画面上就是背对我们趴着。 */
+  if(o.forceStory && (o.forcePhase === 'setup' || o.forcePhase === 'after')){
+    const npv0 = cut(['pov','pov_hands','pov_crotch']);
+    if(npv0) rep.fixes.push('剧情·准备/事后不给第一视角 ' + npv0);
+  }
 
   /* ---- ① 档位护栏：非 R18 不许留露骨词（先做，kind 推断要看干净的词）---- */
   if(S.tier && S.tier !== 'r18'){
@@ -1914,6 +3704,10 @@ function preflight(tags, opt){
 
   /* ---- ②b 按池收束（池是抽取时决定的，规则优先于词面推断）---- */
   const R = (o.pool && POOL_RULE[o.pool]) || null;
+  /* 单人/机械/触手/女女/偷窥分区：这些画面里就不该出现第二个男人。
+     池规则（after 的 m:1、solo_sex 的 m:2）和中文被动句「被人抱着」都会补人，这里一刀切掉。 */
+  const famFem = /^(solo|machine|tentacle|yuri|voyeur)$/.test(String(o.family||''));
+  const NICHE_SCENE = !!o.niche;
   if(R){
     if(R.m === 0){
       const n0 = cut(PF_MALE) + cut(MALE_POS);
@@ -1925,8 +3719,8 @@ function preflight(tags, opt){
                     'faceless_male','invisible_man','disembodied_penis','invisible_penis','hetero'].includes(low(x)))){
         const n0 = cut(['1boy','2boys','3boys','male','male_focus','male_on_top',
                         'invisible_man','disembodied_penis','invisible_penis']);
-        push('faceless_male','hetero');
-        rep.fixes.push('施术者用无脸男 ' + n0);
+        pushMale(push);
+        rep.fixes.push('施术者用 ' + maleMode() + ' ' + n0);
       }
     } else if(R.m === 2){
       // 调教/单人 R18 这类池里混着"自己绑自己"和"被主人绑"，池级说不清，
@@ -1938,8 +3732,8 @@ function preflight(tags, opt){
           pushMale(push);
           if(n0+n1) rep.fixes.push('男体收成 ' + maleMode() + ' ' + (n0+n1));
         } else if(n0){
-          push('faceless_male','hetero');
-          rep.fixes.push('男体收成 faceless_male ' + n0);
+          pushMale(push);
+          rep.fixes.push('男体收成 ' + maleMode() + ' ' + n0);
         }
       } else if(a.some(x=>PF_SEXISH.includes(low(x))) &&
                 !a.some(x=>['masturbation','fingering','vibrator','dildo','sex_toy','sex_toys',
@@ -1947,18 +3741,22 @@ function preflight(tags, opt){
                             'object_insertion','egg_laying'].includes(low(x)))){
         // 条目写的是性交/插入（sex、vaginal、against_wall…）却一个男体词都没有
         // → 旧逻辑原样放行，出图变成单人（用户批量图丢人就是这个分支）
-        push('1boy','faceless_male','hetero'); cut(['solo']);
-        rep.fixes.push('性交动作补无脸男');
+        pushMale(push); cut(['solo']);
+        rep.fixes.push('性交动作补 ' + maleMode());
       }
+    } else if(famFem){
+      /* 只剔"人形"，不动动作：MALE_POS 里 sex/vaginal/double_penetration 是行为不是男体，
+         一起删会让触手/机械分区的整块变成裸体空镜（190 张抽卡 #154-#158 实测） */
+      const nf = cut(PF_MALE) + cut(MALE_BODY);
+      if(nf) rep.fixes.push('无男分区去男性词 ' + nf);
     } else {
       const n0 = cut(['1boy', '2boys', '3boys', 'male', 'male_focus', 'male_on_top']);
       if(povSolo){
         // 第一视角=镜头就是那个人，再补 faceless_male 会画成两个人
         const n1 = cut(['faceless_male', 'hetero', 'invisible_man', 'disembodied_penis', 'invisible_penis']);
         // 第一视角下"看得见的人"会和镜头打架，改成隐形男/只有阴茎：插入成立、人形不占位
-        if(maleMode() === 'penis') push('disembodied_penis');
-        else push('invisible_man');
-        if(n0 + n1) rep.fixes.push('第一视角拆成隐形男 ' + (n0 + n1));
+        pushMale(push);
+        if(n0 + n1) rep.fixes.push('第一视角拆成 ' + maleMode() + ' ' + (n0 + n1));
       } else {
         // 池子要求男性，但词面里一个性动作都没有 → 这条其实是日常条目，
         // 补人只会变成"画面里多一个人干站着"（anima_pg_00003 就是这样）
@@ -1977,24 +3775,18 @@ function preflight(tags, opt){
            一律要人 —— 之前白名单只写死三个池名，duo_sfw 的「壁咚，手撑在墙上」
            「替对方系领带」「膝枕」共 37/56 条拿不到男性，等于对着空气壁咚。
            after 例外：单人事后不该凭空多一个人，双人场景才补。 */
-        const needBody = (R.m === 1 && R.k !== 'after') || R.m === 3
+        const needBody = famFem ? false : ((R.m === 1 && R.k !== 'after') || R.m === 3
                          || sexish || passive
                          || (R.k === 'after' && nChar >= 2)
-                         || (R.k === 'sex' && !selfOnly);
+                         || (R.k === 'sex' && !selfOnly));
         if(needBody){
           /* 三人构型（池要求 2 女 + 1 男：triple_daily/flirt/sex、group3p）：
              第三个人必须画得出来。隐形男塞进 2girls 画面，底模会把它画成
              "半透明的多余男性"——用户反馈的"女同 R18 里出现男性"就是这条路径
              （anima_pg_00119/00121/00125/00127/00131/00132 全是 invisible_man + 2girls）。 */
-          const trio = (R.g === 2);
-          if(trio){
-            cut(['invisible_man','disembodied_penis','invisible_penis']);
-            push('faceless_male','hetero');
-            rep.fixes.push('三人构型用无脸男');
-          } else {
-            pushMale(push);
-          }
-          if(n0) rep.fixes.push('男体收成 ' + (trio ? 'faceless_male' : maleMode()) + ' ' + n0);
+          cut(['invisible_man','disembodied_penis','invisible_penis']);
+          pushMale(push);
+          if(n0) rep.fixes.push('男体收成 ' + maleMode() + ' ' + n0);
         } else if(R.k === 'sex' || R.k === 'after'){
           rep.fixes.push('无性动作不补男');
         }
@@ -2054,12 +3846,196 @@ function preflight(tags, opt){
     cut(['2girls', 'multiple_girls']);
     if(!a.some(x=>['1girl', 'solo', '1boy', 'faceless_male', '1other'].includes(low(x)))) push('1girl');
   }
-  /* ---- ⑦ 手写兜底：词面有性动作、却一个男体词都没有 → 补无脸男（不然只剩单人）
+  /* ⑤l 正戏段必须真的在插入：有体位词却没有 sex/vaginal，底模画成素股/贴着蹭 */
+  if(o.forcePhase === 'sex' && !NICHE_SCENE){
+    const PEN = ['missionary','mating_press','sex_from_behind','doggy_style','all_fours',
+                 'cowgirl_position','reverse_cowgirl_position','girl_on_top','standing_sex',
+                 'carrying','leg_lock','legs_up','spread_legs'];
+    if(PEN.some(w => has(w))){
+      const missP = [];
+      if(!has('sex')){ a.push('sex'); missP.push('sex'); }
+      if(!has('vaginal')){ a.push('vaginal'); missP.push('vaginal'); }
+      if(missP.length) rep.fixes.push('剧情·正戏补 ' + missP.join('+'));
+    }
+  }
+  /* ⑤n 手/足/乳：互动对象必须在画面里（penis 或触手） */
+  if(o.forcePhase === 'play' && !NICHE_SCENE){
+    const NEEDP = ['handjob','footjob','paizuri','paizuri_sex','thigh_sex'];
+    if(NEEDP.some(w => has(w)) && !['penis','tentacles','tentacle','dildo','strap-on','strap_on'].some(w => has(w))){
+      a.push('penis'); rep.fixes.push('剧情·补 penis');
+    }
+  }
+  /* ⑤m 前戏段得有个前戏动作：预设里的动作词被"脱衣改状态"剥空时补一个 */
+  if(o.forcePhase === 'foreplay' && !NICHE_SCENE){
+    const FP = ['groping','kiss','french_kiss','hug','breast_sucking','dry_humping','straddling',
+                'sitting_on_lap','cunnilingus','mutual_masturbation','hand_on_another','thigh_sex'];
+    if(!FP.some(w => has(w))){ a.push('groping'); rep.fixes.push('剧情·前戏补 groping'); }
+  }
+
+  /* 内视是剖面小窗，主体只占一角。和 facing_away（背对）同框时，模型只画得出
+     小窗里的局部，人整体退化成"蹲着流爱液"（m05074 #34 实测：池自带这两个词，
+     composeShot 的 wantInternal 只看块内 sub 看不到预设，所以这里收口）。 */
+  if(has('internal_cumshot') && has('facing_away')){
+    const nf = cut(['facing_away']);
+    if(nf) rep.fixes.push('剧情·内视不背对 ' + nf);
+  }
+  /* 正戏段出现男体、却一个性行为词都没有 —— 画面只剩"两个人贴在一起"
+     （m05074 #33 实测：hand_grab + 1boy + hetero + completely_nude，没有任何动作）。
+     注意这里故意不加 !NICHE_SCENE —— 触手/催眠/调教这些 niche 预设恰恰最容易
+     "只摆姿势不做动作"，#33 本身就是 niche 预设，挡住就永远补不上。 */
+  if(o.forcePhase === 'sex'){
+    const hasMaleBody = ['1boy','2boys','faceless_male','male','hetero'].some(w => has(w));
+    const ACTW = ['sex','vaginal','anal','sex_from_behind','cowgirl_position','missionary',
+                  'standing_sex','doggystyle','deep_penetration','clothed_sex','penetration',
+                  'imminent_penetration','paizuri','fellatio','handjob','footjob','tribadism'];
+    if(hasMaleBody && !ACTW.some(w => has(w))){
+      push('sex','vaginal');
+      rep.fixes.push('剧情·正戏无动作兜底');
+    }
+  }
+  /* 单角色：多人体位词（spitroast / mmf / 2boys …）会画出第二个人。
+     例外：3P 块（threesome）本来就是"一女两男"，2boys/threesome 必须留，
+     反过来要剔 1boy（1boy 与 2boys 同框会互相抵消）。 */
+  if(o.forceStory && !((S.chars||[]).length >= 2)){
+    /* tribadism/yuri/lesbian 在单角色块里是"要求两个女人"的语义：只给 1girl，
+       模型只能把同一个角色复制第二份（m05074 #36 实测：两个古明地恋磨豆腐）。 */
+    const _is3P = (String(o.block || '') === 'threesome');
+    const ban3 = ['2girls','3girls','spitroast','ffm_threesome',
+                  'tribadism','yuri','lesbian','scissoring','futanari',
+                  'girl_on_top_pair','mutual_masturbation'];
+    if(_is3P){
+      ban3.push('1boy','male_on_top');            /* 要 2boys，不能同时给 1boy */
+    } else {
+      ban3.push('2boys','3boys','mmf_threesome','group_sex','threesome','1boy','male_on_top');
+    }
+    const nm = cut(ban3);
+    if(nm) rep.fixes.push('剧情·单人剔多人 ' + nm);
+  }
+  /* faceless_male 的 danbooru 语料是"脸被遮/在阴影/根本没画"，会把构图推向
+     背面与遮挡、把姿势带跑（用户 m04399 实测：第 2 张变坐姿对面位、第 3 张变躺姿后入）。
+     全项目不再输出这个词：玩法段直接剔（只留阴茎），正戏段换成 1boy + hetero。 */
+  {
+    const nFM = cut(['faceless_male']);
+    if(nFM){
+      const mFM = maleMode();
+      if(mFM === 'penis'){ push('penis','solo_focus'); }
+      else {
+      const _b5 = String((typeof o !== 'undefined' && o.block) || '');
+      if(_b5 === 'threesome') push('2boys','hetero'); else push('1boy','hetero');
+    }
+      rep.fixes.push('去无脸男（' + mFM + '）' + nFM);
+    }
+  }
+  /* ---- ⑤j 男体形态：invisible_man / disembodied_penis 在 anima 上都画不出来
+     （2026-11-14 真机：前者半透明鬼影，后者一根悬浮；配 pov 只剩半身）。
+     男体一律走 pushMale 三档；双人接触类动作不许 solo；有实体男就不给第一视角。 ---- */
+  if(!famFem){
+    if(maleMode() === 'penis' && a.some(t=>low(t)==='disembodied_penis')){
+      const nx = cut(['faceless_male','invisible_man','1boy','2boys','hetero','invisible_penis']);
+      if(nx) rep.fixes.push('仅阴茎去人形 ' + nx);
+    }
+    const nInv = (maleMode() === 'penis' && (o.forcePhase === 'play' || o.forcePhase === 'foreplay'))
+      ? 0 : cut(['disembodied_penis','invisible_penis','disembodied_hand']);
+    if(nInv) rep.fixes.push('怪男体去悬浮 ' + nInv);
+    const DUAL = ['hug_from_behind','embracing_from_behind','backhug','hand_grab','grabbing_another\'s_breast',
+      'sex','sex_from_behind','vaginal','penetration','doggystyle','spooning','missionary','against_wall','sitting_on_lap',
+      'straddling','cowgirl_position','paizuri','fellatio','handjob','footjob','kiss','french_kiss',
+      'holding_hands','arm_around_shoulder','leaning_on_person','head_on_shoulder','hug'];
+    const nonHuman = a.some(t=>['tentacle_sex','tentacles','tentacle_job','machine_sex','machine','sex_machine']
+      .indexOf(low(t)) >= 0);
+    if(nonHuman){
+      const nm = cut(['1boy','2boys','faceless_male','hetero','invisible_man','male','male_on_top','disembodied_penis','penis']);
+      if(nm) rep.fixes.push('触手/机械去人形 ' + nm);
+    }
+    const dual = !nonHuman && a.some(t=>DUAL.indexOf(low(t))>=0);
+    if(dual){
+      const ns = cut(['solo']);
+      if(ns) rep.fixes.push('双人动作去 solo');
+      /* 用户口径（2026-11-14）：男性角色就该是透明男，不要实体无脸男 */
+      /* 玩法段（口/乳/手/足）用透明男：只要一双手/一根；正戏段必须有可见身体，
+         否则 invisible_man 在 anima 上会被画成"没有人"（用户 2026-11-14 报的后入那张）。 */
+      const sexPhase = (o.forcePhase === 'sex' || o.forcePhase === 'after');
+      if(sexPhase){
+        if(!a.some(t=>low(t) === '1boy')){
+          const ni2 = cut(['invisible_man','disembodied_penis','invisible_penis']);
+          push('1boy','hetero');
+          rep.fixes.push('正戏用可见男体' + (ni2 ? ' 剔透明男 ' + ni2 : ''));
+        }
+      } else if(maleMode() === 'penis'){
+        /* 用户 2026-11-15：口/乳/手/足 只要一根，隐形男老是变无脸男或者多一条腿 */
+        const nf3 = cut(['faceless_male','invisible_man','1boy','2boys','3boys','male','male_focus',
+                         'male_on_top','hetero','invisible_penis']);
+        if(!a.some(t=>low(t) === 'penis')) push('penis');
+        if(!a.some(t=>low(t) === 'solo_focus')) push('solo_focus');
+        if(!a.some(t=>low(t) === 'penis')) push('penis');   // 父类，617k，不给就画不出
+        rep.fixes.push('仅阴茎档' + (nf3 ? ' 去人形 ' + nf3 : ''));
+      } else if(!a.some(t=>low(t) === 'penis')){
+        const nf2 = cut(['faceless_male','1boy','2boys','3boys','male','male_focus','male_on_top','hetero','invisible_man']);
+        push('penis','solo_focus');
+        rep.fixes.push('双人动作用仅阴茎' + (nf2 ? ' 剔实体男 ' + nf2 : ''));
+      }
+      /* 只有"画面里真有一个人形"时 pov 才会崩（pov + faceless_male = 只剩下半身/悬浮，
+         anima_pg_00089）。仅阴茎档是无形的，第一视角反而最好用（用户 m03209）。 */
+      const hasBody = a.some(t => ['1boy','2boys','3boys','faceless_male','male',
+                                   'male_on_top','male_on_bottom','invisible_man'].includes(low(t)));
+      if(hasBody){
+        const np = cut(['pov','pov_hands','pov_crotch']);
+        if(np){
+          rep.fixes.push('实体男不给第一视角 ' + np);
+          const nf = cut(['full_body']);
+          if(nf && !a.some(t=>['cowboy_shot','upper_body','close-up'].includes(low(t)))){
+            push('cowboy_shot');
+            rep.fixes.push('第一视角改七分身');
+          }
+        }
+      }
+    }
+    /* 玩法/前戏段一律仅阴茎：不管这条动作在不在 DUAL 列表里，人形一律剔掉。
+       池条目自带 1boy + hetero 很常见（oral_sex 一半是这样），不剔就会
+       "penis + 1boy" 同框 —— 既想要一根又长出一个男人。 */
+    if(o.forcePhase === 'play' || o.forcePhase === 'foreplay'){
+      const nf4 = cut(['faceless_male','invisible_man','1boy','2boys','3boys','male',
+                       'male_focus','male_on_top','male_on_bottom','hetero','invisible_penis',
+                       'disembodied_penis','disembodied_hand','invisible_man']);
+      if(nf4) rep.fixes.push('玩法段去人形 ' + nf4);
+      push('penis','solo_focus');
+    }
+    /* 剧情模式统一男体：faceless_male 的 danbooru 语义是"脸被遮/在阴影里"，
+       会把构图推向背面遮挡、把姿势带跑（用户 m04399 实测第 2 张变坐姿对面位、
+       第 3 张变躺姿后入）。统一成 1boy + hetero，脸让构图自然处理。 */
+    if(o.forceStory && o.forcePhase !== 'sex' && o.forcePhase !== 'after'
+       && a.some(t=>low(t) === 'faceless_male')){
+      cut(['faceless_male']);
+      push('1boy', 'hetero');
+      rep.fixes.push('剧情·男体统一为 1boy');
+    }
+    /* 「sex」单独一个词、没有任何体位 → 底模自己编，出来就是动作变形 */
+    if(a.some(t=>low(t)==='sex') && !a.some(t=>POSES.indexOf(low(t))>=0)){
+      push('on_back');
+      rep.fixes.push('正戏补姿势');
+    }
+  }
+
+    /* ⑤k 进程词互斥：画面上已经插入了，就不能再挂"即将插入/引导插入" */
+  if(o.forcePhase){
+    const hp = k => a.some(t=>low(t) === k);
+    if((hp('sex') || hp('vaginal') || hp('sex_from_behind') || hp('tentacle_sex')
+        || hp('cum_in_pussy') || hp('creampie') || hp('cum_overflow') || hp('deep_penetration')) &&
+       (hp('imminent_penetration') || hp('guided_penetration'))){
+      const nk = cut(['imminent_penetration','guided_penetration']);
+      if(nk) rep.fixes.push('剧情·已插入去掉"即将插入" ' + nk);
+    }
+  }
+/* ---- ⑦ 手写兜底：词面有性动作、却一个男体词都没有 → 补无脸男（不然只剩单人）
      Anima 里 solo 会让画面锁单人，必须一起去掉。 */
   if(!R && !a.some(x=>['1boy','2boys','3boys','male','male_focus','male_on_top',
-                        'faceless_male','invisible_man','disembodied_penis','hetero'].includes(low(x)))
-     && a.some(t=>PF_SEXISH.some(s=>low(t)===s)) && !/tentacle|machine|futanari|yuri/.test(k)){
-    push('1boy','faceless_male','hetero'); cut(['solo']);
+                        'faceless_male','invisible_man','disembodied_penis','hetero',
+                        'penis','solo_focus'].includes(low(x)))
+     && o.forcePhase !== 'play' && o.forcePhase !== 'foreplay'
+     && a.some(t=>PF_SEXISH.some(s=>low(t)===s))
+     && !/tentacle|machine|futanari|yuri/.test(k)
+     && !/^(solo|machine|tentacle|yuri|voyeur)$/.test(String(o.family||''))){
+    push('1boy','hetero'); cut(['solo']);
     rep.fixes.push('手写场景补无脸男');
   }
   if(a.some(x=>['1boy','2boys','3boys','faceless_male','multiple_boys'].includes(low(x)))) cut(['solo']);
@@ -2068,11 +4044,11 @@ function preflight(tags, opt){
   if(a.some(x=>['2girls','multiple_girls'].includes(low(x))) &&
      a.some(x=>['invisible_man','disembodied_penis','invisible_penis'].includes(low(x)))){
     cut(['invisible_man','disembodied_penis','invisible_penis']);
-    push('faceless_male','hetero');
-    rep.fixes.push('双女里的隐形男升成无脸男');
+    pushMale(push);
+    rep.fixes.push('双女里的仅阴茎升成 ' + maleMode());
   }
 
-  /* ---- ⑥ 视角 / 机位冲突 ----
+  /* ---- ⑥a 视角 / 机位冲突 ----
      · 双人挂 pov：底模会把 2girls 画成"第一人称男性视角"，画面里冒出男性身体（anima_pg_00061）
      · 跨坐 / 坐腿 / 骑乘 + from_behind：从背后拍跨坐，腿的交叠关系没交代，腿会糊成一片（anima_pg_00063）
      · 跨坐 + cowboy_shot：牛仔镜头只到大腿，跨坐的两条腿直接被切掉 */
@@ -2107,6 +4083,16 @@ function preflight(tags, opt){
     ['sex_machine','dildo_riding','vibrator','dildo']
   ];
   let mainG = -1;
+  /* 池子已经说明这是什么行为（tentacle_sex / machine_sex）时，主组按池定，
+     不然条目自带的 fingering / handjob 会先命中，触手词反被当成冲突剔掉 ——
+     实测"触手分区跑出来的图没触手了"。 */
+  if(o.pool){
+    if(/^tentacle/.test(o.pool)) mainG = 4;
+    else if(/^machine/.test(o.pool)) mainG = 5;
+  }
+  /* 预设路径的池名是 'preset'，池名判断失效；场景里出现触手词就按触手主组走，
+     否则 preset 自带的 all_fours/missionary 会先命中，tentacles 反被当冲突删掉 */
+  if(mainG < 0 && a.some(t => /^tentacle/.test(low(t)))) mainG = 4;
   for(let i=0;i<a.length && mainG<0;i++){
     const t0 = low(a[i]);
     for(let g0=0;g0<ACT_GROUPS.length;g0++) if(ACT_GROUPS[g0].indexOf(t0)>=0){ mainG=g0; break; }
@@ -2118,30 +4104,14 @@ function preflight(tags, opt){
       if(g0===mainG) continue;
       ACT_GROUPS[g0].forEach(t0=>{ if(has(t0)) drop2.push(t0); });
     }
-    ACT_GROUPS[mainG].forEach(t0=>{ if(has(t0) && t0!==low(keepAct)) drop2.push(t0); });
+    /* 插入组（1）内部不互斥：missionary + sex + vaginal 是同一件事的不同说法，
+       只留一个姿势词，画面上就没有"在插入"这件事了。 */
+    if(mainG !== 1 && mainG !== 4) ACT_GROUPS[mainG].forEach(t0=>{ if(has(t0) && t0!==low(keepAct)) drop2.push(t0); });
     if(drop2.length){ cut(drop2); rep.fixes.push('单主行为「'+keepAct+'」剔掉 '+drop2.length+' 个冲突动作'); }
   }
 
-  /* ---- 场景词互斥：动作自带的地点/容器与随机地点打架（车里+厨房、浴缸+电车…） ---- */
-  const PLACE_GRP = [
-    ['bed','bedroom','on_bed','pillow','blanket','bedsheet'],
-    ['bathtub','bathroom','shower','showering','bath'],
-    ['car_interior','car','vehicle_interior'],
-    ['train_interior','train'],
-    ['kitchen','counter','dining_table'],
-    ['office','desk','office_chair'],
-    ['classroom','school_desk','blackboard'],
-    ['pool','poolside','swimming_pool'],
-    ['onsen','hot_spring','steam'],
-    ['mirror','bathroom_mirror'],
-    ['cafe','restaurant','table'],
-    ['shrine','torii','hallway'],
-    ['stairwell','stairs','staircase'],
-    ['couch','sofa','living_room'],
-    ['locker','changing_room','locker_room'],
-    ['forest','field','grass','outdoors'],
-    ['beach','ocean','sea'],
-  ];
+  /* ---- 场景词互斥：动作自带的地点/容器与随机地点打架（车里+厨房、浴缸+电车…） ----
+     PLACE_GRP 已提到模块级（composeShot 的剧情锁定也要用同一张表），这里直接复用 */
   const hitGrp = [];
   for(let i=0;i<PLACE_GRP.length;i++){
     const g = PLACE_GRP[i];
@@ -2162,8 +4132,14 @@ function preflight(tags, opt){
                    'reverse_cowgirl_position','face-to-face','sitting_on_face']);
     if(n) rep.fixes.push('第一视角去自体动作 ' + n);
     // 第一视角只可能有一个机位：from_side/from_behind 与 pov 并存 = 两句机位互相打架
-    const n2 = cut(['from_side','from_behind','from_above','from_below','from_front','dutch_angle']);
+    const n2 = cut(['from_side','from_behind','from_above','from_below','dutch_angle']);
     if(n2) rep.fixes.push('第一视角去冲突机位 ' + n2);
+    // 第一视角 + 全身：镜头就在眼睛上，看不到自己的全身；留着会被画成"第三人称+超广角"
+    if(has('full_body')){
+      cut(['full_body']);
+      if(!has('cowboy_shot') && !has('upper_body')) a.push('cowboy_shot');
+      rep.fixes.push('第一视角去全身');
+    }
   }
 
   /* ---- ⑤c 衣物状态锚 ----
@@ -2171,13 +4147,12 @@ function preflight(tags, opt){
         底模要么给她穿得好好的（undressing 被服装压过），要么直接画成裸。
      2) 露出癖同理：exhibitionism 单独出现时模型自由发挥成全裸，
         必须给一件被掀开的衣物兜住（2026-11-09 anima_pg_00017 就是全裸）。 */
-  const UNDRESS = ['undressing','clothes_removed','panty_pull','panties_around_one_leg','panties_aside',
-                   'skirt_lift','shirt_lift','clothes_lift','bra_lift','dress_lift','clothes_pull',
-                   'open_clothes','wardrobe_malfunction','breast_slip','bra_slip','strap_slip',
-                   'hand_under_skirt','hand_under_shirt','clothes_in_mouth','skirt_pull','shirt_pull'];
+  /* UNDRESS 就是 SOFT_HOT 的前 21 项（P1 核对过逐字一致），不再单独维护一份 */
+  const UNDRESS = SOFT_HOT.slice(0, 21);
   const FLASH = ['exhibitionism','public_indecency','flashing','public_nudity','breasts_out','nipple_slip'];
   const hasU = a => a.some(x=>UNDRESS.includes(low(x)));
-  if(hasU(a) && !a.some(x=>['open_clothes','clothes_pull','clothes_lift','skirt_lift','bra_lift','undressing'].includes(low(x)))){
+  if(o.forceGarb !== 'none'
+     && hasU(a) && !a.some(x=>['open_clothes','clothes_pull','clothes_lift','skirt_lift','bra_lift','undressing'].includes(low(x)))){
     a.push('open_clothes');
     rep.fixes.push('脱衣补衣物状态 open_clothes');
   }
@@ -2186,7 +4161,44 @@ function preflight(tags, opt){
   //    抽到脱衣类动作 → 把那几件整件衣服剔掉，只保留"被弄乱的衣物状态"。
   const FULLGARB = ['dress','shirt','skirt','uniform','school_uniform','kimono','yukata','apron',
                     'coat','jacket','robe','suit','hoodie','sweater','sailor_collar','serafuku',
-                    'china_dress','hanfu','miko'];
+                    'china_dress','hanfu','miko',
+                    /* 内衣：2026-11-14 实测正戏段同时出现 panties + completely_nude，模型二选一 */
+                    'panties','bra','underwear','lingerie',
+                    /* 衣物部件（2026-11-15 加）：角色卡的外观词是整串描述，衣服往往只以
+                       部件形式出现 —— 'black boots' / 'gold trim' / 'navy bowtie' /
+                       'juliet sleeves' / 'orange and black front panels'。只认整件的话这些
+                       全漏网，探针实测 grok-tan 全裸段残留 4 条、claude_girl 6 条、
+                       deepseek-tan 5 条，模型据此认为"还穿着衣服"。
+                       不含 socks/stockings/pantyhose：袜子走 sockPick 独立逻辑。 */
+                    'boots','shoes','loafers','sneakers','sandals','heels','mary_janes','mary janes',
+                    'pumps','flats','slippers','thighhigh_boots',
+                    'lining','trim','sash','waistband','panels','collar','lapel',
+                    'brooch','bowtie','necktie','sleeves','cuffs','gloves','belt',
+                    'blouse','vest','scarf','cloak','cape','shawl','codpiece'];
+  /* 子串匹配的误伤清单（实测 wb_outfits 130 条里有 5 条）：
+     maid_headdress 含 dress、swimsuit / track_suit 含 suit、wet_shirt / torn_shirt
+     是衣物状态不是整件衣服。这些一律豁免，否则"抽到脱衣 + 角色穿泳装"会直接变全裸。
+     2026-11-14 提到函数作用域：⑤d（连续剧情的 forceGarb）也要用同一张豁免表。 */
+  const GARB_KEEP = ['maid_headdress','headdress','swimsuit','one-piece_swimsuit','bikini',
+                     'leotard','track_suit','wet_shirt','torn_shirt','swim_briefs'];
+  /* 配饰豁免（2026-11-15 用户口径："头饰什么的 r18 不用脱包括帽子什么的，
+     这些小配饰可以表现角色的，只用脱衣物就行"）：
+     全裸段必须留下能认出角色的小件 —— 王冠、女仆头饰、帽子、发带、缎带、耳饰。
+     bowtie/necktie 例外：名字里带 bow/tie，但它们是衬衫的一环，跟着衣服一起脱。 */
+  const ACC_KEEP = ['headdress','hat','cap','crown','tiara','diadem','veil','halo','horns',
+                    'antlers','hair_ornament','hairpin','hair_flower','hair_bow','hair_ribbon',
+                    'hair_bell','hairband','headband','earring','choker','pendant'];
+  const hasWord = (kk, g) => kk === g || kk.indexOf(g + '_') === 0
+                        || kk.slice(-(g.length + 1)) === ('_' + g)
+                        || kk.indexOf('_' + g + '_') >= 0;
+  const isAcc = t => {
+    const kk = low(t);
+    if(/bowtie|necktie|neckwear|ribbon_tie/.test(kk)) return false;
+    if(hasWord(kk, 'bow') || (kk.indexOf('bow') >= 0 && kk.indexOf('bowtie') < 0)) return true;
+    if(kk.indexOf('ribbon') >= 0) return true;
+    // 必须按词边界比：'cap' 不能命中 'short cape collar'（披肩领是衣服不是帽子）
+    return ACC_KEEP.some(g => hasWord(kk, g));
+  };
   // R18 性交场景不能"整整齐齐穿着"：池里 90% 的条目只有体位没有衣物状态，
   // 模型就把衣服画得板板正正，身体曲线和半遮半掩全没了。
   // 用户 2026-11-14 原话："像是搁这衣服进去的，没有身体曲线，也没有半遮半掩的诱惑"。
@@ -2217,23 +4229,26 @@ function preflight(tags, opt){
     a.push('open_clothes');
     rep.fixes.push('性交场景补衣物敞开');
   }
-  if(hasU(a)){
+  /* 半脱/敞开段不许整件剔：这两段的前提就是"衣服还穿在身上"。
+     首批实测：play/partial 带着 undressing，⑤c 把 serafuku 当"整件衣服"删了 →
+     画面上"半脱"没东西可半脱，直接变全裸。全裸交给 ⑤d 的 none 分支处理。 */
+  /* 全裸段也要剔：forceGarb==='none' 时 completely_nude 是 ⑤d 才补进来的，
+     走到这里 hasU() 还是 false，整件衣物就跟着留下了 —— 实测正戏段同时挂着
+     leotard 和 completely_nude，模型只能二选一，衣服等于白锁。 */
+  if((hasU(a) || o.forceGarb === 'none') && o.forceGarb !== 'partial' && o.forceGarb !== 'open'){
     // 子串匹配：新角色卡里的服装是词组（gothic maid outfit / black red short dress /
     // white frilled dress），只按单词比会把它们全漏掉，结果"动作写了脱衣、衣服纹丝不动"。
     // 但子串匹配会反噬：'skirt' 命中 skirt_lift、'shirt' 命中 open_shirt / shirt_lift、
     // 'dress' 命中 dress_lift —— 这些是衣物**状态**词，删掉就等于把脱衣动作自己抹了。
     // 所以先过 USTATE，状态词一律豁免。
-    /* 子串匹配的误伤清单（实测 wb_outfits 130 条里有 5 条）：
-       maid_headdress 含 dress、swimsuit / track_suit 含 suit、wet_shirt / torn_shirt
-       是衣物状态不是整件衣服。这些一律豁免，否则"抽到脱衣 + 角色穿泳装"会直接变全裸。 */
-    const GARB_KEEP = ['maid_headdress','headdress','swimsuit','one-piece_swimsuit','bikini',
-                       'leotard','track_suit','wet_shirt','torn_shirt','swim_briefs'];
+    /* 误伤豁免表见函数作用域顶部 GARB_KEEP（wb_outfits 140 条里有 5 条会被子串匹配误杀）。 */
     const keep = [];
     let n3 = 0;
     for(const t of a){
       const kk = low(t);
-      const isState = USTATE.some(u => kk === u || kk.indexOf(u) >= 0)
-                      || GARB_KEEP.some(g => kk === g || kk.indexOf(g) >= 0);
+      const isState = isAcc(t)
+                      || USTATE.some(u => kk === u || kk.indexOf(u) >= 0)
+                      || GARB_KEEP.some(g => kk === g);
       if(!isState && FULLGARB.some(w => kk === w || kk.indexOf(w) >= 0)){ n3++; continue; }
       keep.push(t);
     }
@@ -2249,6 +4264,271 @@ function preflight(tags, opt){
     rep.fixes.push('露出补衣物锚 open_clothes');
   }
 
+  /* ---- ⑤d 连续剧情：段位衣物状态是硬约束（opt.forceGarb） ----
+     设计稿原话：「衣物链 full → open → partial → none → partial，强制项，不是建议
+     （否则模型会自己把衣服穿回去）」。⑤c 只保证"抽到脱衣动作时有衣物状态"，
+     管不住"这一段该不该穿" —— 第 4 张抽到 duo_sfw 的日常条目，前面脱掉的全回来了。 */
+  if(o.forceGarb){
+    const G = String(o.forceGarb);
+    /* 用户 2026-11-14：衣服是"状态形容词"，不是"脱衣动作"。
+       undressing / clothes_lift 这类词进了画面就是"双手在脱衣"，跟手交/乳交同框
+       立刻多出一只手；跟足交同框就是"一边脱一边足交"。剧情模式全剔，只留状态词。 */
+    /* 条目自带的 clothed 是"穿得整整齐齐"，跟敞开/半脱/全裸同框时模型会挑最保守的那个 */
+    if(G === 'open' || G === 'partial'){ const nc0 = cut(['clothed']); if(nc0) rep.fixes.push('剧情·去掉"穿好" ' + nc0); }
+    if(G === 'none'){ const nc1 = cut(['clothed','partially_clothed','open_clothes']); if(nc1) rep.fixes.push('剧情·去掉残留衣着状态 ' + nc1); }
+    if(o.forceStory){
+      const nd = cut(['undressing','clothes_lift','clothes_pull','skirt_lift','skirt_pull',
+                      'shirt_lift','shirt_pull','dress_lift','bra_lift','panty_pull',
+                      'clothes_in_mouth','hand_under_skirt','hand_under_shirt',
+                      'adjusting_clothes','getting_dressed','dressing','putting_on_clothes',
+                      'taking_off_clothes']);
+      if(nd) rep.fixes.push('剧情·脱衣动作改状态 ' + nd);
+    }
+    const NUDE_W = ['completely_nude','nude','naked','topless','bottomless','clothes_removed',
+                    'nipple_slip','breasts_out','wardrobe_malfunction','no_bra','no_panties',
+                    'public_nudity'];
+    // 半脱族：注意这些词多数在 USTATE 里（不会被 FULLGARB 当整件衣服删），这里要显式剔
+    const HALF_W = HALF_STRICT.concat(['open_clothes']);
+    if(G === 'full'){
+      // 准备段：一件都不许脱。剔裸词 + 半脱词，也别让 ⑤c 顺手补的 open_clothes 留下来
+      const n = cut(NUDE_W.concat(HALF_W));
+      if(n) rep.fixes.push('剧情·准备去裸/半脱 ' + n);
+    } else if(G === 'none'){
+      // 正戏段：必须真裸。先剔半脱（留着就会画成"穿着裙子全裸"），
+      // 再按整件衣服剔（本人穿的那套 dress/shirt/skirt… 会压过 completely_nude）
+      /* breasts_out / buttons 这类「衣服还在但走光」的词，跟 completely_nude 同框时模型会二选一，
+         正戏段实测出现过 buttons + breasts_out + completely_nude（看起来像没脱） */
+      const n0 = cut(HALF_W.concat(['breasts_out','nipple_slip','shirt_undone','open_shirt',
+                                    'unbuttoned','buttons','clothes_pull']));
+      const keep = [];
+      let n1 = 0;
+      for(const t of a){
+        const kk = low(t);
+        const isState = isAcc(t)
+                        || USTATE.some(u => kk === u || kk.indexOf(u) >= 0)
+                        || GARB_KEEP.some(g => kk === g);
+        if(!isState && FULLGARB.some(w => kk === w || kk.indexOf(w) >= 0)){ n1++; continue; }
+        keep.push(t);
+      }
+      if(n1){
+        a.length = 0;
+        for(const t of keep) a.push(t);
+      }
+      /* 泳装/连体衣在 GARB_KEEP 里（泳装场景要留），但正戏段必须真裸：
+         两者同框模型只能二选一，衣物锁白锁。 */
+      if(G === 'none'){
+        const nKeep = cut(['one-piece_swimsuit','swimsuit','bikini','leotard','track_suit','swim_briefs']);
+        if(nKeep) rep.fixes.push('剧情·正戏去泳装/紧身衣 ' + nKeep);
+        /* 拉链/背带/蕾丝/透明这类「衣服还在」的细节词不在 FULLGARB 里，会漏过去：
+           zipper + bare_back + completely_nude 实测画成开背拉链紧身衣（用户："像兔女郎下身"），
+           因为模型读 zipper 就一定要画一条拉链，而拉链必须长在衣服上。 */
+        const nDet = cut(['zipper','unzipped','zipper_pull','zipper_down','backless','open_back',
+                          'strap','straps','garter_straps','suspenders','see-through','transparent',
+                          'lace','lace_trim','frilled_trim','cleavage','underboob','sideboob',
+                          'shirt_undone','open_shirt','unbuttoned','buttons','hood','hoodie']);
+        if(nDet) rep.fixes.push('剧情·正戏去衣物细节 ' + nDet);
+      }
+      if(!has('completely_nude')) push('completely_nude');
+      if(n0 || n1) rep.fixes.push('剧情·正戏去半脱/整件衣物 ' + (n0+n1));
+    } else if(G === 'partial'){
+      // 玩法/事后段：半脱是底线。全裸留着，动作就变成"裸着玩"，衣物链断了
+      const n = cut(['completely_nude','nude','naked','public_nudity']);
+      /* 判定"已经半脱"只能看真半脱词。
+         用整张 HALF_W 判定会把 open_clothes 也算进去 —— 上一段是 open（敞开），
+         这一段的条目自带 open_clothes 时判定通过、不再补脱，画面就退回敞开状态，
+         衣物链 full→open→partial 在第 2 段原地踏步（首批实测第 7 张回退）。
+         敞开属于上一级，这一段先剔掉，再按真半脱词校验。 */
+      /* HALF_STRICT 已在模块级定义（见 SOFT_HOT 下方），这里直接用 */
+      const nOpen = cut(['open_clothes']);
+      const hasGarment = a.some(t=>FULLGARB.some(w=>low(t) === w));
+      if(o.forcePhase === 'after'){
+        const nam = cut(['1boy','2boys','faceless_male','hetero','invisible_man','disembodied_penis','male','male_on_top']);
+        if(nam){ push('1girl','solo'); rep.fixes.push('剧情·事后无人形 ' + nam); }
+      }
+      if(o.forcePhase === 'after' && (S.storyUndressed || !hasGarment)){
+        /* 这一批已经脱到底（正戏段全裸），事后段"半脱"没有衣服可脱。
+           实测第 6 张：人物光着，却挂 undressing + skirt_lift，画面等于"凭空扒空气"。
+           改成披东西 + 事后余韵词。 */
+        const nH = cut(HALF_STRICT);
+        /* 已经脱光了，"整理衣服/穿回去"跟衣物链只减不增对着干，一并去掉 */
+        cut(['adjusting_clothes','dressing','getting_dressed','putting_on_clothes']);
+        const lg0 = placeGroupOf(((S.storyLock && S.storyLock.place && S.storyLock.place.tags) || []));
+        if(lg0 === 0) push('blanket');
+        push('after_sex');
+        if(!has('messy_hair')) a.push('messy_hair');
+        if(!a.some(t=>['sitting','lying','lying_on_back','lying_on_stomach','on_side','kneeling','seiza']
+          .includes(low(t)))) a.push('lying_on_back');
+        rep.fixes.push('剧情·事后披床单（本批已脱光）' + (nH? ' 剔半脱 '+nH : ''));
+      } else {
+        /* 半脱 = 外观状态，不补脱衣动作（HALF_STRICT 里的词上面已全剔） */
+        if(!has('partially_clothed')) push('partially_clothed');
+      }
+      if(n) rep.fixes.push('剧情·半脱去全裸 ' + n);
+      if(nOpen) rep.fixes.push('剧情·半脱下沉敞开 ' + nOpen);
+    } else if(G === 'open'){
+      // 前戏段：敞开是底线，全裸提前出现会让后两段没有落差
+      const n = cut(['completely_nude','nude','naked','bottomless','topless','public_nudity']);
+      if(!has('open_clothes')) push('open_clothes');
+      if(n) rep.fixes.push('剧情·敞开去全裸 ' + n);
+    }
+    /* 体液也得跟着段位走：准备/前戏段挂着 pussy_juice，等于把戏提前演完
+       （首批实测 10 张全带 pussy_juice，第 1 张穿得整整齐齐却"已经湿了"）。 */
+    if(G === 'full' || G === 'open'){
+      const nw = cut(['pussy_juice','pussy_juice_trail','wet','female_ejaculation',
+                      'squirt','puddle_of_cum','wet_clothes','wet_shirt']);
+      if(nw) rep.fixes.push('剧情·前段去体液 ' + nw);
+    }
+  }
+
+  /* ---- ⑤h 胸围只留一种（2026-11-14 YG） ---- */
+  try{
+    const bp = String((S.bust === undefined || S.bust === null) ? '' : S.bust);
+    const hits = a.filter(t=>BUST_W.indexOf(low(t)) >= 0);
+    if(bp && BUST_TAG[bp]){
+      const want = BUST_TAG[bp];
+      const dup = hits.length === 1 && low(hits[0]) === want;
+      if(!dup){
+        a = a.filter(t=>BUST_W.indexOf(low(t)) < 0);
+        a.push(want);
+        rep.fixes.push('体型·统一为 ' + BUST_ZH[bp] + (hits.length ? ' 剔 ' + hits.length : ''));
+      }
+      if(bp === 'flat'){
+        const nf = a.filter(t=>FLAT_FORBID.indexOf(low(t)) >= 0);
+        if(nf.length){
+          a = a.filter(t=>FLAT_FORBID.indexOf(low(t)) < 0);
+          rep.fixes.push('体型·贫乳去乳交类接触 ' + nf.length);
+        }
+      }
+    } else if(hits.length > 1){
+      const first = low(hits[0]);
+      a = a.filter(t=>BUST_W.indexOf(low(t)) < 0 || low(t) === first);
+      rep.fixes.push('体型·只留一种 ' + (hits.length-1));
+    }
+  }catch(e){ logline("bustFix", "ERR " + e); }
+
+  /* ---- ⑤g 衣服只认"人定的"（2026-11-14 YG） ----
+     动作词库里的具体衣物（hoodie / serafuku / skirt / school_uniform…）会把角色卡自带的衣服顶掉，
+     或者上下半身拼成两套。规矩：剧情模式下具体衣物词只允许两个来源 ——
+     ①角色卡自己烘的；②用户手选的（服饰面板 S.outfit / 自己打的词 S.userTags）。
+     条目自带的整件衣服一律剔掉，只留状态词（open_clothes / undressing / clothes_lift / 裸词）。 */
+  if(o.forceStory){
+    const keepK = (o.keepCloth || []).map(low);
+    const GARMENT = FULLGARB.concat(['pleated_skirt','skirt','blouse','camisole','sweater_vest',
+      'blazer','cardigan','bodysuit','gym_uniform','track_suit','serafuku','sailor','maid','nurse']);
+    const bad = a.filter(t=>{
+      const kk = low(t);
+      if(keepK.indexOf(kk) >= 0) return false;                  // 用户手定的，留着
+      // 状态词（bra_lift / panties_aside / undressing…）不是整件衣服，交给衣物链管
+      if(isAcc(t)) return false;                                // 头饰/帽子/王冠/发饰：脱衣时留着
+      if(USTATE.some(u => kk === u || kk.indexOf(u) >= 0)) return false;
+      if(GARB_KEEP.some(g => kk === g)) return false;
+      return GARMENT.some(w => kk === w || kk.indexOf(w) >= 0);
+    });
+    if(bad.length){
+      const badSet = new Set(bad.map(low));
+      const keepArr = a.filter(t=>!badSet.has(low(t)));
+      a.length = 0;
+      for(const t of keepArr) a.push(t);
+      rep.fixes.push('剧情·衣服只认人定的 ' + bad.length);
+    }
+  }
+
+  /* ⑤i 没穿裙子就别掀裙 ----
+     动作条目爱自带 skirt_lift / skirt_pull，用户没选裙子时画面里就凭空长出一条百褶裙
+     （实测：foreplay 段"衣服全在"时出现 skirt_lift）。没有裙类词就换成通用 clothes_lift。 */
+  try{
+    const SKIRT_W = ['skirt','pleated_skirt','school_uniform','serafuku','sailor_collar',
+      'china_dress','hanfu','kimono','yukata','dress','miko'];
+    const LIFT_W = ['skirt_lift','skirt_pull','pleated_skirt_lift'];
+    const lifts = a.filter(t=>LIFT_W.indexOf(low(t)) >= 0);
+    const hasSkirt = a.some(t=>SKIRT_W.some(w=>low(t) === w));
+    if(lifts.length && !hasSkirt){
+      a = a.filter(t=>LIFT_W.indexOf(low(t)) < 0);
+      if(!a.some(t=>low(t) === 'clothes_lift')) a.push('clothes_lift');
+      rep.fixes.push('服装·没有裙子不做掀裙 ' + lifts.length);
+    }
+  }catch(e){ logline("skirtFix", "ERR " + e); }
+
+  /* ⑥b 丝袜统一（2026-11-14）：类型由人指定，连带足交也照办；没指定就沿用本批第一种。
+     放在最后一道门里，单张/批量/换库三条路都过一遍，不会有一条绕过。 */
+  try{
+    const pick6 = String((S.sockPick === undefined || S.sockPick === null) ? '' : S.sockPick);
+    const keep6 = String(S.sockLock || '');
+    const socks6 = a.filter(t=>SOCK_SET.has(sockKey(t)));
+    const footy6 = a.some(t=>FOOT_ACT.includes(sockKey(t)));
+    if(!pick6){
+      /* 剧情模式里"自动"= 不碰：腿上的东西不许中途出现（实测 play 段才冒出 thighhighs，
+         前面几张光腿，读起来就是"衣服在变"）。要穿就让用户在下拉里指定一种。 */
+      if(socks6.length){
+        a = a.filter(t=>!SOCK_SET.has(sockKey(t)));
+        rep.fixes.push('丝袜·不自动加 ' + socks6.length);
+      }
+    } else if(pick6 === 'none'){
+      if(socks6.length){ a = a.filter(t=>!SOCK_SET.has(sockKey(t))); rep.fixes.push('丝袜·不要袜类 ' + socks6.length); }
+    } else if(pick6){
+      if(socks6.length || footy6){
+        const dup = socks6.length === 1 && sockKey(socks6[0]) === pick6;
+        if(!dup){
+          a = a.filter(t=>!SOCK_SET.has(sockKey(t)));
+          a.push(pick6);
+          rep.fixes.push('丝袜·统一为 ' + (SOCK_ZH[pick6] || pick6));
+        }
+      }
+    } else if(keep6 && socks6.length){
+      const keepK6 = sockKey(keep6);
+      const odd = socks6.filter(t=>sockKey(t) !== keepK6);
+      if(odd.length){
+        a = a.filter(t=>!SOCK_SET.has(sockKey(t)));
+        a.push(keep6);
+        rep.fixes.push('丝袜·沿用本批 ' + (SOCK_ZH[keep6] || keep6) + ' 剔 ' + odd.length);
+      }
+    }
+  }catch(e){ logline("sockFix", "ERR " + e); }
+
+  /* ⑤e 结算词门禁：玩法段（play）是"正在做"，不该出现 cum_on_* / creampie / 中出这类
+     "已经结束"的结果词。实测第 3 张足交条目自带 cum_on_feet，一张就演完，
+     后面几张全成了回放。正戏/事后段才允许结算。 */
+  /* 正戏三张的节奏：即将插入 → 抽送 → 内射。前两张带 cum_* 会直接"已经做完" */
+  if(o.forcePhase === 'sex' && typeof o.forceBeat === 'number'
+     && typeof S.curBlockCount === 'number' && o.forceBeat < S.curBlockCount - 1){
+    const ncs = cut(['cum_in_pussy','creampie','cum_overflow','cum_shot','facial','bukkake',
+                     'excessive_cum','cum_pool','after_sex','afterglow','puddle_of_cum',
+                     'cumdrip','cum','cum_in_ass','cum_on_tongue','cum_on_penis','cum_on_pussy']);
+    if(ncs) rep.fixes.push('剧情·正戏未到点去结算词 ' + ncs);
+  }
+  if(has('from_behind')){
+    const nlv = cut(['looking_at_viewer','looking_back','looking_over_shoulder']);
+    if(nlv) rep.fixes.push('背后机位别回头 ' + nlv);
+  }
+  if(o.forcePhase === 'after'){
+    const npose = cut(['on_lap','sitting_on_lap','straddling','girl_on_top','cowgirl_position',
+                       'reverse_cowgirl_position','mounting','legs_around_waist','carrying']);
+    if(npose) rep.fixes.push('剧情·事后去双人姿势 ' + npose);
+    const naf = cut(['cum_in_pussy','cum_in_ass','cumdrip','creampie','sex','vaginal','sex_from_behind',
+                     'all_fours','missionary','cowgirl_position']);
+    if(naf){ push('cum_overflow','after_sex'); rep.fixes.push('剧情·事后换事后痕迹 ' + naf); }
+    const naa = cut(['from_behind']);
+    if(naa) rep.fixes.push('剧情·事后不背对镜头 ' + naa);
+  }
+  if(o.forcePhase === 'play' && !o.finale){
+    const CUM_W = CUM.concat([
+      /* 只在"结算"语境才需要、不进 CUM 通用检测的补充词 */
+      'cum_on_feet','cum_on_hands','cum_on_thighs','cum_shot','ejaculation',
+      'cum_on_penis','cum_on_fingers','cum_pool','puddle_of_cum','cum_in_eye',
+      'cum_on_glasses']);
+    const nw2 = cut(CUM_W);
+    if(nw2) rep.fixes.push('剧情·玩法段去结算词 ' + nw2);
+  }
+  /* ---- ⑤f 块末射精收尾 ----
+     每个动作块的最后一张要有"射了"的结果，观众才知道这一轮结束了、下一张是新动作。
+     不标 finale 的行仍然按 ⑤e 剔干净（过程里不该出现结算词）。 */
+  if(o.finale && o.block && FINALE_W[o.block]){
+    const want5 = FINALE_W[o.block];
+    if(!want5.some(w => has(w))){
+      want5.forEach(w => { if(!has(w)) a.push(w); });
+      rep.fixes.push('剧情·块末收尾 ' + want5.join('+'));
+    }
+  }
   // 4) 时间词只能有一个：morning + night + rain 同时出现，模型会画成"看不出来的怪天色"
   const DAY_W = ['morning','day','afternoon','noon','sunrise','dawn'];
   const NIGHT_W = ['night','midnight','starry_sky','moonlight','evening','dusk','sunset'];
@@ -2276,13 +4556,11 @@ function preflight(tags, opt){
     {cut:['close-up','upper_body'], add:['full_body'],
      when:['sex','vaginal','anal','double_penetration','doggystyle','missionary','sex_from_behind',
             'tribadism','cunnilingus','fingering','girl_on_top','69','sitting_on_face','scissoring',
-            'paizuri','irrumatio','handjob','thigh_sex','group_sex','spitroast',
+            'irrumatio','group_sex','spitroast',
             'cowgirl_position','reverse_cowgirl_position','straddling','all_fours','leg_lift',
             'standing_sex','mating_press','spooning','upright_straddle','suspended_congress',
             'prone_bone','full_nelson','piledriver','amazon_position','squatting_cowgirl_position',
             'deep_penetration','tentacle_sex','sex_machine','dildo_riding','object_insertion'], zh:'性交动作要全身'},
-    {cut:['from_behind'], add:['from_side'],
-     when:['leg_lift','standing_sex'], zh:'抬腿/站立后入腿位置无解'},
   ];
   for(let i=0;i<VFIX.length;i++){
     const v = VFIX[i];
@@ -2309,10 +4587,308 @@ function preflight(tags, opt){
     if(noFace.length){ cut(noFace); rep.fixes.push('无脸男不能对视'); }
   }
   // 多人 + 倾斜机位：两人肢体交界处最容易糊
+  /* 第一视角只在玩法/正戏段：准备段挂 pov = 相机替人物演，人还没进场 */
+  /* 第一视角保留（用户 m03209：前戏仅阴茎、插入用第一视角都没问题）。
+     只挡两件事：① 非玩法/正戏段不许有（准备段挂 pov = 相机替人物演）；
+     ② pov + 实体男 = 只剩下半身/悬浮（实测 anima_pg_00089），改仅阴茎档。 */
+  if(o.forcePhase && o.forcePhase !== 'play' && o.forcePhase !== 'sex'){
+    const npv = cut(['pov','pov_hands','pov_crotch']);
+    if(npv) rep.fixes.push('第一视角只留玩法/正戏 ' + npv);
+  }
+  if(has('pov') || has('pov_penis') || has('povpenis')){
+    const nm = cut(['faceless_male','1boy','2boys','3boys','male','invisible_man','invisible_penis']);
+    if(nm){
+      push('penis','solo_focus');
+      rep.fixes.push('第一视角去实体男 ' + nm);
+    }
+  }
+    /* 机位与姿势必须对位：正面位配"从背后"、后入配"第一视角"、口交配"从背后"，
+     都拍不到正在发生的事（用户 2026-11-14 报的"后入那一张直接没有人"）。 */
+  {
+    ANG_OK2 = [
+      {w:['missionary','mating_press','on_back','spread_legs','legs_up','leg_lock'],
+       ok:['from_side','from_above','foreshortening','internal_cumshot','dutch_angle'],
+       bad:['from_behind','from_below']},
+      /* 后入只能从背后拍：from_side 拍出来是"侧入"、from_above/foreshortening 是
+         "正面骑乘"错觉（用户 m05464 #29/#30/#31 三张全中） */
+      {w:['sex_from_behind','doggystyle','doggy_style','all_fours','bent_over','top_down_bottom_up'],
+       ok:['from_behind','internal_cumshot'],
+       bad:['pov','from_below','from_side','from_above','foreshortening']},
+      {w:['cowgirl_position','reverse_cowgirl_position','girl_on_top','straddling','mounting'],
+       ok:['from_side','from_above','from_below','internal_cumshot'],
+       bad:['from_behind']},
+      {w:['standing_sex','carrying','leg_lift','legs_up'],
+       ok:['from_side','from_behind','foreshortening'], bad:['from_above','from_below']},
+      {w:['fellatio','licking_penis','blowjob','deepthroat','cum_in_mouth'],
+       ok:['from_side','from_above','foreshortening','pov'], bad:['from_behind']},
+      /* 触手/机械：这两个词域在六条 w 列里零命中，规则等于空转（2026-11-15 补） */
+      {w:['tentacle_sex','tentacles','tentaclejob','tentacle_in_mouth','tentacles_under_clothes','stomach_bulge'],
+       ok:['from_side','from_above','from_below','internal_cumshot'], bad:['from_behind','pov']},
+      {w:['sex_machine','object_insertion','dildo_riding','vibrator','sex_toy','mechanical_arms'],
+       ok:['from_side','from_above','from_below','internal_cumshot'], bad:['from_behind','pov']},
+      /* 侧入：躺着翻身，斜一点也能读；不给 pov/from_below（下往上拍会糊成一团） */
+  {w:['on_side'], ok:['from_side','from_above','dutch_angle','foreshortening'], bad:['pov','from_below','from_behind']},
+  /* 3P：只认侧面全景，其它机位三个人会互相遮挡 */
+  {w:['threesome','group_sex','2boys','mmf_threesome'], ok:['from_side'], bad:['pov','from_below','from_behind','from_above']},
+  {w:['footjob','toes','soles','thigh_sex'],
+       ok:['from_side','from_above','from_below','foreshortening'], bad:['from_behind','pov']}
+    ];
+    const cur = (ANGLES || []).map(x=>low(x)).filter(x=>has(x));
+    /* 块优先：doggy 的条目常带 spread_legs/legs_up，按词面会先命中 missionary 那条，
+       from_side 就被当合法机位放行 —— 图上就是侧入（用户 m05464 #26/#28/#29）。 */
+    const BLOCK_ANG = {missionary:0, doggy:1, ride:2, stand:3, oral:4, tentacle:5, machine:6, footjob:7, side:8, threesome:9};
+    const bi0 = BLOCK_ANG[String(o.block || '')];
+    for(let gi0 = 0; gi0 < ANG_OK2.length; gi0++){
+      const g = ANG_OK2[gi0];
+      if(bi0 !== undefined ? gi0 !== bi0 : !g.w.some(w=>has(w))) continue;
+      /* 白名单：不在 ok 里的一律算错（原来只剔 bad，foreshortening 这种
+         "不在 bad 也不在 ok"的灰色机位直接放行 → 后入画成正面骑乘） */
+      const bad = cur.filter(a => g.bad.indexOf(a) >= 0 || g.ok.indexOf(a) < 0);
+      if(!bad.length) continue;
+      const nbad = cut(bad);
+      const keep = cur.filter(a => bad.indexOf(a) < 0);
+      let pick2 = '';
+      if(!keep.length){
+        pick2 = g.ok.filter(a => (S.lastAng || '').split(',').indexOf(a) < 0)[0] || g.ok[0] || '';
+        if(pick2) push(pick2);
+      }
+      rep.fixes.push('机位与姿势对位 · 剔 ' + nbad + (pick2 ? ' 补 ' + pick2 : ''));
+      break;
+    }
+  }
+  if(has('dutch_angle') && has('full_body')){
+    cut(['dutch_angle']); rep.fixes.push('倾斜机位配全身会糊');
+  }
   if(has('dutch_angle') && (has('group_sex') || has('spitroast') || has('threesome'))){
     cut(['dutch_angle']); rep.fixes.push('倾斜机位多人会糊');
   }
 
+  /* 崩脸防护（2026-11-14 实测：第 7 张"被人从背后贴着耳语"整个人头扭曲）：
+     两个头贴在一起 + 全身 + 侧视 = 头部只剩几十像素，底模画不清，头就糊成一团；
+     再叠 4 个极端表情 + 气泡，脸一定崩。三条规则一起上： */
+  const HEAD_NEAR = ['whispering','ear_biting','nibbling_ear','breath_on_neck','neck_kiss',
+    'hug_from_behind','embracing_from_behind','backhug','head_on_shoulder','leaning_on_shoulder',
+    'kiss','french_kiss','nose_to_nose','cheek_to_cheek','face_to_face','headpat'];
+  const headNear = HEAD_NEAR.filter(k2=>has(k2));
+  if(headNear.length){
+    if(has('full_body')){
+      // 贴耳/抱在怀里本来就是从背后拍最好看，侧视还会把两个头并成一个
+      /* 只在"这一姿势允许背后机位"时才换背后，否则会把机位对位刚剔掉的 from_behind 装回去
+       （正面位/口交/骑乘/足交从背后拍 = 拍不到正在发生的事）。 */
+    const backBad = ANG_OK2.some(g => g.w.some(w=>has(w)) && g.bad.indexOf('from_behind') >= 0);
+    if(has('from_side')){
+      cut(['from_side']);
+      if(!backBad && !has('from_behind')) a.push('from_behind');
+      else if(backBad && !has('from_above')) a.push('from_above');
+    }
+      cut(['full_body']); if(!has('cowboy_shot')) a.push('cowboy_shot');
+      rep.fixes.push('贴头动作改七分身/背面（防崩脸）');
+    }
+    if(has('speech_bubble')){ cut(['speech_bubble']); rep.fixes.push('贴脸不塞气泡'); }
+  }
+  const MOOD_EXT = ['ahegao','rolling_eyes','torogao','drooling','tongue_out','tears',
+                    'excessive_saliva','hollow_eyes','empty_eyes'];
+  const moodHit = MOOD_EXT.filter(k2=>has(k2));
+  /* 口交是"脸朝下/侧脸含住"，再叠半闭眼/闭眼就是一团糊（用户 m05464） */
+  if(String(o.block || '') === 'oral'){
+    const ne = cut(['half-closed_eyes','closed_eyes','torogao','ahegao']);
+    if(ne) rep.fixes.push('剧情·口交不用眯眼表情 ' + ne);
+  }
+  const moodCap = (has('full_body') || headNear.length) ? 2 : 3;
+  if(moodHit.length > moodCap){
+    cut(moodHit.slice(moodCap));
+    rep.fixes.push('表情堆叠砍到 '+moodCap+' 个（防崩脸）');
+  }
+  if(has('speech_bubble') && has('full_body')){
+    cut(['speech_bubble']); rep.fixes.push('全身图不塞气泡');
+  }
+  /* ⑥c 姿势物理互斥：动作库是"单条原子"，两条不同体位的词叠在一起时模型只能瞎猜，
+     实测出来的就是"站着又躺着""骑乘还压床"这种看不出人形的构图。
+     规则：按命中数定主姿势组，其它组的词一律剔掉（同组内部保留，组内是兼容的）。 */
+  const POSE_GRP = [
+    {id:'stand', w:1, t:['standing','standing_on_one_leg','leaning_forward','leaning_back','against_wall','against_tree','against_window','wall']},
+    {id:'lie',   w:1, t:['lying','lying_on_back','lying_on_stomach','on_back','on_stomach','on_side','spread_legs']},
+    {id:'sit',   w:2, t:['sitting','seiza','kneeling','on_lap','sitting_on_lap','legs_folded']},
+    {id:'ride',  w:3, t:['girl_on_top','straddling','cowgirl_position','reverse_cowgirl_position','mounting','sitting_on_face']},
+    {id:'lift',  w:3, t:['carrying','carried','piledriver','full_nelson','standing_sex','suspension']},
+    {id:'bend',  w:2, t:['bent_over','all_fours','on_all_fours','doggy_style','arched_back','top_down_bottom_up']}
+  ];
+  const poseHits = POSE_GRP.map((g,gi)=>({gi, g, hit:g.t.filter(t=>has(t))})).filter(x=>x.hit.length);
+  const poseLocked = !!(o.forceStory && o.forcePhase && S.curBlockPose && S.curBlockPose.length);
+  if(poseLocked){
+    /* 块内体位优先：把不在本块体位里的姿势词直接剔掉，不做"权重投票" */
+    const lockSet = {};
+    S.curBlockPose.forEach(w=>{ lockSet[String(w).toLowerCase().replace(/[\s-]+/g,'_')] = 1; });
+    (S.curBlockSub || []).forEach(one => (one || []).forEach(w=>{
+      lockSet[String(w).toLowerCase().replace(/[\s-]+/g,'_')] = 1; }));
+    Object.keys(blockSignedPose(String(o.block || ''))).forEach(k=>{ lockSet[k] = 1; });
+    const allPose = POSE_GRP.reduce((acc,g)=>acc.concat(g.t), []);
+    const off = allPose.filter(t=>!lockSet[String(t).toLowerCase().replace(/[\s-]+/g,'_')] && has(t));
+    if(off.length){
+      const no = cut(off);
+      if(no) rep.fixes.push('剧情·体位锁优先剔 ' + no);
+    }
+  } else if(poseHits.length >= 2){
+    // 具体体位（骑乘/抱起/后入）比「站着 / 躺着」更该保留：先乘 weight 再比命中数
+    poseHits.sort((x,y)=> (y.hit.length*(y.g.w||1)) - (x.hit.length*(x.g.w||1)) || x.gi - y.gi);
+    const main = poseHits[0];
+    const drop = [];
+    poseHits.slice(1).forEach(x=>x.hit.forEach(t=>{ if(!main.hit.includes(t)) drop.push(t); }));
+    if(drop.length){
+      const n2 = cut(drop);
+      if(n2) rep.fixes.push('姿势互斥·只留「'+main.g.id+'」剔 '+n2+' 个（'+drop.slice(0,3).join('/')+'）');
+    }
+  }
+
+  /* ---- ⑧ 块特征词兜底（P6-L）----
+     bdsm/tentacle/machine/hypno 四块的"身份词"必须出现在终稿里，否则块名叫"调教"、
+     画面是普通正戏。composeShot 的 add/sub/pose 三条通道都会被前面 24 道规则中的
+     某一条剔掉（逐条追太贵），这里按块 id 兜一次。 */
+  try{
+    const BID = String(o.block || '');
+    /* 四块的"身份词"和历史特例 */
+    const FEAT = {
+      bdsm:    ['bound_wrists'],
+      tentacle:['tentacle_sex','tentacles'],
+      machine: ['sex_machine','object_insertion','vibrator','dildo'],
+      hypno:   ['hypnosis','mind_control'],
+      /* 站立抱起块的支撑面就是 carrying —— bdsm 层的 banPose 里也有它
+         （"绑着还抱起"互相打），叠层那张会被剔掉，这里保底补回。 */
+      stand:   ['carrying']
+    };
+    /* 通用兜底：块名就是画面。骑乘块出图变正面位、站立块没有抱起，
+       根子是体位词在 24 条规则里被某一条剔掉后再没人补回来 —— 逐条追太贵，
+       这里按块签名保底：一个签名都不剩就补第一个。 */
+    const SIG = (typeof BLOCK_SIG !== 'undefined' && BLOCK_SIG[BID]) || null;
+    const want = FEAT[BID] || SIG;
+    if(want && want.length){
+      /* 首项是块的高频代表词（missionary 51550 / cowgirl_position 57634 /
+         carrying 67477）。只看"任一项在不在"会被低频同义词顶掉：
+         预设自带 mating_press(6611) 就算命中，missionary 永远补不进来 ——
+         正面位出图变坐姿后入就是这么来的。 */
+      const lowA = a.map(low);
+      const hasOne = want.some(w => lowA.indexOf(low(w)) >= 0);
+      const hasTop = lowA.indexOf(low(want[0])) >= 0;
+      if(!hasOne){ push(want[0]); rep.fixes.push('剧情·块签名兜底 ' + want[0]); }
+      else if(!hasTop){ push(want[0]); rep.fixes.push('剧情·块签名补高频词 ' + want[0]); }
+    }
+  }catch(e){ logline("featFix", "ERR " + e); }
+
+  /* ---- ⑦a 非人块：机械/触手压根不该有男人 ----
+     POOL_RULE 的 machine_sex/tentacle_sex 都是 m:0，但预设路径的池名是 'preset'，
+     R 取不到 → 走 else 分支补男 → 机械图里长出一个 1boy（用户 m05464 #47）。
+     这里按块 id 兜一层，与池名无关。 */
+  {
+    const fb = String(o.block || '');
+    if(fb === 'machine' || fb === 'tentacle'){
+      const nf3 = cut(['1boy','2boys','3boys','male','male_focus','male_on_top','male_on_bottom',
+                       'faceless_male','invisible_man','hetero','penis','disembodied_penis',
+                       'invisible_penis','penis_grab','male_face','male_torso']);
+      if(nf3) rep.fixes.push('剧情·非人块去人形 ' + nf3);
+      if(fb === 'tentacle' && !a.some(t=>/^tentacle/.test(low(t)))) push('tentacles');
+      if(fb === 'machine' && !a.some(t=>['object_insertion','sex_machine','vibrator','dildo'].indexOf(low(t))>=0)) push('object_insertion');
+    }
+  }
+
+  /* ---- ⑦b 复合层（催眠/调教）----
+     hypno_sex 池 52 条里 17 条自带 faceless_male、bdsm_sex 59 条里 37 条自带，
+     不在这里再剔一遍，前面 ⑤j/⑦ 剔完又会被池子里的话术补回来。 */
+  try{
+    const mID = String(o.mod || '');
+    if(mID === 'hypno' || mID === 'bdsm'){
+      const MD = MOD_DEFS.filter(x => x.id === mID)[0];
+      if(MD){
+        /* 一行只挂一个层：先把别的层的 tone/look 剥净（池条目会在铺词阶段把别的层词带回来） */
+        {
+          const _o2 = [];
+          (MOD_DEFS || []).forEach(m => { if(m.id !== MD.id) _o2.push.apply(_o2, (m.tone||[]).concat(m.look||[])); });
+          const _o2s = new Set(_o2.map(low));
+          const _dd = a.filter(x => _o2s.has(low(x)));
+          if(_dd.length){
+            const _ddn = cut(_dd);
+            if(_ddn) rep.fixes.push('剧情·去别层词 ' + _ddn);
+          }
+        }
+        /* 绑手臂 + 趴着 = 画面变成"被绑着趴在那"，插入读不出来（用户 m05464 #28）。
+           后入块只绑手腕/前臂，保留支撑。 */
+        if(String(o.block || '') === 'doggy'){
+          const nb = cut(['bound_arms','armbinder','arms_bound_above_head','bound_elbows']);
+          if(nb && !a.some(t=>low(t)==='bound_wrists')) push('bound_wrists');
+          if(nb) rep.fixes.push('剧情·后入只绑手腕 ' + nb);
+        }
+        if(MD.banPose && MD.banPose.length){
+          const signP2 = blockSignedPose(String(o.block || ''));
+          const bp2 = new Set(MD.banPose.map(low).filter(k => !signP2[k]));
+          const nb = a.length;
+          a = a.filter(t => !bp2.has(low(t)));
+          if(nb !== a.length) rep.fixes.push('剧情·' + MD.zh + '去冲突姿势 ' + (nb - a.length));
+        }
+        const td = MD.deny || [];
+        if(td.length){
+          const nd = cut(td);
+          if(nd) rep.fixes.push('剧情·' + MD.zh + '去男体 ' + nd);
+        }
+        /* 身份词必须活下来 */
+        const want2 = MD.tone || [];
+        if(want2.length && !want2.some(w => a.some(t => low(t) === low(w)))){
+          push(want2[Math.floor(Math.random() * want2.length)]);
+          rep.fixes.push('剧情·' + MD.zh + '身份词兜底');
+        }
+      }
+    }
+  }catch(e){ logline("modFix", "ERR " + e); }
+
+  /* ---- ⑦c 无层行最终清场（P7-K）----
+     composeShot 的入场清场挡不住"同块第 2 张仍带 hypnosis"（层词在清场之后又被塞回来）。
+     这里用行级真实值 o.mod 收口：没挂层就把两层的 tone/look 全部剥净。 */
+  try{
+    if(o.forceStory && !o.mod){
+      const _all = [];
+      (MOD_DEFS || []).forEach(m => { _all.push.apply(_all, (m.tone||[]).concat(m.look||[])); });
+      const _ks = new Set(_all.map(low));
+      const _d = a.filter(x => _ks.has(low(x)));
+      if(_d.length){
+        const _dn = cut(_d);
+        if(_dn) rep.fixes.push('剧情·未挂层去层词 ' + _dn);
+      }
+    }
+  }catch(e){ logline("modClean", "ERR " + e); }
+  /* 机位真空兜底（定稿前最后一道）：一个机位词都没有的行在 190 张抽卡里占 10%，
+     看图时等于"块名说了侧面、图上没交代视角"。补最通用的 from_side。 */
+  try{
+    if(o.forceStory){
+      const _CAM = (ANGLES || []).map(low);
+      if(!a.some(x => _CAM.indexOf(low(x)) >= 0)){
+        /* 按块挑该块自己的合法机位，别一律 from_side —— 那是把"没机位"
+           换成"全是侧面"，190 张里 from_side 会被顶到一半 */
+        let _fb = '';
+        try{
+          const _bid = String(o.block || '');
+          const _i = Object.keys(BLOCK_ANG || {}).indexOf(_bid);
+          const _ok = (_i >= 0 && ANG_OK2 && ANG_OK2[BLOCK_ANG[_bid]]) ? (ANG_OK2[BLOCK_ANG[_bid]].ok || []) : [];
+          if(_ok.length) _fb = _ok[0];
+        }catch(e){}
+        a.push(_fb || 'from_side');
+        rep.fixes.push('剧情·机位兜底 ' + (_fb || 'from_side'));
+      }
+    }
+  }catch(e){ logline("camFix", "ERR " + e); }
+
+  /* 固定机位最后再钉一次：composeShot 定了 from_side，但 ⑥a 视角冲突 / VFIX /
+     崩脸三条都会改机位（3P 那行被"贴头动作"改成 from_above，190 张抽卡实测 1 行）。
+     块级 fixedAng 是硬约束，任何上游规则都不许翻。 */
+  if(o.block && typeof BLOCK_BY_ID !== 'undefined' && BLOCK_BY_ID[o.block] && BLOCK_BY_ID[o.block].fixedAng){
+    const _fa = BLOCK_BY_ID[o.block].fixedAng;
+    const _n3 = cut(ANGLES.filter(x => x !== _fa));
+    if(!has(_fa)) push(_fa);
+    if(_n3) rep.fixes.push('剧情·固定机位 ' + _fa);
+  }
+  /* 3P：2boys 与 1boy 同框会互相抵消（danbooru 计数冲突），有 2boys 就必须剔 1boy */
+  if(String(o.block || '') === 'threesome' && a.some(t => low(t) === '2boys')){
+    const n1b = cut(['1boy', '1girl']);
+    if(n1b) rep.fixes.push('剧情·3P去单人计数 ' + n1b);
+    if(!a.some(t => low(t) === '1girl')) push('1girl');
+  }
   rep.kind = k;
   rep.pool = R ? o.pool : '';
   rep.n = a.length;
@@ -2331,9 +4907,11 @@ function pfShow(rep, tagN){
 
 function pfDryRun(){
   try{
-    const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh});
+    const pf = preflight(S.tags, {kind: S.sceneKind, pool: S.scenePool, zh: S.sceneZh,
+      forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(S.sceneType||''), quietUndress: !!S.quietUndress,
+    mod: String(S.curMod||''), block: String(S.curBlockKey||'').split('@')[0], niche: !!S.curBlockNiche, forceStory: !!S.story, keepCloth: (S.outfit||[]).concat(S.userTags||[])});
     pfShow(pf.rep, pf.tags.length);
-  }catch(e){}
+  }catch(e){ logline("pfDryRun", "ERR " + e); }
 }
 
 /* ============ 绑定 ============ */
@@ -2365,6 +4943,8 @@ function bind(){
   $("studioRoll").onclick=rollAll;
   $("btnGen").onclick=generate;
   $("btnBatch").onclick=batchRun;
+  // 上次跑批中途崩了会把 btnBatch 留在 disabled；刷新后必须复位，否则按钮永远"按不了"
+  try{ $("btnBatch").disabled = false; $("btnPause").disabled = true; S.batch = false; }catch(e){}
   $("btnLog").onclick=showLog;
   $("btnPause").onclick=()=>{
     if(!S.batch){ toast("没有在跑的批量"); return; }
@@ -2399,9 +4979,33 @@ function bind(){
   }, {passive:false});
 }
 
-const SFW_CATS = ["style","artist","composition","camera","lighting","base","body","pose","expression","hair","face","clothing","accessory","environment","weather","props","extra","text"];
 /* 随机一套 = 与批量完全同一套组合逻辑（composeShot 抽池 → 合并角色/服装 → 审查），
    不再用旧的"随机 5–9 个类别标签"，否则同一个种子在单张和批量里行为不一致。 */
+/* 本批回放：把上一批的 JSON 拿出来（控制台 wbStoryDump() 直接打印并可复制） */
+window.wbStoryDump = function(){
+  const s = localStorage.getItem('wb_story_last_v1') || '';
+  if(!s){ toast('还没有连续剧情的批次记录'); return ''; }
+  try{ console.log(s); }catch(e){}
+  try{ navigator.clipboard.writeText(s); toast('已复制本批 JSON（'+s.length+' 字符）'); }
+  catch(e){ toast('已打印到控制台（'+s.length+' 字符）'); }
+  return s;
+};
+/* 把记录重新灌回页面：动作词直接复原，用来复现"这一批到底抽了什么" */
+window.wbStoryReplay = function(idx){
+  const s = localStorage.getItem('wb_story_last_v1') || '';
+  if(!s){ toast('还没有批次记录'); return false; }
+  let o; try{ o = JSON.parse(s); }catch(e){ return false; }
+  const one = (typeof idx === 'number') ? (o.shots||[])[idx] : null;
+  if(one){
+    setTags(one.tags || []); cleanTags();
+    $("qSeed").value = one.seed || '-1';
+    toast('已复原第 '+((idx)+1)+' 张 · '+one.phase+' · '+one.shot);
+    return true;
+  }
+  logline("replay", "tier="+o.tier+" baseSeed="+o.baseSeed+" shots="+(o.shots||[]).length);
+  toast('本批共 '+((o.shots||[]).length)+' 张（控制台 wbStoryDump() 看全部）');
+  return true;
+};
 function rollLibrary(){
   const sc = composeShot(0,1);
   if(!sc){ toast("抽取失败：池为空"); return; }
@@ -2412,13 +5016,20 @@ function rollLibrary(){
   S.sceneTags = sc.tags.slice(); S.sceneName = sc.zh; S.lastLv = sc.lv;
   setTags(normTags(uniq((S.userTags||[]).concat(S.chars||[]).concat(S.outfit||[]).concat(styleTrigTags())).concat(sc.tags)));
   cleanTags(); refreshNeg(true);
-  const pf = preflight(S.tags, {kind:S.sceneKind, pool:S.scenePool, zh:S.sceneZh});
+  const pf = preflight(S.tags, {kind:S.sceneKind, pool:S.scenePool, zh:S.sceneZh,
+    forceGarb: S.sceneGarb || '', forcePhase: S.scenePhase || '', finale: !!S.curBlockFinale, forceBeat: (typeof S.sceneBeat==='number'?S.sceneBeat:undefined), family: String(S.sceneType||''), quietUndress: !!S.quietUndress,
+    mod: String(S.curMod||''), block: String(S.curBlockKey||'').split('@')[0], niche: !!S.curBlockNiche, forceStory: !!S.story, keepCloth: (S.outfit||[]).concat(S.userTags||[])});
   S.tags = pf.tags; syncText(); pfShow(pf.rep, S.tags.length);
   toast("随机：" + (sc.zh||"组合") + (pf.rep.fixes.length? " · 审查修 "+pf.rep.fixes.length : ""));
 }
 
+function safe(fn, tag){
+  /* 一个 id 写错不该让整页骨架变白：每段初始化独立兜住，错进 logline（2026-11-14 修） */
+  try{ fn(); }catch(e){ logline("uiErr", tag + " " + e); try{ console.error("[ui] "+tag, e); }catch(_){} }
+}
+
 (async function boot(){
-  bind();
+  safe(bind, "bind");
   try{ await loadData(); }catch(e){ console.error("boot/loadData", e); $("stat").textContent="数据加载失败 "+(e&&e.stack||e); return; }
   try{ const r = await fetch('/api/styles'); const j = await r.json();
     if(j.ok){ S.lib.styles = j.styles || []; S.styleId = j.current || null; }
@@ -2426,20 +5037,55 @@ function rollLibrary(){
   try{ const r2 = await fetch('/api/anima/chars'); const j2 = await r2.json();
     if(j2.ok){ S.lib.charsLora = j2.chars || []; S.charId = j2.current || null; }
   }catch(e){ console.error("boot/charLora", e); }
-  renderLib(); renderStudio(); syncText();
-  $("neg").value = defaultNeg();
-  $("stat").textContent += " · 就绪";
+  safe(renderLib, "renderLib"); safe(renderStudio, "renderStudio"); safe(syncText, "syncText");
+  safe(()=>{ $("neg").value = defaultNeg(); }, "neg");
+  safe(()=>{ $("stat").textContent += " · 就绪"; }, "stat");
 })();
-window.addEventListener('error', ()=>{ window.__ERR = (window.__ERR||0)+1; });
+window.addEventListener('error', (e)=>{ window.__ERR = (window.__ERR||0)+1;
+  try{ logline("jsErr", (e && (e.message||e.type)) || "?"); }catch(_){} });
 </script>
 </body>
 </html>
 """
 
 
+def _script_of(html):
+    i = html.find("<script>")
+    j = html.find("</script>", i)
+    if i < 0 or j < i:
+        return ""
+    return html[i + len("<script>"):j]
+
+
+def check_js(html):
+    """写出前先给内联 JS 做语法检查：JS 全在 HTML 内联 script 里，写错一个字就是整页空白。
+    node 不在 PATH 就退回只做长度校验，不阻塞生成。"""
+    js = _script_of(html)
+    if len(js) < 2000:
+        raise SystemExit("生成中止：没抽到 <script>（len=%d）" % len(js))
+    import subprocess, tempfile
+    tf = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8")
+    try:
+        tf.write(js)
+        tf.close()
+        r = subprocess.run(["node", "--check", tf.name], capture_output=True, text=True,
+                            encoding="utf-8", errors="replace")
+        if r.returncode != 0:
+            raise SystemExit("生成中止：JS 语法错误\n" + (r.stderr or r.stdout))
+        return js, ""
+    except FileNotFoundError:
+        return js, "（node 不在 PATH，跳过语法检查）"
+    finally:
+        try:
+            os.unlink(tf.name)
+        except Exception:
+            pass
+
+
 def main():
+    js, note = check_js(HTML)
     io.open(OUT, "w", encoding="utf-8").write(HTML)
-    print("wrote", OUT, os.path.getsize(OUT), "bytes")
+    print("wrote", OUT, os.path.getsize(OUT), "bytes / js", len(js), "chars", note)
 
 
 if __name__ == "__main__":

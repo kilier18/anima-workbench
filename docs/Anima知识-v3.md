@@ -1,50 +1,47 @@
 # Anima 生图知识 3.1
 
-> 配套 `手册-v3.md`。所有数字都是本机实测（RTX 40 系 + 32GB 内存，ComfyUI 便携版）。
-> 3.1 起 WAI v17 已下线，本文只写 Anima；WAI 的历史对照留在下表以便看懂旧记录。
+> 配套 `workbench-维护手册.md`。所有数字都是本机实测（RTX 40 系 + 32GB 内存，ComfyUI 便携版）。
+> 3.1 起 WAI v17 已下线，本文只写 Anima，WAI 的对照列已删。
 
 ---
 
 ## 1. 底模（3.1：只剩 Anima）
 
-| 项 | Anima 12（`miaomiaoHarem_anima12`） | WAI v17（`waiIllustriousSDXL_v170`） |
+| 项 | Anima 12（`miaomiaoHarem_anima12`） |
+|---|---|
+| 文本编码器 | **Qwen3 0.6B**（不是 CLIP） |
+| 权重语法 | **无效**（`(word:1.2)` 不生效） |
+| 标签写法 | danbooru tag 与自然语言混排都行 |
+| 画师 | 必须 `@画师名` 前缀 |
+| 步数 / CFG | 10 / 1.0 |
+| 采样 / 调度 | `er_sde` / `beta` |
+| 默认分辨率 | 1024×1536 |
+| 单张耗时 | 9–18s |
+| 擅长 | 二次元、日式画风、表情 |
+| 短板 | 手部易崩、道具穿帮 |
+
+**分工**：全部走 Anima。WAI v17 已于 3.1 移除。
+
+---
+
+## 2. 参数口径
+
+| 项 | 值 | 说明 |
 |---|---|---|
-| 文本编码器 | **Qwen3 0.6B**（不是 CLIP） | CLIP（SDXL） |
-| 权重语法 | **无效**（`(word:1.2)` 不生效） | 有效 |
-| 标签写法 | danbooru tag 与自然语言混排都行 | 纯 danbooru tag |
-| 画师 | 必须 `@画师名` 前缀 | 普通 tag |
-| 步数 / CFG | 10 / 1.0 | 26 / 7.0 |
-| 采样 / 调度 | `er_sde` / `beta` | `euler_ancestral` / `normal` |
-| 默认分辨率 | 1024×1536 | 832×1216 |
-| 单张耗时 | 9–18s | 18–30s |
-| 擅长 | 二次元、日式画风、表情 | 结构稳定、手部略好 |
-| 短板 | 手部易崩、道具穿帮 | 画风偏欧美、慢 |
+| 步数 | 10 | turbo LoRA **1.0**（实测值，与 §10 速查卡一致），再多是浪费 |
+| CFG | **1.0**（默认） | 2B DiT + turbo，cfg>1 容易过饱和 |
+| 采样器 / 调度 | `er_sde` / `beta` | 10730 那组参数在本机最稳 |
+| 分辨率 | 832×1216（竖图）/ 1024×1536 | 见 §3 |
 
-**分工**：全部走 Anima。WAI v17 已于 3.1 移除，旧记录里看到 WAI 参数只当历史对照。
+**cfg=1 的已知缺陷**：负向完全不参与（同 seed 换负向内容，像素差异 0.0000%）。
+要负向生效只有两条路：
 
----
+1. **把 CFG 提到 2.0 以上** —— 实测有效但会改变画风（对比度上升），不适合所有场景。
+2. **装 `ComfyUI-Anima-NAG`**（`AnimaNormalizedAttentionGuidance`）—— 在 attention 层
+   把负向当"推离方向"接回，cfg 仍是 1。温和档 `scale 1.0 / tau 1.2 / alpha 0.5 / end 0.4`
+   可用；官方默认（scale 2.0 / tau 2.5 / end 0.5）在 Anima base 上会把主体压没。
+   代价约 **+4s/张（+38%）**。`assistant.py` 已支持（`/api/gen` 传 `nag`），页面暂无入口。
 
-## 2. 为什么 10 步比 20/30 步好
-
-同一提示词、同一 seed、只改步数与 CFG（832×1216）：
-
-| 组合 | 耗时 | 饱和 | 亮度 | 对比 | 边缘密度 | 平涂度 |
-|---|---|---|---|---|---|---|
-| 10 步 CFG1 | **12.1s** | 51.9 | 157.8 | 63.9 | 11.1 | 15.59 |
-| 20 步 CFG1 | 16.1s | 57.2 | 144.9 | 64.3 | 11.8 | 15.91 |
-| 30 步 CFG1 | 20.5s | 59.9 | 141.8 | 64.3 | 10.6 | 15.52 |
-| 10 步 CFG4 | 16.1s | **122.4** | 138.8 | 80.0 | 15.4 | 16.44 |
-| 20 步 CFG4 | 28.6s | 85.4 | 143.1 | 79.9 | **20.0** | **19.40** |
-| 30 步 CFG4 | 42.3s | 86.1 | 145.8 | 79.6 | 19.0 | 18.72 |
-
-结论：
-
-1. **CFG 才是画风漂移主因**：10 步时 CFG 1→4，饱和度 +136%、对比 +25%，直接变"欧美 CG 塑料感"。
-2. turbo 是**步数蒸馏 LoRA**，10 步是它的设计工况；CFG>1 时继续加步数只会让细节碎片化（边缘密度 15.4→20.0、平涂度 16.4→19.4）。
-3. 想要"更像角色"：`CFG 1.0`，别加步数。
-4. 20/30 步在 CFG1 下也合格，只是慢（12.1s vs 20.5s），性价比不如 10 步。
-
----
 
 ## 3. 分辨率
 
@@ -95,7 +92,14 @@ UltralyticsDetectorProvider(bbox/hand_yolov8s.pt)
 
 ## 7. 负面与打码
 
-- 默认负面：`bad quality, worst quality, worst detail, bad anatomy, bad hands, muscular_male, muscular, abs, bare_pectorals, back_muscles, bar censor, mosaic censoring, convenient censoring, pixelated, mosaic, blur censor, censored genitals`
+- 默认负面就是代码里的 `DEF_NEG`（`tools/gen_workbench.py` 行 371-378），**50 个词条 / 7 组**，不是短表：
+  1. 质量 / 人体（5）：`bad quality, worst quality, worst detail, bad anatomy, bad hands`
+  2. 手指 / 肢体（6）：`extra hands, fused fingers, extra fingers, missing fingers, malformed limbs, extra limbs`
+  3. 肌肉男（5）：`muscular_male, muscular, abs, bare_pectorals, back_muscles`
+  4. 男体（6）：`male face, male body, visible male, male torso, male head, male eyes`
+  5. 多头 / 配饰 / 衣物（8）：`multiple heads, two heads, hat on male, extra hat, duplicate accessory, duplicate, extra clothing, out of place clothing`
+  6. 文字水印（5）：`text, speech bubble, japanese text, watermark, signature`
+  7. 打码（15，`CENSOR_HARD` 带权重）：`(mosaic censoring:1.45), (bar censor:1.4), (censored:1.35), (pixelated:1.3), mosaic, square mosaic, blur censor, light censor, steam censor, hair censor, heart censor, convenient censoring, transparent censoring, out-of-frame censoring, censored genitals`
 - **不要**在负面里写裸 `censored`：太模糊，反而容易勾出马赛克。
 - 正面命中打码触发词（`cum_in_pussy / cumdrip / pussy / pussy_ejaculation / penis / sperm / spilling` 等）→ 自动补 `uncensored`，并把负面里的 censor 词全部剔掉（实测最稳）。
 - 触手/机械类**不要**写 `penis / 1boy`，否则硬塞一个男人进来。
@@ -104,15 +108,15 @@ UltralyticsDetectorProvider(bbox/hand_yolov8s.pt)
 
 ## 8. 方言（两套别混）
 
-| 项 | danbooru 方言（WAI，已下线） | Anima 方言（3.1 唯一） |
-|---|---|---|
-| 分隔 | 逗号 + 下划线 | 空格、无下划线 |
-| 权重 | 可用 | 无效，必须去掉 |
-| 画师 | 普通 tag | `@kanpa (campagne 9)` |
-| 负面 | 长表 | 14 词短表 |
-| 长度 | 30–60 词 | 上限 45 短语 |
+| 项 | Anima 方言（3.1 唯一） |
+|---|---|
+| 分隔 | 空格、无下划线 |
+| 权重 | 无效，必须去掉 |
+| 画师 | `@kanpa (campagne 9)` |
+| 负面 | 50 词长表（`DEF_NEG`，见 §7） |
+| 长度 | 上限 45 短语 |
 
-页面固定用 Anima 方言（`/api/expand` 的 `dialect=anima`）。danbooru 方言只给旧脚本留兼容。
+页面固定用 Anima 方言（`/api/expand` 的 `dialect=anima`）。danbooru 方言（逗号 + 下划线、可用权重）只给旧脚本留兼容。
 
 ---
 
@@ -120,7 +124,7 @@ UltralyticsDetectorProvider(bbox/hand_yolov8s.pt)
 
 | 现象 | 原因 | 处理 |
 |---|---|---|
-| 画出来像欧美 3D | CFG 太高 | 回到 CFG 1.0 |
+| 画出来像欧美 3D | CFG 太高 | 降到 1.0，或开 NAG 温和档 |
 | 角色不像 | 权重语法 / 缺角色 tag | Anima 去掉权重，写全 `角色tag + 发色 + 瞳色 + 服装` |
 | 两个人变一个人 | 只写了 `futanari` 或 `2girls` | 每个角色都写外貌；扶她补 `futa_with_female` |
 | 多出一条腿 | `leg_lift` 等双侧词 | 双人场景剔双侧词，改 `from_side` 构图 |
@@ -134,7 +138,7 @@ UltralyticsDetectorProvider(bbox/hand_yolov8s.pt)
 ## 10. 参数速查卡
 
 ```
-Anima：10 步 / CFG 1.0 / er_sde / beta / 1024×1536 / VAEDecodeTiled 512-64
+Anima：10 步 / CFG 1.0（负向需 NAG）/ er_sde / beta / 1024×1536 / VAEDecodeTiled 512-64
        LoRA：turbo 1.0 + kinokohime 0.6 + konya 0.3
        CLIP：qwen_3_06b_base (stable_diffusion)   VAE：qwen_image_vae
 修手 ：8 步 / CFG 1.0 / denoise 0.45 / guide 384 / max 768

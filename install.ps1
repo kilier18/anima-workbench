@@ -295,6 +295,9 @@ function Step4 {
 
 # ============================================================
 #  第 5 步：自定义节点
+#  NAG = 让负向提示词生效（cfg1 下唯一办法）；Wardrobe-V5 = 角色卡库（assistant.py 直接读它的
+#  presets\anima_v4_characters.json）；Impact = FaceDetailer 修脸；Ref-Adapter = 参考图锁角色；
+#  style-nodes / GGUF / IPAdapter / Manager = 可选增强。
 # ============================================================
 function Step5 {
     Head 5 "安装自定义节点"
@@ -305,12 +308,17 @@ function Step5 {
         return
     }
 
+    # 必需 = 缺了出图会报节点缺失；可选 = 缺了只是少功能
     $nodes = @(
-        @{ d = "ComfyUI-Manager";        u = "https://github.com/ltdrdata/ComfyUI-Manager";        need = $true },
-        @{ d = "ComfyUI-Impact-Pack";    u = "https://github.com/ltdrdata/ComfyUI-Impact-Pack";    need = $true },
-        @{ d = "ComfyUI-Impact-Subpack"; u = "https://github.com/ltdrdata/ComfyUI-Impact-Subpack"; need = $true },
-        @{ d = "ComfyUI-GGUF";           u = "https://github.com/city96/ComfyUI-GGUF";             need = $false },
-        @{ d = "ComfyUI_IPAdapter_plus"; u = "https://github.com/cubiq/ComfyUI_IPAdapter_plus";    need = $false }
+        @{ d = "ComfyUI-Anima-NAG";         u = "https://github.com/hybskgks28275/ComfyUI-Anima-NAG";           need = $true  },
+        @{ d = "ComfyUI-Impact-Pack";       u = "https://github.com/ltdrdata/ComfyUI-Impact-Pack";               need = $true  },
+        @{ d = "ComfyUI-Impact-Subpack";    u = "https://github.com/ltdrdata/ComfyUI-Impact-Subpack";            need = $true  },
+        @{ d = "Comfyui-Anima-Wardrobe-V5"; u = "https://github.com/lingdongbudong/Comfyui-Anima-Wardrobe-V5";   need = $true  },
+        @{ d = "ComfyUI-Anima-Ref-Adapter"; u = "https://github.com/ArcAnima/ComfyUI-Anima-Ref-Adapter";         need = $false },
+        @{ d = "comfyui-anima-style-nodes"; u = "https://github.com/fulletLab/comfyui-anima-style-nodes";        need = $false },
+        @{ d = "ComfyUI-Manager";           u = "https://github.com/Comfy-Org/ComfyUI-Manager";                  need = $false },
+        @{ d = "ComfyUI-GGUF";              u = "https://github.com/city96/ComfyUI-GGUF";                        need = $false },
+        @{ d = "ComfyUI_IPAdapter_plus";    u = "https://github.com/cubiq/ComfyUI_IPAdapter_plus";               need = $false }
     )
 
     foreach ($n in $nodes) {
@@ -370,7 +378,7 @@ function Step6 {
 
     # 把脚本里的 D:\ComfyUI 换成实际安装目录
     $fixed = 0
-    foreach ($f in @("_setup\start_engine.cmd", "_setup\start_assistant.cmd", "_setup\start_ollama.cmd")) {
+    foreach ($f in @("_setup\start_engine.cmd", "_setup\start_assistant.cmd", "_setup\start_ollama.cmd", "tools\restart_assistant.ps1")) {
         $p = Join-Path $Dir $f
         if (-not (Test-Path $p)) { continue }
         $raw = [System.IO.File]::ReadAllText($p)

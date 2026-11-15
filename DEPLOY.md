@@ -154,26 +154,49 @@ ANIMA_LORAS = [
 ```bat
 cd D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\custom_nodes
 
-git clone https://github.com/ltdrdata/ComfyUI-Manager
+:: 4 个必需
+git clone https://github.com/hybskgks28275/ComfyUI-Anima-NAG
 git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack
 git clone https://github.com/ltdrdata/ComfyUI-Impact-Subpack
+git clone https://github.com/lingdongbudong/Comfyui-Anima-Wardrobe-V5
+
+:: 5 个可选
+git clone https://github.com/ArcAnima/ComfyUI-Anima-Ref-Adapter
+git clone https://github.com/fulletLab/comfyui-anima-style-nodes
+git clone https://github.com/Comfy-Org/ComfyUI-Manager
 git clone https://github.com/city96/ComfyUI-GGUF
 git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus
 ```
 
-| 节点包 | 必需？ | 缺了会怎样 |
-|---|---|---|
-| ComfyUI-Manager | 建议 | 装别的节点要靠它 |
-| ComfyUI-Impact-Pack | **必需** | 工坊的「修手」用 FaceDetailer，缺了出图报节点缺失 |
-| ComfyUI-Impact-Subpack | **必需** | FaceDetailer 的检测模型依赖 |
-| ComfyUI-GGUF | 可选 | 只有用 GGUF 量化模型才需要 |
-| ComfyUI_IPAdapter_plus | 可选 | 参考图风格迁移 |
-
-`Comfyui-Anima-Wardrobe-V5`（角色/场景资源包）**可选**：装了角色缩略图更全，没装工坊会自动回落到自带数据。
+| 节点包 | 必需？ | 提供的节点 | 缺了会怎样 |
+|---|---|---|---|
+| **ComfyUI-Anima-NAG** | **必需** | `AnimaNormalizedAttentionGuidance` | **负向提示词完全失效**（cfg=1 下负向本来不参与，靠它接回）。v5.0 起页面「负面生效」默认勾选 |
+| **ComfyUI-Impact-Pack** | **必需** | `FaceDetailer` | 修手/修脸报节点缺失，出图直接失败 |
+| **ComfyUI-Impact-Subpack** | **必需** | `UltralyticsDetectorProvider` | 同上（FaceDetailer 的检测模型源在这个包） |
+| **Comfyui-Anima-Wardrobe-V5** | **必需** | HTTP 路由 + 角色库数据 | `assistant.py` 直接读它的 `presets\anima_v4_characters.json`（1.2 MB, 2408 角色）。缺了角色卡全空 |
+| ComfyUI-Anima-Ref-Adapter | 可选 | `AnimaRefAdapter` | 「参考图锁定」用不了（单角色默认关，多角色才需要） |
+| comfyui-anima-style-nodes | 可选 | `AnimaStyleExplorer` | 只影响画风浏览器面板 |
+| ComfyUI-Manager | 可选 | — | 只是节点管理器 UI |
+| ComfyUI-GGUF | 可选 | `UNETLoaderGGUF` | 只有跑 `.gguf` 量化底模才要 |
+| ComfyUI_IPAdapter_plus | 可选 | `IPAdapterAdvanced`/`IPAdapterModelLoader` | IPAdapter 分支用不了 |
 
 装完重启一次 ComfyUI，看启动日志有没有 import 报错。
 
+装完在浏览器打开 `http://127.0.0.1:8188/object_info`，搜得到这 4 个就算对：
+`AnimaNormalizedAttentionGuidance` / `FaceDetailer` / `UltralyticsDetectorProvider` / `AnimaRefAdapter`（最后一个装可选包才有）。
+
 > Impact Pack 首次启动会下载检测模型（`bbox/face_yolov8m.pt` 等），需要能访问 GitHub。
+
+### 4.1 节点依赖（一次性装）
+
+```bat
+D:\ComfyUI\ComfyUI_windows_portable\python_embeded\python.exe -m pip install ^
+  ultralytics==8.4.202 segment-anything==1.0 scikit-image==0.26.0 piexif==1.1.3 ^
+  dill==0.4.1 matplotlib==3.11.2 opencv-python-headless==5.0.0.93 ^
+  pillow==13.0.0 huggingface_hub==2.3.0 gguf==0.19.0
+```
+
+`gguf` 只有用 `.gguf` 量化底模才需要，其余是 Impact-Pack / Ref-Adapter 的硬依赖。
 
 ---
 
@@ -292,9 +315,40 @@ curl -s http://127.0.0.1:8188/system_stats
 
 ---
 
-## 9. 下一步
+## 9. v5.0 相对上一版的依赖变化
 
-- 改动作库 → 见 `README.md` 的「核心概念：动作池」
+**新增节点**：`ComfyUI-Anima-NAG`（必需，见第 4 节）、`ComfyUI-Anima-Ref-Adapter`（可选）。
+**新增模型**：
+
+| 放哪 | 文件 | 大小 | 用途 |
+|---|---|---|---|
+| `ComfyUI_windows_portable\ComfyUI\models\loras\`（**注意是便携版里的 loras**，不是 `D:\ComfyUI\models\loras`） | `anima_ref_adapter_v2_r64.safetensors` | 175 MB | 参考图锁定。首次调用 `AnimaRefAdapter` 会自动从 HF `ElectronGirl/anima-ref-adapter` 下 |
+| `models\loras\Anima\` | `anima-turbo-lora-v0.2.safetensors` | 142 MB | Turbo 加速，10 步出图 |
+
+**新增环境变量**（全部可选，不设就走自动推导）：
+
+| 变量 | 作用 |
+|---|---|
+| `COMFY_ROOT` | 安装根目录。默认 = `webui\assistant.py` 的上两级，**换盘不用改代码** |
+| `COMFY_PORTABLE` | ComfyUI 便携版目录。默认 = `$COMFY_ROOT\ComfyUI_windows_portable` |
+| `COMFY_API` / `OLLAMA_API` / `COMFY_OUTPUT` | 改端口/输出目录 |
+
+v5.0 起 `assistant.py` 和三个启动脚本**不再硬编码 `D:\ComfyUI`**，全部由自身位置推导，`git clone` 到任意目录直接能跑。
+
+**数据文件**（`webui\data\`，前端会 fetch 的 9 个，缺一个面板就空一块）：
+
+`wb_tags.json`（1965 标签）/ `wb_chars.json`（2408 角色）/ `wb_scenes.json`（963 场景）/ `wb_presets.json` / `wb_zh.json`（6549 中文对照）/ `wb_pools.json` / `wb_outfits.json`（**带 UTF-8 BOM，Python 读要用 `utf-8-sig`**）/ `wb_atoms.json`（1529 动作 / 37 池）/ `anima_styles.json`。
+
+**别拷**：`*.bak`、`*.bak-*`、`webui\*.log`、`webui\favorites.json`、`_setup\wv2data\`、`logs\`、`tmp\`。
+
+---
+
+## 10. 下一步
+
+- 改动作块 → 见 `README.md` 的「核心概念：动作块」
 - 改场景/角色 → 直接编辑 `webui/data/*.json`，刷新页面即生效
-- 看变更历史 → `docs/历史与回退-v3.md`（只追加，新条目在最上方）
-- 看使用手册 → `docs/手册-v3.md`
+- 改代码后必跑 → `python tools\gen_workbench.py`（生成前端，自带 `node --check` 门禁）+ `node _style_test/run_all.js`（12 组测试）
+- 看变更历史 → `docs/CHANGELOG.md`
+- 看维护手册 → `docs/workbench-维护手册.md`
+- 看提示词口径 → `docs/提示词与场景-v3.md`
+- 看底模参数 → `docs/Anima知识-v3.md`

@@ -31,7 +31,13 @@ HERE    = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 CFG_FILE = os.path.join(HERE, "data", "wb_config.json")
-DEFAULT_OUTDIR = r"D:\ComfyUI\output"
+
+# ---- 安装目录全部由本文件位置推导（webui\assistant.py 的上一级就是仓库根）----
+# 换盘 / 换目录不用改代码；也认环境变量 COMFY_ROOT / COMFY_PORTABLE。
+ROOT     = os.environ.get("COMFY_ROOT") or os.path.dirname(HERE)
+PORTABLE = os.environ.get("COMFY_PORTABLE") or os.path.join(ROOT, "ComfyUI_windows_portable")
+COMFY_TREE = os.path.join(PORTABLE, "ComfyUI")
+DEFAULT_OUTDIR = os.path.join(ROOT, "output")
 
 
 def load_cfg():
@@ -59,7 +65,7 @@ def outdir():
 
 
 OUTDIR  = outdir()
-TAGKIT  = r"D:\ComfyUI\prompts\tagkit.py"
+TAGKIT  = os.path.join(ROOT, "prompts", "tagkit.py")
 TAGDATA = os.path.expanduser(r"~\.dsh\profiles\desktop\node_modules\dsh-comfyui-workbench\data\danbooru")
 
 MODEL_NOTES = {
@@ -76,9 +82,9 @@ DEFAULT_CKPT = "Illustrious-XL-v2.0.safetensors"
 # ---------------- Anima 底模（Cosmos-Predict2 2B 架构，非 SDXL） ----------------
 ANIMA_UNET = "anima-base-v1.0.safetensors"
 ANIMA_FILES = {
-    "unet": "D:/ComfyUI/models/diffusion_models/anima-base-v1.0.safetensors",
-    "te":   "D:/ComfyUI/models/text_encoders/qwen_3_06b_base.safetensors",
-    "vae":  "D:/ComfyUI/models/vae/qwen_image_vae.safetensors",
+    "unet": os.path.join(ROOT, "models", "diffusion_models", "anima-base-v1.0.safetensors"),
+    "te":   os.path.join(ROOT, "models", "text_encoders", "qwen_3_06b_base.safetensors"),
+    "vae":  os.path.join(ROOT, "models", "vae", "qwen_image_vae.safetensors"),
 }
 ANIMA_SAMPLER = "er_sde"
 ANIMA_SCHED = "simple"
@@ -168,7 +174,8 @@ _ACT_TAGS = set(a.replace(" ", "_") for a in _ACT_SFW + _ACT_R18) | {
     "against_wall", "straddling", "kneeling", "sitting", "standing", "walking",
     "lying", "cowgirl_position", "missionary", "sex_from_behind", "paizuri",
     "fellatio", "masturbation", "thigh_sex", "handjob", "footjob", "facesitting"}
-_FRAME_TAGS = {"full_body", "cowboy_shot", "upper_body", "close-up", "portrait", "pov"}
+_FRAME_TAGS = {"full_body", "cowboy_shot", "upper_body", "close-up", "close_up",
+               "portrait", "pov", "lower_body"}
 _EXPR_TAGS = {"smile", "light_smile", "smirk", "blush", "half-closed_eyes", "closed_eyes",
               "open_mouth", "tongue_out", "expressionless", "shy", "rolling_eyes",
               "parted_lips", "heavy_breathing", "ahegao", "empty_eyes"}
@@ -470,9 +477,9 @@ def anima_pack(out, text=""):
                                              "负面用短表（Anima 不吃长负面堆叠）。")
     return out
 
-COMFY_INPUT = r"D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\input"
+COMFY_INPUT = os.path.join(COMFY_TREE, "input")
 # 角色缩略图目录（插件 presets/thumbs 为内置，user_thumbs 为用户覆盖，优先命中）
-_WB_PRESETS = r"D:\ComfyUI\ComfyUI_windows_portable\ComfyUI\custom_nodes\Comfyui-Anima-Wardrobe-V5\presets"
+_WB_PRESETS = os.path.join(COMFY_TREE, "custom_nodes", "Comfyui-Anima-Wardrobe-V5", "presets")
 _THUMB_DIRS = (os.path.join(_WB_PRESETS, "user_thumbs"), os.path.join(_WB_PRESETS, "thumbs"))
 
 # ---------------- 画风包（styles.json） ----------------
@@ -1320,7 +1327,7 @@ def fav_order(kind):
 
 _ARC_ZH = {"foreplay": "前戏", "manual": "手活", "oral": "口活", "penetration": "插入",
            "multi": "多人", "climax": "高潮", "aftermath": "事后"}
-_FRAME_TAGS = {"full_body", "upper_body", "cowboy_shot", "close_up", "portrait", "lower_body"}
+# _FRAME_TAGS 已在文件上方定义（2026-11-15 修：第二份定义会覆盖第一份，导致 close-up 永不匹配）
 _POSE_TAGS = {"missionary", "sex_from_behind", "girl_on_top", "standing_sex", "bent_over",
               "all_fours", "spread_legs"}
 _SEX_TAGS = {"sex", "vaginal", "cum_in_pussy", "cum_in_mouth", "facial", "oral", "fellatio",
@@ -1358,30 +1365,6 @@ def hints_for(tags):
     return h
 
 AUTO_CKPT = "auto"
-NSFW_PICK_TAGS = {"nude", "sex", "penis", "disembodied_penis", "hetero", "yuri", "paizuri",
-                  # 体液/生理/体位/束缚：命中任一就走成人向分支（3.1 起也走 Anima）
-                  "pussy_juice", "pussy_juice_trail", "female_ejaculation", "pussy", "labia",
-                  "clitoris", "clitoral_stimulation", "spread_legs", "spread_ass", "legs_up",
-                  "masturbation", "female_masturbation", "fingering", "fellatio", "irrumatio",
-                  "oral", "cunnilingus", "handjob", "tribadism", "69", "anal", "anus",
-                  "bondage", "shibari", "restrained", "collar", "leash", "blindfold", "femdom",
-                  "breasts_out", "nipples", "breast_press", "cum_on_tongue", "cum_on_breasts",
-                  "cum_on_body", "cum_on_stomach", "cum_overflow", "after_sex", "ahegao",
-                  "fucked_silly", "mind_break", "double_penetration", "group_sex", "gangbang",
-                  "footjob", "thigh_sex", "grabbing_another's_hair", "spanking", "wet",
-                  "cum", "cum_in_pussy", "cum_in_mouth", "facial", "creampie", "vaginal",
-                  "anal", "nipples", "pussy", "girl_on_top", "missionary", "sex_from_behind",
-                  "all_fours", "tribadism", "cunnilingus", "fellatio", "ahegao", "orgasm"}
-
-def apply_nsfw_preset(body):
-    """检测到成人标签时，把 18 步 / 1.35× / 修脸修手 的 r18 配方补进去（不覆盖用户显式给的键）。"""
-    tags = {x.strip().lower() for x in (body.get("positive") or "").split(",")}
-    if not (tags & NSFW_PICK_TAGS):
-        return body
-    prof = SPEED_PROFILES.get("r18") or {}
-    for k, v in prof.items():
-        body.setdefault(k, v)
-    return body
 
 def _dbg(msg):
     """轻量调试：写 webui/_debug.log，读不到就算了。不参与主流程。"""
@@ -1562,6 +1545,102 @@ ANIMA_UNET  = r"Anima\miaomiaoHarem_anima12.safetensors"
 ANIMA_CLIP  = "qwen_3_06b_base.safetensors"
 ANIMA_VAE   = "qwen_image_vae.safetensors"
 ANIMA_BASE_LORAS = [(r"Anima\anima-turbo-lora-v0.2.safetensors", 0.7)]
+# 参考图适配器（ComfyUI-Anima-Ref-Adapter）：连续剧情第 2 张起拿上一张当参考，
+# 治"第 6–8 张换人"。默认 v2_r64；v2 支持 ref_guidance，pilot/r32 只认 strength。
+REF_LORA_DEFAULT = "anima_ref_adapter_v2_r64.safetensors"
+REF_LORA_FALLBACK = "anima_ref_adapter_pilot_r32.safetensors"
+# pid → 这一张实际挂的适配器名（'' = 没挂）。只留最近 200 条，防止长跑吃内存
+GEN_REF = {"last": {}}
+
+
+def ref_lora_name(want=""):
+    """在 models/loras 里找适配器：优先要的那个，其次 v2，最后 pilot。"""
+    d = os.path.join(COMFY_TREE, "models", "loras")
+    cands = []
+    for n in (want, REF_LORA_DEFAULT, REF_LORA_FALLBACK):
+        if n and n not in cands:
+            cands.append(n)
+    try:
+        have = set(os.listdir(d)) if os.path.isdir(d) else set()
+    except Exception:
+        have = set()
+    for n in cands:
+        if n in have:
+            return n
+    return ""
+
+
+# 参考图暂存：白名单 + 大小上限 + 内容指纹命名 + 原子落盘。
+# 老版本直接 copy2 到固定的 ref_<原名>：两个并发请求会互相踩，LoadImage 是执行时才读盘，
+# 于是可能读到"半张图"或上一张的图；而且暂存文件永不清理（16 分钟就长了 14MB）。
+_REF_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 _.\-()]{0,119}\.(?:png|jpe?g|webp)$", re.I)
+_REF_MAX_BYTES = 32 * 1024 * 1024
+_REF_LOCK = threading.Lock()
+_REF_STAGE_N = {"n": 0}
+
+
+def ref_prune_input(ttl_hours=6, keep=40):
+    """清 input 里的 ref_*/hf_*/i2i_* 暂存：超过 TTL 或超出保留数量的删掉。
+
+    ComfyUI 的 input 是共享目录，这些只是搬运中转，不删会一直涨。"""
+    import time as _t
+    try:
+        now = _t.time()
+        for pre in ("ref_", "hf_", "i2i_"):
+            fs = []
+            for n in os.listdir(COMFY_INPUT):
+                if not n.startswith(pre):
+                    continue
+                fp = os.path.join(COMFY_INPUT, n)
+                try:
+                    fs.append((os.path.getmtime(fp), fp))
+                except OSError:
+                    pass
+            fs.sort(reverse=True)
+            for idx, (mt, fp) in enumerate(fs):
+                if idx < keep and (now - mt) < ttl_hours * 3600:
+                    continue
+                try:
+                    os.remove(fp)
+                except OSError:
+                    pass
+    except Exception as _e:
+        _dbg("ref 清理跳过：%s" % _e)
+
+
+def ref_stage(filename):
+    """把出图目录里的一张图复制进 ComfyUI/input，返回 LoadImage 能吃的名字。
+
+    参考图必须落在 input 里 LoadImage 才看得见（output 目录不行）。
+    名字 = ref_<内容指纹>_<原名>：同一张图重复用不会反复写盘，也不会被并发覆盖。"""
+    import hashlib, shutil
+    raw = str(filename or "").strip()
+    fn = os.path.basename(raw)
+    if not fn or fn != raw or ".." in raw or not _REF_NAME_RE.match(fn):
+        raise ValueError("参考图文件名不合法：%r" % (raw[:120],))
+    src = os.path.join(outdir(), fn)
+    if not os.path.isfile(src):
+        alt = os.path.join(DEFAULT_OUTDIR, fn)
+        if os.path.isfile(alt):
+            src = alt
+    if not os.path.isfile(src):
+        raise ValueError("找不到参考图：%s" % fn)
+    _sz = os.path.getsize(src)
+    if _sz > _REF_MAX_BYTES:
+        raise ValueError("参考图太大：%d MB（上限 %d MB）" % (_sz // 1048576, _REF_MAX_BYTES // 1048576))
+    key = hashlib.sha1(("%s|%d|%d" % (src, _sz, int(os.path.getmtime(src)))).encode("utf-8")).hexdigest()[:12]
+    up = "ref_%s_%s" % (key, fn)
+    dst = os.path.join(COMFY_INPUT, up)
+    with _REF_LOCK:
+        if not os.path.exists(dst):
+            os.makedirs(COMFY_INPUT, exist_ok=True)
+            tmp = dst + ".part"
+            shutil.copy2(src, tmp)
+            os.replace(tmp, dst)          # 原子替换：LoadImage 永远看不到半张图
+        _REF_STAGE_N["n"] += 1
+        if _REF_STAGE_N["n"] % 50 == 0:    # 每 50 张顺手清一次，不用额外的后台线程
+            ref_prune_input()
+    return up
 
 # ---------------- 画风库（社区成品画师包，data/anima_styles.json） ----------------
 # 原来写死的三条 LoRA（turbo/kinokohime/konyaKarasue）已退役：turbo 会削弱画风，
@@ -1626,8 +1705,7 @@ def _anima_char_file():
         os.path.join(os.path.dirname(HERE), "ComfyUI_windows_portable", "ComfyUI",
                      "custom_nodes", "Comfyui-Anima-Wardrobe-V5", "presets",
                      "anima_v4_characters.json"),
-        os.path.join(r"D:\ComfyUI", "ComfyUI_windows_portable", "ComfyUI",
-                     "custom_nodes", "Comfyui-Anima-Wardrobe-V5", "presets",
+        os.path.join(COMFY_TREE, "custom_nodes", "Comfyui-Anima-Wardrobe-V5", "presets",
                      "anima_v4_characters.json"),
     ]
     for c in cands:
@@ -1693,9 +1771,16 @@ def anima_char_trig(char_id=None, drop_outfit=False):
     for r in load_anima_chars():
         if r["id"] != cid:
             continue
-        if drop_outfit and r.get("trig_core"):
-            return r["trig_core"]
-        return r["trig"] or r.get("trig_core") or ""
+        core = (r.get("trig") or r.get("trig_core") or "").strip()
+        # 性场景只给身份词：衣服词压在前面会让模型把衣服画回去
+        if drop_outfit:
+            return r.get("trig_core") or core
+        # 非性场景把整件衣物拼上 —— 这一列以前根本没人读，
+        # 数据里写的 white dress / gothic maid outfit 全是白写。
+        out = (r.get("trig_outfit") or "").strip()
+        if out:
+            return ", ".join([x for x in (core, out) if x])
+        return core
     return ""
 
 
@@ -1738,25 +1823,52 @@ def anima_style_trig(style_id=None):
         if r["id"] == sid:
             return _anima_trig_norm(r["trig"] or "")
     return ""
-OUT_DIR = os.environ.get("COMFY_OUTPUT", r"D:\ComfyUI\output")  # 兼容旧引用；实际用 outdir()
+OUT_DIR = os.environ.get("COMFY_OUTPUT") or os.path.join(ROOT, "output")  # 兼容旧引用；实际用 outdir()
 
 
 
 def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
               sampler=None, scheduler=None, width=1024, height=1536, seed=None,
-              style_id=None, char_id=None):
+              style_id=None, char_id=None,
+              ref_image=None, ref_guidance=None, ref_strength=1.0,
+              ref_end=1.0, ref_lora="", ref_correction="apg", nag=None):
     """构 Anima 出图图（核心节点，无第三方依赖）。mode 保留兼容，WAI 已于 3.1 移除。
 
-    LoRA 三层串链：turbo 0.7 → 角色包（char_id）→ 画风包（style_id），三者可同时挂。"""
+    LoRA 三层串链：turbo 0.7 → 角色包（char_id）→ 画风包（style_id），三者可同时挂。
+
+    ref_image（2026-11-14）：给了就插一条 AnimaRefAdapter 支路 —— 参考图进 cross-attn，
+    连续剧情第 2 张起拿上一张当参考，专门治"第 6–8 张换人"。
+      ref_guidance 1.0 = 参考图走两条 CFG 分支，不额外多算一次模型（免费档）
+      ref_guidance >1  = 往参考图推，每步多一次模型调用（贵）
+    """
     import time as _t
     try:
         _s = int(seed) if seed is not None else -1
     except Exception:
         _s = -1
+    if _s < 0 or _s > 4294967295:
+        _s = -1
     sd = _s if _s >= 0 else int((_t.time() * 1000) % 2147483647)
     g = {}
-    st = int(steps or 10)
-    cf = float(cfg if cfg is not None else 1.0)
+    # 参数夹取：原来裸 int()/float()，width=99999 会直接进 EmptyLatentImage，cfg="abc" 直接 500。
+    def _clampi(v, lo, hi, dflt):
+        try:
+            v = int(float(v))
+        except Exception:
+            return dflt
+        return max(lo, min(hi, v))
+    def _clampf(v, lo, hi, dflt):
+        try:
+            v = float(v)
+        except Exception:
+            return dflt
+        if v != v or v in (float("inf"), float("-inf")):   # NaN / inf（JSON 里的 1e400）
+            return dflt
+        return max(lo, min(hi, v))
+    st = _clampi(steps if steps is not None else 10, 1, 60, 10)
+    cf = _clampf(cfg if cfg is not None else 1.0, 0.0, 30.0, 1.0)
+    width = _clampi(width, 256, 2048, 1024) // 8 * 8
+    height = _clampi(height, 256, 2048, 1536) // 8 * 8
     sm = sampler or "er_sde"
     sc = scheduler or "beta"
     g["1"] = {"class_type": "UNETLoader",
@@ -1770,10 +1882,46 @@ def gen_graph(positive, negative="", mode="anima", steps=None, cfg=None,
         g[nid] = {"class_type": "LoraLoaderModelOnly",
                   "inputs": {"model": ref, "lora_name": name, "strength_model": w}}
         ref = [nid, 0]
+    # 参考图支路：LoadImage → AnimaRefAdapter(MODEL)，KSampler 用它的输出
+    if ref_image:
+        g["25"] = {"class_type": "LoadImage", "inputs": {"image": str(ref_image)}}
+        g["26"] = {"class_type": "AnimaRefAdapter", "inputs": {
+            "model": ref, "vae": ["13", 0], "image": ["25", 0],
+            "lora_name": ref_lora or REF_LORA_DEFAULT,
+            "ref_guidance": _clampf(ref_guidance if ref_guidance is not None else 1.0, 0.0, 4.0, 1.0),
+            "correction": ref_correction if ref_correction in ("apg", "rescale", "none") else "apg",
+            "strength": _clampf(ref_strength if ref_strength is not None else 1.0, 0.0, 2.0, 1.0),
+            "ref_end": _clampf(ref_end if ref_end is not None else 1.0, 0.0, 1.0, 1.0),
+            "ref_megapixels": 1.0}}
+        ref = ["26", 0]
+    # NAG 支路（2026-11-15）：Anima 是 guidance 蒸馏模型 —— cfg=1 时负向那一路根本不参与
+    # 前向，负向框写什么都一个像素都不变（实测同 seed 改负向 像素差 0.0000%）。
+    # ComfyUI-Anima-NAG 在 attention 层面做「正 query × 负 key/value」的第二次计算，
+    # 把负向作为"要推离的方向"重新接回采样；实测 cfg=1 + NAG 后同 seed 改负向 像素差 99%+。
+    # nag=None/False → 不插节点，老行为不变。
+    #   nag dict 键：scale / tau / alpha / start / end（缺省用下面的温和档）
+    #   官方推荐（turbo LoRA 8–12 步）是 scale 2.0 / tau 2.5 / alpha 0.5 / 0–0.5，
+    #   但实测那档在 Anima base + 10 步上会把主体整个压掉（皮肤占比 0%、画面近单色），
+    #   原因是 tau 2.5 的 L1 上限太松、scale 2.0 的推离量过大。温和档见下。
+    if nag:
+        _n = nag if isinstance(nag, dict) else {}
+
+        def _nf(key, dflt, lo, hi):
+            return _clampf(_n.get(key, dflt), lo, hi, dflt)
+        g["27"] = {"class_type": "AnimaNormalizedAttentionGuidance", "inputs": {
+            "model": ref,
+            "scale": _nf("scale", 1.0, 0.0, 100.0),
+            "tau": _nf("tau", 1.2, 0.01, 100.0),
+            "alpha": _nf("alpha", 0.5, 0.0, 1.0),
+            "start_percent": _nf("start", 0.0, 0.0, 1.0),
+            "end_percent": _nf("end", 0.4, 0.0, 1.0),
+            "only_anima": True,
+            "optimize_outside_range": True}}
+        ref = ["27", 0]
     g["30"] = {"class_type": "CLIPTextEncode", "inputs": {"text": positive, "clip": ["12", 0]}}
     g["31"] = {"class_type": "CLIPTextEncode", "inputs": {"text": negative, "clip": ["12", 0]}}
     g["40"] = {"class_type": "EmptyLatentImage",
-               "inputs": {"width": int(width), "height": int(height), "batch_size": 1}}
+               "inputs": {"width": width, "height": height, "batch_size": 1}}
     g["60"] = {"class_type": "KSampler", "inputs": {
         "model": ref, "positive": ["30", 0], "negative": ["31", 0],
         "latent_image": ["40", 0], "seed": sd, "steps": st, "cfg": cf,
@@ -1801,21 +1949,49 @@ def _anima_multi(text):
     return False
 
 
-_ANIMA_SEXISH = (
-    "sex", "penetration", "penis", "vaginal", "anal", "cum", "cum_in", "creampie",
-    "nipples", "nipple", "nude", "naked", "topless", "bottomless", "undressing",
-    "open_clothes", "clothes_removed", "paizuri", "fellatio", "cunnilingus",
-    "masturbation", "orgasm", "ahegao", "panties", "bra", "breasts_out",
-)
+
+_ANIMA_FULLNUDE = ("completely_nude", "completely nude", "naked", "fully_nude")
 
 
 def _anima_sexish(text):
-    """性场景判定：命中即认为人物该是"能脱"的状态，角色词条只给身份层。"""
+    """是否"人物已经全裸"。
+
+    2026-11-14 真机事故：以前这里用 _ANIMA_SEXISH（含 undressing / open_clothes / sex），
+    于是每一张"半脱"都被判成性场景，把角色包的 trig_outfit（整件衣物，例如
+    deepseek_maid_outfit_zipzippipe）摘掉 —— LoRA 失去服装约束后，女仆装在同一批里
+    变成三种不同的衣服。现在只有真正全裸（completely_nude / naked）才摘，
+    半脱/敞开继续由衣物状态词控制，衣服型状始终由 LoRA 固定。
+    """
     t = (text or "").lower()
-    return any(k in t for k in _ANIMA_SEXISH)
+    return any(k in t for k in _ANIMA_FULLNUDE)
+
+
+def _dedup_tags(text):
+    """按归一化键去重提示词，保留首次出现的写法。
+
+    LoRA 训练词有两种常见写法：下划线版（deepseek_whale_girl_zipzippipe）和
+    空格版（@deepseek whale girl zipzippipe）。它们对模型是同一个 token，
+    但字符串比较认不出来 —— 页面补一次、后端补一次、重跑再补一次，
+    提示词里就会堆出好几份，词越跑越多。
+    归一化：小写 + 下划线/连字符/点当空格 + 压空格。
+    """
+    parts = [x.strip() for x in (text or "").split(",")]
+    seen = set()
+    out = []
+    for x in parts:
+        if not x:
+            continue
+        k = " ".join(x.lower().replace("_", " ").replace("-", " ").replace(".", " ").split())
+        if not k or k in seen:
+            continue
+        seen.add(k)
+        out.append(x)
+    return ", ".join(out)
 
 
 def gen_submit(positive, negative="", **kw):
+    # 幂等去重：同一训练词的两种写法（下划线/空格）只留一份，防止越跑越多
+    positive = _dedup_tags(positive)
     # 选中画风包时，把它的触发词补到最前面（一次只挂一个画风，不加权不稀释）
     # 角色包触发词放最前，画风包触发词随后（Anima 官方顺序：角色 → 作品 → 画师）
     cid = kw.get("char_id")
@@ -1827,9 +2003,17 @@ def gen_submit(positive, negative="", **kw):
     # 性场景只前置身份词，把"整件衣物"留在外面，否则 LoRA 会把衣服死死按住
     ctrig = anima_char_trig(cid, drop_outfit=_anima_sexish(positive))
     if ctrig:
-        _ch = ctrig.split(",")[0].strip().lower()
-        if not _ch or _ch not in (positive or "").lower():
-            positive = ctrig + ", " + (positive or "")
+        # 2026-11-14 事故：原来只判断"第一个词在不在"，页面把角色 id（deepseek-tan）
+        # 放在最前面时，整串 ctrig 就被当成"已经有了"而整块跳过 ——
+        # deepseek_maid_outfit_zipzippipe 这个"整件女仆装"的训练 tag 根本没进提示词，
+        # LoRA 失去服装约束，同一批里衣服变三种。
+        # 现在逐词判断：缺哪个补哪个，缺的按原顺序前置。
+        _low = (positive or "").lower()
+        _parts = [x.strip() for x in ctrig.split(",") if x.strip()]
+        _miss = [x for x in _parts if x.lower() not in _low]
+        if _miss:
+            positive = ", ".join(_miss) + ", " + (positive or "")
+    positive = _dedup_tags(positive)
     sid = kw.get("style_id")
     if sid is None:
         sid = anima_style_get()
@@ -1838,31 +2022,123 @@ def gen_submit(positive, negative="", **kw):
         _head = trig.split(",")[0].strip().lower()
         if not _head or _head not in (positive or "").lower():
             positive = trig + ", " + (positive or "")
-    g, sd = gen_graph(positive, negative, **kw)
+    # 参考图支路：ref_image 是"出图目录里的文件名"（上一张的结果），这里搬进 input 再挂节点。
+    # 适配器文件一个都没下到就静默退化成普通出图，不让整批崩掉。
+    _ref_fn = kw.pop("ref_image", None)
+    _ref_used = ""
+    if _ref_fn:
+        _rl = ref_lora_name(kw.pop("ref_lora", "") or "")
+        if _rl:
+            try:
+                kw["ref_image"] = ref_stage(_ref_fn)
+                kw["ref_lora"] = _rl
+                _ref_used = _rl
+            except Exception as _e:
+                _dbg("ref 支路跳过：%s" % _e)
+                kw["ref_image"] = None
+        else:
+            kw["ref_image"] = None
+    else:
+        kw.pop("ref_lora", None)
+        kw["ref_image"] = None
+    _nag = kw.pop("nag", None)
+    if _nag in (False, None, "", "off", 0):
+        _nag = None
+    elif _nag in (True, "on", 1, "auto"):
+        _nag = {}
+    g, sd = gen_graph(positive, negative, nag=_nag, **kw)
     r = http_json(COMFY + "/prompt", {"prompt": g, "client_id": "assistant_gen"}, timeout=60)
     pid = (r or {}).get("prompt_id")
     if not pid:
         raise RuntimeError("ComfyUI 拒绝了任务：%s" % str(r)[:300])
+    GEN_REF.setdefault("last", {})[pid] = _ref_used       # 给 /api/gen 回话用：这一张到底挂没挂参考
     return pid, sd
 
 
+
+def comfy_out_candidates():
+    """ComfyUI 实际 output 目录的候选：配置目录 → 环境变量 → 默认 → 便携版内置。"""
+    c = []
+    for p in (outdir(), os.environ.get("COMFY_OUTPUT") or "", DEFAULT_OUTDIR,
+              os.path.join(COMFY_PORTABLE, "ComfyUI", "output")):
+        p = (p or "").strip()
+        if p and p not in c:
+            c.append(p)
+    return c
+
+
+def save_out(fn, subfolder="", name=""):
+    """把出好的图复制到 outdir()；返回落盘路径，找不到源文件返回空串。
+
+    只复制图片，ComfyUI 自己的 temp/中间文件一概不碰。目标目录就是 UI 里「⚙ 目录」设的那个。
+    """
+    import shutil
+    if not fn:
+        return ""
+    dst_dir = outdir()
+    try:
+        os.makedirs(dst_dir, exist_ok=True)
+    except Exception:
+        return ""
+    srcs = []
+    for base in comfy_out_candidates():
+        srcs.append(os.path.join(base, subfolder or "", fn))
+    srcs.append(os.path.join(DEFAULT_OUTDIR, subfolder or "", fn))
+    src = next((x for x in srcs if os.path.isfile(x)), "")
+    if not src:
+        return ""
+    out_name = (name or fn).strip()
+    for ch in '\\/:*?"<>|':
+        out_name = out_name.replace(ch, "_")
+    if not out_name.lower().endswith(os.path.splitext(fn)[1].lower()):
+        out_name += os.path.splitext(fn)[1]
+    dst = os.path.join(dst_dir, out_name)
+    if os.path.abspath(src) == os.path.abspath(dst):
+        return dst
+    try:
+        shutil.copy2(src, dst)
+        return dst
+    except Exception:
+        return ""
+
+
 def gen_poll(pid, timeout=300):
-    """查一次任务状态；timeout<=0 表示只查一次立刻返回（用于前端轮询）。"""
+    """查一次任务状态；timeout<=0 表示只查一次立刻返回（用于前端轮询）。
+
+    判定顺序（2026-11-14 修）：失败 → 成功 → 还在队列 → 丢了。
+    老版本先判 success/outputs 再判 error，导致"已有 outputs 的失败任务"被报成 done；
+    又只看 /history 不看 /queue，ComfyUI 重启把任务丢掉后会永远 running，前端死转。"""
     import time as _t
     t0 = _t.time()
+    miss = 0
     while True:
         h = http_json(COMFY + "/history/" + pid, timeout=30) or {}
         item = h.get(pid) or {}
-        st = (item.get("status") or {}).get("status_str") or ("done" if item else "running")
-        if st in ("success", "done") or item.get("outputs"):
-            outs = []
-            for node in (item.get("outputs") or {}).values():
-                for img in (node.get("images") or []):
-                    outs.append({"filename": img.get("filename"), "subfolder": img.get("subfolder", ""),
-                                 "type": img.get("type", "output")})
-            return {"state": "done", "images": outs}
+        status = item.get("status") or {}
+        st = status.get("status_str") or ""
         if st == "error":
             return {"state": "error", "images": []}
+        outs = []
+        for node in (item.get("outputs") or {}).values():
+            for img in (node.get("images") or []):
+                outs.append({"filename": img.get("filename"), "subfolder": img.get("subfolder", ""),
+                             "type": img.get("type", "output")})
+        if st == "success" or outs:
+            return {"state": "done", "images": outs}
+        if not item:
+            # history 里没有这份：可能还在队列/正在跑，也可能 ComfyUI 重启后任务彻底丢了
+            miss += 1
+            if miss >= 2:
+                q = http_json(COMFY + "/queue", timeout=15) or {}
+                ids = []
+                for k in ("queue_running", "queue_pending"):
+                    for row in (q.get(k) or []):
+                        try:
+                            ids.append(row[1])
+                        except Exception:
+                            pass
+                if pid not in ids:
+                    return {"state": "lost", "images": []}
         if timeout <= 0:
             return {"state": "running", "images": []}
         if _t.time() - t0 >= timeout:
@@ -1870,7 +2146,7 @@ def gen_poll(pid, timeout=300):
         _t.sleep(1.0)
 
 
-COMFY_PORTABLE = os.environ.get("COMFY_PORTABLE") or r"D:\ComfyUI\ComfyUI_windows_portable"
+COMFY_PORTABLE = PORTABLE
 COMFY_PY = os.path.join(COMFY_PORTABLE, "python_embeded", "python.exe")
 COMFY_DIR = os.path.join(COMFY_PORTABLE, "ComfyUI")
 
@@ -1883,7 +2159,7 @@ def comfy_cmd(out_dir=None):
         "--use-pytorch-cross-attention", "--preview-method", "none",
         "--port", "8188", "--listen", "127.0.0.1",
         "--output-directory", od,
-        "--extra-model-paths-config", r"D:\ComfyUI\extra_model_paths.yaml",
+        "--extra-model-paths-config", os.path.join(ROOT, "extra_model_paths.yaml"),
     ]
 
 
@@ -2678,96 +2954,6 @@ SPEED_PROFILES = {
                 "lora": "Hyper-SDXL-8steps-CFG-lora.safetensors", "lora_weight": 0.85,
                 "light_fix": True},
 }
-_FLUID_CUM = {"cum", "cum_in_pussy", "cum_in_ass", "cum_on_body", "cum_on_breasts",
-              "cum_on_hair", "cum_on_face", "cum_on_tongue", "cum_on_stomach",
-              "cumdrip", "cum_overflow", "excessive_cum", "bukkake", "facial",
-              "cum_on_penis", "cum_on_ass", "cum_in_mouth"}
-_FLUID_TEXT = ("中出", "内射", "射精", "射在", "颜射", "乳射", "肛内", "射了一")
-
-
-_INTENSITY = {
-    "foreplay": ["blush"],
-    "manual": ["sweat", "heavy_breathing"],
-    "oral": ["sweat", "saliva", "heavy_breathing"],
-    "penetration": ["sweat", "saliva", "heavy_breathing", "moaning"],
-    "multi": ["sweat", "saliva", "heavy_breathing", "moaning"],
-    "climax": ["sweat", "tears", "saliva", "trembling", "moaning"],
-    "aftermath": ["sweat", "tears", "heavy_breathing"],
-}
-
-
-def apply_intensity(tags, arc="", tier="", stage=None):
-    """呻吟/泪/汗/口水量随激烈程度递增；T4 再加过量口水；stage 越往后越湿越抖。"""
-    low = {str(t).strip().lower() for t in tags}
-    try:
-        _st = int(stage) if stage is not None else 0
-    except Exception:
-        _st = 0
-    for _need, _at in (("sweat", 3), ("trembling", 4), ("heavy_breathing", 5)):
-        if _st >= _at and _need not in low:
-            tags.append(_need)
-            low.add(_need)
-    add = _INTENSITY.get((arc or "").strip().lower(), ["sweat", "heavy_breathing"])
-    if str(tier).upper() == "T4":
-        add = list(add) + ["excessive_saliva"]
-    for t in add:
-        if t not in low:
-            tags.append(t)
-            low.add(t)
-    return tags
-
-
-def _allow_t5(arc="", name="", note="", text=""):
-    """T5 失神（最强档）只允许出现在事后或二次射精；其余场景降回 T4。"""
-    blob = "%s %s %s" % (name or "", note or "", text or "")
-    return (arc or "") == "aftermath" or any(k in blob for k in ("事后", "二次", "第二次", "再来一次", "又射", "再射"))
-
-
-def fluid_rule(tags, arc="", name="", note=""):
-    """体液规则：只有 climax/aftermath 或特殊标注才有精液，其余只留汗与透明爱液。"""
-    low = {str(t).strip().lower() for t in tags}
-    special = "保留精液" in (note or "") or any(k in (name or "") for k in _FLUID_TEXT)
-    if special:
-        return tags
-    _surface = {"cum_on_breasts", "cum_on_body", "cum_on_stomach", "cum_on_hair", "cumdrip",
-                "cum_overflow", "excessive_cum", "cum_in_pussy", "cum"}
-    # 女女场景一律不出精液：只留汗与爱液
-    if {"yuri", "2girls", "tribadism"} & {str(t).strip().lower() for t in tags}:
-        tags = [t for t in tags if str(t).strip().lower() not in _FLUID_CUM]
-        for _t in ("sweat", "pussy_juice"):
-            if _t not in tags:
-                tags.append(_t)
-        return tags
-    _weak = any(k in (name or "") for k in ("体液", "精液"))  # 名字里写"带体液"= 特殊标注，任何 arc 都放行体表/溢出体液
-    out = [t for t in tags if str(t).strip().lower() not in _FLUID_CUM
-           or (_weak and str(t).strip().lower() in _surface)]
-    for t in ("sweat", "pussy_juice"):
-        if t not in {str(x).strip().lower() for x in out}:
-            out.append(t)
-    return out
-
-
-def hypno_rule(tags, name="", cat="", note=""):
-    """催眠强化：爱心瞳孔必须看得见脸，且不能被"空洞眼/闭眼"覆盖掉。
-    实测教训：heart-shaped_pupils 与 empty_eyes 同写，底模优先画成空洞白眼；
-    脸只占画幅一小角时爱心瞳孔直接消失。"""
-    low = {str(t).strip().lower() for t in tags}
-    blob = "%s %s %s" % (name or "", cat or "", note or "")
-    if not (low & {"heart-shaped_pupils", "symbol-shaped_pupils"} or "催眠" in blob):
-        return tags
-    _drop = {"empty_eyes", "blank_stare", "dazed", "expressionless", "closed_eyes",
-             "rolling_eyes", "half-closed_eyes"}
-    tags = [t for t in tags if str(t).strip().lower() not in _drop]
-    low = {str(t).strip().lower() for t in tags}
-    for _t in ("heart-shaped_pupils", "torogao", "parted_lips"):
-        if _t not in low:
-            tags.append(_t)
-            low.add(_t)
-    if not (low & {"close-up", "upper_body", "portrait", "cowboy_shot"}):
-        tags.append("upper_body")
-    if not (low & {"pov", "from_behind"}):
-        tags.append("looking_at_viewer")
-    return tags
 
 
 def rear_variant(tags, ct):
@@ -2848,20 +3034,6 @@ def expr_tier_of(tags):
     return "T0"
 
 
-def apply_expr_tier(tags, tier=None, rng=None):
-    """剥掉旧表情标签，按档位随机抽一组写回。tier=auto/空 → 按原标签推断。"""
-    import random as _r
-    rng = rng or _r
-    t = str(tier or "").strip().upper()
-    if t in ("", "AUTO"):
-        t = expr_tier_of(tags)
-    if t not in EXPR_TIERS:
-        t = "T0"
-    out = [x for x in tags if str(x).strip().lower() not in EXPR_STRIP]
-    for x in rng.choice(EXPR_TIERS[t]):
-        if x not in out:
-            out.append(x)
-    return out, t
 
 N_DEFAULT = ("worst quality, low quality, bad anatomy, bad hands, extra digits, fewer digits, "
              "jpeg artifacts, watermark, signature, text, blurry, "
@@ -2869,7 +3041,6 @@ N_DEFAULT = ("worst quality, low quality, bad anatomy, bad hands, extra digits, 
              "mosaic, blur censor, censored genitals")
 CJK = re.compile(r"[\u3000-\u9fff\uff00-\uffef]")
 FRAMING = {"close-up", "upper_body", "cowboy_shot", "full_body", "portrait"}
-GROUP = {"solo", "2girls", "3girls", "multiple_girls", "1girl", "1boy", "2boys", "6+girls"}
 
 def _clean_raw(text):
     out = []
@@ -2997,7 +3168,7 @@ def _drop_conflicts(res, k):
 
 NSFW_TAGS = set("""nude nipples pussy penis anus cum sex vaginal anal oral fellatio paizuri handjob
 spread_legs sex_from_behind missionary cowgirl_position ahegao tongue_out rolling_eyes cum_on_body
-cum_in_pussy cum_on_face cum_on_breasts cum_on_tongue cum_overflow uncensored censored nude_female
+cum_in_pussy facial cum_on_breasts cum_on_tongue cum_overflow uncensored censored nude_female
 nude_male topless bottomless breast_sucking penis_in_pussy penis_in_ass penis_in_mouth ejaculation
 masturbation orgasm saliva_on_body sweat_on_body areolae large_breasts huge_breasts hanging_breasts
 clitoris urethra erection foreskin precum sperm""".split())
@@ -3184,6 +3355,8 @@ class H(BaseHTTPRequestHandler):
                 _w = float((qg.get("wait") or ["0"])[0] or 0)
             except Exception:
                 _w = 0.0
+            # 单个轮询请求最多占 20 秒：原来 wait=9999 能把线程按住 9999 秒并每秒捶一次 ComfyUI
+            _w = max(0.0, min(_w, 20.0))
             try:
                 r2 = gen_poll(pid, timeout=_w)
                 r2["ok"] = True
@@ -3598,8 +3771,18 @@ class H(BaseHTTPRequestHandler):
                     width=q2.get("width") or 1024, height=q2.get("height") or 1536,
                     seed=q2.get("seed") or None,
                     style_id=q2.get("style_id"),
-                    char_id=q2.get("char_id"))
-                return self._send(200, {"ok": True, "id": pid, "seed": sd})
+                    char_id=q2.get("char_id"),
+                    ref_image=(q2.get("ref_image") or "").strip() or None,
+                    ref_guidance=q2.get("ref_guidance"),
+                    ref_strength=q2.get("ref_strength"),
+                    ref_end=q2.get("ref_end"),
+                    ref_lora=q2.get("ref_lora") or "",
+                    nag=(q2.get("nag") if q2.get("nag") not in (None, False, "", 0, "off") else None))
+                _rref = (GEN_REF.get("last") or {}).pop(pid, "")
+                return self._send(200, {"ok": True, "id": pid, "seed": sd,
+                                        "ref": _rref,
+                                        # 回包必须是"这一张实际挂的那个"，不能再重算成默认 v2（会说谎）
+                                        "ref_lora": _rref})
             except Exception as e:
                 return self._send(500, {"ok": False, "error": str(e)})
         if p == "/api/anima/handfix":
@@ -3640,6 +3823,11 @@ class H(BaseHTTPRequestHandler):
                 return self._send(200, {"ok": True, "prompt_id": r3.get("prompt_id")})
             except Exception as e:
                 return self._send(200, {"ok": False, "error": str(e)})
+        if p == "/api/save":
+            got = save_out(str(body.get("file") or "").strip(),
+                           str(body.get("subfolder") or "").strip(),
+                           str(body.get("name") or "").strip())
+            return self._send(200, {"ok": bool(got), "saved": got, "dir": outdir()})
         return self._send(404, {"error": "not found"})
 
 class AssistantServer(ThreadingHTTPServer):

@@ -18,13 +18,14 @@
 
 | 模块 | 作用 |
 |---|---|
-| **动作池** | 1222 条结构化动作条目，按「内容分级 × 人物关系」分成 26 个池，随机组合而不是硬拼 |
+| **动作块** | 1529 条动作条目归进 **14 个块**（前戏 / 口交 / 乳交 / 手交 / 足交 / 正面位 / 后入 / 骑乘 / 站立抱起 / 侧入 / 3P / 触手 / 机械 / 事后），每块带 3–5 条子动作与机位差分 |
+| **复合层** | 催眠 / 调教不占块位，是可叠加的修饰层（催眠口交、调教后入），约 12% 的行随机挂上 |
 | **场景库** | 960+ 条现成场景，一键套用（地点 / 光线 / 天气 / 构图 / 情绪全套） |
-| **角色库** | 2390 个角色条目，带作品分类、搜索、缩略图；含「AI 拟人（大模型娘）」18 条双预设 |
+| **角色库** | 2400+ 角色条目，带作品分类、搜索、缩略图；含「AI 拟人（大模型娘）」18 条双预设 |
 | **画风库** | 114 个画风 LoRA（画师包 / 东方画师 / AI 拟人），点卡即挂，自带触发词、强度与缩略图 |
-| **出图前审查** | 提交前跑一遍一致性检查，自动修人物数量、性别配置、视角与机位冲突 |
-| **批量出图** | 一次排 N 张，逐张过审、逐张记录，出问题能定位到是哪一条 |
-| **出图目录** | 页面里直接改落盘位置，不写代码 |
+| **出图前审查** | 提交前跑一遍一致性检查，自动修人物数量、性别配置、视角与机位冲突、衣物状态、表情堆叠 |
+| **批量出图** | 一次排 N 张（50 / 100 / 190 都有排片表），逐张过审、逐张记录，出问题能定位到是哪一条 |
+| **出图目录** | 页面里直接改落盘位置，出图自动按 `序号_块_衣物_机位_原名` 命名 |
 
 ## 技术栈
 
@@ -38,7 +39,7 @@
                                       ├─ Anima 2B UNet（动漫向扩散模型）
                                       ├─ Qwen3-0.6B 文本编码器
                                       ├─ Qwen-Image VAE
-                                      └─ 画风 LoRA 库（turbo 0.7 + 画风包选挂）
+                                      └─ 画风 LoRA 库（turbo 1.0 + 画风包选挂）
 ```
 
 - 后端只依赖 Python 标准库 + 可选 Pillow，不装框架也能跑。
@@ -78,7 +79,12 @@ ComfyUI/
 │   ├─ health_check.py        # 数据体检
 │   ├─ comfy_proxy.py         # 轻量代理（可选）
 │   └─ atoms_*.py             # 各池原始词条（改动作库改这里）
-└─ docs/                      # 手册与变更记录
+├─ _style_test/                # 回归测试与抽卡审计（node 脚本，零依赖）
+│   ├─ run_all.js              # 12 组回归
+│   ├─ audit_multi.js          # 44 轮抽卡审计（4 seed × 11 配置）
+│   ├─ dry_story.js            # 只抽卡不出图，打印每张最终提示词
+│   └─ run_story_ref.js        # 命令行跑真图并复制到指定目录
+└─ docs/                       # 四份手册 + 变更记录
 ```
 
 ## 快速开始
@@ -91,9 +97,9 @@ ComfyUI/
 装完后随时可以校验本地文件和仓库是否一致：
 
 ```bat
-python toolserify_repo.py            :: 逐文件 sha256 比对
-python toolserify_repo.py --remote   :: 再比一次 HEAD vs origin/main
-python toolserify_repo.py --quiet    :: 只打结论
+python tools\verify_repo.py            :: 逐文件 sha256 比对
+python tools\verify_repo.py --remote   :: 再比一次 HEAD vs origin/main
+python tools\verify_repo.py --quiet    :: 只打结论
 ```
 
 已经装好 ComfyUI + Anima 的话，最短路径是：
@@ -116,19 +122,28 @@ start http://127.0.0.1:8190
 
 也可以直接双击 `ComfyUI控制台.ps1` 用图形界面起。
 
-## 核心概念：动作池
+## 核心概念：动作块
 
-`wb_atoms.json` 里的动作不是一张大表，而是按两个维度切开的 26 个池：
+`wb_atoms.json` 里 1529 条动作条目，按「内容分级 × 人物关系」切成 37 个池；批量出图时**不直接抽池**，而是先排「块」。
 
-- **内容分级**：SFW（日常向）/ Suggestive（暧昧向）/ Explicit（成人为）
-- **人物关系**：单人 / 双女 / 机械 / 调教 / 触手 / 三人 / 催眠
+**14 个块**（一张图属于哪个块，由排片阶段决定）：
 
-抽取时先按「分级 + 角色数量」选出主池，再按权重掺少量辅池，最后交给出图前审查收束性别与构图。这条链路保证了：
+| 块 | 段 | 张数占比（190 张） |
+|---|---|---|
+| 前戏 / 事后 | 准备 / 收尾 | 10 / 10 |
+| 口交 / 乳交 / 手交 / 足交 | 玩法 | 10 / 15 / 15 / 14 |
+| 正面位 / 后入 / 骑乘 / 站立抱起 / 侧入 / 3P | 正戏 | 22 / 22 / 15 / 15 / 15 / 10 |
+| 触手 / 机械 | 正戏（非人形） | 10 / 7 |
 
-- 单人图里不会凭空多出人
-- 双人图里不会挤进第三人
-- 需要男性时统一用「无脸男 / 隐形男 / 仅器官」三种可选处理，画面不抢主体
-- 每个动作条目的「核心动作词」单独存一份，避免被表情、光线词稀释
+块内再做三件事产生差分，避免"同一动作连拍"：
+
+1. **子动作**：每块 3–5 条（口交有舔 / 含 / 边乳交边舔），块内不放回抽
+2. **机位**：一张一换，块内不重复；无机位可选的块按 `ANG_OK2` 白名单挑
+3. **景别**：每 3 张换一次（全身 / 七分身 / 上半身）
+
+每块最后一张自动落**结算词**（口交 `cum_in_mouth`、正面位 `creampie`…），过程行禁止结算词 —— 这样一批图读起来像"一场戏"，而不是十条互不相干的片段。
+
+**复合层**（催眠 / 调教）不占块位，随机叠在约 12% 的行上，各自带要剔的男体词与物理冲突姿势（"绑住手腕还抱起"会被拒）。
 
 改动作库的流程：
 
@@ -137,6 +152,7 @@ start http://127.0.0.1:8190
 python tools/build_atoms.py        :: 重新生成 wb_atoms.json
 python tools/health_check.py       :: 体检：缺词、无核心、同义重复
 python tools/gen_workbench.py      :: 重新生成 workbench.html
+node _style_test/run_all.js        :: 12 组回归（语法 / 分段 / 审查 / 仿真）
 ```
 
 ## 画风库
@@ -150,7 +166,7 @@ python tools/gen_workbench.py      :: 重新生成 workbench.html
 | `strength` | LoRA 强度，缺省 1.0 |
 | `group` | 分组：画师包 / 东方画师 / 桶外-知名画师 / AI 拟人（大模型娘） |
 
-基座固定 `turbo 0.7`，选中画风包时叠加；再点同一张卡即取消，只留 turbo。
+基座固定 `turbo 1.0`，选中画风包时叠加；再点同一张卡即取消，只留 turbo。
 
 加一个新画风：LoRA 放进 `models/loras/`，`anima_styles.json` 追加一条（`id` 唯一、`on_disk: true`），刷新页面即可。缩略图可选，放 `webui/static/style_thumbs/<id>.jpg`。
 
@@ -171,7 +187,9 @@ python tools/gen_workbench.py      :: 重新生成 workbench.html
 - 标签、角色、画师词条来自 [Danbooru](https://danbooru.donmai.us/) 公开标签体系
 - 底模：[Anima](https://huggingface.co/circlestone-labs/Anima)（Cosmos-Predict2 架构，动漫向）
 - 推理：[ComfyUI](https://github.com/comfyanonymous/ComfyUI)
-- 自定义节点：ComfyUI-Manager、Impact-Pack、Impact-Subpack、GGUF、IPAdapter_plus
+- 自定义节点：ComfyUI-Manager、Impact-Pack、Impact-Subpack、GGUF、IPAdapter_plus、
+  [Anima-NAG](https://github.com/hybskgks28275/ComfyUI-Anima-NAG)（cfg=1 下让负向词真正生效）、
+  ComfyUI-Anima-Ref-Adapter（角色一致性参考图）
 
 ## 许可
 

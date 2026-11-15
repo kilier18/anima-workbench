@@ -19886,13 +19886,13 @@
    {
     "zh": "脸上的还没擦，坐着发愣",
     "tags": [
-     "cum_on_face",
+     "facial",
      "messy_hair",
      "sitting",
      "exhausted"
     ],
     "core": [
-     "cum_on_face",
+     "facial",
      "messy_hair"
     ],
     "lv": 3,
@@ -22754,7 +22754,7 @@
     "tags": [
      "1girl",
      "solo",
-     "bending_over",
+     "bent_over",
      "hand_on_own_chest",
      "shirt",
      "from_above"
@@ -22762,7 +22762,7 @@
     "core": [
      "1girl",
      "solo",
-     "bending_over",
+     "bent_over",
      "hand_on_own_chest",
      "shirt",
      "from_above"
@@ -22961,7 +22961,7 @@
      "1girl",
      "solo",
      "shoes",
-     "bending_over",
+     "bent_over",
      "skirt",
      "from_behind"
     ],
@@ -22969,7 +22969,7 @@
      "1girl",
      "solo",
      "shoes",
-     "bending_over",
+     "bent_over",
      "skirt",
      "from_behind"
     ],
@@ -24540,7 +24540,7 @@
      "drooling",
      "tongue_out",
      "blush",
-     "excessive_saliva"
+     "saliva"
     ],
     [
      "ahegao",
@@ -24554,7 +24554,7 @@
      "trembling",
      "heavy_breathing",
      "blush",
-     "excessive_saliva",
+     "drooling",
      "tongue_out"
     ],
     [
@@ -25025,6 +25025,12 @@
    "zh": "第一视角",
    "tags": [
     "pov"
+   ]
+  },
+  {
+   "zh": "透视压缩",
+   "tags": [
+    "foreshortening"
    ]
   }
  ],

@@ -142,8 +142,8 @@
    "lora": "Anima\\packs\\musume-deepseek-whale.safetensors",
    "lora_w": 1.0,
    "thumb": "musume_whale_normal",
-   "trig_core": "deepseek-tan, deepseek_whale_girl_zipzippipe, deepseek_maid_outfit_zipzippipe",
-   "trig_outfit": ""
+   "trig_core": "deepseek-tan, deepseek_whale_girl_zipzippipe",
+   "trig_outfit": "deepseek_maid_outfit_zipzippipe"
   },
   {
    "t": "deepseek-tan-chibi",
